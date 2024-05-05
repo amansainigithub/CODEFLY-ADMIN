@@ -18,6 +18,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AdminDashboardComponent } from './admin-panel/admin-dashboard/admin-dashboard.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+// Import library module
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -39,8 +44,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatToolbarModule
-  ],
+    MatToolbarModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+  ], 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })

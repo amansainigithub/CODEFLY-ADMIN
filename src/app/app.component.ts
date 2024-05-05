@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TokenStorageService } from './_services/token-storage.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService,private router:Router) { }
+  constructor(private tokenStorageService: TokenStorageService,private router:Router,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -32,6 +33,7 @@ export class AppComponent {
       this.username = user.username;
       this.router.navigate(['/admin/dashboard']);
     }
+
   }
 
   logout(): void {
