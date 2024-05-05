@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatsidenavComponent } from './matsidenav.component';
+import { AdminDashboardComponent } from './admin-dashboard.component';
 
-describe('MatsidenavComponent', () => {
-  let component: MatsidenavComponent;
-  let fixture: ComponentFixture<MatsidenavComponent>;
+describe('AdminDashboardComponent', () => {
+  let component: AdminDashboardComponent;
+  let fixture: ComponentFixture<AdminDashboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MatsidenavComponent]
+      declarations: [AdminDashboardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MatsidenavComponent);
+    fixture = TestBed.createComponent(AdminDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -14,7 +14,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { MatsidenavComponent } from './matsidenav/matsidenav.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AdminDashboardComponent } from './admin-panel/admin-dashboard/admin-dashboard.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,7 @@ import { MatsidenavComponent } from './matsidenav/matsidenav.component';
     BoardModeratorComponent,
     ProfileComponent,
     HomeComponent,
-    MatsidenavComponent
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +37,11 @@ import { MatsidenavComponent } from './matsidenav/matsidenav.component';
     FormsModule,
     HttpClientModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
