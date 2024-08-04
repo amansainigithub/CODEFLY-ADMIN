@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TokenStorageService } from './_services/token-storage.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,11 @@ export class AppComponent {
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService,private router:Router,private spinner: NgxSpinnerService) { }
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    private router:Router,
+    private spinner: NgxSpinnerService,
+    private toast:NgToastService) { }
 
   ngOnInit(): void {
 
@@ -42,8 +47,9 @@ export class AppComponent {
     window.location.reload();
   }
 
-  toggleSidebar(): void {
-    const wrapper = document.getElementById('wrapper');
-    wrapper?.classList.toggle('toggled');
+  genToast(){
+    this.toast.success({detail:"Success",summary:"This is Success", position:"topRight",duration:3000})
+    // this.toast.warning({detail:"Warning",summary:"This is Success", position:"botomCenter",duration:3000})
   }
+
 }
