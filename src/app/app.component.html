@@ -8,114 +8,125 @@
 </ngx-spinner>
 
 
-<div id="app" class="navbar-light bg-light">
-  <div class="container">
+<div id="app" class="navbar-light bg-light"  >
+
+  <!-- Not Login Navbar starting -->
+  <div class="container" *ngIf="!isLoggedIn">
     <nav class="navbar navbar-expand navbar-light bg-light py-3">
       <a href="#" class="navbar-brand">Shopping</a>
-      <ul class="navbar-nav mr-auto" routerLinkActive="active">
-        <li class="nav-item" *ngIf="showAdminBoard">
-          <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-        </li>
-      </ul>
-  
       <ul  class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
         <li class="nav-item">
           <a mat-raised-button color="primary" href="/" routerLink="/">Login</a>
         </li>
       </ul>
-  
-      <ul class="navbar-nav ml-auto " *ngIf="isLoggedIn">
-        <li class="nav-item">
-          <a href="admin/dashboard/profile" class="nav-link" routerLink="admin/dashboard/profile">{{ username }}</a>
-        </li>
-        <li class="nav-item"  >
-          <button  mat-raised-button color="primary" (click)="logout()">Logout</button>
-        </li>
-      </ul>
     </nav>
   </div>
-  
+  <!-- Not Login Navbar Ending -->
 
-  <div > 
-    
-    <div class="row" *ngIf="isLoggedIn" >
 
-      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-            <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <span class="fs-5 d-none d-sm-inline">Menu</span>
-            </a> -->
-            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
-                <li class="nav-item">
-                    <a href="#" class="nav-link align-middle px-0">
-                        <i class="bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                        <i class="bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                    <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                        <li class="w-100">
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/user" class="nav-link px-0 align-middle" routerLink="user">
-                        <i class="bi-table"></i> <span class="ms-1 d-none d-sm-inline">User</span></a>
-                </li>
-                <li>
-                    <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                        <i class="bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                    <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                        <li class="w-100">
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                        <i class="bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                        <li class="w-100">
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                        </li>
-                    </ul>
-                </li>
-                <li >
-                    <a href="/profile" class="nav-link px-0 align-middle" routerLink="profile">
-                        <i class="bi-people"></i> <span class="ms-1 d-none d-sm-inline">Profile</span> </a>
-                </li>
-            </ul>
-            <hr>
+  <!--Login Navbar starting -->
+
+  <div class="container-fluid p-0"  >
+
+      <div *ngIf="isLoggedIn">
+          <mat-toolbar style="background-color: #d6eaf8;height: 80px;" >
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+              <mat-icon>local_mall</mat-icon>
+            </button>
+            <span>AdminShop</span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+              <mat-icon matBadge="15" >notifications</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+              <mat-icon matBadge="2" >mail</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+              <mat-icon matBadge="" >shopping_cart</mat-icon>
+            </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>logout</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" class="p-2">
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+
+
            
-        </div>
-    </div>
-      
-      
-      <div class="col-sm-10">
-        <router-outlet></router-outlet>
+          </mat-toolbar>
       </div>
-    </div>
+  </div>
+  <!-- Not Login Navbar Ending -->
 
-    
 
 
+  <!-- User Not Login -->
+  <div  *ngIf="!isLoggedIn" > 
     <router-outlet></router-outlet>
   </div>
+
+
+  <!-- User Login  -->
+  <div>
+    <div class="row" *ngIf="isLoggedIn">
+
+      <div class="col-sm-2">
+
+        <div class="sidebar bg-light">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-center text-dark" href="#" aria-expanded="false">
+                  Dashboard
+              </a>
+          </li>
+              <li class="nav-item">
+                  <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
+                      <i class="bi bi-house-door"></i> Home
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu2" aria-expanded="false">
+                      <i class="bi bi-folder "></i> Services
+                      <i class="bi bi-chevron-right arrow-icon ms-auto"></i>
+                  </a>
+                  <ul class="collapse submenu" id="submenu2">
+                      <li class="submenu-item hv1"><a class="nav-link" href="#">Service 1</a></li>
+                      <li class="submenu-item"><a class="nav-link hv1" href="#">Service 2</a></li>
+                  </ul>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu3" aria-expanded="false">
+                      <i class="bi bi-info-circle"></i> About
+                  </a>
+                  <ul class="collapse submenu" id="submenu3">
+                      <li class="submenu-item hv1"><a class="nav-link " href="#">Company</a></li>
+                      <li class="submenu-item"><a class="nav-link hv1" href="#">Team</a></li>
+                  </ul>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link hv1" href="#">
+                      <i class="bi bi-envelope"></i> Contact
+                  </a>
+              </li>
+          </ul>
+      </div>
+  
+        1
+      </div>
+  
+      <div class="col-sm-10" style="height: 100vh;background-color: white;">
+        <router-outlet>
+        </router-outlet>
+      </div>
+  
+    </div>
+  </div>
 </div>
+
+
+
+

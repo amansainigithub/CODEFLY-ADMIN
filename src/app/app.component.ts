@@ -21,6 +21,7 @@ export class AppComponent {
   constructor(private tokenStorageService: TokenStorageService,private router:Router,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -39,5 +40,10 @@ export class AppComponent {
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();
+  }
+
+  toggleSidebar(): void {
+    const wrapper = document.getElementById('wrapper');
+    wrapper?.classList.toggle('toggled');
   }
 }

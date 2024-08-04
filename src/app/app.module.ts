@@ -20,6 +20,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {MatMenuModule} from '@angular/material/menu';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -47,6 +51,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatToolbarModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    MatMenuModule,
+    MatBadgeModule,
+    MatExpansionModule
   ], 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync()],

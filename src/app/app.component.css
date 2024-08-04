@@ -1,0 +1,44 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+
+  /* /////////////////////////////////////////////////////////////// */
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+/* .sidebar .submenu {
+    display: none;
+    padding-left: 20px;
+} */
+.sidebar .submenu.show {
+    display: block;
+}
+.submenu-item {
+    font-size: 16px;
+}
+.sidebar .nav-link:hover {
+    /* background-color: #e9ecef; */
+    background-color: #7171f9;
+    color: white;
+    border-radius: 5px;
+}
+
+.sidebar .submenu.show {
+    display: block;
+}
+submenu-item {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.arrow-icon {
+    transition: transform 0.3s;
+    margin-left: auto;
+}
+.arrow-icon.rotate {
+    transform: rotate(90deg);
+}
