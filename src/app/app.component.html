@@ -6,6 +6,9 @@
   <p style="color: white" > 
     Loading... </p>
 </ngx-spinner>
+<ng-toast /> 
+<!-- <button type="button" (click)="genToast()" >click</button> -->
+
 
 
 <div id="app" class="navbar-light bg-light"  >
@@ -71,66 +74,254 @@
 
 
   <!-- User Login  -->
-  <div>
+  <!-- <div>
     <div class="row" *ngIf="isLoggedIn">
 
       <div class="col-sm-2">
 
-        <div class="sidebar bg-light">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link text-center text-dark" href="#" aria-expanded="false">
-                  Dashboard
-              </a>
-          </li>
-              <li class="nav-item">
-                  <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
-                      <i class="bi bi-house-door"></i> Home
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu2" aria-expanded="false">
-                      <i class="bi bi-folder "></i> Services
-                      <i class="bi bi-chevron-right arrow-icon ms-auto"></i>
-                  </a>
-                  <ul class="collapse submenu" id="submenu2">
-                      <li style="list-style-type: none;" class="submenu-item hv1"><a class="nav-link" href="#">Service 1</a></li>
-                      <li class="submenu-item"><a class="nav-link hv1" href="#">
-                        <i class="bi bi-chevron-right arrow-icon ms-auto"></i>
-                        Service 2</a></li>
-                  </ul>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu3" aria-expanded="false">
-                      <i class="bi bi-info-circle"></i> About
-                  </a>
-                  <ul class="collapse submenu" id="submenu3">
-                      <li class="submenu-item hv1"><a class="nav-link " href="#">Company</a></li>
-                      <li class="submenu-item"><a class="nav-link hv1" href="#">Team</a></li>
-                  </ul>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link hv1" href="#">
-                      <i class="bi bi-envelope"></i> Contact
-                  </a>
-              </li>
-          </ul>
-      </div>
-  
-        1
+            <div class="sidebar bg-light" style="background-color: #d6eaf8;">
+              <ul class="nav flex-column">
+                    <li class="nav-item">
+                      <a class="nav-link text-center text-dark " href="#" aria-expanded="false">
+                          <b>
+                            <i class="bi bi-house-check-fill"></i>
+                            Dashboard
+                          </b>
+                      </a>
+                  </li>
+                  <li class="nav-item mt-3">
+                      <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
+                          <i class="bi bi-house-door"></i> Home
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu2" aria-expanded="false">
+                          <i class="bi bi-folder "></i> Services
+                          <i class="bi bi-chevron-right arrow-icon ms-auto floatRit" ></i>
+                      </a>
+                      <ul class="collapse submenu" id="submenu2">
+                          <li class="submenu-item hv1 unOrderList">
+                            <a class="nav-link" href="#">
+                              <i class="bi bi-lock-fill"></i>
+                              Service 1
+                            </a>
+                          </li>
+                          <li class="submenu-item unOrderList">
+                            <a class="nav-link hv1" href="#">
+                              <i class="bi bi-spotify"></i>
+                                  Service 2
+                            </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu3" aria-expanded="false">
+                        <i class="bi bi-lock-fill"></i>
+                        About
+                        <i class="bi bi-chevron-right arrow-icon ms-auto floatRit" ></i>
+                      </a>
+                      <ul class="collapse submenu3" id="submenu3">
+                        <li class="submenu-item unOrderList">
+                          <a class="nav-link" href="#">
+                            <i class="bi bi-lock-fill"></i>
+                            product
+                          </a>
+                        </li>
+                        <li class="submenu-item unOrderList">
+                          <a class="nav-link" href="#">
+                            <i class="bi bi-spotify"></i>
+                                Sub Product
+                          </a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link hv1" href="#">
+                          <i class="bi bi-envelope"></i> Contact
+                      </a>
+                  </li>
+              </ul>
+          </div>
       </div>
   
       <div class="col-sm-10" style="height: 100vh;background-color: white;">
-        <router-outlet>
-        </router-outlet>
+      
+            <button type="button" (click)="streachSize()"> streach</button>
+
+            <router-outlet></router-outlet>
       </div>
   
     </div>
-  </div>
+  </div> -->
 </div>
 
-<ng-toast /> 
-<button type="button" (click)="genToast()" >click</button>
+
+
+
+<!-- SIDEBAR -->
+<div>
+  <div class="sidebar scrollable-content" [ngClass]="{'sidebar-extend-min': !isSidebarVisible}">
+    <a href="" class="item">Home</a>
+    <a href="" class="item">Product</a>
+    <a href="" class="item">Category</a>
+    <a href="" class="item">Timer</a>
+    <a href="" class="item">Flipper</a>
+    <a href="" class="item">Home</a>
+    <a href="" class="item">Product</a>
+    <a href="" class="item">Category</a>
+    <a href="" class="item">Timer</a>
+    <a href="" class="item">Flipper</a>
+    <a href="" class="item">Home</a>
+    <a href="" class="item">Product</a>
+    <a href="" class="item">Category</a>
+    <a href="" class="item">Timer</a>
+    <a href="" class="item">Flipper</a>
+    <div class="divider"></div>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-center text-dark " href="#" aria-expanded="false">
+            <b>
+              <i class="bi bi-house-check-fill"></i>
+              Dashboard
+            </b>
+        </a>
+    </li>
+    <li class="nav-item mt-3">
+        <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
+            <i class="bi bi-house-door"></i> Home
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu2" aria-expanded="false">
+            <i class="bi bi-folder "></i> Services
+            <i class="bi bi-chevron-right arrow-icon ms-auto floatRit" ></i>
+        </a>
+        <ul class="collapse submenu" id="submenu2">
+            <li class="submenu-item hv1 unOrderList">
+              <a class="nav-link" href="#">
+                <i class="bi bi-lock-fill"></i>
+                Service 1
+              </a>
+            </li>
+            <li class="submenu-item unOrderList">
+              <a class="nav-link hv1" href="#">
+                <i class="bi bi-spotify"></i>
+                    Service 2
+              </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu3" aria-expanded="false">
+          <i class="bi bi-lock-fill"></i>
+          About
+          <i class="bi bi-chevron-right arrow-icon ms-auto floatRit" ></i>
+        </a>
+        <ul class="collapse submenu3" id="submenu3">
+          <li class="submenu-item unOrderList">
+            <a class="nav-link" href="#">
+              <i class="bi bi-lock-fill"></i>
+              product
+            </a>
+          </li>
+          <li class="submenu-item unOrderList">
+            <a class="nav-link" href="#">
+              <i class="bi bi-spotify"></i>
+                  Sub Product
+            </a>
+          </li>
+      </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link hv1" href="#">
+            <i class="bi bi-envelope"></i> Contact
+        </a>
+    </li>
+</ul>
+    
+</div>
+
+<!-- CONTENT -->
+<div class="content mydiv" [ngClass]="{'content-expanded': !isSidebarVisible}">
+            <button mat-button  type="button" (click)="toggleSidebar()">magic</button>
+            <h3>This is my content Area</h3>
+            <p>
+              Below, one can find a 1000-word essay example about time management. One should not seek universal rules for such essay writing. The requirements depend on a college and a tutor. The word count may be up to or not less than 1000 lexical units. The introduced 1000-word article example has 1007 words. It has a typical structure with an introduction, a body with several paragraphs, and a conclusion. The sample also has a thesis statement and facts that support the main idea in all its parts. Although the essay is clear and complies with all the writing standards, after reading a 1000 word essay pages you may still find yourself having questions. Approach online essay service to give you a hand with the writing process.
+
+          Table of contents:
+
+          How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?
+          How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?
+          How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?
+          How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?How do you choose a topic for a 1000 word essay?
+          How long is 1000 words? A short guide on outlining
+          Structuring your essay effectively: The introduction
+          Crafting a 1000 word essay like a pro: The body
+          Sum up the core points: A flawless conclusion
+          What does 1000 words look like? Successful people are perfect time managers
+          What can we do for you in terms of essay writing?
+          How to Choose a Topic For a 1000 Word Essay?
+
+          One of the main challenges for a student who wonders how to write a 1000-word essay is choosing a working topic. If your teacher has
+            </p>
+</div>
+</div>
 
 
 

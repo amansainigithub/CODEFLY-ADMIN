@@ -47,9 +47,20 @@ export class AppComponent {
     window.location.reload();
   }
 
+  streachSize(){
+    alert("Running")
+  }
+  
+
   genToast(){
     this.toast.success({detail:"Success",summary:"This is Success", position:"topRight",duration:3000})
     // this.toast.warning({detail:"Warning",summary:"This is Success", position:"botomCenter",duration:3000})
+  }
+
+  isSidebarVisible = true; // Initial state of the sidebar
+
+  toggleSidebar() {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 
 }
