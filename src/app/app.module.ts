@@ -27,6 +27,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgToastModule } from 'ng-angular-popup';
 import { ParentCategoryComponent } from './admin-panel/categories/parent-category/parent-category.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ReactiveFormsModule} from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -55,7 +59,9 @@ import { ParentCategoryComponent } from './admin-panel/categories/parent-categor
     MatMenuModule,
     MatBadgeModule,
     MatExpansionModule,
-    NgToastModule
+    NgToastModule,
+    MatSlideToggleModule,
+     ReactiveFormsModule,
   ], 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync()],
