@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ParentCategoryService } from '../../../_services/categories/parentCategory/parent-category.service';
 
 @Component({
   selector: 'app-parent-category',
@@ -18,7 +19,6 @@ export class ParentCategoryComponent {
     description: null,
     metaDescription: null,
     featuredStatus: null,
-    featuredFile: null,
     categoryFile: null,
     permalink: null,
     user: null,
@@ -29,7 +29,7 @@ export class ParentCategoryComponent {
 
   progressBarShow:any = false;
 
-  constructor(private router:Router)
+  constructor(private router:Router, private parentCategoryService:ParentCategoryService)
   {
 
   }
@@ -37,6 +37,17 @@ export class ParentCategoryComponent {
   onSubmit()
   {
       console.log(JSON.stringify(this.form));
+
+      this.parentCategoryService.saveParentCategory(this.form).subscribe({
+        next:(res:any)=> {
+          alert("data saved")
+          console.log(res);
+        },
+        error:(err:any)=>  {
+          console.log(err)
+        }
+      }
+    );
   }
 
 
