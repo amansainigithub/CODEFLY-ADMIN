@@ -25,7 +25,7 @@ export class AppComponent {
     private spinner: NgxSpinnerService,
     private toast:NgToastService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -46,10 +46,6 @@ export class AppComponent {
     this.tokenStorageService.signOut();
     window.location.reload();
   }
-
-  streachSize(){
-    alert("Running")
-  }
   
 
   genToast(){
@@ -62,5 +58,15 @@ export class AppComponent {
   toggleSidebar() {
     this.isSidebarVisible = !this.isSidebarVisible;
   }
+
+
+  
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/parent-category', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
 
 }

@@ -26,6 +26,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgToastModule } from 'ng-angular-popup';
+import { ParentCategoryComponent } from './admin-panel/categories/parent-category/parent-category.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NgToastModule } from 'ng-angular-popup';
     ProfileComponent,
     HomeComponent,
     AdminDashboardComponent,
+    ParentCategoryComponent,
   ],
   imports: [
     BrowserModule,

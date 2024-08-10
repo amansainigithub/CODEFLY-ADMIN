@@ -20,7 +20,7 @@ TOKEN_KEY = 'auth-token';
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
      
-      if(window.sessionStorage.getItem(this.TOKEN_KEY) == null || window.sessionStorage.getItem(this.TOKEN_KEY) == undefined)
+      if(window.localStorage.getItem(this.TOKEN_KEY) == null || window.localStorage.getItem(this.TOKEN_KEY) == undefined)
       {
         //Return False if sessionStorage is Empty
         this._router.navigateByUrl("/");
