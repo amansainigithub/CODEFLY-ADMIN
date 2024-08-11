@@ -29,6 +29,7 @@ import { NgToastModule } from 'ng-angular-popup';
 import { ParentCategoryComponent } from './admin-panel/categories/parent-category/parent-category.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ReactiveFormsModule} from '@angular/forms';
+import { ChildCategoryComponent } from './admin-panel/categories/child-category/child-category.component';
 
 
 
@@ -44,6 +45,7 @@ import { ReactiveFormsModule} from '@angular/forms';
     HomeComponent,
     AdminDashboardComponent,
     ParentCategoryComponent,
+    ChildCategoryComponent,
   ],
   imports: [
     BrowserModule,

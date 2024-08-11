@@ -77,50 +77,61 @@
 
 <!-- SIDEBAR -->
 <div *ngIf="isLoggedIn">
-  <div class="sidebar scrollable-content" [ngClass]="{'sidebar-extend-min': !isSidebarVisible}">
-    <!-- <a href="" class="item">Home</a>
-    <a href="" class="item">Product</a> -->
-  
-    <ul class="nav flex-column">
-      <li class="nav-item mt-5">
-        <a class="nav-link text-center text-dark " href="#" aria-expanded="false">
-            <b>
-              <i class="bi bi-house-check-fill"></i>
-              Dashboard
-            </b>
-        </a>
-    </li>
+       <div class="sidebar scrollable-content" [ngClass]="{'sidebar-extend-min': !isSidebarVisible}">
+      <!-- <a href="" class="item">Home</a>
+      <a href="" class="item">Product</a> -->
     
-    <li class="nav-item mt-3">
-        <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
-            <i class="bi bi-house-door"></i> Home
-        </a>
-    </li>
+      <ul class="nav flex-column">
+        <li class="nav-item mt-5">
+          <a class="nav-link text-center text-dark " href="#" aria-expanded="false">
+              <b>
+                <i class="bi bi-house-check-fill"></i>
+                Dashboard
+              </b>
+          </a>
+      </li>
+      
+      <li class="nav-item mt-3">
+          <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
+              <i class="bi bi-house-door"></i> Home
+          </a>
+      </li>
 
-    <li class="nav-item">
-      <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu4" aria-expanded="false">
-        <i class="bi bi-calendar4 mr-2"></i>
-         Categories
-         <i class="bi bi-chevron-right arrow-icon ms-auto floatRit" ></i>
-      </a>
+      <li class="nav-item">
+        <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu4" aria-expanded="false">
+          <i class="bi bi-calendar4 mr-2"></i>
+          Categories
+          <i class="bi bi-chevron-right arrow-icon ms-auto floatRit" ></i>
+        </a>
+        <ul class="collapse submenu4" id="submenu4">
+          <li class="submenu-item hv1 unOrderList">
+            <a style="font-size: 14px;" class="nav-link"  href="" routerLink="/admin/dashboard/parent-category">
+              <i class="bi bi-window-sidebar"></i>
+                Parent Category
+            </a>
+          </li>
+      </ul>
+
+      <!-- CHILD CATEGORY -->
       <ul class="collapse submenu4" id="submenu4">
         <li class="submenu-item hv1 unOrderList">
-          <a class="nav-link" href="" routerLink="/admin/dashboard/parent-category">
-            <i class="bi bi-window-sidebar"></i>
-              Parent Category
+          <a style="font-size: 14px;" class="nav-link"  href="" routerLink="/admin/dashboard/child-category">
+            <i class="bi bi-bookmarks-fill"></i>
+              Child Category
           </a>
         </li>
     </ul>
-  </li>
+    
+    </li>
 
     <li class="nav-item">
         <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu2" aria-expanded="false">
             <i class="bi bi-folder "></i> Services
             <i class="bi bi-chevron-right arrow-icon ms-auto floatRit" ></i>
         </a>
-        <ul class="collapse submenu" id="submenu2">
+        <ul class="collapse submenu" id="submenu2" >
             <li class="submenu-item hv1 unOrderList">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="#" style="font-size: 14px;">
                 <i class="bi bi-lock-fill"></i>
                 Service 1
               </a>

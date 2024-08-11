@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminDashboardComponent } from './admin-panel/admin-dashboard/admin-dashboard.component';
 import { AdminGuardService } from './authGuards/adminGuards/admin-guard.service';
 import { ParentCategoryComponent } from './admin-panel/categories/parent-category/parent-category.component';
+import { ChildCategoryComponent } from './admin-panel/categories/child-category/child-category.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
                   // { path: '', component: AdminDashboardComponent},
                   { path: 'profile', component: ProfileComponent },
                   { path: 'parent-category', component: ParentCategoryComponent , },
+                  { path: 'child-category', component: ChildCategoryComponent , },
       ],
 }
 

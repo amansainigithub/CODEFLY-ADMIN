@@ -55,6 +55,7 @@
     overflow: scroll;
     position: fixed;
     padding-top: 45px;
+    font-size: 14px;
 }
 
 .sidebar a{
@@ -83,6 +84,8 @@ margin-top: 10px;
     display: inline-block;
     margin-top: 7%;
 }
+
+
 
 .content-expanded {
     margin-left: 4%;
