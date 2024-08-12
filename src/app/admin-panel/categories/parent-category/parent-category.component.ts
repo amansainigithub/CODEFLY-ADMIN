@@ -49,50 +49,55 @@ export class ParentCategoryComponent {
       };
       this.file=event.target.files[0];
     }
-
-    console.log(this.file);
-
-    this.bucket.uploadFile(this.file).subscribe({
-      next:(res:any)=> {
-        console.log(res.bucketUrl);
-        this.toast.success({detail:"Success",summary:"File Saved Success", position:"bottomRight",duration:3000});
-        
-        this.spinner.hide();
-      },
-      error:(err:any)=>  {
-        this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
-        this.spinner.hide();
-        console.log(err);
-      }
-    }
-  );
-
-  
   }
 
 
 
   onSubmit()
   {
-    this.spinner.show();
-      this.parentCategoryService.saveParentCategory(this.form).subscribe({
+    if(this.file == null)
+    {
+      this.toast.error({detail:"Error",summary:"please Select File", position:"bottomRight",duration:3000});
+    }else{
+
+      //upload File
+      this.bucket.uploadFile(this.file).subscribe({
         next:(res:any)=> {
-          this.toast.success({detail:"Success",summary:"data Saved Success", position:"bottomRight",duration:3000});
-          
-          this.spinner.hide();
+          this.form.categoryFile = res.bucketUrl;
+          this.toast.success({detail:"Success",summary:"File Upload Success", position:"bottomRight",duration:1000});
+          //save Parent data
+          this.saveparentCategory();
+
+          console.log(res);
         },
         error:(err:any)=>  {
           this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
-          this.spinner.hide();
           console.log(err);
+          return;
         }
       }
     );
+     
+      }
+    }
+
+
+    saveparentCategory()
+    {
+       //save File
+       this.parentCategoryService.saveParentCategory(this.form).subscribe({
+         next:(res:any)=> {
+           this.toast.success({detail:"Success",summary:"data Saved Success", position:"bottomRight",duration:3000});
+           
+           this.spinner.hide();
+         },
+         error:(err:any)=>  {
+           this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+           this.spinner.hide();
+           console.log(err);
+             }
+           }
+         );
+    }
+
   }
-
-
-
-
-
-
-}
