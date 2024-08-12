@@ -18,6 +18,7 @@ export class ChildCategoryComponent {
   parentList: any[] = [];
   imageSrc: string = '';
   file:any;
+  fileRendor:boolean = false;
 
   form: any = {
     categoryName: null,
@@ -54,6 +55,7 @@ export class ChildCategoryComponent {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
       reader.onload = () => {
+        this.fileRendor = true;
         this.imageSrc = reader.result as string;
       };
       this.file=event.target.files[0];

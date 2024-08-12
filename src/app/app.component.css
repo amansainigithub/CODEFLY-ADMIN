@@ -113,6 +113,13 @@ margin-top: 10px;
     border-radius: 8px;
 }
 
+
+ul li a.active {
+     /* background-color: #e9ecef; */
+     background-color: #7171f9;
+     color: white;
+     border-radius: 5px;
+  }
  
 
 @media only screen and (max-width:600px) {

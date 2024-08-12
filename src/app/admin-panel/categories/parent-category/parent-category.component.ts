@@ -26,6 +26,9 @@ export class ParentCategoryComponent {
   };
  
   progressBarShow:any = false;
+
+  //To show to image
+  fileRendor:boolean = false;
   imageSrc: string = '';
   file:any;
 
@@ -45,6 +48,7 @@ export class ParentCategoryComponent {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
       reader.onload = () => {
+        this.fileRendor = true;
         this.imageSrc = reader.result as string;
       };
       this.file=event.target.files[0];
@@ -59,6 +63,9 @@ export class ParentCategoryComponent {
     {
       this.toast.error({detail:"Error",summary:"please Select File", position:"bottomRight",duration:3000});
     }else{
+
+      //show Spinner
+      this.spinner.show();
 
       //upload File
       this.bucket.uploadFile(this.file).subscribe({
