@@ -24,6 +24,7 @@
               <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                 <p class="text-center"
                   style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 18px;">
+                  <i class="bi bi-lock-fill"></i>
                   Admin Panel
                 </p>
 
@@ -47,7 +48,10 @@
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-light text-center">Sign in</button>
+                <button type="submit" mat-raised-button class="text-center">
+                  <i class="bi bi-unlock-fill"></i>
+                  Sign in
+                </button>
 
                 <div class="form-group">
                   <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
@@ -75,7 +79,8 @@
                     placeholder="passkey" />
                 </div>
 
-                <button type="submit" class="btn btn-light text-center" (click)="validatePasskey()" >submit</button>
+                <button type="submit" class="btn btn-light text-center" (click)="validatePasskey()" >
+                  submit</button>
               </form>
             </div> 
 

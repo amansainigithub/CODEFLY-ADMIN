@@ -19,6 +19,10 @@ export class AppComponent {
   showModeratorBoard = false;
   username?: string;
 
+  //TIMER LIVE
+  currentTime: string = '';
+  private intervalId: any;
+
   constructor(
     private tokenStorageService: TokenStorageService,
     private router:Router,
@@ -26,6 +30,10 @@ export class AppComponent {
     private toast:NgToastService) { }
 
   ngOnInit(): void { 
+
+    // FOR TIMER
+    this.updateTime();
+    this.intervalId = setInterval(() => this.updateTime(), 1000);
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -66,6 +74,18 @@ export class AppComponent {
     this.router.navigateByUrl('/parent-category', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
+  }
+
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+
+  private updateTime() {
+    const now = new Date();
+    this.currentTime = now.toLocaleTimeString();
   }
 
 

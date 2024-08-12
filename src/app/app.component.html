@@ -14,7 +14,7 @@
 <div id="app" class="navbar-light bg-light"  >
 
   <!-- Not Login Navbar starting -->
-  <div class="container" *ngIf="!isLoggedIn">
+  <!-- <div class="container" *ngIf="!isLoggedIn">
     <nav class="navbar navbar-expand navbar-light bg-light py-3">
       <a href="#" class="navbar-brand">Shopping</a>
       <ul  class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
@@ -23,8 +23,33 @@
         </li>
       </ul>
     </nav>
-  </div>
+  </div> -->
   <!-- Not Login Navbar Ending -->
+
+  <div *ngIf="!isLoggedIn">
+      <mat-toolbar>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <!-- <span>ADMIN PORTAL</span> -->
+        <div class="bouncing-text">
+          <div class="b">A</div>
+          <div class="o">D</div>
+          <div class="u">M</div>
+          <div class="n">I</div>
+          <div class="c">N</div>
+          <div class="e">P</div>
+          <div class="shadow"></div>
+          <div class="shadow-two"></div>
+        </div>
+        <span class="example-spacer"></span>
+        
+        <a mat-raised-button color="primary" href="/" routerLink="/">
+          <i class="bi bi-box-arrow-in-right"></i>
+          Login
+        </a>
+      </mat-toolbar>
+ </div> 
 
 
   <!--Login Navbar starting -->
@@ -188,10 +213,15 @@
                   <i class="bi bi-list"></i>
                 </button>
               
-                <button mat-button (click)="reloadCurrentRoute()" >
+                <button mat-button (click)="reloadCurrentRoute()"  class="mx-3" >
                   <i class="bi bi-arrow-clockwise"></i>
-                  refresh
+                  Refresh
                 </button>
+
+                <span class="clock">
+                  {{ currentTime }}
+                </span>
+                
               <!-- DYNAMIC ROOT CONTENT -->
             </router-outlet>
               
