@@ -30,6 +30,8 @@ import { ParentCategoryComponent } from './admin-panel/categories/parent-categor
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ReactiveFormsModule} from '@angular/forms';
 import { ChildCategoryComponent } from './admin-panel/categories/child-category/child-category.component';
+import { UpdateParentFileComponent } from './admin-panel/categories/parent-category/updateParentFile/update-parent-file/update-parent-file.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -46,6 +48,7 @@ import { ChildCategoryComponent } from './admin-panel/categories/child-category/
     AdminDashboardComponent,
     ParentCategoryComponent,
     ChildCategoryComponent,
+    UpdateParentFileComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ import { ChildCategoryComponent } from './admin-panel/categories/child-category/
     NgToastModule,
     MatSlideToggleModule,
      ReactiveFormsModule,
+     MatDialogModule
   ], 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync()],
