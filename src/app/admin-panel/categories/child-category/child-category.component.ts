@@ -127,6 +127,9 @@ export class ChildCategoryComponent {
       next:(res:any)=> {
         this.toast.success({detail:"Success",summary:"child Saved Success", position:"bottomRight",duration:3000});
         this.spinner.hide();
+
+        //getChildList
+        this.getChildCategoryList();
       },
       error:(err:any)=>  {
         this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});

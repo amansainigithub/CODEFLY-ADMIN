@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { TokenStorageService } from './_services/token-storage.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgToastService } from 'ng-angular-popup';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -26,8 +27,10 @@ export class AppComponent {
   constructor(
     private tokenStorageService: TokenStorageService,
     private router:Router,
+    private activateRouter:ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private toast:NgToastService) { }
+    private toast:NgToastService) {
+     }
 
   ngOnInit(): void { 
 
@@ -45,7 +48,7 @@ export class AppComponent {
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.username;
-      this.router.navigate(['/admin/dashboard']);
+      // this.router.navigate(['/admin/dashboard']);
     }
 
   }
@@ -68,15 +71,6 @@ export class AppComponent {
   }
 
 
-  
-  reloadCurrentRoute() {
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/parent-category', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
-  }
-
-
   ngOnDestroy() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
@@ -88,5 +82,9 @@ export class AppComponent {
     this.currentTime = now.toLocaleTimeString();
   }
 
+
+  routingFix(){
+    this.router.navigate(["/admin/dashboard/child-category"])
+  }
 
 }

@@ -19,9 +19,9 @@ const routes: Routes = [
                   //ADMIN PANEL
                   // { path: '', component: AdminDashboardComponent},
                   { path: 'profile', component: ProfileComponent },
-                  { path: 'parent-category', component: ParentCategoryComponent , },
-                  { path: 'child-category', component: ChildCategoryComponent , },
-                  { path: 'update-parent-file', component: UpdateParentFileComponent , },
+                  { path: 'parent-category', component: ParentCategoryComponent , pathMatch:'full' },
+                  { path: 'child-category', component: ChildCategoryComponent , pathMatch:'full' ,  },
+                  { path: 'update-parent-file', component: UpdateParentFileComponent , pathMatch:'full' },
       ],
 }
 

@@ -36,6 +36,7 @@ import { UpdateChildFileComponent } from './admin-panel/categories/child-categor
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

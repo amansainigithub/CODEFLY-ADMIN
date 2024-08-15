@@ -140,12 +140,23 @@
       <!-- CHILD CATEGORY -->
       <ul class="collapse submenu4" id="submenu4">
         <li class="submenu-item hv1 unOrderList">
-          <a style="font-size: 14px;" class="nav-link"  routerLinkActive="active" href="" routerLink="/admin/dashboard/child-category">
+          <a style="font-size: 14px;" class="nav-link"  routerLinkActive="active"
+             href="/admin/dashboard/child-category" routerLink="/admin/dashboard/child-category">
             <i class="bi bi-bookmarks-fill"></i>
               Child Category
           </a>
         </li>
     </ul>
+
+    <ul class="collapse submenu4" id="submenu4">
+      <li class="submenu-item hv1 unOrderList">
+        <a type="button" (click)="routingFix()" style="font-size: 14px;" class="nav-link" 
+           href="" routerLink="">
+          <i class="bi bi-bookmarks-fill"></i>
+            Child Category
+        </a>
+      </li>
+  </ul>
     
     </li>
 
@@ -213,7 +224,7 @@
                   <i class="bi bi-list"></i>
                 </button>
               
-                <button mat-button (click)="reloadCurrentRoute()"  class="mx-3" >
+                <button mat-button class="mx-3" >
                   <i class="bi bi-arrow-clockwise"></i>
                   Refresh
                 </button>
