@@ -44,3 +44,26 @@
     display: block;
   }
   
+
+  /* //DOT CSS */
+  .dotGreen {
+    animation: blink 1.5s infinite;
+    font-size: 25px;
+    color: #4caf50;
+   }
+
+   .dotRed{
+        animation: blink 1.5s infinite;
+        font-size: 25px;
+        color: #e31e1e;
+   }
+
+/* Animation for smooth blinking */
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3; /* Slightly lower opacity for a smoother effect */
+    }
+}

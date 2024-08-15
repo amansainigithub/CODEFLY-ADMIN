@@ -32,6 +32,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { ChildCategoryComponent } from './admin-panel/categories/child-category/child-category.component';
 import { UpdateParentFileComponent } from './admin-panel/categories/parent-category/updateParentFile/update-parent-file/update-parent-file.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { UpdateChildFileComponent } from './admin-panel/categories/child-category/updateChildFile/update-child-file/update-child-file.component';
 
 
 
@@ -49,6 +50,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ParentCategoryComponent,
     ChildCategoryComponent,
     UpdateParentFileComponent,
+    UpdateChildFileComponent,
   ],
   imports: [
     BrowserModule,
