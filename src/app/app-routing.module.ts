@@ -8,6 +8,7 @@ import { AdminGuardService } from './authGuards/adminGuards/admin-guard.service'
 import { ParentCategoryComponent } from './admin-panel/categories/parent-category/parent-category.component';
 import { ChildCategoryComponent } from './admin-panel/categories/child-category/child-category.component';
 import { UpdateParentFileComponent } from './admin-panel/categories/parent-category/updateParentFile/update-parent-file/update-parent-file.component';
+import { BabyCategoryComponent } from './admin-panel/categories/baby-category/baby-category.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
                   { path: 'parent-category', component: ParentCategoryComponent , pathMatch:'full' },
                   { path: 'child-category', component: ChildCategoryComponent , pathMatch:'full' ,  },
                   { path: 'update-parent-file', component: UpdateParentFileComponent , pathMatch:'full' },
+                  { path: 'baby-category', component: BabyCategoryComponent , pathMatch:'full' },
       ],
 }
 

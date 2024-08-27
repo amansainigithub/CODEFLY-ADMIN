@@ -33,6 +33,7 @@ import { ChildCategoryComponent } from './admin-panel/categories/child-category/
 import { UpdateParentFileComponent } from './admin-panel/categories/parent-category/updateParentFile/update-parent-file/update-parent-file.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UpdateChildFileComponent } from './admin-panel/categories/child-category/updateChildFile/update-child-file/update-child-file.component';
+import { BabyCategoryComponent } from './admin-panel/categories/baby-category/baby-category.component';
 
 
 
@@ -52,6 +53,7 @@ import { UpdateChildFileComponent } from './admin-panel/categories/child-categor
     ChildCategoryComponent,
     UpdateParentFileComponent,
     UpdateChildFileComponent,
+    BabyCategoryComponent,
   ],
   imports: [
     BrowserModule,
