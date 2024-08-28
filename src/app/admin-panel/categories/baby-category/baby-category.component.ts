@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParentCategoryService } from '../../../_services/categories/parentCategory/parent-category.service';
 import { ChildCategoryService } from '../../../_services/categories/childCategory/child-category.service';
@@ -7,6 +7,9 @@ import { BucketService } from '../../../_services/bucket/bucket.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BabyCategoryService } from '../../../_services/categories/babyCategory/baby-category.service';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateChildFileComponent } from '../child-category/updateChildFile/update-child-file/update-child-file.component';
+import { UpdateBabyFileComponent } from './updateBabyFile/update-baby-file/update-baby-file.component';
 
 @Component({
   selector: 'app-baby-category',
@@ -198,6 +201,89 @@ export class BabyCategoryComponent {
     }
   );
   }
+
+
+
+
+
+  updateform: any = {
+    id: 0,
+    categoryName: null,
+    defaultName: null,
+    slug: null,
+    description: null,
+    metaDescription: null,
+    featuredStatus: null,
+    categoryFile: null,
+    permalink: null,
+    user: null,
+    isActive: false,
+  };
+
+
+
+  updatebabyCategory()
+  {
+    console.log(this.updateform);
+     //save File
+     this.babyCategoryService.updatebabyCategory(this.updateform).subscribe({
+       next:(res:any)=> {
+         this.toast.success({detail:"Success",summary:"data Update Success", position:"bottomRight",duration:3000});
+         
+         //get Child Category List
+         this.getbabyCategoryList();
+         
+         this.spinner.hide();
+       },
+       error:(err:any)=>  {
+         this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+         this.spinner.hide();
+         console.log(err);
+           }
+         }
+       );
+  }
+
+
+  getBabyCategoryById(childCategoryId: any) {
+    //to show update form
+    this.viceVersaForm = true;
+
+    this.babyCategoryService.getBabyCategoryByIdService(childCategoryId).subscribe({
+      next:(res:any)=> {
+        this.updateform = res.data;
+        this.fileRendor = false;
+        console.log(res);
+        this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
+        
+      },
+      error:(err:any)=>  {
+        this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+        this.spinner.hide();
+        console.log(err);
+          }
+        }
+      );
+    }
+
+
+    //Update File
+    readonly dialog = inject(MatDialog);
+    openDialog(enterAnimationDuration: string, exitAnimationDuration: string,babyCategoryId:any): void {
+      const dialogRef = this.dialog.open(UpdateBabyFileComponent, {
+        width: '400px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        data: { babyCategoryId: babyCategoryId },
+        
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log("Dialog result: " + result);
+        this.getChildCategoryList();
+      });
+      
+    }
 
 
 

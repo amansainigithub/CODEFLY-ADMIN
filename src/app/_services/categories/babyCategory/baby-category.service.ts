@@ -23,12 +23,29 @@ export class BabyCategoryService {
     return this.http.get(AUTH_API_PROTECTED + 'getBabyCategoryList', httpOptions);
   }
 
-  deletebabyCategoryByIdService(childCategoryId:any): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'deleteBabyCategoryById/'+childCategoryId, httpOptions);
+  deletebabyCategoryByIdService(babyCategoryId:any): Observable<any> {
+    return this.http.get(AUTH_API_PROTECTED + 'deleteBabyCategoryById/'+babyCategoryId, httpOptions);
   }
 
   saveBabyCategoryService(data:any): Observable<any> {
     return this.http.post(AUTH_API_PROTECTED + 'saveBabyCategory',data, httpOptions);
+  }
+
+  updatebabyCategory(data:any): Observable<any> {
+    return this.http.post(AUTH_API_PROTECTED + 'updateBabyCategory',data, httpOptions);
+  }
+
+  getBabyCategoryByIdService(babyCategoryId:any): Observable<any> {
+    return this.http.get(AUTH_API_PROTECTED + 'getBabyCategoryById/'+babyCategoryId, httpOptions);
+  }
+
+
+  //Update File Parent
+  updateBabyFile(file:any,babyCategoryId:any)
+  {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.http.post(AUTH_API_PROTECTED+"updateBabyCategoryFile/"+ babyCategoryId,formData);
   }
 
 }
