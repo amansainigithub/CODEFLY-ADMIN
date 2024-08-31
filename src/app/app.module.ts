@@ -36,6 +36,7 @@ import { UpdateChildFileComponent } from './admin-panel/categories/child-categor
 import { BabyCategoryComponent } from './admin-panel/categories/baby-category/baby-category.component';
 import { UpdateBabyFileComponent } from './admin-panel/categories/baby-category/updateBabyFile/update-baby-file/update-baby-file.component';
 import { BornCategoryComponent } from './admin-panel/categories/born-category/born-category.component';
+import { UpdateBornFileComponent } from './admin-panel/categories/born-category/updateBornFile/update-born-file/update-born-file.component';
 
 
 
@@ -58,6 +59,7 @@ import { BornCategoryComponent } from './admin-panel/categories/born-category/bo
     BabyCategoryComponent,
     UpdateBabyFileComponent,
     BornCategoryComponent,
+    UpdateBornFileComponent,
   ],
   imports: [
     BrowserModule,

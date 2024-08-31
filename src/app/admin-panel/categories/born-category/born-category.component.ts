@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BabyCategoryService } from '../../../_services/categories/babyCategory/baby-category.service';
 import { NgToastService } from 'ng-angular-popup';
@@ -6,6 +6,8 @@ import { BucketService } from '../../../_services/bucket/bucket.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BornCategoryService } from '../../../_services/categories/bornCategory/born-category.service';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateBornFileComponent } from './updateBornFile/update-born-file/update-born-file.component';
 
 @Component({
   selector: 'app-born-category',
@@ -253,6 +255,25 @@ export class BornCategoryComponent {
         }
       );
     }
+
+
+     //Update File
+     readonly dialog = inject(MatDialog);
+     openDialog(enterAnimationDuration: string, exitAnimationDuration: string,bornCategoryId:any): void {
+       const dialogRef = this.dialog.open(UpdateBornFileComponent, {
+         width: '400px',
+         enterAnimationDuration,
+         exitAnimationDuration,
+         data: { bornCategoryId: bornCategoryId },
+         
+       });
+ 
+       dialogRef.afterClosed().subscribe(result => {
+         console.log("Dialog result: " + result);
+         this.getbornCategoryList();
+       });
+       
+     }
 
 
 

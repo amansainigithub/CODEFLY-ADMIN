@@ -43,5 +43,13 @@ export class BornCategoryService {
   }
 
 
+   //Update File Parent
+   updateBornFile(file:any,bornCategoryId:any)
+   {
+     const formData: FormData = new FormData();
+     formData.append('file', file);
+     return this.http.post(AUTH_API_PROTECTED+"updateBornCategoryFile/"+ bornCategoryId,formData);
+   }
+
 
 }
