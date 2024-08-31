@@ -62,7 +62,7 @@
                   </td>
 
                   <td>
-                    <button  (click)="getParentCategoryById(data.id)"  type="button" class="btn btn-primary btn-sm">
+                    <button  (click)="getChildCategoryById(data.id)"  type="button" class="btn btn-primary btn-sm">
                       <i class="bi bi-pencil-square bg-primary"></i>
                     </button>
                   </td>
@@ -339,6 +339,37 @@
                 novalidate>
 
 
+
+                 <!-- parent Category list start-->
+                 <div>
+                  <label class="fs12">Parent Category</label>
+                  <select  
+                  [(ngModel)]="updateform.parentCategoryId" 
+                  name="parentCategoryId" 
+                  class="form-select form-select-sm"
+                  aria-label="Default select example"
+                  required #parentCategoryId="ngModel"
+                  [class.dirty]="parentCategoryId.dirty" 
+                  [class.touched]="parentCategoryId.touched"
+                  [ngClass]="{ 'is-invalid': parentCategoryId.errors && (parentCategoryId.touched || parentCategoryId.dirty ) }"
+                  >
+                    <option  selected>select</option>
+                    <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.categoryName}}</option>
+                  </select>   
+                  
+                  <div 
+                    *ngIf="categoryName.errors && (categoryName.touched || categoryName.dirty )" 
+                    class="invalid-feedback">
+
+                      <div 
+                      *ngIf="categoryName.errors['required'] ">
+                      parentCategoryId is required
+                      </div>
+                    </div>
+                </div>
+                <!-- parent Category list end-->
+
+
                   <div class="form-group">
                     <label class="fs12">CategoryName</label>
                     <input 
@@ -374,6 +405,9 @@
                       </div>
                     </div>
                   </div>
+
+
+
 
 
                   <div class="row">

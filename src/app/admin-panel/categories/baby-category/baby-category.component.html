@@ -93,7 +93,7 @@
                       (ngSubmit)="f.form.valid && onSubmit()" 
                       novalidate>
     
-                      <!-- parent Category list start-->
+                      <!-- Child Category list start-->
                       <div>
                         <label class="fs12">Child Category</label>
                         <select  
@@ -120,7 +120,7 @@
                             </div>
                           </div>
                       </div>
-                      <!-- parent Category list end-->
+                      <!-- Child Category list end-->
     
     
                         <div class="form-group">
@@ -339,6 +339,38 @@
                     #f="ngForm" 
                     (ngSubmit)="f.form.valid && updatebabyCategory()" 
                     novalidate>
+
+
+
+                    
+                  <!-- Child Category list start-->
+                  <div>
+                    <label class="fs12">Child Category</label>
+                    <select  
+                      [(ngModel)]="updateform.childCategoryId" 
+                      name="childCategoryId" 
+                      class="form-select form-select-sm"
+                      aria-label="Default select example"
+                      required #childCategoryId="ngModel"
+                      [class.dirty]="childCategoryId.dirty" 
+                      [class.touched]="childCategoryId.touched"
+                      [ngClass]="{ 'is-invalid': childCategoryId.errors && (childCategoryId.touched || childCategoryId.dirty ) }"
+                    >
+                      <option  selected>select</option>
+                      <option *ngFor="let cList of childList" [value]="cList.id">{{ cList.categoryName}}</option>
+                    </select>   
+                    
+                    <div 
+                      *ngIf="categoryName.errors && (categoryName.touched || categoryName.dirty )" 
+                      class="invalid-feedback">
+
+                        <div 
+                        *ngIf="categoryName.errors['required'] ">
+                        childCategoryId is required
+                        </div>
+                      </div>
+                  </div>
+                  <!-- Child Category list end-->
     
     
                       <div class="form-group">

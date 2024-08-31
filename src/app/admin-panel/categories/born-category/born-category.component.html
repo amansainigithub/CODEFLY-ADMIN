@@ -338,7 +338,38 @@
                     #f="ngForm" 
                     (ngSubmit)="f.form.valid && updateBornCategory()" 
                     novalidate>
+
+                    
     
+                     <!-- Baby Category list start-->
+                     <div>
+                      <label class="fs12">Baby Category</label>
+                      <select  
+                        [(ngModel)]="updateform.babyCategoryId" 
+                        name="babyCategoryId" 
+                        class="form-select form-select-sm"
+                        aria-label="Default select example"
+                        required #babyCategoryId="ngModel"
+                        [class.dirty]="babyCategoryId.dirty" 
+                        [class.touched]="babyCategoryId.touched"
+                        [ngClass]="{ 'is-invalid': babyCategoryId.errors && (babyCategoryId.touched || babyCategoryId.dirty ) }"
+                      >
+                        <option  selected>select</option>
+                        <option *ngFor="let cList of babyList" [value]="cList.id">{{ cList.categoryName}}</option>
+                      </select>   
+                      
+                      <div 
+                        *ngIf="categoryName.errors && (categoryName.touched || categoryName.dirty )" 
+                        class="invalid-feedback">
+  
+                          <div 
+                          *ngIf="categoryName.errors['required'] ">
+                          childCategoryId is required
+                          </div>
+                        </div>
+                    </div>
+                    <!-- Baby Category list end-->
+
     
                       <div class="form-group">
                         <label class="fs12">CategoryName</label>

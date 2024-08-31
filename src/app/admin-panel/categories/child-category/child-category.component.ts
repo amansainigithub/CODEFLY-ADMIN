@@ -77,20 +77,21 @@ export class ChildCategoryComponent {
 
   getParentCategoryList()
   {
-    this.spinner.show();
-    this.parentCategoryService.getParentCategoryListService().subscribe({
-      next:(res:any)=> {
-        this.parentList = res.data;
-        this.spinner.hide();
-      },
-      error:(err:any)=>  {
-        console.log(err);
-        this.spinner.hide();
-        this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
-        
+      this.spinner.show();
+      this.parentCategoryService.getParentCategoryListService().subscribe({
+        next:(res:any)=> {
+          this.parentList = res.data;
+          console.log(this.parentList);
+          this.spinner.hide();
+        },
+        error:(err:any)=>  {
+          console.log(err);
+          this.spinner.hide();
+          this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+          
+        }
       }
-    }
-  );
+    );
   }
 
 
@@ -212,7 +213,7 @@ export class ChildCategoryComponent {
   };
 
 
-  getParentCategoryById(childCategoryId: any) {
+  getChildCategoryById(childCategoryId: any) {
     //to show update form
     this.viceVersaForm = true;
 
@@ -220,7 +221,10 @@ export class ChildCategoryComponent {
       next:(res:any)=> {
         this.updateform = res.data;
         this.fileRendor = false;
-        console.log(res)
+        console.log(res);
+
+        //this.getParentCategoryList();
+
         this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
         
       },
