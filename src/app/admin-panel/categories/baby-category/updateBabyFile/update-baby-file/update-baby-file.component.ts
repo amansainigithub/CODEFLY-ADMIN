@@ -51,7 +51,6 @@ export class UpdateBabyFileComponent {
       else{
         this.babyCategoryService.updateBabyFile(this.file,this.data.babyCategoryId).subscribe({
           next:(res:any)=>{
-            console.log(res);
             this.toast.success({detail:"Success",summary:"File Update success", position:"bottomRight",duration:3000});
             this.dialogRef.close();
 
