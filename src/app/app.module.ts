@@ -36,6 +36,7 @@ import { BornCategoryComponent } from './admin-panel/categories/born-category/bo
 import { UpdateBornFileComponent } from './admin-panel/categories/born-category/updateBornFile/update-born-file/update-born-file.component';
 import { CustomerComponent } from './admin-panel/users/customer/customer.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { AdminComponent } from './admin-panel/users/admin/admin.component';
 
 
 
@@ -57,6 +58,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     BornCategoryComponent,
     UpdateBornFileComponent,
     CustomerComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,41 +2,105 @@
 
     <div class="alert">
       <i class="bi bi-people-fill px-1 baseColor"></i>
-      <p>Users List</p>
+      <p>Customer</p>
     </div>
 
 
-          <div class="">
+          <div  class="table-container">
             <table class=" table table-sm table-hover ">
               <thead>
   
                 <tr>
                   <th scope="col">id</th>
-                  <th scope="col">SubCategoryName</th>
-                  <th scope="col">DefaultName</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">SubTitle</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">FileUrl</th>
-                  <th scope="col">updateFile</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">userName</th>
+                  <th scope="col">email</th>
+                  <th scope="col">mobile</th>
+                  <th scope="col">customerEmail</th>
+                  <th scope="col">customer-Mobile-Verify</th>
+                  <th scope="col">customer-Email-Verify</th>
+                  <th scope="col">cust-Username</th>
+                  <th scope="col">customer-MobileOtp</th>
+                  <th scope="col">project-Role</th>
+                  <th scope="col">customer-Register-Complete</th>
+                  <th scope="col">customer-Forgot-PasswordOtp</th>
+                  <th scope="col">isCustomer-Forgot-Password</th>
+                  <th scope="col">creationDate</th>
+                  <th scope="col">lastModifiedDate</th>
                 </tr>
   
               </thead>
               <tbody>
-                  <tr scope="row" *ngFor="let data of usersList">
+                  <tr scope="row" *ngFor="let data of customerList">
                       <td>{{ data.id }}</td>
-                      <td>{{ data.subCategoryName }}</td>
-                      <td>{{ data.defaultName }}</td>
-                      <td>{{ data.title}}</td>
-                      <td>{{ data.subTitle }}</td>
-                      <td>{{ data.description }}</td>
-                      <td>{{ data.defaultName }}</td>
-                      <td>{{ data.title}}</td>
-                      <td>{{ data.subTitle }}</td>
-                      <td>{{ data.description }}</td>
-  
+                      <td>{{ data.username }}</td>
+                      <td>{{ data.email }}</td>
+                      <td>{{ data.mobile}}</td>
+                      <td>{{ data.customerEmail}}</td>
+
+
+                      <td *ngIf="data.customerMobileVerify === 'Y' " >
+                        <span class="badge bg-success">Y</span>
+                      </td>
+                      <td *ngIf="data.customerMobileVerify === 'N' || data.customerMobileVerify === '' || data.customerMobileVerify === null " >
+                        <span class="badge bg-danger">N</span>
+                      </td>
+
+
+                      <td *ngIf="data.customerEmailVerify === 'Y' " >
+                        <span class="badge bg-success">Y</span>
+                      </td>
+                      <td *ngIf="data.customerEmailVerify === 'N' || data.customerEmailVerify === '' 
+                          || data.customerEmailVerify === null " >
+                        <span class="badge bg-danger">N</span>
+                      </td>
+
+
+                      <td>{{ data.custUsername }}</td>
+                      <td>{{ data.customerMobileOtp}}</td>
+
+
+                      <td>
+                        <span class="badge bg-primary"> {{ data.projectRole}}</span>
+                      </td>
+
+
+
+                      <td *ngIf="data.customerRegisterComplete === 'Y' " >
+                        <span class="badge bg-success">Y</span>
+                      </td>
+                      <td *ngIf="data.customerRegisterComplete === 'N' || data.customerRegisterComplete === '' 
+                          || data.customerRegisterComplete === null " >
+                        <span class="badge bg-danger">N</span>
+                      </td>
+
+
+
+                      <td *ngIf="data.customerForgotPasswordOtp === 'Y' " >
+                        <span class="badge bg-success">Y</span>
+                      </td>
+                      <td *ngIf="data.customerForgotPasswordOtp === 'N' || data.customerForgotPasswordOtp === '' 
+                          || data.customerForgotPasswordOtp === null " >
+                        <span class="badge bg-danger">N</span>
+                      </td>
+                      
+
+
+                      <td *ngIf="data.isCustomerForgotPassword === 'Y' " >
+                        <span class="badge bg-success">Y</span>
+                      </td>
+                      <td *ngIf="data.isCustomerForgotPassword === 'N' || data.isCustomerForgotPassword === '' 
+                          || data.isCustomerForgotPassword === null " >
+                        <span class="badge bg-danger">N</span>
+                      </td>
+
+
+                      <td>
+                        <span class="badge bg-primary">  {{ data.creationDate}}</span>
+                      </td>
+                      <td>
+                        <span class="badge bg-primary">  {{ data.lastModifiedDate}}</span>
+                     </td>
+
                     </tr>
               </tbody>
             </table>

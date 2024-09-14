@@ -11,6 +11,7 @@ import { UpdateParentFileComponent } from './admin-panel/categories/parent-categ
 import { BabyCategoryComponent } from './admin-panel/categories/baby-category/baby-category.component';
 import { BornCategoryComponent } from './admin-panel/categories/born-category/born-category.component';
 import { CustomerComponent } from './admin-panel/users/customer/customer.component';
+import { AdminComponent } from './admin-panel/users/admin/admin.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
                   { path: 'update-parent-file', component: UpdateParentFileComponent , pathMatch:'full' },
                   { path: 'baby-category', component: BabyCategoryComponent , pathMatch:'full' },
                   { path: 'born-category', component: BornCategoryComponent , pathMatch:'full' },
-                  { path: 'customer', component: CustomerComponent , pathMatch:'full' },
+                  { path: 'customer-node', component: CustomerComponent , pathMatch:'full' },
+                  { path: 'admin-node', component: AdminComponent , pathMatch:'full' },
       ],
 }
 

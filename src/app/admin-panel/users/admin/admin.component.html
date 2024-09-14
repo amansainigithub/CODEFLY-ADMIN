@@ -1,0 +1,64 @@
+<div class="container p-4 bg-white mt-4 border-radius20">
+
+    <div class="alert">
+      <i class="bi bi-people-fill px-1 baseColor"></i>
+      <p>Admin</p>
+    </div>
+
+
+          <div  class="table-container">
+            <table class=" table table-sm table-hover ">
+              <thead>
+  
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">userName</th>
+                  <th scope="col">email</th>
+                  <th scope="col">mobile</th>
+                  <th scope="col">passKey</th>
+                  <th scope="col">project-Role</th>
+                  <th scope="col">admin-Email</th>
+                  <th scope="col">creationDate</th>
+                  <th scope="col">lastModifiedDate</th>
+
+                  
+                </tr>
+  
+              </thead>
+              <tbody>
+                  <tr scope="row" *ngFor="let data of adminList">
+                      <td>{{ data.id }}</td>
+                      <td>{{ data.username }}</td>
+                      <td>{{ data.email }}</td>
+                      <td>{{ data.mobile}}</td>
+                      <td>{{ data.passKey}}</td>
+                      <td>
+                        <span class="badge bg-primary"> {{ data.projectRole}}</span>
+                      </td>
+                      <td>{{ data.adminEmail}}</td>
+                      <td>
+                        <span class="badge bg-primary">  {{ data.creationDate}}</span>
+                      </td>
+                      <td>
+                        <span class="badge bg-primary">  {{ data.lastModifiedDate}}</span>
+                     </td>
+
+                    </tr>
+              </tbody>
+            </table>
+          </div>
+  
+   
+   <mat-paginator 
+                [pageSizeOptions]="[2, 4, 5, 8]" 
+                [pageSize]="2"
+                [length]="totalElements"
+                (page)="nextPage($event)"
+                showFirstLastButtons>
+           </mat-paginator>
+        
+
+   
+  
+      </div>
+ 
