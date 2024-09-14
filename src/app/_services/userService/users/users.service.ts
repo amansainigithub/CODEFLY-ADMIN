@@ -18,13 +18,21 @@ export class UsersService {
 
   constructor(private http: HttpClient , private toast:NgToastService) { }
 
-  
+  //CUSTOMER
   getCustomerByPagination(request:any): Observable<any> {
     return this.http.post(AUTH_API_PROTECTED + 'getCustomerByPagination?page='+request.page + '&size=' +request.size, httpOptions);
   }
 
+  //SELLER
+  getSellerByPagination(request:any): Observable<any> {
+    return this.http.post(AUTH_API_PROTECTED + 'getSellerByPagination?page='+request.page + '&size=' +request.size, httpOptions);
+  }
+
+  //ADMIN
   getAdminByPagination(request:any): Observable<any> {
     return this.http.post(AUTH_API_PROTECTED + 'getAdminByPagination?page='+request.page + '&size=' +request.size, httpOptions);
   }
+
+  
 
 }

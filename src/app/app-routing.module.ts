@@ -12,6 +12,7 @@ import { BabyCategoryComponent } from './admin-panel/categories/baby-category/ba
 import { BornCategoryComponent } from './admin-panel/categories/born-category/born-category.component';
 import { CustomerComponent } from './admin-panel/users/customer/customer.component';
 import { AdminComponent } from './admin-panel/users/admin/admin.component';
+import { SellerComponent } from './admin-panel/users/seller/seller.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
                   { path: 'baby-category', component: BabyCategoryComponent , pathMatch:'full' },
                   { path: 'born-category', component: BornCategoryComponent , pathMatch:'full' },
                   { path: 'customer-node', component: CustomerComponent , pathMatch:'full' },
+                  { path: 'seller-node', component: SellerComponent , pathMatch:'full' },
                   { path: 'admin-node', component: AdminComponent , pathMatch:'full' },
       ],
 }
