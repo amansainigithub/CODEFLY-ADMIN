@@ -6,10 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { BoardUserComponent } from './board-user/board-user.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -37,6 +34,8 @@ import { BabyCategoryComponent } from './admin-panel/categories/baby-category/ba
 import { UpdateBabyFileComponent } from './admin-panel/categories/baby-category/updateBabyFile/update-baby-file/update-baby-file.component';
 import { BornCategoryComponent } from './admin-panel/categories/born-category/born-category.component';
 import { UpdateBornFileComponent } from './admin-panel/categories/born-category/updateBornFile/update-born-file/update-born-file.component';
+import { CustomerComponent } from './admin-panel/users/customer/customer.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -46,9 +45,6 @@ import { UpdateBornFileComponent } from './admin-panel/categories/born-category/
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    BoardUserComponent,
-    BoardAdminComponent,
-    BoardModeratorComponent,
     ProfileComponent,
     HomeComponent,
     AdminDashboardComponent,
@@ -60,6 +56,7 @@ import { UpdateBornFileComponent } from './admin-panel/categories/born-category/
     UpdateBabyFileComponent,
     BornCategoryComponent,
     UpdateBornFileComponent,
+    CustomerComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +75,8 @@ import { UpdateBornFileComponent } from './admin-panel/categories/born-category/
     NgToastModule,
     MatSlideToggleModule,
      ReactiveFormsModule,
-     MatDialogModule
+     MatDialogModule,
+     MatPaginatorModule
   ], 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync()],

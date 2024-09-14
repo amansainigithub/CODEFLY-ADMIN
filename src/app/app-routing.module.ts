@@ -10,6 +10,7 @@ import { ChildCategoryComponent } from './admin-panel/categories/child-category/
 import { UpdateParentFileComponent } from './admin-panel/categories/parent-category/updateParentFile/update-parent-file/update-parent-file.component';
 import { BabyCategoryComponent } from './admin-panel/categories/baby-category/baby-category.component';
 import { BornCategoryComponent } from './admin-panel/categories/born-category/born-category.component';
+import { CustomerComponent } from './admin-panel/users/customer/customer.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
                   { path: 'update-parent-file', component: UpdateParentFileComponent , pathMatch:'full' },
                   { path: 'baby-category', component: BabyCategoryComponent , pathMatch:'full' },
                   { path: 'born-category', component: BornCategoryComponent , pathMatch:'full' },
+                  { path: 'customer', component: CustomerComponent , pathMatch:'full' },
       ],
 }
 

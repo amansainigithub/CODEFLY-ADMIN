@@ -1,0 +1,58 @@
+ <div class="container p-4 bg-white mt-4 border-radius20">
+
+    <div class="alert">
+      <i class="bi bi-people-fill px-1 baseColor"></i>
+      <p>Users List</p>
+    </div>
+
+
+          <div class="">
+            <table class=" table table-sm table-hover ">
+              <thead>
+  
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">SubCategoryName</th>
+                  <th scope="col">DefaultName</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">SubTitle</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">FileUrl</th>
+                  <th scope="col">updateFile</th>
+                  <th scope="col">Action</th>
+                </tr>
+  
+              </thead>
+              <tbody>
+                  <tr scope="row" *ngFor="let data of usersList">
+                      <td>{{ data.id }}</td>
+                      <td>{{ data.subCategoryName }}</td>
+                      <td>{{ data.defaultName }}</td>
+                      <td>{{ data.title}}</td>
+                      <td>{{ data.subTitle }}</td>
+                      <td>{{ data.description }}</td>
+                      <td>{{ data.defaultName }}</td>
+                      <td>{{ data.title}}</td>
+                      <td>{{ data.subTitle }}</td>
+                      <td>{{ data.description }}</td>
+  
+                    </tr>
+              </tbody>
+            </table>
+          </div>
+  
+   
+   <mat-paginator 
+                [pageSizeOptions]="[2, 4, 5, 8]" 
+                [pageSize]="2"
+                [length]="totalElements"
+                (page)="nextPage($event)"
+                showFirstLastButtons>
+           </mat-paginator>
+        
+
+   
+  
+      </div>
+ 
