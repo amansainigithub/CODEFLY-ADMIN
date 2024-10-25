@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
+import { API_AUTHORIZA_URL } from '../../../constants/Constants';
 
-const AUTH_API_PROTECTED = 'http://localhost:8080/shopping/api/flying/v1/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,23 +20,23 @@ export class BabyCategoryService {
 
 
   getBabyCategoryListService(): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'getBabyCategoryList', httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "babyController/" + 'getBabyCategoryList', httpOptions);
   }
 
   deletebabyCategoryByIdService(babyCategoryId:any): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'deleteBabyCategoryById/'+babyCategoryId, httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "babyController/" +'deleteBabyCategoryById/'+babyCategoryId, httpOptions);
   }
 
   saveBabyCategoryService(data:any): Observable<any> {
-    return this.http.post(AUTH_API_PROTECTED + 'saveBabyCategory',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + "babyController/" + 'saveBabyCategory',data, httpOptions);
   }
 
   updatebabyCategory(data:any): Observable<any> {
-    return this.http.post(AUTH_API_PROTECTED + 'updateBabyCategory',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + "babyController/" + 'updateBabyCategory',data, httpOptions);
   }
 
   getBabyCategoryByIdService(babyCategoryId:any): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'getBabyCategoryById/'+babyCategoryId, httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "babyController/" + 'getBabyCategoryById/'+babyCategoryId, httpOptions);
   }
 
 
@@ -45,7 +45,7 @@ export class BabyCategoryService {
   {
     const formData: FormData = new FormData();
     formData.append('file', file);
-    return this.http.post(AUTH_API_PROTECTED+"updateBabyCategoryFile/"+ babyCategoryId,formData);
+    return this.http.post(API_AUTHORIZA_URL  + "babyController/" +  "updateBabyCategoryFile/"+ babyCategoryId,formData);
   }
 
 }

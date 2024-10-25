@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const AUTH_API = 'http://localhost:8080/shopping/api/admin/auth/';
+import { API_PUBIC_URL } from '../constants/Constants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,14 +14,14 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(AUTH_API + 'adminSignin', {
+    return this.http.post(API_PUBIC_URL + 'adminAuthController/'+ 'adminSignin', {
       username,
       password
     }, httpOptions);
   }
 
   register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(AUTH_API + 'signup', {
+    return this.http.post(API_PUBIC_URL + "adminAuthController/"+  'signup', {
       username,
       email,
       password
@@ -30,7 +29,7 @@ export class AuthService {
   }
 
   passKey(username: string, password: string,passKey: string): Observable<any> {
-    return this.http.post(AUTH_API + 'adminPassKey', {
+    return this.http.post(API_PUBIC_URL + "adminAuthController/"+  'adminPassKey', {
       username,
       password,
       passKey

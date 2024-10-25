@@ -2,10 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
-
-const AUTH_API_PROTECTED = 'http://localhost:8080/shopping/api/flying/v1/';
-
-
+import { API_AUTHORIZA_URL } from '../../../constants/Constants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,23 +17,23 @@ export class ParentCategoryService {
 
 
   saveParentCategory(data:any): Observable<any> {
-    return this.http.post(AUTH_API_PROTECTED + 'createParentCategory',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + "parentController/" + 'createParentCategory',data, httpOptions);
   }
 
   getParentCategoryListService(): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'getParentCategoryList', httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "parentController/" + 'getParentCategoryList', httpOptions);
   }
 
   deleteParentCategoryByIdService(parentCategoryId:any): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'deleteCategoryById/'+parentCategoryId, httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "parentController/" + 'deleteCategoryById/'+parentCategoryId, httpOptions);
   }
 
   getParentCategoryByIdService(parentCategoryId:any): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'getParentCategoryById/'+parentCategoryId, httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "parentController/" + 'getParentCategoryById/'+parentCategoryId, httpOptions);
   }
 
   updateParentCategory(data:any): Observable<any> {
-    return this.http.post(AUTH_API_PROTECTED + 'updateParentCategory',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + "parentController/" + 'updateParentCategory',data, httpOptions);
   }
 
 
@@ -45,7 +42,7 @@ export class ParentCategoryService {
   {
     const formData: FormData = new FormData();
     formData.append('file', file);
-    return this.http.post(AUTH_API_PROTECTED+"updateParentCategoryFile/"+ parentCategoryid,formData);
+    return this.http.post(API_AUTHORIZA_URL + "parentController/" + "updateParentCategoryFile/"+ parentCategoryid,formData);
   }
 
 

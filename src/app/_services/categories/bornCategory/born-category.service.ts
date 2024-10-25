@@ -2,9 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
-
-
-const AUTH_API_PROTECTED = 'http://localhost:8080/shopping/api/flying/v1/';
+import { API_AUTHORIZA_URL } from '../../../constants/Constants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,25 +19,25 @@ export class BornCategoryService {
 
 
   getBornCategoryListService(): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'getBornCategoryList', httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "bornController/" + 'getBornCategoryList', httpOptions);
   }
 
   deletebornCategoryByIdService(bornCategoryId:any): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'deleteBornCategoryById/'+bornCategoryId, httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "bornController/" + 'deleteBornCategoryById/'+bornCategoryId, httpOptions);
   }
 
 
   saveBornCategoryService(data:any): Observable<any> {
-    return this.http.post(AUTH_API_PROTECTED + 'saveBornCategory',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + "bornController/" + 'saveBornCategory',data, httpOptions);
   }
 
 
   updatebornCategory(data:any): Observable<any> {
-    return this.http.post(AUTH_API_PROTECTED + 'updateBornCategory',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + 'updateBornCategory',data, httpOptions);
   }
 
   getBornCategoryByIdService(bornCategoryId:any): Observable<any> {
-    return this.http.get(AUTH_API_PROTECTED + 'getBornCategoryById/'+bornCategoryId, httpOptions);
+    return this.http.get(API_AUTHORIZA_URL + "bornController/" + 'getBornCategoryById/'+bornCategoryId, httpOptions);
   }
 
 
@@ -48,7 +46,7 @@ export class BornCategoryService {
    {
      const formData: FormData = new FormData();
      formData.append('file', file);
-     return this.http.post(AUTH_API_PROTECTED+"updateBornCategoryFile/"+ bornCategoryId,formData);
+     return this.http.post(API_AUTHORIZA_URL + "bornController/" + "updateBornCategoryFile/"+ bornCategoryId,formData);
    }
 
 

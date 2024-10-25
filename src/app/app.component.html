@@ -100,7 +100,7 @@
 
 
 
-<!-- SIDEBAR -->
+<!-- SIDEBAR STARTING-->
 <div *ngIf="isLoggedIn">
        <div class="sidebar scrollable-content" [ngClass]="{'sidebar-extend-min': !isSidebarVisible}">
       <!-- <a href="" class="item">Home</a>
@@ -201,6 +201,30 @@
             
         </ul>
     </li>
+
+    <li class="nav-item">
+      <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu3" aria-expanded="false">
+        <i class="bi bi-percent"></i>
+        Tax MetaData
+        <i class="bi bi-chevron-right arrow-icon ms-auto floatRit" ></i>
+      </a>
+      <ul class="collapse submenu3" id="submenu3">
+        <li class="submenu-item unOrderList">
+          <a routerLink="/admin/dashboard/hsnCodes"  class="nav-link" href="/admin/dashboard/hsnCodes">
+            <i class="bi bi-tags-fill"></i>
+            HSN Code
+          </a>
+        </li>
+        <li class="submenu-item unOrderList">
+          <a class="nav-link" href="#">
+            <i class="bi bi-percent"></i>
+              Tax  
+          </a>
+        </li>
+    </ul>
+  </li>
+
+
     <li class="nav-item">
         <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu3" aria-expanded="false">
           <i class="bi bi-lock-fill"></i>
@@ -261,6 +285,8 @@
 </div>
 <!-- CONTENT -->
 </div>
+
+<!-- SIDEBAR ENDING -->
 
 
 

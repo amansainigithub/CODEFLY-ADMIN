@@ -38,6 +38,7 @@ import { CustomerComponent } from './admin-panel/users/customer/customer.compone
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AdminComponent } from './admin-panel/users/admin/admin.component';
 import { SellerComponent } from './admin-panel/users/seller/seller.component';
+import { HsnCodesComponent } from './admin-panel/tax/hsn-codes/hsn-codes.component';
 
 
 
@@ -61,6 +62,7 @@ import { SellerComponent } from './admin-panel/users/seller/seller.component';
     CustomerComponent,
     AdminComponent,
     SellerComponent,
+    HsnCodesComponent,
   ],
   imports: [
     BrowserModule,
