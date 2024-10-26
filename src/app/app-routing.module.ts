@@ -16,6 +16,8 @@ import { SellerComponent } from './admin-panel/users/seller/seller.component';
 import { HsnCodesComponent } from './admin-panel/tax/hsn-codes/hsn-codes.component';
 import { CatalogBrandComponent } from './admin-panel/catalogs-metadata/catalog-brand/catalog-brand.component';
 import { CatalogMaterialComponent } from './admin-panel/catalogs-metadata/catalog-material/catalog-material.component';
+import { CatalogTypeComponent } from './admin-panel/catalogs-metadata/catalog-type/catalog-type.component';
+import { CatalogSizeComponent } from './admin-panel/catalogs-metadata/catalog-size/catalog-size.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -39,6 +41,8 @@ const routes: Routes = [
                   { path: 'hsnCodes', component: HsnCodesComponent , pathMatch:'full' },
                   { path: 'brand', component: CatalogBrandComponent , pathMatch:'full' },
                   { path: 'material', component: CatalogMaterialComponent , pathMatch:'full' },
+                  { path: 'type', component: CatalogTypeComponent , pathMatch:'full' },
+                  { path: 'size', component: CatalogSizeComponent , pathMatch:'full' },
 
       ],
 }

@@ -41,6 +41,8 @@ import { SellerComponent } from './admin-panel/users/seller/seller.component';
 import { HsnCodesComponent } from './admin-panel/tax/hsn-codes/hsn-codes.component';
 import { CatalogBrandComponent } from './admin-panel/catalogs-metadata/catalog-brand/catalog-brand.component';
 import { CatalogMaterialComponent } from './admin-panel/catalogs-metadata/catalog-material/catalog-material.component';
+import { CatalogTypeComponent } from './admin-panel/catalogs-metadata/catalog-type/catalog-type.component';
+import { CatalogSizeComponent } from './admin-panel/catalogs-metadata/catalog-size/catalog-size.component';
 
 
 
@@ -67,6 +69,8 @@ import { CatalogMaterialComponent } from './admin-panel/catalogs-metadata/catalo
     HsnCodesComponent,
     CatalogBrandComponent,
     CatalogMaterialComponent,
+    CatalogTypeComponent,
+    CatalogSizeComponent,
   ],
   imports: [
     BrowserModule,
