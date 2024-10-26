@@ -2,19 +2,18 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ParentCategoryService } from '../../../_services/categories/parentCategory/parent-category.service';
-import { ChildCategoryService } from '../../../_services/categories/childCategory/child-category.service';
 import { BucketService } from '../../../_services/bucket/bucket.service';
 import Swal from 'sweetalert2';
-import { HsnService } from '../../../_services/HsnService/hsn.service';
 import { PageEvent } from '@angular/material/paginator';
+import { BrandService } from '../../../_services/catalogMetaDataServices/brandService/brand.service';
+
 
 @Component({
-  selector: 'app-hsn-codes',
-  templateUrl: './hsn-codes.component.html',
-  styleUrl: './hsn-codes.component.css'
+  selector: 'app-catalog-brand',
+  templateUrl: './catalog-brand.component.html',
+  styleUrl: './catalog-brand.component.css'
 })
-export class HsnCodesComponent {
+export class CatalogBrandComponent {
 
   //Filter List For Searching
   filteredItems:any = [];
@@ -22,8 +21,7 @@ export class HsnCodesComponent {
    //form Hide and show for update and save user
    viceVersaForm:boolean = false;
 
-  hsnList:any[]=[];
-  hsnListClone:any[]=[];
+  brandList:any[]=[];
   
   totalElements: number = 0;
   currentPage: number = 1;
@@ -33,13 +31,13 @@ export class HsnCodesComponent {
   searchText: string = '';
 
   form: any = {
-    hsn: null,
+    brand: null,
     defaultName: null,
     description: null,
   };
 
   updateform: any = {
-   hsn: null,
+    brand: null,
    defaultName: null,
    description: null,
    isActive: false,
@@ -47,14 +45,13 @@ export class HsnCodesComponent {
 
  
    ngOnInit(): void { 
-     this.getHsnByPagination({ page: "0", size: "10" });
+     this.getBrandByPagination({ page: "0", size: "10" });
  
    }
    
    constructor(
               private router:Router, 
-              private parentCategoryService:ParentCategoryService ,
-              private hsnService:HsnService,
+              private brandService:BrandService,
               private toast:NgToastService ,
               private bucket:BucketService,
               private spinner: NgxSpinnerService)
@@ -62,16 +59,16 @@ export class HsnCodesComponent {
  
  
   
- //GET HSN PAGINATION START
-   getHsnByPagination(request:any)
+ //GET BRAND PAGINATION START
+   getBrandByPagination(request:any)
   {
     this.spinner.show();
-    this.hsnService.getHsnByPagination(request)
+    this.brandService.getBrandByPagination(request)
     .subscribe(
       {
           next:(res:any)=> {
-          this.hsnList = res.data['content']
-          this.filteredItems  = this.hsnList;
+          this.brandList = res.data['content']
+          this.filteredItems  = this.brandList;
 
           this.totalElements = res.data['totalElements'];
           this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
@@ -86,27 +83,27 @@ export class HsnCodesComponent {
       }
     );
   }
-  //GET HSN PAGINATION ENDING
+  //GET BRAND PAGINATION ENDING
 
   nextPage(event: PageEvent) {
     console.log(event);
     const request:any = {};
     request['page'] = event.pageIndex.toString();
     request['size'] = event.pageSize.toString();
-    this.getHsnByPagination(request);
+    this.getBrandByPagination(request);
 }
 
- //SAVE HSN START
-   saveHsn()
+ //SAVE BRAND START
+   saveBrand()
    {
     console.log(this.form);
-    this.hsnService.saveHsnCodesService(this.form).subscribe({
+    this.brandService.saveCatalogBrandService(this.form).subscribe({
       next:(res:any)=> {
-        this.toast.success({detail:"Success",summary:"HSN Saved Success", position:"bottomRight",duration:3000});
+        this.toast.success({detail:"Success",summary:"Brand Saved Success", position:"bottomRight",duration:3000});
         this.spinner.hide();
 
-         //get HSN Code Category List
-         this.getHsnByPagination({ page: "0", size: "10" });
+         //get BRAND List
+         this.getBrandByPagination({ page: "0", size: "10" });
       },
       error:(err:any)=>  {
         //this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
@@ -118,11 +115,11 @@ export class HsnCodesComponent {
     }
   );
    }
-   //SAVE HSN ENDING
+   //SAVE BRAND ENDING
  
   
- //Delete HSN Code START
-   deleteHsnCodeByid(hsnCode:any)
+ //Delete BRAND START
+ deleteBrandByid(brandId:any)
    { 
      Swal.fire({
            title: 'Are you sure?',
@@ -136,13 +133,13 @@ export class HsnCodesComponent {
            if (result.isConfirmed) {
  
  
-         //Delete HSN
-       this.hsnService.deleteHsnCodeByIdService(hsnCode).subscribe({
+         //Delete BRAND
+       this.brandService.deleteBrandByIdService(brandId).subscribe({
          next:(res:any)=> {
            this.toast.success({detail:"Success",summary:"Delete Success", position:"bottomRight",duration:3000});
            
-           //get HSN Code List
-           this.getHsnByPagination({ page: "0", size: "10" });
+           //get BRAND Code List
+           this.getBrandByPagination({ page: "0", size: "10" });
            
            this.updateform = {};
 
@@ -159,15 +156,15 @@ export class HsnCodesComponent {
        }
      })
    }
-   //DELETE HSN CODE END
+   //DELETE BRAND CODE END
  
   
-   //Get HSN Code By Id Start
-   getHsnCodeById(hsnId: any) {
+   //Get BRAND By Id Start
+   getBrandeById(brandId: any) {
      //to show update form
      this.viceVersaForm = true;
  
-     this.hsnService.getHsnCodeByIdService(hsnId).subscribe({
+     this.brandService.getBrandByIdService(brandId).subscribe({
        next:(res:any)=> {
          this.updateform = res.data;
          console.log(res);
@@ -182,19 +179,19 @@ export class HsnCodesComponent {
          }
        );
      }
-   //Get HSN Code By Id Ending
+   //Get BRAND Code By Id Ending
      
-     //Update HSN Code Start
-updateHsnCode()
+     //Update BRAND Code Start
+     updateBrand()
      {
        console.log(this.updateform);
         //save File
-        this.hsnService.updateHsnCode(this.updateform).subscribe({
+        this.brandService.updateBrand(this.updateform).subscribe({
           next:(res:any)=> {
             this.toast.success({detail:"Success",summary:"Data Update Success", position:"bottomRight",duration:3000});
             
-            //get HSN Code Category List
-           this.getHsnByPagination({ page: "0", size: "10" });
+            //get BRAND Code Category List
+           this.getBrandByPagination({ page: "0", size: "10" });
             
             this.spinner.hide();
           },
@@ -206,7 +203,7 @@ updateHsnCode()
             }
           );
      }
- //Update HSN Code Ending
+ //Update BRAND Ending
 
      
    //Search Starting
@@ -214,14 +211,13 @@ updateHsnCode()
       const searchQuery = this.searchText.trim().toLowerCase();
   
       if (searchQuery) {
-        this.filteredItems = this.hsnList.filter(item => 
-          item.hsn.toLowerCase().includes(searchQuery)
+        this.filteredItems = this.brandList.filter(item => 
+          item.brand.toLowerCase().includes(searchQuery)
         );
       } else {
-        this.filteredItems = this.hsnList;
+        this.filteredItems = this.brandList;
       }
     }
   //Search Ending
- 
  
 }

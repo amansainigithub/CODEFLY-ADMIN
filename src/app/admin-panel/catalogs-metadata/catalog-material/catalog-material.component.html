@@ -14,13 +14,13 @@
               <!-- <span class="icon">&#10003;</span> -->
               <!-- <strong>Create Parent Category</strong> -->
               <i class="bi bi-window-sidebar px-1 baseColor"></i>
-              <p>HSN Code</p>
+              <p>MATERIAL</p>
               <!-- <span class="close-btn">&times;</span> -->
             </div>
 
            
             <!-- Search Input Starting -->
-            <input type="text" placeholder="Search HSN Code" 
+            <input type="text" placeholder="Search MATERIAL Code" 
             [(ngModel)]="searchText" (input)="onSearch()" class="form-control form-control-sm mb-3" />
              <!-- Search Input Ending -->
 
@@ -31,7 +31,7 @@
 
                   <th scope="col">S.N</th>
                   <th scope="col">Id</th>
-                  <th scope="col">HSN</th>
+                  <th scope="col">MATERIAL</th>
                   <th scope="col">Default Name</th>
                   <th scope="col">Desc</th>
                   <th scope="col">status</th>
@@ -45,7 +45,7 @@
                   <th scope="row">{{i}}</th>
                   <th>{{data.id}}</th>
                   
-                  <td>{{data.hsn}}</td>
+                  <td>{{data.material}}</td>
 
                   <td>{{data.defaultName}}</td>
 
@@ -63,12 +63,12 @@
                   </td>
 
                   <td>
-                    <button  (click)="getHsnCodeById(data.id)"  type="button" class="btn btn-primary btn-sm">
+                    <button  (click)="getMaterialById(data.id)"  type="button" class="btn btn-primary btn-sm">
                       <i class="bi bi-pencil-square bg-primary"></i>
                     </button>
                   </td>
                   <td>
-                    <button (click)="deleteHsnCodeByid(data.id)" type="button" class="btn btn-sm" style="color: #ff1818;">
+                    <button (click)="deleteMaterial(data.id)" type="button" class="btn btn-sm" style="color: #ff1818;">
                       <i class="bi bi-file-earmark-x-fill"></i>
                     </button>
                   </td>
@@ -89,52 +89,52 @@
 
             <div class="col-md-6">
 
-                <!-- SAVE HSN STARTING -->
+                <!-- SAVE Material STARTING -->
               <div *ngIf="!viceVersaForm">
                 <div class="alert">
                   <i class="bi bi-window-sidebar px-1 baseColor"></i>
-                  <p>HSN Codes</p>  
+                  <p>MATERIAL</p>  
                 </div>
               
                   
                   <form 
                   name="form" 
                   #f="ngForm" 
-                  (ngSubmit)="f.form.valid && saveHsn()" 
+                  (ngSubmit)="f.form.valid && saveMaterial()" 
                   novalidate>
 
 
                     <div class="form-group">
-                      <label class="fs12">HSN Code</label>
+                      <label class="fs12">Material</label>
                       <input 
                       type="text" 
                       class="form-control form-control-sm" 
-                      name="hsn" 
-                      [(ngModel)]="form.hsn" 
-                      required #hsn="ngModel"
+                      name="material" 
+                      [(ngModel)]="form.material" 
+                      required #material="ngModel"
                       minlength="4" 
                       maxlength="40" 
-                      [class.dirty]="hsn.dirty" 
-                      [class.touched]="hsn.touched"
-                      [ngClass]="{ 'is-invalid': hsn.errors && (hsn.touched || hsn.dirty ) }" />
+                      [class.dirty]="material.dirty" 
+                      [class.touched]="material.touched"
+                      [ngClass]="{ 'is-invalid': material.errors && (material.touched || material.dirty ) }" />
               
                       <div 
-                      *ngIf="hsn.errors && (hsn.touched || hsn.dirty )" 
+                      *ngIf="material.errors && (material.touched || material.dirty )" 
                       class="invalid-feedback">
 
                         <div 
-                        *ngIf="hsn.errors['required'] ">
-                        HSN is required
+                        *ngIf="material.errors['required'] ">
+                        material is required
                         </div>
 
                         <div 
-                        *ngIf="hsn.errors['minlength']">
-                        HSN must be at least 5 characters
+                        *ngIf="material.errors['minlength']">
+                        material must be at least 5 characters
                         </div>
 
                         <div 
-                        *ngIf="hsn.errors['maxlength']">
-                        HSN must be at most 40 characters
+                        *ngIf="material.errors['maxlength']">
+                        material must be at most 40 characters
                         </div>
                       </div>
                     </div>
@@ -143,7 +143,7 @@
                     <div class="row">
                       <div class="col">
                         <div class="form-group">
-                          <label class="fs12">HSN default Name</label>
+                          <label class="fs12">Default Name</label>
                           <input 
                           type="text" 
                           class="form-control form-control-sm" 
@@ -208,64 +208,61 @@
                     
               
                     <div class="d-grid gap-2 col-12 mx-auto mt-4">
-                        <button mat-raised-button color="primary" [disabled]="f.invalid">save HSN</button>
+                        <button mat-raised-button color="primary" [disabled]="f.invalid">save MATERIAL</button>
                       </div>
 
                   </form>
 
-                   <!-- SAVE HSN ENDING -->
+                   <!-- SAVE MATERIAL ENDING -->
 
               </div>
+              <!-- SAVE Material ENDING -->
                     
               <div *ngIf="viceVersaForm">
-                <!-- UPDATE HSN  START-->
+                <!-- UPDATE MATERIAL  START-->
                 <div class="alert">
                   <i class="bi bi-window-sidebar px-1 baseColor"></i>
-                  <p>Update HSN Code</p>
+                  <p>Update Material</p>
                 </div>
             
                
                 <form 
                 name="form" 
                 #f="ngForm" 
-                (ngSubmit)="f.form.valid && updateHsnCode() " 
+                (ngSubmit)="f.form.valid && updateMaterial() " 
                 novalidate>
 
-
-
-
                   <div class="form-group">
-                    <label class="fs12">HSN Code</label>
+                    <label class="fs12">Material</label>
                     <input 
-                    [(ngModel)]="updateform.hsn"
+                    [(ngModel)]="updateform.material"
                     type="text" 
                     class="form-control form-control-sm" 
-                    name="hsn" 
-                    [(ngModel)]="form.hsn" 
-                    required #hsn="ngModel"
+                    name="material" 
+                    required #material="ngModel"
                     minlength="4" 
                     maxlength="40" 
-                    [class.dirty]="hsn.dirty" 
-                    [class.touched]="hsn.touched"
-                    [ngClass]="{ 'is-invalid': hsn.errors && (hsn.touched || hsn.dirty ) }" />
+                    [class.dirty]="material.dirty" 
+                    [class.touched]="material.touched"
+                    [ngClass]="{ 'is-invalid': material.errors && (material.touched || material.dirty ) }" />
             
                     <div 
-                    *ngIf="hsn.errors && (hsn.touched || hsn.dirty )" 
+                    *ngIf="material.errors && (material.touched || material.dirty )" 
                     class="invalid-feedback">
 
                       <div 
-                      *ngIf="hsn.errors['required'] ">
-                      HSN is required
+                      *ngIf="material.errors['required'] ">
+                      material is required
                       </div>
 
                       <div 
-                      *ngIf="hsn.errors['minlength']">
-                      HSN must be at least 5 characters
+                      *ngIf="material.errors['minlength']">
+                      material must be at least 5 characters
                       </div>
 
                       <div 
-                      *ngIf="hsn.errors['maxlength']">
-                      categoryName must be at most 40 characters
+                      *ngIf="material.errors['maxlength']">
+                      material must be at most 40 characters
                       </div>
                     </div>
                   </div>
@@ -352,11 +349,11 @@
                               
             
                   <div class="d-grid gap-2 col-12 mx-auto mt-4">
-                      <button mat-raised-button color="primary" [disabled]="f.invalid">Update HSN Code</button>
+                      <button mat-raised-button color="primary" [disabled]="f.invalid">Update MATERIAL</button>
                      </div>
 
                 </form>
-                 <!-- UPDATE HSN ENDING -->
+                 <!-- UPDATE MATERIAL ENDING -->
 
               </div>
                 

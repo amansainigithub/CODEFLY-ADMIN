@@ -14,6 +14,8 @@ import { CustomerComponent } from './admin-panel/users/customer/customer.compone
 import { AdminComponent } from './admin-panel/users/admin/admin.component';
 import { SellerComponent } from './admin-panel/users/seller/seller.component';
 import { HsnCodesComponent } from './admin-panel/tax/hsn-codes/hsn-codes.component';
+import { CatalogBrandComponent } from './admin-panel/catalogs-metadata/catalog-brand/catalog-brand.component';
+import { CatalogMaterialComponent } from './admin-panel/catalogs-metadata/catalog-material/catalog-material.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -35,6 +37,9 @@ const routes: Routes = [
                   { path: 'admin-node', component: AdminComponent , pathMatch:'full' },
                   // HSN codes
                   { path: 'hsnCodes', component: HsnCodesComponent , pathMatch:'full' },
+                  { path: 'brand', component: CatalogBrandComponent , pathMatch:'full' },
+                  { path: 'material', component: CatalogMaterialComponent , pathMatch:'full' },
+
       ],
 }
 
