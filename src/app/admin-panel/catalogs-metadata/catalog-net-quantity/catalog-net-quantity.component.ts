@@ -7,13 +7,17 @@ import { BucketService } from '../../../_services/bucket/bucket.service';
 import Swal from 'sweetalert2';
 import { HsnService } from '../../../_services/HsnService/hsn.service';
 import { PageEvent } from '@angular/material/paginator';
+import { NetQuantityService } from '../../../_services/catalogMetaDataServices/netQuantityService/net-quantity.service';
+
 
 @Component({
-  selector: 'app-hsn-codes',
-  templateUrl: './hsn-codes.component.html',
-  styleUrl: './hsn-codes.component.css'
+  selector: 'app-catalog-net-quantity',
+  templateUrl: './catalog-net-quantity.component.html',
+  styleUrl: './catalog-net-quantity.component.css'
 })
-export class HsnCodesComponent {
+export class CatalogNetQuantityComponent {
+
+  
 
   //Filter List For Searching
   filteredItems:any = [];
@@ -21,8 +25,7 @@ export class HsnCodesComponent {
    //form Hide and show for update and save user
    viceVersaForm:boolean = false;
 
-  hsnList:any[]=[];
-  hsnListClone:any[]=[];
+  netQuantityList:any[]=[];
   
   totalElements: number = 0;
   currentPage: number = 1;
@@ -32,13 +35,13 @@ export class HsnCodesComponent {
   searchText: string = '';
 
   form: any = {
-    hsn: null,
+    netQuantity: null,
     defaultName: null,
     description: null,
   };
 
   updateform: any = {
-   hsn: null,
+    netQuantity: null,
    defaultName: null,
    description: null,
    isActive: false,
@@ -46,14 +49,13 @@ export class HsnCodesComponent {
 
  
    ngOnInit(): void { 
-     this.getHsnByPagination({ page: "0", size: "10" });
+     this.getNetQuantityPagination({ page: "0", size: "10" });
  
    }
    
    constructor(
               private router:Router, 
-              private parentCategoryService:ParentCategoryService ,
-              private hsnService:HsnService,
+              private netQuantityService:NetQuantityService,
               private toast:NgToastService ,
               private bucket:BucketService,
               private spinner: NgxSpinnerService)
@@ -62,15 +64,15 @@ export class HsnCodesComponent {
  
   
  //GET HSN PAGINATION START
-   getHsnByPagination(request:any)
+   getNetQuantityPagination(request:any)
   {
     this.spinner.show();
-    this.hsnService.getHsnByPagination(request)
+    this.netQuantityService.getNetQuantityByPagination(request)
     .subscribe(
       {
           next:(res:any)=> {
-          this.hsnList = res.data['content']
-          this.filteredItems  = this.hsnList;
+          this.netQuantityList = res.data['content']
+          this.filteredItems  = this.netQuantityList;
 
           this.totalElements = res.data['totalElements'];
           this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
@@ -85,27 +87,27 @@ export class HsnCodesComponent {
       }
     );
   }
-  //GET HSN PAGINATION ENDING
+  //GET NetQuantity PAGINATION ENDING
 
   nextPage(event: PageEvent) {
     console.log(event);
     const request:any = {};
     request['page'] = event.pageIndex.toString();
     request['size'] = event.pageSize.toString();
-    this.getHsnByPagination(request);
+    this.getNetQuantityPagination(request);
 }
 
- //SAVE HSN START
-   saveHsn()
+ //SAVE NETQUANTITY START
+   saveNetQuantity()
    {
     console.log(this.form);
-    this.hsnService.saveHsnCodesService(this.form).subscribe({
+    this.netQuantityService.saveNetQuantity(this.form).subscribe({
       next:(res:any)=> {
-        this.toast.success({detail:"Success",summary:"HSN Saved Success", position:"bottomRight",duration:3000});
+        this.toast.success({detail:"Success",summary:"Net Quantity Saved Success", position:"bottomRight",duration:3000});
         this.spinner.hide();
 
-         //get HSN Code Category List
-         this.getHsnByPagination({ page: "0", size: "10" });
+         //get  NetQuantity Category List
+         this.getNetQuantityPagination({ page: "0", size: "10" });
       },
       error:(err:any)=>  {
         //this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
@@ -117,11 +119,11 @@ export class HsnCodesComponent {
     }
   );
    }
-   //SAVE HSN ENDING
+   //SAVE NetQuantity ENDING
  
   
- //Delete HSN Code START
-   deleteHsnCodeByid(hsnCode:any)
+ //Delete NetQuantitySTART
+   deleteNetQuantityByid(netQuantityId:any)
    { 
      Swal.fire({
            title: 'Are you sure?',
@@ -135,13 +137,13 @@ export class HsnCodesComponent {
            if (result.isConfirmed) {
  
  
-         //Delete HSN
-       this.hsnService.deleteHsnCodeByIdService(hsnCode).subscribe({
+         //Delete net quantity 
+       this.netQuantityService.deleteNetQuantityByIdService(netQuantityId).subscribe({
          next:(res:any)=> {
            this.toast.success({detail:"Success",summary:"Delete Success", position:"bottomRight",duration:3000});
            
-           //get HSN Code List
-           this.getHsnByPagination({ page: "0", size: "10" });
+           //get net quantity  List
+           this.getNetQuantityPagination({ page: "0", size: "10" });
            
            this.updateform = {};
 
@@ -158,15 +160,15 @@ export class HsnCodesComponent {
        }
      })
    }
-   //DELETE HSN CODE END
+   //DELETE net quantity END
  
   
-   //Get HSN Code By Id Start
-   getHsnCodeById(hsnId: any) {
+   //Get NetQuantity By Id Start
+   getNetQuantityById(netQuantityId: any) {
      //to show update form
      this.viceVersaForm = true;
  
-     this.hsnService.getHsnCodeByIdService(hsnId).subscribe({
+     this.netQuantityService.getNetQuantityByIdService(netQuantityId).subscribe({
        next:(res:any)=> {
          this.updateform = res.data;
          console.log(res);
@@ -181,19 +183,19 @@ export class HsnCodesComponent {
          }
        );
      }
-   //Get HSN Code By Id Ending
+   //Get net quantity  By Id Ending
      
-     //Update HSN Code Start
-updateHsnCode()
+     //Update net quantity  Start
+updateNetQuantity()
      {
        console.log(this.updateform);
         //save File
-        this.hsnService.updateHsnCode(this.updateform).subscribe({
+        this.netQuantityService.updateNetQuantity(this.updateform).subscribe({
           next:(res:any)=> {
             this.toast.success({detail:"Success",summary:"Data Update Success", position:"bottomRight",duration:3000});
             
-            //get HSN Code Category List
-           this.getHsnByPagination({ page: "0", size: "10" });
+            //get net quantity Category List
+           this.getNetQuantityPagination({ page: "0", size: "10" });
             
             this.spinner.hide();
           },
@@ -205,7 +207,7 @@ updateHsnCode()
             }
           );
      }
- //Update HSN Code Ending
+ //Update net quantity Ending
 
      
    //Search Starting
@@ -213,14 +215,14 @@ updateHsnCode()
       const searchQuery = this.searchText.trim().toLowerCase();
   
       if (searchQuery) {
-        this.filteredItems = this.hsnList.filter(item => 
-          item.hsn.toLowerCase().includes(searchQuery)
+        this.filteredItems = this.netQuantityList.filter(item => 
+          item.netQuantity.toLowerCase().includes(searchQuery)
         );
       } else {
-        this.filteredItems = this.hsnList;
+        this.filteredItems = this.netQuantityList;
       }
     }
   //Search Ending
  
- 
+
 }

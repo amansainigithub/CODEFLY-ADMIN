@@ -18,6 +18,7 @@ import { CatalogBrandComponent } from './admin-panel/catalogs-metadata/catalog-b
 import { CatalogMaterialComponent } from './admin-panel/catalogs-metadata/catalog-material/catalog-material.component';
 import { CatalogTypeComponent } from './admin-panel/catalogs-metadata/catalog-type/catalog-type.component';
 import { CatalogSizeComponent } from './admin-panel/catalogs-metadata/catalog-size/catalog-size.component';
+import { CatalogNetQuantityComponent } from './admin-panel/catalogs-metadata/catalog-net-quantity/catalog-net-quantity.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
                   { path: 'material', component: CatalogMaterialComponent , pathMatch:'full' },
                   { path: 'type', component: CatalogTypeComponent , pathMatch:'full' },
                   { path: 'size', component: CatalogSizeComponent , pathMatch:'full' },
+                  { path: 'netQuantity', component: CatalogNetQuantityComponent , pathMatch:'full' },
 
       ],
 }
