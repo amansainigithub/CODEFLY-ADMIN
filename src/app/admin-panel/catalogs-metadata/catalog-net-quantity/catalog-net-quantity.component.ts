@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ParentCategoryService } from '../../../_services/categories/parentCategory/parent-category.service';
 import { BucketService } from '../../../_services/bucket/bucket.service';
 import Swal from 'sweetalert2';
-import { HsnService } from '../../../_services/HsnService/hsn.service';
 import { PageEvent } from '@angular/material/paginator';
 import { NetQuantityService } from '../../../_services/catalogMetaDataServices/netQuantityService/net-quantity.service';
 
@@ -63,7 +61,7 @@ export class CatalogNetQuantityComponent {
  
  
   
- //GET HSN PAGINATION START
+ //GET net Quantity PAGINATION START
    getNetQuantityPagination(request:any)
   {
     this.spinner.show();

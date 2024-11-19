@@ -44,6 +44,7 @@ import { CatalogMaterialComponent } from './admin-panel/catalogs-metadata/catalo
 import { CatalogTypeComponent } from './admin-panel/catalogs-metadata/catalog-type/catalog-type.component';
 import { CatalogSizeComponent } from './admin-panel/catalogs-metadata/catalog-size/catalog-size.component';
 import { CatalogNetQuantityComponent } from './admin-panel/catalogs-metadata/catalog-net-quantity/catalog-net-quantity.component';
+import { CatalogInvestigationComponent } from './admin-panel/catalogCBI/catalog-investigation/catalog-investigation.component';
 
 
 
@@ -73,6 +74,7 @@ import { CatalogNetQuantityComponent } from './admin-panel/catalogs-metadata/cat
     CatalogTypeComponent,
     CatalogSizeComponent,
     CatalogNetQuantityComponent,
+    CatalogInvestigationComponent,
   ],
   imports: [
     BrowserModule,
