@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,13 +7,6 @@ import Swal from 'sweetalert2';
 import { PageEvent } from '@angular/material/paginator';
 import { MaterialService } from '../../../_services/catalogMetaDataServices/materialService/material.service';
 import { CatalogInvestigationService } from '../../../_services/catalogCBI/catalog-investigation/catalog-investigation.service';
-
-class FileUpload {
-  selectedFile: File | null = null;
-  selectedImage: string | ArrayBuffer | null = null;
-  uploadProgress: number = 0;
-  isUploading: boolean = false;
-}
 
 declare var bootstrap: any; // Declare bootstrap for accessing modal methods
 @Component({
@@ -33,9 +26,84 @@ itemsPerPage: number = 10;
 //SearchList
 searchText: string = '';
 
+//Model Flag (Open and Close)
+isModalOpen = false;
+
+
+parentList = [
+  { id: 1, name: 'Category 1' },
+  { id: 2, name: 'Category 2' },
+  { id: 3, name: 'Category 3' }
+];
+
+
+actionStatusList = [
+  { id: 1, name: 'QC_PASS' },
+  { id: 2, name: 'QC_ERROR' }
+];
+
+
+errorList = [
+  { id: 1, name: 'Error 1' },
+  { id: 2, name: 'Error 2' },
+  { id: 3, name: 'Error 3' },
+  { id: 3, name: 'Error 4' },
+  { id: 3, name: 'Error 5' }
+];
+
+
+
+updateform: any = {
+  id:null,
+  username :null,
+  categoryId :null,
+  categoryName:null,
+  sellerStoreName:null,
+  catalogName:null,
+  catalogSubTitle:null,
+  catalogFrontFile:null,
+  catalogThumbnail:null,
+  // file_1:null,
+  // file_2:null,
+  // file_3:null,
+  // file_4:null,
+  catalogStatus:null,
+  gst:null,
+  hsnCode:null,
+  size:null,
+  weight:null,
+  styleCode:null,
+  netQuantity:null,
+  catalogLength:null,
+  catalogBreath:null,
+  catalogHeight:null,
+  material:null,
+  catalogType:null,
+  catalogClr:"Red", 
+  manufactureDetails:null,
+  packerDetails:null,
+  tags:null,
+  description:null,
+  sku:null,
+  searchKey:null,
+  sellActualPrice:null,
+  defectiveReturnPrice:null,
+  mrp:null,
+  inventory:null,
+
+  //investigation Data 
+  actionStatus:"",
+  errorMarked:"",
+  otherSuggestion:""
+};
+
 
 ngOnInit(): void { 
-  this.getMaterialByPagination({ page: "0", size: "10" });
+
+  //Catalog masters
+  this.getCatalogMasters();
+
+  this.catalogProgressList({ page: "0", size: "10" });
 }
 
 constructor(
@@ -49,14 +117,13 @@ constructor(
 
 
 //GET MATERIAL PAGINATION START
-getMaterialByPagination(request:any)
+catalogProgressList(request:any)
 {
  this.spinner.show();
  this.cataloginvestigation.getProogressCatalogService(request)
  .subscribe(
    {
        next:(res:any)=> {
-        console.log(res);
        this.progressCatalogList = res.data['content']
        this.filteredItems  = this.progressCatalogList;
 
@@ -76,11 +143,10 @@ getMaterialByPagination(request:any)
 //GET MATERIAL PAGINATION ENDING
 
 nextPage(event: PageEvent) {
- console.log(event);
  const request:any = {};
  request['page'] = event.pageIndex.toString();
  request['size'] = event.pageSize.toString();
- this.getMaterialByPagination(request);
+ this.catalogProgressList(request);
 }
 
 
@@ -98,95 +164,17 @@ nextPage(event: PageEvent) {
  }
 //Search Ending
 
-
-
-
-selectedData: any = null;
-openModal(data: any) {
-  //catalog Master
-  this.getCatalogMasters();
-
-  this.selectedData = data;
-  this.updateform = data;
-
-  // Use Bootstrap's JavaScript API to show the modal
-  const modalElement = document.getElementById('actionedModal')!;
-  const modal = new bootstrap.Modal(modalElement);
-  modal.show();
-}
-
-performAction() {
-  console.log('Action performed for:', this.selectedData);
-  // Add your function logic here
-}
-
-
-
-
-
-
-updateform: any = {
-  id:null,
-  username :null,
-  categoryId :null,
-  categoryName:null,
-  sellerStoreName:null,
-  catalogName:null,
-  catalogSubTitle:null,
-  catalogFrontFile:null,
-  catalogThumbnail:null,
-  file_1:null,
-  file_2:null,
-  file_3:null,
-  file_4:null,
-  catalogStatus:null,
-  gst:null,
-  hsnCode:null,
-  size:null,
-  weight:null,
-  styleCode:null,
-  netQuantity:null,
-  catalogLength:null,
-  catalogBreath:null,
-  catalogHeight:null,
-  material:null,
-  catalogType:null,
-  catalogClr:"Red", 
-  manufactureDetails:null,
-  packerDetails:null,
-  tags:null,
-  description:null,
-  sku:null,
-  identifier:null,
-  searchKey:null,
-  sellActualPrice:null,
-  defectiveReturnPrice:null,
-  mrp:null,
-  inventory:null
-};
-
-
-parentList = [
-  { id: 1, name: 'Category 1' },
-  { id: 2, name: 'Category 2' },
-  { id: 3, name: 'Category 3' },
-  // Add more categories as needed
-];
-
-
 hsnCodeList:any="";
 sizeList:any="";
 netQuantityList:any="";
 materialList:any="";
 catalogTypeList:any="";
-
-getCatalogMasters(){
+async getCatalogMasters(){
   this.spinner.show();
   ///save Catalog Form Data
   this.cataloginvestigation.getCatalogMasters().subscribe(
     {
         next:(res:any)=> {
-        console.log(res);
 
         //Hsn List
         this.hsnCodeList = res.data.hsn;
@@ -214,91 +202,68 @@ getCatalogMasters(){
   );
 }
 
-
-
-
-isModalOpen = false;
-// Function to open the modal
-openModalSm(catalogId:any) {
-  this.isModalOpen = true;
-
-  console.log("Open Model Running " + catalogId);
-  
-
-  this.saveCatalog(catalogId);
+catalogId:any;
+takeAction(data: any){
+ //Set Updated Data
+ this.updateform = data;
+ this.catalogId = data.id;
+ this.toast.warning({ detail: "Success", summary: "Data Fetch Success", position: "bottomRight", duration: 3000 });
 }
+
+
+// Function to open the modal
+catalogInvestigate() {
+  this.isModalOpen = true;
+}
+
+
+//Validation on Model Pass Or Error
+isDebugDisabled = false;
+onActionStatusChange(event: Event): void {
+  const selectedValue = (event.target as HTMLSelectElement).value;
+
+  if (selectedValue === 'QC_PASS') {
+    this.isDebugDisabled = true;
+    this.updateform.errorMarked = ''; // Clear value if disabling
+  } else {
+    this.isDebugDisabled = false;
+  }
+}
+//Validation on Model Pass Or Ending
+
+
+//Catalog Investigation Starting
+submitInvestigation() {
+   //Show Spinner
+   this.spinner.show();
+
+   // Wait for 3 seconds before calling the service
+   setTimeout(() => {
+     this.cataloginvestigation.updateCatalogService(this.updateform,this.catalogId).subscribe({
+       next: (res:any) => { 
+         this.toast.success({ detail: "Success", summary: "Catalog Investigation Completed", position: "bottomRight", duration: 3000 });
+         
+         //Close the Model
+         this.closeModal();
+
+         //Hide the Spinner
+         this.spinner.hide();
+ 
+       },
+       error: (error) => {
+         console.error('Failed | Catalog Not Saved ', error);
+         this.toast.error({ detail: "Failed", summary: "Catalog Upload Failed", position: "bottomRight", duration: 3000 });
+         this.spinner.hide();
+       }
+     });
+   }, 1000); // 3000 milliseconds = 3 seconds
+}
+//Catalog Investigation Ending
+
 
 // Function to close the modal
-closeModalSm() {
+closeModal() {
   this.isModalOpen = false;
 }
-
-// Function to handle confirm action
-confirmActionSm() {
-
- console.log("Open Model Sm Starting");
-}
-
-
-
-
-firstFile:any = "";
-filesNew: (File | null)[] = [null, null, null, null, null];
-///Upload Files on Button Click All Files
-saveCatalog(catalogId:any) {
-
-  console.log("saved Catalog Process Starting");
-  
-
-  //Show Spinner
-  this.spinner.show();
-
-  const formData = new FormData();
-
-  // Upload First File Main Catalog Image
-  formData.append(`files`, this.firstFile);
-  formData.append(`indexes`, '00'); // Append the index of each file
-
-  this.filesNew.forEach((file, index) => {
-    if (file) {
-      formData.append(`files`, file); // Append each file if it's selected
-    }
-  });
-
-  const catalogData = JSON.stringify(this.updateform);
-
-  // Add catalogData as JSON blob
-  formData.append('catalogData', new Blob([catalogData], { type: 'application/json' }));
-
-  // Wait for 3 seconds before calling the service
-  setTimeout(() => {
-    this.cataloginvestigation.updateCatalogService(catalogData, formData, catalogId).subscribe({
-      next: (response) => { 
-        this.toast.success({ detail: "Success", summary: "Catalog Saved Success", position: "bottomRight", duration: 3000 });
-        
-        //close the Model
-        //this.closeModal();
-
-        //Hide the Spinner
-        this.spinner.hide();
-
-        //redirect to Catalog
-        localStorage.setItem("CUS","SUCCESS");
-        alert("Catalog Upload Success ")
-      },
-      error: (error) => {
-        console.error('Failed | Catalog Not Saved ', error);
-        this.toast.error({ detail: "Failed", summary: "Catalog Upload Failed", position: "bottomRight", duration: 3000 });
-        this.spinner.hide();
-
-         //redirect to Catalog
-         localStorage.setItem("CUS","SUCCESS");
-         alert("Catalog Upload Failed")
-      }
-    });
-  }, 1000); // 3000 milliseconds = 3 seconds
-
-}
-
 
 }

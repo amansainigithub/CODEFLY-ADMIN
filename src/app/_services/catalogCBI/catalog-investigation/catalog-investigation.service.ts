@@ -28,9 +28,9 @@ export class CatalogInvestigationService {
 
 
     //save Catalog Service
-    updateCatalogService(catalogData:any,formData:any,catalogId:any) {
+    updateCatalogService(updataForm:any, catalogId:any) {
     return this.http.post(API_AUTHORIZA_URL + 'catalogCbiController/catalogInvestigation/'+catalogId
-      , formData)
+      , updataForm );
   }
 
   

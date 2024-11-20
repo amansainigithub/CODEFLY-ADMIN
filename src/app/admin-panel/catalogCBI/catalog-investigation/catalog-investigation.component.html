@@ -1,10 +1,15 @@
 <div class="mt-4">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <div class="alert">
           <i class="bi bi-window-sidebar px-1 baseColor"></i>
-          <p>Catalog CBI</p>
+          <p>
+            Catalog CBI 
+            <span style="font-weight: bold;">
+             ( {{totalElements}} )
+            </span>
+          </p>
         </div>
 
         <!-- Search Input -->
@@ -17,11 +22,8 @@
           <thead>
             <tr class="bg-light">
               <th scope="col" style="width: 60px;">S.NO</th>
+              <th scope="col" style="width: 60px;">CL Id</th>
               <th scope="col" style="width: 100px;">Images</th>
-              <th scope="col" style="width: 250px;">Product Name</th>
-              <th scope="col" style="width: 100px;">Category Name</th>
-              <th scope="col">Inventory</th>
-              <th scope="col">File Id</th>
               <th scope="col" style="width: 120px;">Created Date</th>
               <th scope="col">Status</th>
               <th scope="col">Actioned</th>
@@ -31,12 +33,12 @@
             <tr *ngFor="let data of progressCatalogList; let i = index">
               <th scope="row">{{ i + 1 }}</th>
               <td>
+                {{data.id}}
+              </td>
+              <td>
                 <img [src]="data.catalogThumbnail" class="imageResponsive" alt="Catalog Image">
               </td>
-              <td>{{ data.catalogName }}</td>
-              <td>{{ data.categoryName }}</td>
-              <td>{{ data.inventory }}</td>
-              <td>FILE- {{i}}</td>
+              
               <td>{{data.creationDate}}</td>
               <td>
                 <div *ngIf="data.catalogStatus === 'QC_PROGRESS'">
@@ -46,8 +48,10 @@
                 </div>
               </td>
               <td>
-                <button type="button" class="btn btn-primary"
-                        (click)="openModal(data)">Actioned</button>
+
+               <button mat-raised-button style="background-color: #f1c40f;" (click)="takeAction(data)">
+                 <span class="fs11" >Take Action</span>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -61,770 +65,883 @@
           showFirstLastButtons>
         </mat-paginator>
       </div>
-    </div>
-  </div>
 
 
+      <div class="col-md-6">
+        <div>
+
+          <div class="alert">
+            <i class="bi bi-window-sidebar px-1 baseColor"></i>
+            <p>
+              Product Investigation
+              <span style="font-weight: bold;">
+              ( {{catalogId ? catalogId : 0 }} )
+              </span>
+            </p>
+          </div>
 
 
+         <div>
+             <form 
+                  name="form" 
+                  #f="ngForm" 
+                  (ngSubmit)="f.form.valid " 
+                  novalidate>
 
-  <!-- Bootstrap Modal -->
-<div class="modal fade" id="actionedModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog custom-modal-dialog">
-    <div class="modal-content custom-modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Action Details</h5>
-        <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       
-        <div class="container bg-white mt-3 p-3" style="border-radius:10px ;">
-
-                <div>
-                  <h5 class="psi mt-3">
-                    Product , Size and Inventory
-                  </h5>
-                </div>
-      
-      
-            <div>
-              <form 
-                        name="form" 
-                        #f="ngForm" 
-                        (ngSubmit)="f.form.valid " 
-                        novalidate>
-      
-                          <!-- Product Name -->
-                          <div class="form-row mt-3">
-                            <div class="form-group col-md-6">
-                                <label class="fs12">Product Name</label>
-                                <input 
-                                type="text" 
-                                class="form-control form-control-sm" 
-                                name="catalogName" 
-                                [(ngModel)]="updateform.catalogName" 
-                                required #catalogName="ngModel"
-                                minlength="20" 
-                                maxlength="150" 
-                                [class.dirty]="catalogName.dirty" 
-                                [class.touched]="catalogName.touched"
-                                [ngClass]="{ 'is-invalid': catalogName.errors && (catalogName.touched || catalogName.dirty ) }" />
-                        
-                                <div 
-                                *ngIf="catalogName.errors && (catalogName.touched || catalogName.dirty )" 
-                                class="invalid-feedback">
-                                  <div 
-                                  *ngIf="catalogName.errors['required'] ">
-                                  catalogName is required
-                                  </div>
-                                  <div 
-                                  *ngIf="catalogName.errors['minlength']">
-                                  catalogName must be at least 20 characters
-                                  </div>
-                                  <div 
-                                  *ngIf="catalogName.errors['maxlength']">
-                                  catalogName must be at most 150 characters
-                                  </div>
-                                </div>
-                              </div>
+                    <!-- Product Name -->
+                    <div class="form-row mt-3">
+                      <div class="form-group col-md-12">
+                          <label class="fs12">Product Name</label>
+                          <input 
+                          type="text" 
+                          class="form-control form-control-sm" 
+                          name="catalogName" 
+                          [(ngModel)]="updateform.catalogName" 
+                          required #catalogName="ngModel"
+                          minlength="20" 
+                          maxlength="150" 
+                          [class.dirty]="catalogName.dirty" 
+                          [class.touched]="catalogName.touched"
+                          [ngClass]="{ 'is-invalid': catalogName.errors && (catalogName.touched || catalogName.dirty ) }" />
+                  
+                          <div 
+                          *ngIf="catalogName.errors && (catalogName.touched || catalogName.dirty )" 
+                          class="invalid-feedback">
+                            <div 
+                            *ngIf="catalogName.errors['required'] ">
+                            catalogName is required
+                            </div>
+                            <div 
+                            *ngIf="catalogName.errors['minlength']">
+                            catalogName must be at least 20 characters
+                            </div>
+                            <div 
+                            *ngIf="catalogName.errors['maxlength']">
+                            catalogName must be at most 150 characters
+                            </div>
                           </div>
-                            <!-- Product Name Ending -->
-        
-      
+                        </div>
+                    </div>
+                      <!-- Product Name Ending -->
+  
+
+                  <div class="form-group col-md-12">
+                    <label class="fs12">SIZE</label>
+                    <select  
+                      [(ngModel)]="updateform.size" 
+                      name="catalogForm" 
+                      class="form-select form-select-sm"
+                      aria-label="Default select example"
+                      required #size="ngModel"
+                      [class.dirty]="size.dirty" 
+                      [class.touched]="size.touched"
+                      [ngClass]="{ 'is-invalid': size.errors && (size.touched || size.dirty) }"
+                    >
+                      <option value="" selected ="select">Select</option>
+                      <option *ngFor="let sizes of sizeList" [value]="sizes.size">
+                        {{ sizes.size }}
+                      </option>
+                    </select>
+                  
+                    <div 
+                      *ngIf="size.errors && (size.touched || size.dirty)" 
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="size.errors['required']">
+                        SIZE is required
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-12 mt-4">
+                    <div class="table-container">
+                      <table class="table table-bordered">
+                        <thead class="bg-light">
+                          <tr class="fs11 text-center">
+                            <th>Size</th>
+                            <th>Meesho Price*</th>
+                            <th>Wrong/Defective Returns Price</th>
+                            <th>MRP*</th>
+                            <th>Inventory*</th>
+                            <th>SKU ID</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="fs11">
+                            <td>Free Size</td>
+                              <td>
+                                <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="sellActualPrice" 
+                                  [(ngModel)]="updateform.sellActualPrice" 
+                                  required #sellActualPrice="ngModel"
+                                  minlength="2" 
+                                  maxlength="4" 
+                                  [class.dirty]="sellActualPrice.dirty" 
+                                  [class.touched]="sellActualPrice.touched"
+                                  [ngClass]="{ 'is-invalid': sellActualPrice.errors && (sellActualPrice.touched || sellActualPrice.dirty ) }" />
+                          
+                                  <div 
+                                  *ngIf="sellActualPrice.errors && (sellActualPrice.touched || sellActualPrice.dirty )" 
+                                  class="invalid-feedback">
+                                    <div 
+                                    *ngIf="sellActualPrice.errors['required'] ">
+                                    sellActualPrice is required
+                                    </div>
+                                    <div 
+                                    *ngIf="sellActualPrice.errors['minlength']">
+                                    sellActualPrice must be at least 4 characters
+                                    </div>
+                                    <div 
+                                    *ngIf="sellActualPrice.errors['maxlength']">
+                                    sellActualPrice must be at most 4 characters
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="defectiveReturnPrice" 
+                                  [(ngModel)]="updateform.defectiveReturnPrice" 
+                                  required #defectiveReturnPrice="ngModel"
+                                  minlength="2" 
+                                  maxlength="4" 
+                                  [class.dirty]="defectiveReturnPrice.dirty" 
+                                  [class.touched]="defectiveReturnPrice.touched"
+                                  [ngClass]="{ 'is-invalid': defectiveReturnPrice.errors && (defectiveReturnPrice.touched || defectiveReturnPrice.dirty ) }" />
+                          
+                                  <div 
+                                  *ngIf="defectiveReturnPrice.errors && (defectiveReturnPrice.touched || defectiveReturnPrice.dirty )" 
+                                  class="invalid-feedback">
+                                    <div 
+                                    *ngIf="defectiveReturnPrice.errors['required'] ">
+                                    defectiveReturnPrice is required
+                                    </div>
+                                    <div 
+                                    *ngIf="defectiveReturnPrice.errors['minlength']">
+                                    defectiveReturnPrice must be at least 2 characters
+                                    </div>
+                                    <div 
+                                    *ngIf="defectiveReturnPrice.errors['maxlength']">
+                                    defectiveReturnPrice must be at most 4 characters
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="mrp" 
+                                  [(ngModel)]="updateform.mrp" 
+                                  required #mrp="ngModel"
+                                  minlength="2" 
+                                  maxlength="4" 
+                                  [class.dirty]="mrp.dirty" 
+                                  [class.touched]="mrp.touched"
+                                  [ngClass]="{ 'is-invalid': mrp.errors && (mrp.touched || mrp.dirty ) }" />
+                          
+                                  <div 
+                                  *ngIf="mrp.errors && (mrp.touched || mrp.dirty )" 
+                                  class="invalid-feedback">
+                                    <div 
+                                    *ngIf="mrp.errors['required'] ">
+                                    MRP is required
+                                    </div>
+                                    <div 
+                                    *ngIf="mrp.errors['minlength']">
+                                    MRP must be at least 2 characters
+                                    </div>
+                                    <div 
+                                    *ngIf="mrp.errors['maxlength']">
+                                    mrp must be at most 4 characters
+                                    </div>
+                                  </div>
+                              </td>
+                              <td>
+                                <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="inventory" 
+                                  [(ngModel)]="updateform.inventory" 
+                                  required #inventory="ngModel"
+                                  minlength="1" 
+                                  maxlength="4" 
+                                  [class.dirty]="inventory.dirty" 
+                                  [class.touched]="inventory.touched"
+                                  [ngClass]="{ 'is-invalid': inventory.errors && (inventory.touched || inventory.dirty ) }" />
+                          
+                                  <div 
+                                  *ngIf="inventory.errors && (inventory.touched || inventory.dirty )" 
+                                  class="invalid-feedback">
+                                    <div 
+                                    *ngIf="inventory.errors['required'] ">
+                                    inventory is required
+                                    </div>
+                                    <div 
+                                    *ngIf="inventory.errors['minlength']">
+                                    inventory must be at least 1 characters
+                                    </div>
+                                    <div 
+                                    *ngIf="inventory.errors['maxlength']">
+                                    inventory must be at most 4 characters
+                                    </div>
+                                  </div>
+                              </td>
+                              
+                            <td>
+                              <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="sku" 
+                                  [(ngModel)]="updateform.sku" 
+                                  required #sku="ngModel"
+                                  minlength="1" 
+                                  maxlength="4" 
+                                  [class.dirty]="sku.dirty" 
+                                  [class.touched]="sku.touched"
+                                  [ngClass]="{ 'is-invalid': sku.errors && (sku.touched || sku.dirty ) }" />
+                          
+                                  <div 
+                                  *ngIf="sku.errors && (sku.touched || sku.dirty )" 
+                                  class="invalid-feedback">
+                                    <div 
+                                    *ngIf="sku.errors['required'] ">
+                                    sku is required
+                                    </div>
+                                    <div 
+                                    *ngIf="sku.errors['minlength']">
+                                    sku must be at least 1 characters
+                                    </div>
+                                    <div 
+                                    *ngIf="sku.errors['maxlength']">
+                                    sku must be at most 4 characters
+                                    </div>
+                                  </div>
+
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+
+                    <!-- GST START -->
+                    <div class="row mt-3">
+                      <div class="form-group col-md-6">
+                        <label class="fs12">GST</label>
+                        <select  
+                          [(ngModel)]="updateform.gst" 
+                          name="gst" 
+                          class="form-select form-select-sm"
+                          aria-label="Default select example"
+                          required #gst="ngModel"
+                          [class.dirty]="gst.dirty" 
+                          [class.touched]="gst.touched"
+                          [ngClass]="{ 'is-invalid': gst.errors && (gst.touched || gst.dirty) }"
+                        >
+                          <option value="" selected ="select">Select</option>
+                          <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
+                        </select>
+                      
+                        <div 
+                          *ngIf="gst.errors && (gst.touched || gst.dirty)" 
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="gst.errors['required']">
+                            GST is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label class="fs12">HSN Code</label>
+                        <select  
+                          [(ngModel)]="updateform.hsnCode" 
+                          name="hsnCode" 
+                          class="form-select form-select-sm"
+                          aria-label="Default select example"
+                          required #hsnCode="ngModel"
+                          [class.dirty]="hsnCode.dirty" 
+                          [class.touched]="hsnCode.touched"
+                          [ngClass]="{ 'is-invalid': hsnCode.errors && (hsnCode.touched || hsnCode.dirty) }"
+                        >
+                          <option value="" selected ="select">Select</option>
+                          <option 
+                              *ngFor="let hsnNode of hsnCodeList"
+                              [value]="hsnNode.hsn">
+                              {{ hsnNode.hsn }}
+                          </option>
+                        </select>
+                      
+                        <div 
+                          *ngIf="hsnCode.errors && (hsnCode.touched || hsnCode.dirty)" 
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="hsnCode.errors['required']">
+                            hsnCode is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- GST ENDING -->
+
+
+                    <!--  WEIGHT -->
+                      <div class="form-group col-md-12">
+                        <label class="fs12">Weight</label>
+                        <select  
+                          [(ngModel)]="updateform.weight" 
+                          name="weight" 
+                          class="form-select form-select-sm"
+                          aria-label="Default select example"
+                          required #weight="ngModel"
+                          [class.dirty]="weight.dirty" 
+                          [class.touched]="weight.touched"
+                          [ngClass]="{ 'is-invalid': weight.errors && (weight.touched || weight.dirty) }"
+                        >
+                          <option value="" selected ="select">Select</option>
+                          <option *ngFor="let pList of parentList" [value]="pList.id">
+                            {{ pList.name }}
+                          </option>
+                        </select>
+                      
+                        <div 
+                          *ngIf="weight.errors && (weight.touched || weight.dirty)" 
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="weight.errors['required']">
+                            weight is required
+                          </div>
+                        </div>
+                      </div>
+                     <!--- WEIGHT -->
+
+
+                     <!-- Style Code Start  -->
+                      
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                          <label class="fs12">Style Code</label>
+                          <input 
+                          type="text" 
+                          class="form-control form-control-sm" 
+                          name="styleCode" 
+                          [(ngModel)]="updateform.styleCode" 
+                          required #styleCode="ngModel"
+                          minlength="10" 
+                          maxlength="10" 
+                          [class.dirty]="styleCode.dirty" 
+                          [class.touched]="styleCode.touched"
+                          [ngClass]="{ 'is-invalid': styleCode.errors && (styleCode.touched || styleCode.dirty ) }" />
+                  
+                          <div 
+                          *ngIf="styleCode.errors && (styleCode.touched || styleCode.dirty )" 
+                          class="invalid-feedback">
+                            <div 
+                            *ngIf="styleCode.errors['required'] ">
+                            Style Code is required
+                            </div>
+                            <div 
+                            *ngIf="styleCode.errors['minlength']">
+                            Style Code must be at least 10 characters
+                            </div>
+                            <div 
+                            *ngIf="styleCode.errors['maxlength']">
+                            Style Code must be at most 10 characters
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+                      <!-- style Code Ending -->
+
+
+
+<!-- ============================================================ -->
+                   <div >
+                        <h5 class="psi mt-3" >
+                            Product Details
+                       </h5>
+                      </div>
+
+
+
+                       <!-- NET QNTTY START -->
+                    <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label class="fs12">Net Quantity</label>
+                        <select  
+                          [(ngModel)]="updateform.netQuantity" 
+                          name="netQuantity" 
+                          class="form-select form-select-sm"
+                          aria-label="Default select example"
+                          required #netQuantity="ngModel"
+                          [class.dirty]="netQuantity.dirty" 
+                          [class.touched]="netQuantity.touched"
+                          [ngClass]="{ 'is-invalid': netQuantity.errors && (netQuantity.touched || netQuantity.dirty) }"
+                        >
+                          <option value="" selected ="select">Select</option>
+                          <option *ngFor="let netQList of netQuantityList" [value]="netQList.netQuantity">
+                            {{ netQList.netQuantity }}
+                          </option>
+                        </select>
+                      
+                        <div 
+                          *ngIf="netQuantity.errors && (netQuantity.touched || netQuantity.dirty)" 
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="netQuantity.errors['required']">
+                            Net-Quantity is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- NET QNTTY ENDING -->
+
+                    <!-- Product Height length width Satrting-->
+                    <div class="row mt-3">
+                      
+                      <div class="form-group col-md-4">
+                        <label class="fs12">Length</label>
+                        <select  
+                          [(ngModel)]="updateform.catalogLength" 
+                          name="catalogLength" 
+                          class="form-select form-select-sm"
+                          aria-label="Default select example"
+                          required #catalogLength="ngModel"
+                          [class.dirty]="catalogLength.dirty" 
+                          [class.touched]="catalogLength.touched"
+                          [ngClass]="{ 'is-invalid': catalogLength.errors && (catalogLength.touched || catalogLength.dirty) }"
+                        >
+                          <option value="" selected ="select">Select</option>
+                          <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
+                        </select>
+                      
+                        <div 
+                          *ngIf="catalogLength.errors && (catalogLength.touched || catalogLength.dirty)" 
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="catalogLength.errors['required']">
+                            Length is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-4">
+                        <label class="fs12">Breath</label>
+                        <select  
+                          [(ngModel)]="updateform.catalogBreath" 
+                          name="catalogBreath" 
+                          class="form-select form-select-sm"
+                          aria-label="Default select example"
+                          required #catalogBreath="ngModel"
+                          [class.dirty]="catalogBreath.dirty" 
+                          [class.touched]="catalogBreath.touched"
+                          [ngClass]="{ 'is-invalid': catalogBreath.errors && (catalogBreath.touched || catalogBreath.dirty) }"
+                        >
+                          <option value="" selected ="select">Select</option>
+                          <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
+                        </select>
+                      
+                        <div 
+                          *ngIf="catalogBreath.errors && (catalogBreath.touched || catalogBreath.dirty)" 
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="catalogBreath.errors['required']">
+                            Breath is required
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="form-group col-md-4">
+                        <label class="fs12">Height</label>
+                        <select  
+                          [(ngModel)]="updateform.catalogHeight" 
+                          name="catalogHeight" 
+                          class="form-select form-select-sm"
+                          aria-label="Default select example"
+                          required #catalogHeight="ngModel"
+                          [class.dirty]="catalogHeight.dirty" 
+                          [class.touched]="catalogHeight.touched"
+                          [ngClass]="{ 'is-invalid': catalogHeight.errors && (catalogHeight.touched || catalogHeight.dirty) }"
+                        >
+                          <option value="" selected ="select">Select</option>
+                          <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
+                        </select>
+                      
+                        <div 
+                          *ngIf="catalogHeight.errors && (catalogHeight.touched || catalogHeight.dirty)" 
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="catalogHeight.errors['required']">
+                            Height is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Product Height length width Ending -->
+
+                       <!-- Material and Type Start -->
+                       <div class="row">
                         <div class="form-group col-md-6">
-                          <label class="fs12">SIZE</label>
+                          <label class="fs12">Material</label>
                           <select  
-                            [(ngModel)]="updateform.size" 
-                            name="catalogForm" 
+                            [(ngModel)]="updateform.material" 
+                            name="material" 
                             class="form-select form-select-sm"
                             aria-label="Default select example"
-                            required #size="ngModel"
-                            [class.dirty]="size.dirty" 
-                            [class.touched]="size.touched"
-                            [ngClass]="{ 'is-invalid': size.errors && (size.touched || size.dirty) }"
+                            required #material="ngModel"
+                            [class.dirty]="material.dirty" 
+                            [class.touched]="material.touched"
+                            [ngClass]="{ 'is-invalid': material.errors && (material.touched || material.dirty) }"
                           >
                             <option value="" selected ="select">Select</option>
-                            <option *ngFor="let sizes of sizeList" [value]="sizes.size">
-                              {{ sizes.size }}
+                            <option *ngFor="let materialList of materialList" [value]="materialList.material">
+                              {{ materialList.material }}
                             </option>
                           </select>
                         
                           <div 
-                            *ngIf="size.errors && (size.touched || size.dirty)" 
+                            *ngIf="material.errors && (material.touched || material.dirty)" 
                             class="invalid-feedback"
                           >
-                            <div *ngIf="size.errors['required']">
-                              SIZE is required
+                            <div *ngIf="material.errors['required']">
+                              material is required
                             </div>
                           </div>
                         </div>
-      
-                        <div class="form-group col-md-7 mt-4">
-                          <div class="table-container">
-                            <table class="table table-bordered">
-                              <thead class="bg-light">
-                                <tr class="fs11 text-center">
-                                  <th>Size</th>
-                                  <th>Meesho Price*</th>
-                                  <th>Wrong/Defective Returns Price</th>
-                                  <th>MRP*</th>
-                                  <th>Inventory*</th>
-                                  <th>SKU ID</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr class="fs11">
-                                  <td>Free Size</td>
-                                    <td>
-                                      <input 
-                                        type="text" 
-                                        class="form-control form-control-sm" 
-                                        name="sellActualPrice" 
-                                        [(ngModel)]="updateform.sellActualPrice" 
-                                        required #sellActualPrice="ngModel"
-                                        minlength="2" 
-                                        maxlength="4" 
-                                        [class.dirty]="sellActualPrice.dirty" 
-                                        [class.touched]="sellActualPrice.touched"
-                                        [ngClass]="{ 'is-invalid': sellActualPrice.errors && (sellActualPrice.touched || sellActualPrice.dirty ) }" />
-                                
-                                        <div 
-                                        *ngIf="sellActualPrice.errors && (sellActualPrice.touched || sellActualPrice.dirty )" 
-                                        class="invalid-feedback">
-                                          <div 
-                                          *ngIf="sellActualPrice.errors['required'] ">
-                                          sellActualPrice is required
-                                          </div>
-                                          <div 
-                                          *ngIf="sellActualPrice.errors['minlength']">
-                                          sellActualPrice must be at least 4 characters
-                                          </div>
-                                          <div 
-                                          *ngIf="sellActualPrice.errors['maxlength']">
-                                          sellActualPrice must be at most 4 characters
-                                          </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                      <input 
-                                        type="text" 
-                                        class="form-control form-control-sm" 
-                                        name="defectiveReturnPrice" 
-                                        [(ngModel)]="updateform.defectiveReturnPrice" 
-                                        required #defectiveReturnPrice="ngModel"
-                                        minlength="2" 
-                                        maxlength="4" 
-                                        [class.dirty]="defectiveReturnPrice.dirty" 
-                                        [class.touched]="defectiveReturnPrice.touched"
-                                        [ngClass]="{ 'is-invalid': defectiveReturnPrice.errors && (defectiveReturnPrice.touched || defectiveReturnPrice.dirty ) }" />
-                                
-                                        <div 
-                                        *ngIf="defectiveReturnPrice.errors && (defectiveReturnPrice.touched || defectiveReturnPrice.dirty )" 
-                                        class="invalid-feedback">
-                                          <div 
-                                          *ngIf="defectiveReturnPrice.errors['required'] ">
-                                          defectiveReturnPrice is required
-                                          </div>
-                                          <div 
-                                          *ngIf="defectiveReturnPrice.errors['minlength']">
-                                          defectiveReturnPrice must be at least 2 characters
-                                          </div>
-                                          <div 
-                                          *ngIf="defectiveReturnPrice.errors['maxlength']">
-                                          defectiveReturnPrice must be at most 4 characters
-                                          </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                      <input 
-                                        type="text" 
-                                        class="form-control form-control-sm" 
-                                        name="mrp" 
-                                        [(ngModel)]="updateform.mrp" 
-                                        required #mrp="ngModel"
-                                        minlength="2" 
-                                        maxlength="4" 
-                                        [class.dirty]="mrp.dirty" 
-                                        [class.touched]="mrp.touched"
-                                        [ngClass]="{ 'is-invalid': mrp.errors && (mrp.touched || mrp.dirty ) }" />
-                                
-                                        <div 
-                                        *ngIf="mrp.errors && (mrp.touched || mrp.dirty )" 
-                                        class="invalid-feedback">
-                                          <div 
-                                          *ngIf="mrp.errors['required'] ">
-                                          MRP is required
-                                          </div>
-                                          <div 
-                                          *ngIf="mrp.errors['minlength']">
-                                          MRP must be at least 2 characters
-                                          </div>
-                                          <div 
-                                          *ngIf="mrp.errors['maxlength']">
-                                          mrp must be at most 4 characters
-                                          </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                      <input 
-                                        type="text" 
-                                        class="form-control form-control-sm" 
-                                        name="inventory" 
-                                        [(ngModel)]="updateform.inventory" 
-                                        required #inventory="ngModel"
-                                        minlength="1" 
-                                        maxlength="4" 
-                                        [class.dirty]="inventory.dirty" 
-                                        [class.touched]="inventory.touched"
-                                        [ngClass]="{ 'is-invalid': inventory.errors && (inventory.touched || inventory.dirty ) }" />
-                                
-                                        <div 
-                                        *ngIf="inventory.errors && (inventory.touched || inventory.dirty )" 
-                                        class="invalid-feedback">
-                                          <div 
-                                          *ngIf="inventory.errors['required'] ">
-                                          inventory is required
-                                          </div>
-                                          <div 
-                                          *ngIf="inventory.errors['minlength']">
-                                          inventory must be at least 1 characters
-                                          </div>
-                                          <div 
-                                          *ngIf="inventory.errors['maxlength']">
-                                          inventory must be at most 4 characters
-                                          </div>
-                                        </div>
-                                    </td>
-                                  <td>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Enter SKU ID" />
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
+
+
+
+                        <div class="form-group col-md-6">
+                          <label class="fs12">Type</label>
+                          <select  
+                            [(ngModel)]="updateform.catalogType" 
+                            name="catalogType" 
+                            class="form-select form-select-sm"
+                            aria-label="Default select example"
+                            required #catalogType="ngModel"
+                            [class.dirty]="catalogType.dirty" 
+                            [class.touched]="catalogType.touched"
+                            [ngClass]="{ 'is-invalid': catalogType.errors && (catalogType.touched || catalogType.dirty) }"
+                          >
+                            <option value="" selected ="select">Select</option>
+                            <option *ngFor="let typeList of catalogTypeList" [value]="typeList.catalogType">
+                              {{ typeList.catalogType }}
+                            </option>
+                          </select>
+                        
+                          <div 
+                            *ngIf="catalogType.errors && (catalogType.touched || catalogType.dirty)" 
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="catalogType.errors['required']">
+                              Type is required
+                            </div>
                           </div>
                         </div>
+                      </div>
+                      <!-- Material and Type  Ending -->
+
+
+                      <!-- Manufaturing Details Starting-->
                         
-      
-                          <!-- GST START -->
-                          <div class="row mt-3">
-                            <div class="form-group col-md-3">
-                              <label class="fs12">GST</label>
-                              <select  
-                                [(ngModel)]="updateform.gst" 
-                                name="gst" 
-                                class="form-select form-select-sm"
-                                aria-label="Default select example"
-                                required #gst="ngModel"
-                                [class.dirty]="gst.dirty" 
-                                [class.touched]="gst.touched"
-                                [ngClass]="{ 'is-invalid': gst.errors && (gst.touched || gst.dirty) }"
-                              >
-                                <option value="" selected ="select">Select</option>
-                                <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
-                              </select>
-                            
-                              <div 
-                                *ngIf="gst.errors && (gst.touched || gst.dirty)" 
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="gst.errors['required']">
-                                  GST is required
-                                </div>
-                              </div>
-                            </div>
-      
-                            <div class="form-group col-md-3">
-                              <label class="fs12">HSN Code</label>
-                              <select  
-                                [(ngModel)]="updateform.hsnCode" 
-                                name="hsnCode" 
-                                class="form-select form-select-sm"
-                                aria-label="Default select example"
-                                required #hsnCode="ngModel"
-                                [class.dirty]="hsnCode.dirty" 
-                                [class.touched]="hsnCode.touched"
-                                [ngClass]="{ 'is-invalid': hsnCode.errors && (hsnCode.touched || hsnCode.dirty) }"
-                              >
-                                <option value="" selected ="select">Select</option>
-                                <option 
-                                    *ngFor="let hsnNode of hsnCodeList"
-                                    [value]="hsnNode.hsn">
-                                    {{ hsnNode.hsn }}
-                                </option>
-                              </select>
-                            
-                              <div 
-                                *ngIf="hsnCode.errors && (hsnCode.touched || hsnCode.dirty)" 
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="hsnCode.errors['required']">
-                                  hsnCode is required
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- GST ENDING -->
-      
-      
-                          <!--  WEIGHT -->
-                            <div class="form-group col-md-3">
-                              <label class="fs12">Weight</label>
-                              <select  
-                                [(ngModel)]="updateform.weight" 
-                                name="weight" 
-                                class="form-select form-select-sm"
-                                aria-label="Default select example"
-                                required #weight="ngModel"
-                                [class.dirty]="weight.dirty" 
-                                [class.touched]="weight.touched"
-                                [ngClass]="{ 'is-invalid': weight.errors && (weight.touched || weight.dirty) }"
-                              >
-                                <option value="" selected ="select">Select</option>
-                                <option *ngFor="let pList of parentList" [value]="pList.id">
-                                  {{ pList.name }}
-                                </option>
-                              </select>
-                            
-                              <div 
-                                *ngIf="weight.errors && (weight.touched || weight.dirty)" 
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="weight.errors['required']">
-                                  weight is required
-                                </div>
-                              </div>
-                            </div>
-                           <!--- WEIGHT -->
-      
-      
-                           <!-- Style Code Start  -->
-                            
-                          <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label class="fs12">Style Code</label>
-                                <input 
-                                type="text" 
-                                class="form-control form-control-sm" 
-                                name="styleCode" 
-                                [(ngModel)]="updateform.styleCode" 
-                                required #styleCode="ngModel"
-                                minlength="10" 
-                                maxlength="10" 
-                                [class.dirty]="styleCode.dirty" 
-                                [class.touched]="styleCode.touched"
-                                [ngClass]="{ 'is-invalid': styleCode.errors && (styleCode.touched || styleCode.dirty ) }" />
-                        
-                                <div 
-                                *ngIf="styleCode.errors && (styleCode.touched || styleCode.dirty )" 
-                                class="invalid-feedback">
-                                  <div 
-                                  *ngIf="styleCode.errors['required'] ">
-                                  Style Code is required
-                                  </div>
-                                  <div 
-                                  *ngIf="styleCode.errors['minlength']">
-                                  Style Code must be at least 10 characters
-                                  </div>
-                                  <div 
-                                  *ngIf="styleCode.errors['maxlength']">
-                                  Style Code must be at most 10 characters
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
-      
-                            <!-- style Code Ending -->
-      
-      
-      
-      <!-- ============================================================ -->
-                         <div >
-                              <h5 class="psi mt-3" >
-                                  Product Details
-                             </h5>
-                            </div>
-      
-      
-      
-                             <!-- NET QNTTY START -->
-                          <div class="row mt-3">
-                            <div class="form-group col-md-6">
-                              <label class="fs12">Net Quantity</label>
-                              <select  
-                                [(ngModel)]="updateform.netQuantity" 
-                                name="netQuantity" 
-                                class="form-select form-select-sm"
-                                aria-label="Default select example"
-                                required #netQuantity="ngModel"
-                                [class.dirty]="netQuantity.dirty" 
-                                [class.touched]="netQuantity.touched"
-                                [ngClass]="{ 'is-invalid': netQuantity.errors && (netQuantity.touched || netQuantity.dirty) }"
-                              >
-                                <option value="" selected ="select">Select</option>
-                                <option *ngFor="let netQList of netQuantityList" [value]="netQList.netQuantity">
-                                  {{ netQList.netQuantity }}
-                                </option>
-                              </select>
-                            
-                              <div 
-                                *ngIf="netQuantity.errors && (netQuantity.touched || netQuantity.dirty)" 
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="netQuantity.errors['required']">
-                                  Net-Quantity is required
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- NET QNTTY ENDING -->
-      
-                          <!-- Product Height length width Satrting-->
-                          <div class="row mt-3">
-                            
-                            <div class="form-group col-md-2">
-                              <label class="fs12">Length</label>
-                              <select  
-                                [(ngModel)]="updateform.catalogLength" 
-                                name="catalogLength" 
-                                class="form-select form-select-sm"
-                                aria-label="Default select example"
-                                required #catalogLength="ngModel"
-                                [class.dirty]="catalogLength.dirty" 
-                                [class.touched]="catalogLength.touched"
-                                [ngClass]="{ 'is-invalid': catalogLength.errors && (catalogLength.touched || catalogLength.dirty) }"
-                              >
-                                <option value="" selected ="select">Select</option>
-                                <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
-                              </select>
-                            
-                              <div 
-                                *ngIf="catalogLength.errors && (catalogLength.touched || catalogLength.dirty)" 
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="catalogLength.errors['required']">
-                                  Length is required
-                                </div>
-                              </div>
-                            </div>
-      
-                            <div class="form-group col-md-2">
-                              <label class="fs12">Breath</label>
-                              <select  
-                                [(ngModel)]="updateform.catalogBreath" 
-                                name="catalogBreath" 
-                                class="form-select form-select-sm"
-                                aria-label="Default select example"
-                                required #catalogBreath="ngModel"
-                                [class.dirty]="catalogBreath.dirty" 
-                                [class.touched]="catalogBreath.touched"
-                                [ngClass]="{ 'is-invalid': catalogBreath.errors && (catalogBreath.touched || catalogBreath.dirty) }"
-                              >
-                                <option value="" selected ="select">Select</option>
-                                <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
-                              </select>
-                            
-                              <div 
-                                *ngIf="catalogBreath.errors && (catalogBreath.touched || catalogBreath.dirty)" 
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="catalogBreath.errors['required']">
-                                  Breath is required
-                                </div>
-                              </div>
-                            </div>
-      
-      
-                            <div class="form-group col-md-2">
-                              <label class="fs12">Height</label>
-                              <select  
-                                [(ngModel)]="updateform.catalogHeight" 
-                                name="catalogHeight" 
-                                class="form-select form-select-sm"
-                                aria-label="Default select example"
-                                required #catalogHeight="ngModel"
-                                [class.dirty]="catalogHeight.dirty" 
-                                [class.touched]="catalogHeight.touched"
-                                [ngClass]="{ 'is-invalid': catalogHeight.errors && (catalogHeight.touched || catalogHeight.dirty) }"
-                              >
-                                <option value="" selected ="select">Select</option>
-                                <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
-                              </select>
-                            
-                              <div 
-                                *ngIf="catalogHeight.errors && (catalogHeight.touched || catalogHeight.dirty)" 
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="catalogHeight.errors['required']">
-                                  Height is required
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- Product Height length width Ending -->
-      
-                             <!-- Material and Type Start -->
-                             <div class="row">
-                              <div class="form-group col-md-3">
-                                <label class="fs12">Material</label>
-                                <select  
-                                  [(ngModel)]="updateform.material" 
-                                  name="material" 
-                                  class="form-select form-select-sm"
-                                  aria-label="Default select example"
-                                  required #material="ngModel"
-                                  [class.dirty]="material.dirty" 
-                                  [class.touched]="material.touched"
-                                  [ngClass]="{ 'is-invalid': material.errors && (material.touched || material.dirty) }"
-                                >
-                                  <option value="" selected ="select">Select</option>
-                                  <option *ngFor="let materialList of materialList" [value]="materialList.material">
-                                    {{ materialList.material }}
-                                  </option>
-                                </select>
-                              
-                                <div 
-                                  *ngIf="material.errors && (material.touched || material.dirty)" 
-                                  class="invalid-feedback"
-                                >
-                                  <div *ngIf="material.errors['required']">
-                                    material is required
-                                  </div>
-                                </div>
-                              </div>
-      
-      
-      
-                              <div class="form-group col-md-3">
-                                <label class="fs12">Type</label>
-                                <select  
-                                  [(ngModel)]="updateform.catalogType" 
-                                  name="catalogType" 
-                                  class="form-select form-select-sm"
-                                  aria-label="Default select example"
-                                  required #catalogType="ngModel"
-                                  [class.dirty]="catalogType.dirty" 
-                                  [class.touched]="catalogType.touched"
-                                  [ngClass]="{ 'is-invalid': catalogType.errors && (catalogType.touched || catalogType.dirty) }"
-                                >
-                                  <option value="" selected ="select">Select</option>
-                                  <option *ngFor="let typeList of catalogTypeList" [value]="typeList.catalogType">
-                                    {{ typeList.catalogType }}
-                                  </option>
-                                </select>
-                              
-                                <div 
-                                  *ngIf="catalogType.errors && (catalogType.touched || catalogType.dirty)" 
-                                  class="invalid-feedback"
-                                >
-                                  <div *ngIf="catalogType.errors['required']">
-                                    Type is required
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- Material and Type  Ending -->
-      
-      
-                            <!-- Manufaturing Details Starting-->
-                              
-                            <div class="row mt-3">
-                              <div class="form-group col-md-6">
-                                <label class="fs12">Manufaturing Details</label>
-                                <input 
-                                type="text" 
-                                class="form-control form-control-sm" 
-                                name="manufactureDetails" 
-                                [(ngModel)]="updateform.manufactureDetails" 
-                                required #manufactureDetails="ngModel"
-                                minlength="5" 
-                                maxlength="100" 
-                                [class.dirty]="manufactureDetails.dirty" 
-                                [class.touched]="manufactureDetails.touched"
-                                [ngClass]="{ 'is-invalid': manufactureDetails.errors && (manufactureDetails.touched || manufactureDetails.dirty ) }" />
-                        
-                                <div 
-                                *ngIf="manufactureDetails.errors && (manufactureDetails.touched || manufactureDetails.dirty )" 
-                                class="invalid-feedback">
-                                  <div 
-                                  *ngIf="manufactureDetails.errors['required'] ">
-                                  Manufacture is required
-                                  </div>
-                                  <div 
-                                  *ngIf="manufactureDetails.errors['minlength']">
-                                  Manufacture must be at least 5 characters
-                                  </div>
-                                  <div 
-                                  *ngIf="manufactureDetails.errors['maxlength']">
-                                  Manufacture must be at most 100 characters
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-      
-                            <!-- manufacturing Details Ending -->
-      
-      
-                             <!-- Packer Details Starting-->
-                             <div class="row mt-3">
-                              <div class="form-group col-md-6">
-                                <label class="fs12">Packer Details</label>
-                                <input 
-                                type="text" 
-                                class="form-control form-control-sm" 
-                                name="packerDetails" 
-                                [(ngModel)]="updateform.packerDetails" 
-                                required #packerDetails="ngModel"
-                                minlength="5" 
-                                maxlength="50" 
-                                [class.dirty]="packerDetails.dirty" 
-                                [class.touched]="packerDetails.touched"
-                                [ngClass]="{ 'is-invalid': packerDetails.errors && (netQuantity.touched || packerDetails.dirty ) }" />
-                        
-                                <div 
-                                *ngIf="packerDetails.errors && (packerDetails.touched || packerDetails.dirty )" 
-                                class="invalid-feedback">
-                                  <div 
-                                  *ngIf="packerDetails.errors['required'] ">
-                                  Packer Details is required
-                                  </div>
-                                  <div 
-                                  *ngIf="packerDetails.errors['minlength']">
-                                  Packer Details is requiredmust be at least 5 characters
-                                  </div>
-                                  <div 
-                                  *ngIf="packerDetails.errors['maxlength']">
-                                  Packer Details is required must be at most 50 characters
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!--  Packer Details Ending -->
-      
-      
-      
-                            <!-- Tags Start -->
-                            <div class="row mt-3">
-                            <div class="form-group col-md-6">
-                              <label class="fs12">Tags</label>
-                              <input 
-                              type="text" 
-                              class="form-control form-control-sm" 
-                              name="tags" 
-                              [(ngModel)]="updateform.tags" 
-                              required #tags="ngModel"
-                              minlength="5" 
-                              maxlength="150" 
-                              [class.dirty]="tags.dirty" 
-                              [class.touched]="tags.touched"
-                              [ngClass]="{ 'is-invalid': tags.errors && (tags.touched || tags.dirty ) }" />
-                      
-                              <div 
-                              *ngIf="tags.errors && (tags.touched || tags.dirty )" 
-                              class="invalid-feedback">
-                                <div 
-                                *ngIf="tags.errors['required'] ">
-                                Tags is required
-                                </div>
-                                <div 
-                                *ngIf="tags.errors['minlength']">
-                                Tags is requiredmust be at least 5 characters
-                                </div>
-                                <div 
-                                *ngIf="tags.errors['maxlength']">
-                                Tags is required must be at most 150 characters
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                            <!-- Tags Ending -->
-      
-      
-                        <!-- Description Start     -->
-                        <div class="row mt-3">
-                          <div class="form-group col-md-6">
-                            <label class="fs12">Description</label>
-                            <textarea style="height: 100px"
-                            type="text" 
-                            class="form-control form-control-sm" 
-                            name="description" 
-                            [(ngModel)]="updateform.description" 
-                            required #description="ngModel"
-                            minlength="10" 
-                            maxlength="3000" 
-                            [class.dirty]="description.dirty" 
-                            [class.touched]="description.touched"
-                            [ngClass]="{ 'is-invalid': description.errors && (description.touched || description.dirty ) }" >
-                          </textarea>
-                    
+                      <div class="row mt-3">
+                        <div class="form-group col-md-12">
+                          <label class="fs12">Manufaturing Details</label>
+                          <input 
+                          type="text" 
+                          class="form-control form-control-sm" 
+                          name="manufactureDetails" 
+                          [(ngModel)]="updateform.manufactureDetails" 
+                          required #manufactureDetails="ngModel"
+                          minlength="5" 
+                          maxlength="100" 
+                          [class.dirty]="manufactureDetails.dirty" 
+                          [class.touched]="manufactureDetails.touched"
+                          [ngClass]="{ 'is-invalid': manufactureDetails.errors && (manufactureDetails.touched || manufactureDetails.dirty ) }" />
+                  
+                          <div 
+                          *ngIf="manufactureDetails.errors && (manufactureDetails.touched || manufactureDetails.dirty )" 
+                          class="invalid-feedback">
                             <div 
-                            *ngIf="description.errors && (description.touched || description.dirty )" 
-                            class="invalid-feedback">
-                              <div 
-                              *ngIf="description.errors['required'] ">
-                                description is required
-                              </div>
-                              <div 
-                              *ngIf="description.errors['minlength']">
-                                description must be at least 10 characters
-                              </div>
-                              <div 
-                              *ngIf="description.errors['maxlength']">
-                                description must be at most 3000 characters
-                              </div>
+                            *ngIf="manufactureDetails.errors['required'] ">
+                            Manufacture is required
+                            </div>
+                            <div 
+                            *ngIf="manufactureDetails.errors['minlength']">
+                            Manufacture must be at least 5 characters
+                            </div>
+                            <div 
+                            *ngIf="manufactureDetails.errors['maxlength']">
+                            Manufacture must be at most 100 characters
                             </div>
                           </div>
                         </div>
-                        <!-- Description Ending -->
-      
-                          
-                    
-                          <div class="row mt-4">                          
-                            <div class="form-group  col-md-3">
-                              <button mat-raised-button color="primary" class="w-100"  (click)="openModalSm(updateform.id)">save
-                                Catalog</button>
+                      </div>
+
+                      <!-- manufacturing Details Ending -->
+
+
+                       <!-- Packer Details Starting-->
+                       <div class="row mt-3">
+                        <div class="form-group col-md-12">
+                          <label class="fs12">Packer Details</label>
+                          <input 
+                          type="text" 
+                          class="form-control form-control-sm" 
+                          name="packerDetails" 
+                          [(ngModel)]="updateform.packerDetails" 
+                          required #packerDetails="ngModel"
+                          minlength="5" 
+                          maxlength="50" 
+                          [class.dirty]="packerDetails.dirty" 
+                          [class.touched]="packerDetails.touched"
+                          [ngClass]="{ 'is-invalid': packerDetails.errors && (netQuantity.touched || packerDetails.dirty ) }" />
+                  
+                          <div 
+                          *ngIf="packerDetails.errors && (packerDetails.touched || packerDetails.dirty )" 
+                          class="invalid-feedback">
+                            <div 
+                            *ngIf="packerDetails.errors['required'] ">
+                            Packer Details is required
+                            </div>
+                            <div 
+                            *ngIf="packerDetails.errors['minlength']">
+                            Packer Details is requiredmust be at least 5 characters
+                            </div>
+                            <div 
+                            *ngIf="packerDetails.errors['maxlength']">
+                            Packer Details is required must be at most 50 characters
                             </div>
                           </div>
-                          </form>
+                        </div>
+                      </div>
+                      <!--  Packer Details Ending -->
+
+
+
+                      <!-- Tags Start -->
+                      <div class="row mt-3">
+                      <div class="form-group col-md-12">
+                        <label class="fs12">Tags</label>
+                        <input 
+                        type="text" 
+                        class="form-control form-control-sm" 
+                        name="tags" 
+                        [(ngModel)]="updateform.tags" 
+                        required #tags="ngModel"
+                        minlength="5" 
+                        maxlength="150" 
+                        [class.dirty]="tags.dirty" 
+                        [class.touched]="tags.touched"
+                        [ngClass]="{ 'is-invalid': tags.errors && (tags.touched || tags.dirty ) }" />
+                
+                        <div 
+                        *ngIf="tags.errors && (tags.touched || tags.dirty )" 
+                        class="invalid-feedback">
+                          <div 
+                          *ngIf="tags.errors['required'] ">
+                          Tags is required
                           </div>
-      
-      
-      
-      
-      </div>
-      
-      
-      
-      
-      
-      <!-- Button to open modal (for demonstration) -->
-      <!-- Modal Structure -->
-      <div class="modal" *ngIf="isModalOpen">
-        <div class="modal-content">
-          <!-- <div class="modal-header"></div> -->
-           <div class="text-cente">
-            <i style="color: blue;" class="bi bi-rocket-takeoff"></i>
-           </div> 
-          <div class="modal-message">Are, you sure you want to submit this Catalog</div>
-      
-          <div class="d-flex justify-content-center">
-            <button mat-raised-button (click)="closeModalSm()" class="mx-2">Cancel</button>
-            <button mat-raised-button (click)="confirmActionSm()" color="primary" class="mx-2">Submit</button>
-          </div>
-          
+                          <div 
+                          *ngIf="tags.errors['minlength']">
+                          Tags is requiredmust be at least 5 characters
+                          </div>
+                          <div 
+                          *ngIf="tags.errors['maxlength']">
+                          Tags is required must be at most 150 characters
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      <!-- Tags Ending -->
+
+
+                  <!-- Description Start     -->
+                  <div class="row mt-3">
+                    <div class="form-group col-md-12">
+                      <label class="fs12">Description</label>
+                      <textarea style="height: 100px"
+                      type="text" 
+                      class="form-control form-control-sm" 
+                      name="description" 
+                      [(ngModel)]="updateform.description" 
+                      required #description="ngModel"
+                      minlength="10" 
+                      maxlength="3000" 
+                      [class.dirty]="description.dirty" 
+                      [class.touched]="description.touched"
+                      [ngClass]="{ 'is-invalid': description.errors && (description.touched || description.dirty ) }" >
+                    </textarea>
+              
+                      <div 
+                      *ngIf="description.errors && (description.touched || description.dirty )" 
+                      class="invalid-feedback">
+                        <div 
+                        *ngIf="description.errors['required'] ">
+                          description is required
+                        </div>
+                        <div 
+                        *ngIf="description.errors['minlength']">
+                          description must be at least 10 characters
+                        </div>
+                        <div 
+                        *ngIf="description.errors['maxlength']">
+                          description must be at most 3000 characters
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Description Ending -->
+
+                    
+              
+                    <div class="row mt-4">                          
+                      <div class="form-group  col-md-12">
+                        <button mat-raised-button class="w-100"  style="background-color: #f1c40f;"
+                          (click)="catalogInvestigate()" >
+                          Continue Investigate
+                        </button>
+                      </div>
+                    </div>
+
+              </form>
+            </div>
+
         </div>
       </div>
-      
-      
-      
-      
-      
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="performAction()">Confirm</button>
-      </div>
     </div>
   </div>
-</div>
 
+
+
+<!-- Button to open modal (for demonstration) -->
+<!-- Modal Structure -->
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <!-- <div class="modal-header"></div> -->
+     <div class="text-center">
+      <i style="color: blue;" class="bi bi-search"></i>
+     </div> 
+    <div class="modal-message text-center">Investigation Submission</div>
+
+    <div>
+      <form name="form" #f="ngForm" (ngSubmit)="f.form.valid " novalidate>
+
+        <div class="form-group col-md-12">
+          <label class="fs12">Action Status</label>
+          <select  
+            [(ngModel)]="updateform.actionStatus" 
+            name="actionStatus" 
+            class="form-select form-select-sm"
+            aria-label="Default select example"
+            required #actionStatus="ngModel"
+            [class.dirty]="actionStatus.dirty" 
+            [class.touched]="actionStatus.touched"
+            [ngClass]="{ 'is-invalid': actionStatus.errors && (actionStatus.touched || actionStatus.dirty) }"
+            (change)="onActionStatusChange($event)"
+          >
+            <option value="" selected ="select">Select</option>
+            <option *ngFor="let actionList of actionStatusList"  [value]="actionList.name">
+              {{ actionList.name }}
+            </option>
+          </select>
+        
+          <div 
+            *ngIf="actionStatus.errors && (actionStatus.touched || gst.dirty)" 
+            class="invalid-feedback"
+          >
+            <div *ngIf="actionStatus.errors['required']">
+              ActionStatus is required
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group col-md-12">
+          <label class="fs12">Action Debug</label>
+          <select  
+            [(ngModel)]="updateform.errorMarked" 
+            name="errorMarked" 
+            class="form-select form-select-sm"
+            aria-label="Default select example"
+            required #errorMarked="ngModel"
+            [class.dirty]="errorMarked.dirty" 
+            [class.touched]="errorMarked.touched"
+            [ngClass]="{ 'is-invalid': errorMarked.errors && (errorMarked.touched || errorMarked.dirty) }"
+            [disabled]="isDebugDisabled" 
+          >
+            <option value="" selected ="select">Select</option>
+            <option *ngFor="let eList of errorList" [value]="eList.name"  >{{ eList.name }}</option>
+          </select>
+        
+          <div 
+            *ngIf="errorMarked.errors && (errorMarked.touched || gst.dirty)" 
+            class="invalid-feedback"
+          >
+            <div *ngIf="errorMarked.errors['required']">
+              Error Marked is required
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row mt-3">
+          <div class="form-group col-md-12">
+            <label class="fs12">Other Suggestion</label>
+            <textarea style="height: 100px"
+            type="text" 
+            class="form-control form-control-sm" 
+            name="description" 
+            [(ngModel)]="updateform.otherSuggestion" 
+            required #otherSuggestion="ngModel"
+            minlength="1" 
+            maxlength="3000" 
+            [class.dirty]="otherSuggestion.dirty" 
+            [class.touched]="otherSuggestion.touched"
+            [ngClass]="{ 'is-invalid': otherSuggestion.errors && (otherSuggestion.touched || otherSuggestion.dirty ) }" >
+          </textarea>
+    
+            <div 
+            *ngIf="otherSuggestion.errors && (otherSuggestion.touched || otherSuggestion.dirty )" 
+            class="invalid-feedback">
+              <div 
+              *ngIf="otherSuggestion.errors['required'] ">
+              Other issue is required
+              </div>
+              <div 
+              *ngIf="otherSuggestion.errors['minlength']">
+                Other-Issue must be at least 10 characters
+              </div>
+              <div 
+              *ngIf="otherSuggestion.errors['maxlength']">
+              Other-Issue must be at most 3000 characters
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="d-flex justify-content-center mt-3">
+          <button mat-raised-button (click)="closeModal()" class="mx-2">
+            Cancel
+          </button>
+          <button type="submit" mat-raised-button (click)="submitInvestigation()" color="primary" class="mx-2">
+            Submit
+          </button>
+        </div>
+    
+      </form>
+    </div>
+
+   
+    
+  </div>
+</div>
