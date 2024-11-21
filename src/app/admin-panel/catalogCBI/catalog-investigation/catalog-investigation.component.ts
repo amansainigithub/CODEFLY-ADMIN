@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BucketService } from '../../../_services/bucket/bucket.service';
-import Swal from 'sweetalert2';
 import { PageEvent } from '@angular/material/paginator';
-import { MaterialService } from '../../../_services/catalogMetaDataServices/materialService/material.service';
 import { CatalogInvestigationService } from '../../../_services/catalogCBI/catalog-investigation/catalog-investigation.service';
 
 declare var bootstrap: any; // Declare bootstrap for accessing modal methods
@@ -28,13 +26,6 @@ searchText: string = '';
 
 //Model Flag (Open and Close)
 isModalOpen = false;
-
-
-parentList = [
-  { id: 1, name: 'Category 1' },
-  { id: 2, name: 'Category 2' },
-  { id: 3, name: 'Category 3' }
-];
 
 
 actionStatusList = [
@@ -169,6 +160,11 @@ sizeList:any="";
 netQuantityList:any="";
 materialList:any="";
 catalogTypeList:any="";
+gstList:any;
+weightList:any;
+lengthList:any;
+breathList:any;
+heightList:any;
 async getCatalogMasters(){
   this.spinner.show();
   ///save Catalog Form Data
@@ -188,8 +184,23 @@ async getCatalogMasters(){
         //Material List  
         this.materialList = res.data.materialList;
 
-        //Material List  
+        //Type List  
         this.catalogTypeList = res.data.typeList;
+
+        //gstList List  
+        this.gstList = res.data.gstPercentageList;
+
+        //Weight List  
+        this.weightList = res.data.catalogWeightList;
+
+        //length List  
+        this.lengthList = res.data.lengthList;
+
+        //Breath List  
+        this.breathList = res.data.catalogBreathList;
+
+        //Height List  
+        this.heightList = res.data.heightLists;
 
         this.spinner.hide();
       },

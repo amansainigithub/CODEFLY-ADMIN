@@ -343,7 +343,9 @@
                           [ngClass]="{ 'is-invalid': gst.errors && (gst.touched || gst.dirty) }"
                         >
                           <option value="" selected ="select">Select</option>
-                          <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
+                          <option *ngFor="let data of gstList" [value]="data.gstPercentage">
+                            {{ data.gstPercentage }}
+                          </option>
                         </select>
                       
                         <div 
@@ -403,8 +405,8 @@
                           [ngClass]="{ 'is-invalid': weight.errors && (weight.touched || weight.dirty) }"
                         >
                           <option value="" selected ="select">Select</option>
-                          <option *ngFor="let pList of parentList" [value]="pList.id">
-                            {{ pList.name }}
+                          <option *ngFor="let data of weightList" [value]="data.catalogWeight">
+                            {{ data.catalogWeight }}
                           </option>
                         </select>
                       
@@ -517,7 +519,9 @@
                           [ngClass]="{ 'is-invalid': catalogLength.errors && (catalogLength.touched || catalogLength.dirty) }"
                         >
                           <option value="" selected ="select">Select</option>
-                          <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
+                          <option *ngFor="let data of lengthList" [value]="data.catalogLength">
+                            {{ data.catalogLength }}
+                          </option>
                         </select>
                       
                         <div 
@@ -543,7 +547,9 @@
                           [ngClass]="{ 'is-invalid': catalogBreath.errors && (catalogBreath.touched || catalogBreath.dirty) }"
                         >
                           <option value="" selected ="select">Select</option>
-                          <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
+                          <option *ngFor="let data of breathList" [value]="data.catalogBreath">
+                            {{ data.catalogBreath }}
+                          </option>
                         </select>
                       
                         <div 
@@ -570,7 +576,9 @@
                           [ngClass]="{ 'is-invalid': catalogHeight.errors && (catalogHeight.touched || catalogHeight.dirty) }"
                         >
                           <option value="" selected ="select">Select</option>
-                          <option *ngFor="let pList of parentList" [value]="pList.id">{{ pList.name }}</option>
+                          <option *ngFor="let data of heightList" [value]="data.catalogHeight">
+                            {{ data.catalogHeight }}
+                          </option>
                         </select>
                       
                         <div 
@@ -784,15 +792,15 @@
                       class="invalid-feedback">
                         <div 
                         *ngIf="description.errors['required'] ">
-                          description is required
+                          Description is required
                         </div>
                         <div 
                         *ngIf="description.errors['minlength']">
-                          description must be at least 10 characters
+                          Description must be at least 10 characters
                         </div>
                         <div 
                         *ngIf="description.errors['maxlength']">
-                          description must be at most 3000 characters
+                          Description must be at most 3000 characters
                         </div>
                       </div>
                     </div>
@@ -803,7 +811,7 @@
               
                     <div class="row mt-4">                          
                       <div class="form-group  col-md-12">
-                        <button mat-raised-button class="w-100"  style="background-color: #f1c40f;"
+                        <button mat-raised-button class="w-100"  style="background-color: #f1c40f;"  [disabled]="f.invalid"
                           (click)="catalogInvestigate()" >
                           Continue Investigate
                         </button>
@@ -933,7 +941,7 @@
           <button mat-raised-button (click)="closeModal()" class="mx-2">
             Cancel
           </button>
-          <button type="submit" mat-raised-button (click)="submitInvestigation()" color="primary" class="mx-2">
+          <button type="submit" mat-raised-button  [disabled]="f.invalid" (click)="submitInvestigation()" color="primary" class="mx-2">
             Submit
           </button>
         </div>
