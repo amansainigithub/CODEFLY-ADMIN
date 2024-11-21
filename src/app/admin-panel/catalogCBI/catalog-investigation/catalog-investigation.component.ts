@@ -5,6 +5,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BucketService } from '../../../_services/bucket/bucket.service';
 import { PageEvent } from '@angular/material/paginator';
 import { CatalogInvestigationService } from '../../../_services/catalogCBI/catalog-investigation/catalog-investigation.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+
+
 
 declare var bootstrap: any; // Declare bootstrap for accessing modal methods
 @Component({
@@ -13,6 +17,7 @@ declare var bootstrap: any; // Declare bootstrap for accessing modal methods
   styleUrl: './catalog-investigation.component.css'
 })
 export class CatalogInvestigationComponent {
+
 //Filter List For Searching
 filteredItems:any = [];
 progressCatalogList:any[]=[];
@@ -102,7 +107,8 @@ constructor(
            private cataloginvestigation:CatalogInvestigationService,
            private toast:NgToastService ,
            private bucket:BucketService,
-           private spinner: NgxSpinnerService)
+           private spinner: NgxSpinnerService,
+           private datePipe:DatePipe)
          {}
 
 
@@ -115,10 +121,13 @@ catalogProgressList(request:any)
  .subscribe(
    {
        next:(res:any)=> {
+        console.log(res);
+        
        this.progressCatalogList = res.data['content']
        this.filteredItems  = this.progressCatalogList;
 
        this.totalElements = res.data['totalElements'];
+       this.currentPage = res.data.pageable['pageNumber'];
        this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
        this.spinner.hide();
      },
@@ -141,19 +150,6 @@ nextPage(event: PageEvent) {
 }
 
 
-//Search Starting
-  onSearch() {
-   const searchQuery = this.searchText.trim().toLowerCase();
-
-   if (searchQuery) {
-     this.filteredItems = this.progressCatalogList.filter(item => 
-       item.material.toLowerCase().includes(searchQuery)
-     );
-   } else {
-     this.filteredItems = this.progressCatalogList;
-   }
- }
-//Search Ending
 
 hsnCodeList:any="";
 sizeList:any="";
@@ -243,6 +239,8 @@ onActionStatusChange(event: Event): void {
 //Validation on Model Pass Or Ending
 
 
+
+
 //Catalog Investigation Starting
 submitInvestigation() {
    //Show Spinner
@@ -256,6 +254,8 @@ submitInvestigation() {
          
          //Close the Model
          this.closeModal();
+
+         this.catalogProgressList({page:this.currentPage,size:this.itemsPerPage})
 
          //Hide the Spinner
          this.spinner.hide();
@@ -275,6 +275,74 @@ submitInvestigation() {
 // Function to close the modal
 closeModal() {
   this.isModalOpen = false;
+}
+
+
+
+
+
+//Search Starting
+onSearch() {
+  const searchQuery = this.searchText.trim().toLowerCase();
+  console.log(searchQuery);
+  
+  if (searchQuery) {
+    this.filteredItems = this.progressCatalogList.filter(item => 
+      item.catalogId.toLowerCase().includes(searchQuery)
+    );
+  } else {
+    this.filteredItems = this.progressCatalogList;
+  }
+}
+//Search Ending
+
+startDate: Date | null = null;
+endDate: Date | null = null;
+onDateRangeChange(): void {
+
+  console.log(this.startDate);
+  console.log(this.endDate);
+  
+
+   // Use DatePipe to format the start and end dates to MM/DD/YYYY
+   const formattedStartDate = this.datePipe.transform(this.startDate, 'MM/dd/yyyy');
+   const formattedEndDate = this.datePipe.transform(this.endDate, 'MM/dd/yyyy');
+
+   console.log('Formatted Start Date:', formattedStartDate);
+   console.log('Formatted End Date:', formattedEndDate);
+
+
+  if (this.startDate && this.endDate) {
+    const page = 0; // Example: Page number
+    const size = 10; // Example: Page size
+
+    this.spinner.show();
+    this.cataloginvestigation.searchCatalogByDateService(page,size,formattedStartDate,formattedEndDate)
+    .subscribe(
+      {
+          next:(res:any)=> {
+          this.progressCatalogList = res.data['content']
+          this.filteredItems  = this.progressCatalogList;
+   
+          this.totalElements = res.data['totalElements'];
+          this.toast.success({detail:"Success",summary:"Data Fetch Success with Date Range", position:"bottomRight",duration:3000});
+          this.spinner.hide();
+        },
+        error:(err:any)=>  {
+          console.log(err)
+          this.spinner.hide();
+          this.toast.error(
+            {
+              detail:"Error",
+              summary:"Data Fetch Failed Catalog investigation (Date Ranged)",
+               position:"bottomRight",duration:3000
+            }
+          );
+        }
+      }
+    );
+  }
+
 }
 
 }

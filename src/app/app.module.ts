@@ -45,8 +45,10 @@ import { CatalogTypeComponent } from './admin-panel/catalogs-metadata/catalog-ty
 import { CatalogSizeComponent } from './admin-panel/catalogs-metadata/catalog-size/catalog-size.component';
 import { CatalogNetQuantityComponent } from './admin-panel/catalogs-metadata/catalog-net-quantity/catalog-net-quantity.component';
 import { CatalogInvestigationComponent } from './admin-panel/catalogCBI/catalog-investigation/catalog-investigation.component';
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'; // For Native Date Adapter
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -94,10 +96,13 @@ import { CatalogInvestigationComponent } from './admin-panel/catalogCBI/catalog-
     MatSlideToggleModule,
      ReactiveFormsModule,
      MatDialogModule,
-     MatPaginatorModule
+     MatPaginatorModule,
+     MatDatepickerModule,
+     MatNativeDateModule,
+     MatFormFieldModule
   ], 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [authInterceptorProviders, provideAnimationsAsync()],
+  providers: [authInterceptorProviders, provideAnimationsAsync(),DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

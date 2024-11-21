@@ -13,9 +13,25 @@
         </div>
 
         <!-- Search Input -->
-        <input type="text" placeholder="Search MATERIAL Code" 
+        <input type="text" placeholder="Search Progress Catalog" 
                [(ngModel)]="searchText" (input)="onSearch()" 
                class="form-control form-control-sm mb-3" />
+
+        <!-- Progress Data Find for Date Range  Starting-->
+        <mat-form-field>
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [(ngModel)]="startDate" placeholder="Start date">
+            <input matEndDate [(ngModel)]="endDate" placeholder="End date">
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <button (click)="onDateRangeChange()" mat-raised-button>Range Date </button>
+        
+        <!-- Progress Data Find for Date Range  Ending-->
+
 
         <!-- Table -->
         <table class="table table-bordered custom-table mt-4">
@@ -24,13 +40,13 @@
               <th scope="col" style="width: 60px;">S.NO</th>
               <th scope="col" style="width: 60px;">CL Id</th>
               <th scope="col" style="width: 100px;">Images</th>
-              <th scope="col" style="width: 120px;">Created Date</th>
+              <th scope="col" style="width: 120px;">Catalog Id</th>
               <th scope="col">Status</th>
               <th scope="col">Actioned</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of progressCatalogList; let i = index">
+            <tr *ngFor="let data of filteredItems; let i = index">
               <th scope="row">{{ i + 1 }}</th>
               <td>
                 {{data.id}}
@@ -39,7 +55,7 @@
                 <img [src]="data.catalogThumbnail" class="imageResponsive" alt="Catalog Image">
               </td>
               
-              <td>{{data.creationDate}}</td>
+              <td>{{data.catalogId}}</td>
               <td>
                 <div *ngIf="data.catalogStatus === 'QC_PROGRESS'">
                   <span style="background-color: #feffb0;" class="badge text-dark p-2">

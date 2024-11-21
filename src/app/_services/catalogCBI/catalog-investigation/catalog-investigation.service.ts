@@ -19,13 +19,13 @@ export class CatalogInvestigationService {
 
     //ADMIN
     getProogressCatalogService(request:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "catalogCbiController/"+ 'getCatalogInProgressList?page='+request.page + '&size=' +request.size, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "catalogCbiController/"+ 
+                          'getCatalogInProgressList?page='+request.page + '&size=' +request.size, httpOptions);
     }
 
     getCatalogMasters(){
       return this.http.get(API_AUTHORIZA_URL + 'catalogCbiController/getCatalogMasters');
     }
-
 
     //save Catalog Service
     updateCatalogService(updataForm:any, catalogId:any) {
@@ -33,5 +33,16 @@ export class CatalogInvestigationService {
       , updataForm );
   }
 
+
+  searchCatalogByDateService(page:any ,size:any ,startDate:any,endDate:any): Observable<any> {
+
+    console.log(startDate);
+    console.log(endDate);
+    
+    
+
+    return this.http.get(API_AUTHORIZA_URL + "catalogCbiController/"+ 'searchCatalogByDates?page='+page + '&size=' +size 
+                         +'&startDate=' +startDate +'&endDate=' +endDate  , httpOptions);
+  }
   
 }
