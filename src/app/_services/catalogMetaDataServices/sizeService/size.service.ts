@@ -16,24 +16,24 @@ export class SizeService {
   constructor(private http: HttpClient , private toast:NgToastService) { }
 
   saveCatalogSizeService(data:any): Observable<any> {
-    return this.http.post(API_AUTHORIZA_URL + "catalogSizeController/" + 'saveCatalogSize',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + "productSizeVariantController/" + 'saveSize',data, httpOptions);
   }
 
     //ADMIN
     getSizeByPagination(request:any): Observable<any> {
-      return this.http.post(API_AUTHORIZA_URL + "catalogSizeController/"+ 'getCatalogSize?page='+request.page + '&size=' +request.size, httpOptions);
+      return this.http.post(API_AUTHORIZA_URL + "productSizeVariantController/"+ 'getSize?page='+request.page + '&size=' +request.size, httpOptions);
     }
 
     getSizeByIdService(sizeId:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "catalogSizeController/" + 'getCatalogSizeById/'+sizeId, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "productSizeVariantController/" + 'getSizeById/'+sizeId, httpOptions);
     }
 
     updateSizeCode(data:any): Observable<any> {
-      return this.http.post(API_AUTHORIZA_URL + "catalogSizeController/" + 'updateCatalogSize',data, httpOptions);
+      return this.http.post(API_AUTHORIZA_URL + "productSizeVariantController/" + 'updateSize',data, httpOptions);
     }
 
     deleteSizeByIdService(sizeId:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "catalogSizeController/" + 'deleteCatalogSize/'+sizeId, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "productSizeVariantController/" + 'deleteSize/'+sizeId, httpOptions);
     }
   
 }

@@ -18,24 +18,24 @@ export class HsnService {
   constructor(private http: HttpClient , private toast:NgToastService) { }
 
   saveHsnCodesService(data:any): Observable<any> {
-    return this.http.post(API_AUTHORIZA_URL + "hsnController/" + 'saveHsn',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + "productHsnController/" + 'saveHsn',data, httpOptions);
   }
 
     //ADMIN
     getHsnByPagination(request:any): Observable<any> {
-      return this.http.post(API_AUTHORIZA_URL + "hsnController/"+ 'getHsnListByPagination?page='+request.page + '&size=' +request.size, httpOptions);
+      return this.http.post(API_AUTHORIZA_URL + "productHsnController/"+ 'getHsnListByPagination?page='+request.page + '&size=' +request.size, httpOptions);
     }
 
     getHsnCodeByIdService(hsnCodeId:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "hsnController/" + 'getHsnCodeById/'+hsnCodeId, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "productHsnController/" + 'getHsnCodeById/'+hsnCodeId, httpOptions);
     }
 
     updateHsnCode(data:any): Observable<any> {
-      return this.http.post(API_AUTHORIZA_URL + "hsnController/" + 'updateHsnCode',data, httpOptions);
+      return this.http.post(API_AUTHORIZA_URL + "productHsnController/" + 'updateHsnCode',data, httpOptions);
     }
 
     deleteHsnCodeByIdService(bornCategoryId:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "hsnController/" + 'deleteHsnCode/'+bornCategoryId, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "productHsnController/" + 'deleteHsnCode/'+bornCategoryId, httpOptions);
     }
   
 }

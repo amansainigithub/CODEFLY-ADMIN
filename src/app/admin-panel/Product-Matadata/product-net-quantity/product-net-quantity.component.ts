@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NetQuantityService } from '../../../_services/catalogMetaDataServices/netQuantityService/net-quantity.service';
 import { NgToastService } from 'ng-angular-popup';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { BucketService } from '../../../_services/bucket/bucket.service';
-import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PageEvent } from '@angular/material/paginator';
-import { SizeService } from '../../../_services/catalogMetaDataServices/sizeService/size.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-catalog-size',
-  templateUrl: './catalog-size.component.html',
-  styleUrl: './catalog-size.component.css'
+  selector: 'app-product-net-quantity',
+  templateUrl: './product-net-quantity.component.html',
+  styleUrl: './product-net-quantity.component.css'
 })
-export class CatalogSizeComponent {
+export class ProductNetQuantityComponent {
 
   //Filter List For Searching
   filteredItems:any = [];
@@ -20,7 +20,7 @@ export class CatalogSizeComponent {
    //form Hide and show for update and save user
    viceVersaForm:boolean = false;
 
-  sizeList:any[]=[];
+  netQuantityList:any[]=[];
   
   totalElements: number = 0;
   currentPage: number = 1;
@@ -30,13 +30,13 @@ export class CatalogSizeComponent {
   searchText: string = '';
 
   form: any = {
-    size: null,
+    netQuantity: null,
     defaultName: null,
     description: null,
   };
 
   updateform: any = {
-   size: null,
+    netQuantity: null,
    defaultName: null,
    description: null,
    isActive: false,
@@ -44,13 +44,13 @@ export class CatalogSizeComponent {
 
  
    ngOnInit(): void { 
-     this.getSizeByPagination({ page: "0", size: "10" });
+     this.getNetQuantityPagination({ page: "0", size: "10" });
  
    }
    
    constructor(
               private router:Router, 
-              private sizeService:SizeService,
+              private netQuantityService:NetQuantityService,
               private toast:NgToastService ,
               private bucket:BucketService,
               private spinner: NgxSpinnerService)
@@ -58,16 +58,16 @@ export class CatalogSizeComponent {
  
  
   
- //GET SIZE PAGINATION START
-   getSizeByPagination(request:any)
+ //GET net Quantity PAGINATION START
+   getNetQuantityPagination(request:any)
   {
     this.spinner.show();
-    this.sizeService.getSizeByPagination(request)
+    this.netQuantityService.getNetQuantityByPagination(request)
     .subscribe(
       {
           next:(res:any)=> {
-          this.sizeList = res.data['content']
-          this.filteredItems  = this.sizeList;
+          this.netQuantityList = res.data['content']
+          this.filteredItems  = this.netQuantityList;
 
           this.totalElements = res.data['totalElements'];
           this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
@@ -82,27 +82,27 @@ export class CatalogSizeComponent {
       }
     );
   }
-  //GET SIZE PAGINATION ENDING
+  //GET NetQuantity PAGINATION ENDING
 
   nextPage(event: PageEvent) {
     console.log(event);
     const request:any = {};
     request['page'] = event.pageIndex.toString();
     request['size'] = event.pageSize.toString();
-    this.getSizeByPagination(request);
+    this.getNetQuantityPagination(request);
 }
 
- //SAVE SIZE START
-   saveSize()
+ //SAVE NETQUANTITY START
+   saveNetQuantity()
    {
     console.log(this.form);
-    this.sizeService.saveCatalogSizeService(this.form).subscribe({
+    this.netQuantityService.saveNetQuantity(this.form).subscribe({
       next:(res:any)=> {
-        this.toast.success({detail:"Success",summary:"SIZE Saved Success", position:"bottomRight",duration:3000});
+        this.toast.success({detail:"Success",summary:"Net Quantity Saved Success", position:"bottomRight",duration:3000});
         this.spinner.hide();
 
-         //get SIZE Category List
-         this.getSizeByPagination({ page: "0", size: "10" });
+         //get  NetQuantity Category List
+         this.getNetQuantityPagination({ page: "0", size: "10" });
       },
       error:(err:any)=>  {
         //this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
@@ -114,11 +114,11 @@ export class CatalogSizeComponent {
     }
   );
    }
-   //SAVE SIZE ENDING
+   //SAVE NetQuantity ENDING
  
   
- //Delete SIZE START
-   deleteSizeByid(sizeId:any)
+ //Delete NetQuantitySTART
+   deleteNetQuantityByid(netQuantityId:any)
    { 
      Swal.fire({
            title: 'Are you sure?',
@@ -132,13 +132,13 @@ export class CatalogSizeComponent {
            if (result.isConfirmed) {
  
  
-         //Delete SIZE
-       this.sizeService.deleteSizeByIdService(sizeId).subscribe({
+         //Delete net quantity 
+       this.netQuantityService.deleteNetQuantityByIdService(netQuantityId).subscribe({
          next:(res:any)=> {
            this.toast.success({detail:"Success",summary:"Delete Success", position:"bottomRight",duration:3000});
            
-           //get SIZE List
-           this.getSizeByPagination({ page: "0", size: "10" });
+           //get net quantity  List
+           this.getNetQuantityPagination({ page: "0", size: "10" });
            
            this.updateform = {};
 
@@ -155,15 +155,15 @@ export class CatalogSizeComponent {
        }
      })
    }
-   //DELETE SIZE END
+   //DELETE net quantity END
  
   
-   //Get SIZE By Id Start
-   getSizeById(sizeId: any) {
+   //Get NetQuantity By Id Start
+   getNetQuantityById(netQuantityId: any) {
      //to show update form
      this.viceVersaForm = true;
  
-     this.sizeService.getSizeByIdService(sizeId).subscribe({
+     this.netQuantityService.getNetQuantityByIdService(netQuantityId).subscribe({
        next:(res:any)=> {
          this.updateform = res.data;
          console.log(res);
@@ -178,19 +178,19 @@ export class CatalogSizeComponent {
          }
        );
      }
-   //Get SIZE By Id Ending
+   //Get net quantity  By Id Ending
      
-     //Update SIZE Start
-updateSize()
+     //Update net quantity  Start
+updateNetQuantity()
      {
        console.log(this.updateform);
         //save File
-        this.sizeService.updateSizeCode(this.updateform).subscribe({
+        this.netQuantityService.updateNetQuantity(this.updateform).subscribe({
           next:(res:any)=> {
             this.toast.success({detail:"Success",summary:"Data Update Success", position:"bottomRight",duration:3000});
             
-            //get SIZE Category List
-           this.getSizeByPagination({ page: "0", size: "10" });
+            //get net quantity Category List
+           this.getNetQuantityPagination({ page: "0", size: "10" });
             
             this.spinner.hide();
           },
@@ -202,7 +202,7 @@ updateSize()
             }
           );
      }
- //Update SIZE Ending
+ //Update net quantity Ending
 
      
    //Search Starting
@@ -210,11 +210,11 @@ updateSize()
       const searchQuery = this.searchText.trim().toLowerCase();
   
       if (searchQuery) {
-        this.filteredItems = this.sizeList.filter(item => 
-          item.size.toLowerCase().includes(searchQuery)
+        this.filteredItems = this.netQuantityList.filter(item => 
+          item.netQuantity.toLowerCase().includes(searchQuery)
         );
       } else {
-        this.filteredItems = this.sizeList;
+        this.filteredItems = this.netQuantityList;
       }
     }
   //Search Ending

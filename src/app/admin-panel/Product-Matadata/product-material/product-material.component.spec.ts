@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CatalogMaterialComponent } from './catalog-material.component';
+import { ProductMaterialComponent } from './product-material.component';
 
-describe('CatalogMaterialComponent', () => {
-  let component: CatalogMaterialComponent;
-  let fixture: ComponentFixture<CatalogMaterialComponent>;
+describe('ProductMaterialComponent', () => {
+  let component: ProductMaterialComponent;
+  let fixture: ComponentFixture<ProductMaterialComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CatalogMaterialComponent]
+      declarations: [ProductMaterialComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CatalogMaterialComponent);
+    fixture = TestBed.createComponent(ProductMaterialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { BucketService } from '../../../_services/bucket/bucket.service';
-import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PageEvent } from '@angular/material/paginator';
-import { BrandService } from '../../../_services/catalogMetaDataServices/brandService/brand.service';
-
+import Swal from 'sweetalert2';
+import { TypeServiceService } from '../../../_services/catalogMetaDataServices/typeService/type-service.service';
 
 @Component({
-  selector: 'app-catalog-brand',
-  templateUrl: './catalog-brand.component.html',
-  styleUrl: './catalog-brand.component.css'
+  selector: 'app-product-type',
+  templateUrl: './product-type.component.html',
+  styleUrl: './product-type.component.css'
 })
-export class CatalogBrandComponent {
+export class ProductTypeComponent {
 
   //Filter List For Searching
   filteredItems:any = [];
@@ -21,7 +20,7 @@ export class CatalogBrandComponent {
    //form Hide and show for update and save user
    viceVersaForm:boolean = false;
 
-  brandList:any[]=[];
+  typeList:any[]=[];
   
   totalElements: number = 0;
   currentPage: number = 1;
@@ -31,13 +30,13 @@ export class CatalogBrandComponent {
   searchText: string = '';
 
   form: any = {
-    brand: null,
+    catalogType: null,
     defaultName: null,
     description: null,
   };
 
   updateform: any = {
-    brand: null,
+    catalogType: null,
    defaultName: null,
    description: null,
    isActive: false,
@@ -45,13 +44,13 @@ export class CatalogBrandComponent {
 
  
    ngOnInit(): void { 
-     this.getBrandByPagination({ page: "0", size: "10" });
+     this.getTypeByPagination({ page: "0", size: "10" });
  
    }
    
    constructor(
               private router:Router, 
-              private brandService:BrandService,
+              private typeService:TypeServiceService,
               private toast:NgToastService ,
               private bucket:BucketService,
               private spinner: NgxSpinnerService)
@@ -59,16 +58,16 @@ export class CatalogBrandComponent {
  
  
   
- //GET BRAND PAGINATION START
-   getBrandByPagination(request:any)
+ //GET TYPE PAGINATION START
+   getTypeByPagination(request:any)
   {
     this.spinner.show();
-    this.brandService.getBrandByPagination(request)
+    this.typeService.getTypeByPagination(request)
     .subscribe(
       {
           next:(res:any)=> {
-          this.brandList = res.data['content']
-          this.filteredItems  = this.brandList;
+          this.typeList = res.data['content']
+          this.filteredItems  = this.typeList;
 
           this.totalElements = res.data['totalElements'];
           this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
@@ -77,33 +76,33 @@ export class CatalogBrandComponent {
         error:(err:any)=>  {
           console.log(err)
           this.spinner.hide();
-          this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+          this.toast.error({detail:"Error",summary:err.error. data.message, position:"bottomRight",duration:3000});
 
         }
       }
     );
   }
-  //GET BRAND PAGINATION ENDING
+  //GET TYPE PAGINATION ENDING
 
   nextPage(event: PageEvent) {
     console.log(event);
     const request:any = {};
     request['page'] = event.pageIndex.toString();
     request['size'] = event.pageSize.toString();
-    this.getBrandByPagination(request);
+    this.getTypeByPagination(request);
 }
 
- //SAVE BRAND START
-   saveBrand()
+ //SAVE TYPE START
+   saveType()
    {
     console.log(this.form);
-    this.brandService.saveCatalogBrandService(this.form).subscribe({
+    this.typeService.saveTypeService(this.form).subscribe({
       next:(res:any)=> {
-        this.toast.success({detail:"Success",summary:"Brand Saved Success", position:"bottomRight",duration:3000});
+        this.toast.success({detail:"Success",summary:"Type Saved Success", position:"bottomRight",duration:3000});
         this.spinner.hide();
 
-         //get BRAND List
-         this.getBrandByPagination({ page: "0", size: "10" });
+         //get TYPE Code Category List
+         this.getTypeByPagination({ page: "0", size: "10" });
       },
       error:(err:any)=>  {
         //this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
@@ -115,11 +114,11 @@ export class CatalogBrandComponent {
     }
   );
    }
-   //SAVE BRAND ENDING
+   //SAVE TYPE ENDING
  
   
- //Delete BRAND START
- deleteBrandByid(brandId:any)
+ //Delete TYPE START
+ deleteTypeByid(typeId:any)
    { 
      Swal.fire({
            title: 'Are you sure?',
@@ -133,13 +132,13 @@ export class CatalogBrandComponent {
            if (result.isConfirmed) {
  
  
-         //Delete BRAND
-       this.brandService.deleteBrandByIdService(brandId).subscribe({
+         //Delete TYPE
+       this.typeService.deleteTypeByIdService(typeId).subscribe({
          next:(res:any)=> {
            this.toast.success({detail:"Success",summary:"Delete Success", position:"bottomRight",duration:3000});
            
-           //get BRAND Code List
-           this.getBrandByPagination({ page: "0", size: "10" });
+           //get TYPE List
+           this.getTypeByPagination({ page: "0", size: "10" });
            
            this.updateform = {};
 
@@ -156,15 +155,15 @@ export class CatalogBrandComponent {
        }
      })
    }
-   //DELETE BRAND CODE END
+   //DELETE TYPE END
  
   
-   //Get BRAND By Id Start
-   getBrandeById(brandId: any) {
+   //Get TYPE By Id Start
+   getTypeById(typeId: any) {
      //to show update form
      this.viceVersaForm = true;
  
-     this.brandService.getBrandByIdService(brandId).subscribe({
+     this.typeService.getTypeByIdService(typeId).subscribe({
        next:(res:any)=> {
          this.updateform = res.data;
          console.log(res);
@@ -179,19 +178,19 @@ export class CatalogBrandComponent {
          }
        );
      }
-   //Get BRAND Code By Id Ending
+   //Get TYPE By Id Ending
      
-     //Update BRAND Code Start
-     updateBrand()
+     //Update TYPE Start
+updateType()
      {
        console.log(this.updateform);
         //save File
-        this.brandService.updateBrand(this.updateform).subscribe({
+        this.typeService.updateType(this.updateform).subscribe({
           next:(res:any)=> {
             this.toast.success({detail:"Success",summary:"Data Update Success", position:"bottomRight",duration:3000});
             
-            //get BRAND Code Category List
-           this.getBrandByPagination({ page: "0", size: "10" });
+            //get TYPE Category List
+           this.getTypeByPagination({ page: "0", size: "10" });
             
             this.spinner.hide();
           },
@@ -203,7 +202,7 @@ export class CatalogBrandComponent {
             }
           );
      }
- //Update BRAND Ending
+ //Update TYPE Ending
 
      
    //Search Starting
@@ -211,13 +210,14 @@ export class CatalogBrandComponent {
       const searchQuery = this.searchText.trim().toLowerCase();
   
       if (searchQuery) {
-        this.filteredItems = this.brandList.filter(item => 
-          item.brand.toLowerCase().includes(searchQuery)
+        this.filteredItems = this.typeList.filter(item => 
+          item.catalogType.toLowerCase().includes(searchQuery)
         );
       } else {
-        this.filteredItems = this.brandList;
+        this.filteredItems = this.typeList;
       }
     }
   //Search Ending
  
+
 }

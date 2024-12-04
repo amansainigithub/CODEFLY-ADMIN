@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SizeService } from '../../../_services/catalogMetaDataServices/sizeService/size.service';
 import { NgToastService } from 'ng-angular-popup';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ParentCategoryService } from '../../../_services/categories/parentCategory/parent-category.service';
 import { BucketService } from '../../../_services/bucket/bucket.service';
-import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PageEvent } from '@angular/material/paginator';
-import { MaterialService } from '../../../_services/catalogMetaDataServices/materialService/material.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-catalog-material',
-  templateUrl: './catalog-material.component.html',
-  styleUrl: './catalog-material.component.css'
+  selector: 'app-product-size',
+  templateUrl: './product-size.component.html',
+  styleUrl: './product-size.component.css'
 })
-export class CatalogMaterialComponent {
+export class ProductSizeComponent {
 
   //Filter List For Searching
   filteredItems:any = [];
@@ -21,7 +20,7 @@ export class CatalogMaterialComponent {
    //form Hide and show for update and save user
    viceVersaForm:boolean = false;
 
-  materialList:any[]=[];
+  sizeList:any[]=[];
   
   totalElements: number = 0;
   currentPage: number = 1;
@@ -31,13 +30,13 @@ export class CatalogMaterialComponent {
   searchText: string = '';
 
   form: any = {
-    material: null,
+    size: null,
     defaultName: null,
     description: null,
   };
 
   updateform: any = {
-    material: null,
+   size: null,
    defaultName: null,
    description: null,
    isActive: false,
@@ -45,13 +44,13 @@ export class CatalogMaterialComponent {
 
  
    ngOnInit(): void { 
-     this.getMaterialByPagination({ page: "0", size: "10" });
+     this.getSizeByPagination({ page: "0", size: "10" });
  
    }
    
    constructor(
               private router:Router, 
-              private materialService:MaterialService,
+              private sizeService:SizeService,
               private toast:NgToastService ,
               private bucket:BucketService,
               private spinner: NgxSpinnerService)
@@ -59,16 +58,16 @@ export class CatalogMaterialComponent {
  
  
   
- //GET MATERIAL PAGINATION START
-   getMaterialByPagination(request:any)
+ //GET SIZE PAGINATION START
+   getSizeByPagination(request:any)
   {
     this.spinner.show();
-    this.materialService.getMaterialByPagination(request)
+    this.sizeService.getSizeByPagination(request)
     .subscribe(
       {
           next:(res:any)=> {
-          this.materialList = res.data['content']
-          this.filteredItems  = this.materialList;
+          this.sizeList = res.data['content']
+          this.filteredItems  = this.sizeList;
 
           this.totalElements = res.data['totalElements'];
           this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
@@ -83,27 +82,27 @@ export class CatalogMaterialComponent {
       }
     );
   }
-  //GET MATERIAL PAGINATION ENDING
+  //GET SIZE PAGINATION ENDING
 
   nextPage(event: PageEvent) {
     console.log(event);
     const request:any = {};
     request['page'] = event.pageIndex.toString();
     request['size'] = event.pageSize.toString();
-    this.getMaterialByPagination(request);
+    this.getSizeByPagination(request);
 }
 
- //SAVE Material START
-   saveMaterial()
+ //SAVE SIZE START
+   saveSize()
    {
     console.log(this.form);
-    this.materialService.saveMaterialService(this.form).subscribe({
+    this.sizeService.saveCatalogSizeService(this.form).subscribe({
       next:(res:any)=> {
-        this.toast.success({detail:"Success",summary:"Material Saved Success", position:"bottomRight",duration:3000});
+        this.toast.success({detail:"Success",summary:"SIZE Saved Success", position:"bottomRight",duration:3000});
         this.spinner.hide();
 
-         //get MATERIAL Code Category List
-         this.getMaterialByPagination({ page: "0", size: "10" });
+         //get SIZE Category List
+         this.getSizeByPagination({ page: "0", size: "10" });
       },
       error:(err:any)=>  {
         //this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
@@ -115,11 +114,11 @@ export class CatalogMaterialComponent {
     }
   );
    }
-   //SAVE MATERIAL ENDING
+   //SAVE SIZE ENDING
  
   
- //Delete MATERIAL Code START
-   deleteMaterial(materialId:any)
+ //Delete SIZE START
+   deleteSizeByid(sizeId:any)
    { 
      Swal.fire({
            title: 'Are you sure?',
@@ -133,13 +132,13 @@ export class CatalogMaterialComponent {
            if (result.isConfirmed) {
  
  
-         //Delete MATERIAL
-       this.materialService.deleteMaterialByIdService(materialId).subscribe({
+         //Delete SIZE
+       this.sizeService.deleteSizeByIdService(sizeId).subscribe({
          next:(res:any)=> {
            this.toast.success({detail:"Success",summary:"Delete Success", position:"bottomRight",duration:3000});
            
-           //get MATERIAL Code List
-           this.getMaterialByPagination({ page: "0", size: "10" });
+           //get SIZE List
+           this.getSizeByPagination({ page: "0", size: "10" });
            
            this.updateform = {};
 
@@ -156,15 +155,15 @@ export class CatalogMaterialComponent {
        }
      })
    }
-   //DELETE Material CODE END
+   //DELETE SIZE END
  
   
-   //Get Material Code By Id Start
-   getMaterialById(materialId: any) {
+   //Get SIZE By Id Start
+   getSizeById(sizeId: any) {
      //to show update form
      this.viceVersaForm = true;
  
-     this.materialService.getMaterialByIdService(materialId).subscribe({
+     this.sizeService.getSizeByIdService(sizeId).subscribe({
        next:(res:any)=> {
          this.updateform = res.data;
          console.log(res);
@@ -179,19 +178,19 @@ export class CatalogMaterialComponent {
          }
        );
      }
-   //Get MATERIAL Code By Id Ending
+   //Get SIZE By Id Ending
      
-     //Update MATERIAL Code Start
-updateMaterial()
+     //Update SIZE Start
+updateSize()
      {
        console.log(this.updateform);
         //save File
-        this.materialService.updateMaterial(this.updateform).subscribe({
+        this.sizeService.updateSizeCode(this.updateform).subscribe({
           next:(res:any)=> {
             this.toast.success({detail:"Success",summary:"Data Update Success", position:"bottomRight",duration:3000});
             
-            //get MATERIAL Code Category List
-           this.getMaterialByPagination({ page: "0", size: "10" });
+            //get SIZE Category List
+           this.getSizeByPagination({ page: "0", size: "10" });
             
             this.spinner.hide();
           },
@@ -203,7 +202,7 @@ updateMaterial()
             }
           );
      }
- //Update MATERIAL Code Ending
+ //Update SIZE Ending
 
      
    //Search Starting
@@ -211,11 +210,11 @@ updateMaterial()
       const searchQuery = this.searchText.trim().toLowerCase();
   
       if (searchQuery) {
-        this.filteredItems = this.materialList.filter(item => 
-          item.material.toLowerCase().includes(searchQuery)
+        this.filteredItems = this.sizeList.filter(item => 
+          item.size.toLowerCase().includes(searchQuery)
         );
       } else {
-        this.filteredItems = this.materialList;
+        this.filteredItems = this.sizeList;
       }
     }
   //Search Ending

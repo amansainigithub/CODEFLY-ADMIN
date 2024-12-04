@@ -18,24 +18,24 @@ export class MaterialService {
   constructor(private http: HttpClient , private toast:NgToastService) { }
 
   saveMaterialService(data:any): Observable<any> {
-    return this.http.post(API_AUTHORIZA_URL + "catalogMaterialController/" + 'saveCatalogMaterial',data, httpOptions);
+    return this.http.post(API_AUTHORIZA_URL + "productMaterialController/" + 'saveMaterial',data, httpOptions);
   }
 
     //ADMIN
     getMaterialByPagination(request:any): Observable<any> {
-      return this.http.post(API_AUTHORIZA_URL + "catalogMaterialController/"+ 'getCatalogMaterial?page='+request.page + '&size=' +request.size, httpOptions);
+      return this.http.post(API_AUTHORIZA_URL + "productMaterialController/"+ 'getMaterial?page='+request.page + '&size=' +request.size, httpOptions);
     }
 
     getMaterialByIdService(materialId:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "catalogMaterialController/" + 'getCatalogMaterialById/'+materialId, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "productMaterialController/" + 'getMaterialById/'+materialId, httpOptions);
     }
 
     updateMaterial(data:any): Observable<any> {
-      return this.http.post(API_AUTHORIZA_URL + "catalogMaterialController/" + 'updateCatalogMaterial',data, httpOptions);
+      return this.http.post(API_AUTHORIZA_URL + "productMaterialController/" + 'updateMaterial',data, httpOptions);
     }
 
     deleteMaterialByIdService(materialId:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "catalogMaterialController/" + 'deleteCatalogMaterial/'+materialId, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "productMaterialController/" + 'deleteMaterial/'+materialId, httpOptions);
     }
   
 }

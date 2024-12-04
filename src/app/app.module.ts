@@ -39,16 +39,16 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { AdminComponent } from './admin-panel/users/admin/admin.component';
 import { SellerComponent } from './admin-panel/users/seller/seller.component';
 import { HsnCodesComponent } from './admin-panel/tax/hsn-codes/hsn-codes.component';
-import { CatalogBrandComponent } from './admin-panel/catalogs-metadata/catalog-brand/catalog-brand.component';
-import { CatalogMaterialComponent } from './admin-panel/catalogs-metadata/catalog-material/catalog-material.component';
-import { CatalogTypeComponent } from './admin-panel/catalogs-metadata/catalog-type/catalog-type.component';
-import { CatalogSizeComponent } from './admin-panel/catalogs-metadata/catalog-size/catalog-size.component';
-import { CatalogNetQuantityComponent } from './admin-panel/catalogs-metadata/catalog-net-quantity/catalog-net-quantity.component';
 import { CatalogInvestigationComponent } from './admin-panel/catalogCBI/catalog-investigation/catalog-investigation.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core'; // For Native Date Adapter
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DatePipe } from '@angular/common';
+import { ProductBrandComponent } from './admin-panel/Product-Matadata/product-brand/product-brand.component';
+import { ProductMaterialComponent } from './admin-panel/Product-Matadata/product-material/product-material.component';
+import { ProductTypeComponent } from './admin-panel/Product-Matadata/product-type/product-type.component';
+import { ProductSizeComponent } from './admin-panel/Product-Matadata/product-size/product-size.component';
+import { ProductNetQuantityComponent } from './admin-panel/Product-Matadata/product-net-quantity/product-net-quantity.component';
 
 
 @NgModule({
@@ -71,12 +71,12 @@ import { DatePipe } from '@angular/common';
     AdminComponent,
     SellerComponent,
     HsnCodesComponent,
-    CatalogBrandComponent,
-    CatalogMaterialComponent,
-    CatalogTypeComponent,
-    CatalogSizeComponent,
-    CatalogNetQuantityComponent,
     CatalogInvestigationComponent,
+    ProductBrandComponent,
+    ProductMaterialComponent,
+    ProductTypeComponent,
+    ProductSizeComponent,
+    ProductNetQuantityComponent,
   ],
   imports: [
     BrowserModule,

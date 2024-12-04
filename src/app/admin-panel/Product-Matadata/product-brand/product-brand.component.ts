@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { BrandService } from '../../../_services/catalogMetaDataServices/brandService/brand.service';
 import { NgToastService } from 'ng-angular-popup';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { BucketService } from '../../../_services/bucket/bucket.service';
-import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PageEvent } from '@angular/material/paginator';
-import { NetQuantityService } from '../../../_services/catalogMetaDataServices/netQuantityService/net-quantity.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-catalog-net-quantity',
-  templateUrl: './catalog-net-quantity.component.html',
-  styleUrl: './catalog-net-quantity.component.css'
+  selector: 'app-product-brand',
+  templateUrl: './product-brand.component.html',
+  styleUrl: './product-brand.component.css'
 })
-export class CatalogNetQuantityComponent {
-
-  
+export class ProductBrandComponent {
 
   //Filter List For Searching
   filteredItems:any = [];
@@ -23,7 +20,7 @@ export class CatalogNetQuantityComponent {
    //form Hide and show for update and save user
    viceVersaForm:boolean = false;
 
-  netQuantityList:any[]=[];
+  brandList:any[]=[];
   
   totalElements: number = 0;
   currentPage: number = 1;
@@ -33,13 +30,13 @@ export class CatalogNetQuantityComponent {
   searchText: string = '';
 
   form: any = {
-    netQuantity: null,
+    brand: null,
     defaultName: null,
     description: null,
   };
 
   updateform: any = {
-    netQuantity: null,
+    brand: null,
    defaultName: null,
    description: null,
    isActive: false,
@@ -47,13 +44,13 @@ export class CatalogNetQuantityComponent {
 
  
    ngOnInit(): void { 
-     this.getNetQuantityPagination({ page: "0", size: "10" });
+     this.getBrandByPagination({ page: "0", size: "10" });
  
    }
    
    constructor(
               private router:Router, 
-              private netQuantityService:NetQuantityService,
+              private brandService:BrandService,
               private toast:NgToastService ,
               private bucket:BucketService,
               private spinner: NgxSpinnerService)
@@ -61,16 +58,16 @@ export class CatalogNetQuantityComponent {
  
  
   
- //GET net Quantity PAGINATION START
-   getNetQuantityPagination(request:any)
+ //GET BRAND PAGINATION START
+   getBrandByPagination(request:any)
   {
     this.spinner.show();
-    this.netQuantityService.getNetQuantityByPagination(request)
+    this.brandService.getBrandByPagination(request)
     .subscribe(
       {
           next:(res:any)=> {
-          this.netQuantityList = res.data['content']
-          this.filteredItems  = this.netQuantityList;
+          this.brandList = res.data['content']
+          this.filteredItems  = this.brandList;
 
           this.totalElements = res.data['totalElements'];
           this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"bottomRight",duration:3000});
@@ -85,27 +82,27 @@ export class CatalogNetQuantityComponent {
       }
     );
   }
-  //GET NetQuantity PAGINATION ENDING
+  //GET BRAND PAGINATION ENDING
 
   nextPage(event: PageEvent) {
     console.log(event);
     const request:any = {};
     request['page'] = event.pageIndex.toString();
     request['size'] = event.pageSize.toString();
-    this.getNetQuantityPagination(request);
+    this.getBrandByPagination(request);
 }
 
- //SAVE NETQUANTITY START
-   saveNetQuantity()
+ //SAVE BRAND START
+   saveBrand()
    {
     console.log(this.form);
-    this.netQuantityService.saveNetQuantity(this.form).subscribe({
+    this.brandService.saveBrandService(this.form).subscribe({
       next:(res:any)=> {
-        this.toast.success({detail:"Success",summary:"Net Quantity Saved Success", position:"bottomRight",duration:3000});
+        this.toast.success({detail:"Success",summary:"Brand Saved Success", position:"bottomRight",duration:3000});
         this.spinner.hide();
 
-         //get  NetQuantity Category List
-         this.getNetQuantityPagination({ page: "0", size: "10" });
+         //get BRAND List
+         this.getBrandByPagination({ page: "0", size: "10" });
       },
       error:(err:any)=>  {
         //this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
@@ -117,11 +114,11 @@ export class CatalogNetQuantityComponent {
     }
   );
    }
-   //SAVE NetQuantity ENDING
+   //SAVE BRAND ENDING
  
   
- //Delete NetQuantitySTART
-   deleteNetQuantityByid(netQuantityId:any)
+ //Delete BRAND START
+ deleteBrandByid(brandId:any)
    { 
      Swal.fire({
            title: 'Are you sure?',
@@ -135,13 +132,13 @@ export class CatalogNetQuantityComponent {
            if (result.isConfirmed) {
  
  
-         //Delete net quantity 
-       this.netQuantityService.deleteNetQuantityByIdService(netQuantityId).subscribe({
+         //Delete BRAND
+       this.brandService.deleteBrandByIdService(brandId).subscribe({
          next:(res:any)=> {
            this.toast.success({detail:"Success",summary:"Delete Success", position:"bottomRight",duration:3000});
            
-           //get net quantity  List
-           this.getNetQuantityPagination({ page: "0", size: "10" });
+           //get BRAND Code List
+           this.getBrandByPagination({ page: "0", size: "10" });
            
            this.updateform = {};
 
@@ -158,15 +155,15 @@ export class CatalogNetQuantityComponent {
        }
      })
    }
-   //DELETE net quantity END
+   //DELETE BRAND CODE END
  
   
-   //Get NetQuantity By Id Start
-   getNetQuantityById(netQuantityId: any) {
+   //Get BRAND By Id Start
+   getBrandeById(brandId: any) {
      //to show update form
      this.viceVersaForm = true;
  
-     this.netQuantityService.getNetQuantityByIdService(netQuantityId).subscribe({
+     this.brandService.getBrandByIdService(brandId).subscribe({
        next:(res:any)=> {
          this.updateform = res.data;
          console.log(res);
@@ -181,19 +178,19 @@ export class CatalogNetQuantityComponent {
          }
        );
      }
-   //Get net quantity  By Id Ending
+   //Get BRAND Code By Id Ending
      
-     //Update net quantity  Start
-updateNetQuantity()
+     //Update BRAND Code Start
+     updateBrand()
      {
        console.log(this.updateform);
         //save File
-        this.netQuantityService.updateNetQuantity(this.updateform).subscribe({
+        this.brandService.updateBrand(this.updateform).subscribe({
           next:(res:any)=> {
             this.toast.success({detail:"Success",summary:"Data Update Success", position:"bottomRight",duration:3000});
             
-            //get net quantity Category List
-           this.getNetQuantityPagination({ page: "0", size: "10" });
+            //get BRAND Code Category List
+           this.getBrandByPagination({ page: "0", size: "10" });
             
             this.spinner.hide();
           },
@@ -205,7 +202,7 @@ updateNetQuantity()
             }
           );
      }
- //Update net quantity Ending
+ //Update BRAND Ending
 
      
    //Search Starting
@@ -213,14 +210,13 @@ updateNetQuantity()
       const searchQuery = this.searchText.trim().toLowerCase();
   
       if (searchQuery) {
-        this.filteredItems = this.netQuantityList.filter(item => 
-          item.netQuantity.toLowerCase().includes(searchQuery)
+        this.filteredItems = this.brandList.filter(item => 
+          item.brand.toLowerCase().includes(searchQuery)
         );
       } else {
-        this.filteredItems = this.netQuantityList;
+        this.filteredItems = this.brandList;
       }
     }
   //Search Ending
  
-
 }

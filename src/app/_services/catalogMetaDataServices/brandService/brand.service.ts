@@ -16,24 +16,24 @@ export class BrandService {
   
   constructor(private http: HttpClient , private toast:NgToastService) { }
 
-  saveCatalogBrandService(data:any): Observable<any> {
-    return this.http.post(API_AUTHORIZA_URL + "catalogBrandController/" + 'saveCatalogBrand',data, httpOptions);
-  }
+   saveBrandService(data:any): Observable<any> {
+    return this.http.post(API_AUTHORIZA_URL + "productBrandController/" + 'saveBrand',data, httpOptions);
+   }
 
     //ADMIN
     getBrandByPagination(request:any): Observable<any> {
-      return this.http.post(API_AUTHORIZA_URL + "catalogBrandController/"+ 'getCatalogBrand?page='+request.page + '&size=' +request.size, httpOptions);
+      return this.http.post(API_AUTHORIZA_URL + "productBrandController/"+ 'getBrand?page='+request.page + '&size=' +request.size, httpOptions);
     }
 
     getBrandByIdService(brandId:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "catalogBrandController/" + 'getCatalogBrandById/' + brandId, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "productBrandController/" + 'getBrandById/' + brandId, httpOptions);
     }
 
     updateBrand(data:any): Observable<any> {
-      return this.http.post(API_AUTHORIZA_URL + "catalogBrandController/" + 'updateCatalogBrand',data, httpOptions);
+      return this.http.post(API_AUTHORIZA_URL + "productBrandController/" + 'updateBrand',data, httpOptions);
     }
 
     deleteBrandByIdService(brandId:any): Observable<any> {
-      return this.http.get(API_AUTHORIZA_URL + "catalogBrandController/" + 'deleteBrand/'+brandId, httpOptions);
+      return this.http.get(API_AUTHORIZA_URL + "productBrandController/" + 'deleteBrand/'+brandId, httpOptions);
     }
 }
