@@ -8,6 +8,7 @@ import { BornCategoryService } from '../../../_services/categories/bornCategory/
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateBornFileComponent } from './updateBornFile/update-born-file/update-born-file.component';
+import { MappedSampleFilesComponent } from './bornMappedFiles/mapped-sample-files/mapped-sample-files.component';
 
 @Component({
   selector: 'app-born-category',
@@ -217,6 +218,21 @@ export class BornCategoryComponent {
   {
     console.log(this.updateform);
      //save File
+    const data ={id:"100",productName:"AMan saini"}
+     this.bornCategoryService.updatebornCategoryNew(data).subscribe({
+      next:(res:any)=> {
+        this.toast.success({detail:"Success",summary:"data Update Success", position:"bottomRight",duration:3000});
+        this.spinner.hide();
+      },
+      error:(err:any)=>  {
+        this.toast.error({detail:"Error",summary:err, position:"bottomRight",duration:3000});
+        this.spinner.hide();
+        console.log(err);
+          }
+        }
+      );
+
+
      this.bornCategoryService.updatebornCategory(this.updateform).subscribe({
        next:(res:any)=> {
          this.toast.success({detail:"Success",summary:"data Update Success", position:"bottomRight",duration:3000});
@@ -227,7 +243,7 @@ export class BornCategoryComponent {
          this.spinner.hide();
        },
        error:(err:any)=>  {
-         this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+         this.toast.error({detail:"Error",summary:err, position:"bottomRight",duration:3000});
          this.spinner.hide();
          console.log(err);
            }
@@ -262,6 +278,26 @@ export class BornCategoryComponent {
      openDialog(enterAnimationDuration: string, exitAnimationDuration: string,bornCategoryId:any): void {
        const dialogRef = this.dialog.open(UpdateBornFileComponent, {
          width: '400px',
+         enterAnimationDuration,
+         exitAnimationDuration,
+         data: { bornCategoryId: bornCategoryId },
+         
+       });
+ 
+       dialogRef.afterClosed().subscribe(result => {
+         console.log("Dialog result: " + result);
+         this.getbornCategoryList();
+       });
+       
+     }
+
+
+     //Update File
+     readonly bornMappedSampleFiesDialog = inject(MatDialog);
+     bornMappedSampleFies(enterAnimationDuration: string, exitAnimationDuration: string,bornCategoryId:any): void {
+       const dialogRef = this.bornMappedSampleFiesDialog.open(MappedSampleFilesComponent, {
+         width: '700px',
+         height:'500px',
          enterAnimationDuration,
          exitAnimationDuration,
          data: { bornCategoryId: bornCategoryId },

@@ -26,6 +26,7 @@
                   <th scope="col">Id</th>
                   <th scope="col">categoryName</th>
                   <th scope="col">File</th>
+                  <th scope="col">Mapped Sample File</th>
                   <th scope="col">isActive</th>
                   <th scope="col">update</th>
                   <th scope="col">Remove</th>
@@ -48,6 +49,12 @@
                     style="cursor:pointer ;border-radius: 45px;"
                     (click)="openDialog('0ms', '0ms',data.id)"
                     >
+                  </th>
+
+                  <th>
+                    <button mat-raised-button color="primary" (click)="bornMappedSampleFies('0ms', '0ms',data.id)" >
+                      Mappe Fies
+                    </button> 
                   </th>
 
                   <td *ngIf="data.active" >

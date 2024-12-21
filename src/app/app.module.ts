@@ -49,6 +49,7 @@ import { ProductMaterialComponent } from './admin-panel/Product-Matadata/product
 import { ProductTypeComponent } from './admin-panel/Product-Matadata/product-type/product-type.component';
 import { ProductSizeComponent } from './admin-panel/Product-Matadata/product-size/product-size.component';
 import { ProductNetQuantityComponent } from './admin-panel/Product-Matadata/product-net-quantity/product-net-quantity.component';
+import { MappedSampleFilesComponent } from './admin-panel/categories/born-category/bornMappedFiles/mapped-sample-files/mapped-sample-files.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { ProductNetQuantityComponent } from './admin-panel/Product-Matadata/prod
     ProductTypeComponent,
     ProductSizeComponent,
     ProductNetQuantityComponent,
+    MappedSampleFilesComponent,
   ],
   imports: [
     BrowserModule,

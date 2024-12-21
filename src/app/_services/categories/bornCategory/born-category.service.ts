@@ -31,10 +31,15 @@ export class BornCategoryService {
     return this.http.post(API_AUTHORIZA_URL + "bornController/" + 'saveBornCategory',data, httpOptions);
   }
 
-
-  updatebornCategory(data:any): Observable<any> {
-    return this.http.post(API_AUTHORIZA_URL + 'updateBornCategory',data, httpOptions);
+  updatebornCategoryNew(data:any): Observable<any> {    
+    return this.http.post(API_AUTHORIZA_URL + "bornController/" +'updateBornCategoryNew',data);
   }
+
+  updatebornCategory(data:any): Observable<any> {    
+    return this.http.post(API_AUTHORIZA_URL + "bornController/"+ 'updateBornCategory',data, httpOptions);
+  }
+
+ 
 
   getBornCategoryByIdService(bornCategoryId:any): Observable<any> {
     return this.http.get(API_AUTHORIZA_URL + "bornController/" + 'getBornCategoryById/'+bornCategoryId, httpOptions);
@@ -48,6 +53,11 @@ export class BornCategoryService {
      formData.append('file', file);
      return this.http.post(API_AUTHORIZA_URL + "bornController/" + "updateBornCategoryFile/"+ bornCategoryId,formData);
    }
+
+   // Method to upload files with titles and descriptions
+  uploadSampleFiles(formData: FormData,bornCategoryId:any): Observable<any> {
+    return this.http.post(API_AUTHORIZA_URL + "bornController/" + "productSampleFiles/"+bornCategoryId , formData);
+  }
 
 
 }

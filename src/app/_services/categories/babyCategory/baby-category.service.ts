@@ -35,6 +35,10 @@ export class BabyCategoryService {
     return this.http.post(API_AUTHORIZA_URL + "babyController/" + 'updateBabyCategory',data, httpOptions);
   }
 
+  updatebabyCategoryNew(data:any): Observable<any> {
+    return this.http.post(API_AUTHORIZA_URL + "babyController/" + 'updateBabyCategoryNew',data, httpOptions);
+  }
+
   getBabyCategoryByIdService(babyCategoryId:any): Observable<any> {
     return this.http.get(API_AUTHORIZA_URL + "babyController/" + 'getBabyCategoryById/'+babyCategoryId, httpOptions);
   }
