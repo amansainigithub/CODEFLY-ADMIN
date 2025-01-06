@@ -39,7 +39,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { AdminComponent } from './admin-panel/users/admin/admin.component';
 import { SellerComponent } from './admin-panel/users/seller/seller.component';
 import { HsnCodesComponent } from './admin-panel/tax/hsn-codes/hsn-codes.component';
-import { CatalogInvestigationComponent } from './admin-panel/catalogCBI/catalog-investigation/catalog-investigation.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core'; // For Native Date Adapter
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -50,6 +49,9 @@ import { ProductTypeComponent } from './admin-panel/Product-Matadata/product-typ
 import { ProductSizeComponent } from './admin-panel/Product-Matadata/product-size/product-size.component';
 import { ProductNetQuantityComponent } from './admin-panel/Product-Matadata/product-net-quantity/product-net-quantity.component';
 import { MappedSampleFilesComponent } from './admin-panel/categories/born-category/bornMappedFiles/mapped-sample-files/mapped-sample-files.component';
+import { ProductInvestigationComponent } from './admin-panel/seller-products/product-investigation/product-investigation.component';
+import { SellerProductVerificationComponent } from './admin-panel/seller-products/seller-product-verification/seller-product-verification.component';
+import { SellerProductUnderReviewComponent } from './admin-panel/seller-products/seller-product-under-review/seller-product-under-review.component';
 
 
 @NgModule({
@@ -72,13 +74,15 @@ import { MappedSampleFilesComponent } from './admin-panel/categories/born-catego
     AdminComponent,
     SellerComponent,
     HsnCodesComponent,
-    CatalogInvestigationComponent,
     ProductBrandComponent,
     ProductMaterialComponent,
     ProductTypeComponent,
     ProductSizeComponent,
     ProductNetQuantityComponent,
     MappedSampleFilesComponent,
+    ProductInvestigationComponent,
+    SellerProductVerificationComponent,
+    SellerProductUnderReviewComponent,
   ],
   imports: [
     BrowserModule,
