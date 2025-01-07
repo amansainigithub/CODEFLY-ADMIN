@@ -149,14 +149,13 @@ ul li a.active {
 /* TIME LIVE START */
 .clock {
   font-size:14px;
-  font-weight: bold;
   text-align: center;
   color: #333;
   background: #f0f0f0;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 4px;
   color: #4361ee;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family:serif;
 }
 
 /* TIME LIVE ENDING */

@@ -19,9 +19,9 @@ import { ProductMaterialComponent } from './admin-panel/Product-Matadata/product
 import { ProductTypeComponent } from './admin-panel/Product-Matadata/product-type/product-type.component';
 import { ProductSizeComponent } from './admin-panel/Product-Matadata/product-size/product-size.component';
 import { ProductNetQuantityComponent } from './admin-panel/Product-Matadata/product-net-quantity/product-net-quantity.component';
-import { ProductInvestigationComponent } from './admin-panel/seller-products/product-investigation/product-investigation.component';
-import { SellerProductVerificationComponent } from './admin-panel/seller-products/seller-product-verification/seller-product-verification.component';
 import { SellerProductUnderReviewComponent } from './admin-panel/seller-products/seller-product-under-review/seller-product-under-review.component';
+import { ProductCheckingComponent } from './admin-panel/seller-products/product-checking/product-checking.component';
+import { SellerProductUnderReviewVariantsComponent } from './admin-panel/seller-products/seller-product-under-review-variants/seller-product-under-review-variants.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -49,8 +49,9 @@ const routes: Routes = [
                   { path: 'type', component: ProductTypeComponent , pathMatch:'full' },
                   { path: 'size', component: ProductSizeComponent , pathMatch:'full' },
                   { path: 'netQuantity', component: ProductNetQuantityComponent , pathMatch:'full' },
-                  { path: 'product-Verification', component: SellerProductVerificationComponent , pathMatch:'full' },
                   { path: 'product-UnderReview', component: SellerProductUnderReviewComponent , pathMatch:'full' },
+                  { path: 'UnderReview-variants', component: SellerProductUnderReviewVariantsComponent , pathMatch:'full' },
+                  { path: 'product-checking/:variantId', component: ProductCheckingComponent , pathMatch:'full' },
 
       ],
 }

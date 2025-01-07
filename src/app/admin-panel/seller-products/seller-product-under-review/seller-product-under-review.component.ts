@@ -15,20 +15,19 @@ import { PageEvent } from '@angular/material/paginator';
 export class SellerProductUnderReviewComponent {
 
         constructor(private tokenStorage: TokenStorageService, 
-          private toast:NgToastService ,
-          private activateRoute: ActivatedRoute,
-          private router: Router,
-          private spinner: NgxSpinnerService,
-          private http: HttpClient,
-          private productVerifierService:ProductVerifierServiceService) {    
-          }
+                    private toast:NgToastService ,
+                    private activateRoute: ActivatedRoute,
+                    private router: Router,
+                    private spinner: NgxSpinnerService,
+                    private http: HttpClient,
+                    private productVerifierService:ProductVerifierServiceService) {    
+                    }
 
           
       ngOnInit(): void 
       {
-      this.getproductsUnderReview({ page: "0", size: "10" }) ;
+        this.getproductsUnderReview({ page: "0", size: "10" }) ;
       }
-
 
       pendingDataCaptured:any[]=[];
       filteredItems:any;
@@ -38,28 +37,24 @@ export class SellerProductUnderReviewComponent {
 
       getproductsUnderReview(request:any)
       { 
-      //Show Loading
-      this.spinner.show();
-      this.productVerifierService.getUnderReviewProductList(request).subscribe({
-      next:(res:any)=> {
-      console.log(res);
+          //Show Loading
+          this.spinner.show();
+          this.productVerifierService.getUnderReviewProductList(request).subscribe({
+          next:(res:any)=> {
+          console.log(res);
 
-      this.pendingDataCaptured = res.data['content'];
-      this.filteredItems  = this.pendingDataCaptured;
-      this.totalElements = res.data['totalElements'];
-      this.spinner.hide();
-      },
-      error:(err:any)=>  {
-      console.log(err)
-      this.spinner.hide();
-      this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+          this.pendingDataCaptured = res.data['content'];
+          this.filteredItems  = this.pendingDataCaptured;
+          this.totalElements = res.data['totalElements'];
+          this.spinner.hide();
+          },
+          error:(err:any)=>  {
+          console.log(err)
+          this.spinner.hide();
+          this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+          }
+          })
       }
-      })
-      }
-
-
-
-
 
       nextPagePending(event: PageEvent) {
       console.log(event);
@@ -68,7 +63,6 @@ export class SellerProductUnderReviewComponent {
       request['size'] = event.pageSize.toString();
       this.getproductsUnderReview(request);
       }
-
 
 
       //Search Starting

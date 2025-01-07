@@ -285,6 +285,17 @@
         </a>
       </li>
     </ul>
+
+    <ul class="collapse productInvestigation" id="productInvestigation">
+      <li class="submenu-item unOrderList">
+        <a routerLink="/admin/dashboard/UnderReview-variants" class="nav-link fs13"
+          href="/admin/dashboard/UnderReview-variants">
+          <i class="bi bi-bag-check-fill"></i>
+          UnderReview Variants
+        </a>
+      </li>
+    </ul>
+
   </li>
 
     <li class="nav-item">
@@ -309,13 +320,8 @@
                 <button mat-stroked-button   type="button" (click)="toggleSidebar()">
                   <i class="bi bi-list"></i>
                 </button>
-              
-                <button mat-button class="mx-3" >
-                  <i class="bi bi-arrow-clockwise"></i>
-                  Refresh
-                </button>
 
-                <span class="clock">
+                <span class="clock mx-2">
                   {{ currentTime }}
                 </span>
                 

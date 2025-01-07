@@ -49,9 +49,10 @@ import { ProductTypeComponent } from './admin-panel/Product-Matadata/product-typ
 import { ProductSizeComponent } from './admin-panel/Product-Matadata/product-size/product-size.component';
 import { ProductNetQuantityComponent } from './admin-panel/Product-Matadata/product-net-quantity/product-net-quantity.component';
 import { MappedSampleFilesComponent } from './admin-panel/categories/born-category/bornMappedFiles/mapped-sample-files/mapped-sample-files.component';
-import { ProductInvestigationComponent } from './admin-panel/seller-products/product-investigation/product-investigation.component';
-import { SellerProductVerificationComponent } from './admin-panel/seller-products/seller-product-verification/seller-product-verification.component';
 import { SellerProductUnderReviewComponent } from './admin-panel/seller-products/seller-product-under-review/seller-product-under-review.component';
+import { ProductCheckingComponent } from './admin-panel/seller-products/product-checking/product-checking.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { SellerProductUnderReviewVariantsComponent } from './admin-panel/seller-products/seller-product-under-review-variants/seller-product-under-review-variants.component';
 
 
 @NgModule({
@@ -80,9 +81,9 @@ import { SellerProductUnderReviewComponent } from './admin-panel/seller-products
     ProductSizeComponent,
     ProductNetQuantityComponent,
     MappedSampleFilesComponent,
-    ProductInvestigationComponent,
-    SellerProductVerificationComponent,
     SellerProductUnderReviewComponent,
+    ProductCheckingComponent,
+    SellerProductUnderReviewVariantsComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +106,8 @@ import { SellerProductUnderReviewComponent } from './admin-panel/seller-products
      MatPaginatorModule,
      MatDatepickerModule,
      MatNativeDateModule,
-     MatFormFieldModule
+     MatFormFieldModule,
+     MatTooltipModule
   ], 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync(),DatePipe],
