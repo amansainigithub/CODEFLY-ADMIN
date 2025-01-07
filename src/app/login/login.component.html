@@ -1,96 +1,73 @@
+
 <div *ngIf="!isLoggedIn">
-  <section class="background-radial-gradient overflow-hidden">
-    <div *ngIf="!isLoggedIn" class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-      <div class="row gx-lg-5 align-items-center mb-5">
-        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-            The best offer <br />
-            <span style="color: hsl(218, 81%, 75%)">for your business</span>
-          </h1>
-          <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Temporibus, expedita iusto veniam atque, magni tempora mollitia
-            dolorum consequatur nulla, neque debitis eos reprehenderit quasi
-            ab ipsum nisi dolorem modi. Quos?
-          </p>
-        </div>
 
-        <div class="col-lg-6 mb-5 mb-lg-0 position-relative" >
-          <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-          <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-
-          <div class="card bg-glass ">
-            <div class="card-body px-3 py-3 px-md-3" *ngIf="!passkey">
-              <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-                <p class="text-center"
-                  style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 18px;">
-                  <i class="bi bi-lock-fill"></i>
-                  Admin Panel
-                </p>
-
-                <div data-mdb-input-init class="form-outline mb-4 mt-2">
-                  <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required
-                    #username="ngModel" placeholder="email" />
-
-                  <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">
-                    Username is required!
-                  </div>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
-                    minlength="6" #password="ngModel" placeholder="password" />
-
-                  <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
-                    <div>Password is required</div>
-                    <div>
-                      Password must be at least 6 characters
-                    </div>
-                  </div>
-                </div>
-                <button type="submit" mat-raised-button class="text-center">
-                  <i class="bi bi-unlock-fill"></i>
-                  Sign in
-                </button>
-
-                <div class="form-group">
-                  <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
-                    Login failed: {{ errorMessage }}
-                  </div>
-                </div>
-
-              </form>
-
-              <div class="alert alert-success" *ngIf="isLoggedIn">
-                Logged in as {{ roles }}.
-              </div>
+  <div class="d-flex justify-content-center" style="margin-top: 150px;" *ngIf="!passkey">
+    <div class="card shadow" style="width: 22rem;">
+      <div class="card-body">
+        <p class="text-center">
+          <i class="bi bi-lock-fill"></i>
+          Admin Panel
+        </p>
+        <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+           
+          <div class="form-outline mb-4 mt-2">
+            <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required
+              #username="ngModel" placeholder="email" />
+  
+            <div class="bg-danger text-light p-2 fs11" *ngIf="username.errors && f.submitted">
+              Username is required!
             </div>
-
-
-            <div class="card-body px-3 py-3 px-md-3" *ngIf="passkey">
-              <form *ngIf="!isLoggedIn" name="form" novalidate>
-                <p 
-                  style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 18px;">
-                  Pass-Key
-                </p>
-            
-                <div data-mdb-input-init class="form-outline mb-4 mt-2">
-                  <input type="text" class="form-control" name="adminPasskey" [(ngModel)]="pkey.adminPasskey" required #username="ngModel"
-                    placeholder="passkey" />
-                </div>
-
-                <button type="submit" class="btn btn-light text-center" (click)="validatePasskey()" >
-                  submit</button>
-              </form>
-            </div> 
-
-
           </div>
-        </div>
+  
+          <div class="form-outline mb-4">
+            <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+              #password="ngModel" placeholder="password" />
+
+              <div class="bg-danger text-light p-2 fs11" *ngIf="password.errors && f.submitted">
+                <div>Password is required</div>
+                <div>
+                  Password must be at least 6 characters
+                </div>
+              </div>
+          </div>
+          <button type="submit" mat-raised-button class="text-center">
+            <i class="bi bi-unlock-fill"></i>
+            Sign in
+          </button>
+  
+          <div class="form-group">
+            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+              Login failed: {{ errorMessage }}
+            </div>
+          </div>
+  
+        </form>
       </div>
     </div>
-  </section>
-  <!-- Section: Design Block -->
+  </div>
 </div>
 
 
+<div class="d-flex justify-content-center" style="margin-top: 150px;" *ngIf="passkey">
+  <div class="card shadow" style="width: 25rem;">
+    <div class="card-body">
+      <p class="text-center">
+        <i class="bi bi-lock-fill"></i>
+        Pass Key
+      </p>
+      <div class="card-body">
+        <form *ngIf="!isLoggedIn" name="form" novalidate>
+          <p> Pass-Key</p>
+
+          <div class="form-outline mb-4 mt-2">
+            <input type="text" class="form-control" name="adminPasskey" [(ngModel)]="pkey.adminPasskey" required
+              #username="ngModel" placeholder="passkey" />
+          </div>
+
+          <button type="submit" class="btn btn-light text-center" (click)="validatePasskey()">
+            submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
