@@ -53,6 +53,7 @@ import { SellerProductUnderReviewComponent } from './admin-panel/seller-products
 import { ProductCheckingComponent } from './admin-panel/seller-products/product-checking/product-checking.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { SellerProductUnderReviewVariantsComponent } from './admin-panel/seller-products/seller-product-under-review-variants/seller-product-under-review-variants.component';
+import { ProductReviewStatusComponent } from './admin-panel/product-review-status/product-review-status/product-review-status.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { SellerProductUnderReviewVariantsComponent } from './admin-panel/seller-
     SellerProductUnderReviewComponent,
     ProductCheckingComponent,
     SellerProductUnderReviewVariantsComponent,
+    ProductReviewStatusComponent,
   ],
   imports: [
     BrowserModule,

@@ -265,6 +265,29 @@
 
       </li>
 
+      <li class="nav-item">
+
+        <a class="nav-link-headings"  (click)="toggleSubmenu('productReviews')"  href="#" data-bs-toggle="collapse" data-bs-target="#productReviewStatus"
+          aria-expanded="false">
+          <i class="bi bi-bag-check-fill"></i>
+          Product Reviews Status
+          <i 
+            [class.bi-chevron-right]="!isProductReviews" 
+            [class.bi-chevron-down]="isProductReviews" 
+            class="ms-auto floatRit"></i>
+        </a>
+
+        <ul class="collapse productReviewStatus" id="productReviewStatus">
+          <li class="unOrderList">
+            <a routerLink="/admin/dashboard/product-reviews-status" routerLinkActive="active" class="nav-link fs13"
+              href="/admin/dashboard/product-reviews-status">
+              <i class="bi bi-bag-check-fill"></i>
+              product ReviewStatus 
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <div class="divider">
       </div>
     </ul>

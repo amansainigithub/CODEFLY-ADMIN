@@ -8,8 +8,6 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +19,7 @@ export class HsnService {
     return this.http.post(API_AUTHORIZA_URL + "productHsnController/" + 'saveHsn',data, httpOptions);
   }
 
-    //ADMIN
+
     getHsnByPagination(request:any): Observable<any> {
       return this.http.post(API_AUTHORIZA_URL + "productHsnController/"+ 'getHsnListByPagination?page='+request.page + '&size=' +request.size, httpOptions);
     }

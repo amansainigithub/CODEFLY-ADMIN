@@ -92,6 +92,7 @@ export class AppComponent {
   isUsersOpen = false;
   isCatalogMeta = false;
   isProductInvestigation = false;
+  isProductReviews = false;
   toggleSubmenu(menu:any) {
     if (menu === 'categories') {
       this.isCategoriesOpen = !this.isCategoriesOpen;
@@ -101,6 +102,8 @@ export class AppComponent {
       this.isCatalogMeta = !this.isCatalogMeta;
     }else if (menu === 'productInvestigation') {
       this.isProductInvestigation = !this.isProductInvestigation;
+    }else if (menu === 'productReviews') {
+      this.isProductReviews = !this.isProductReviews;
     }
   }
 

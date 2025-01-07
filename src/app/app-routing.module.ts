@@ -22,6 +22,7 @@ import { ProductNetQuantityComponent } from './admin-panel/Product-Matadata/prod
 import { SellerProductUnderReviewComponent } from './admin-panel/seller-products/seller-product-under-review/seller-product-under-review.component';
 import { ProductCheckingComponent } from './admin-panel/seller-products/product-checking/product-checking.component';
 import { SellerProductUnderReviewVariantsComponent } from './admin-panel/seller-products/seller-product-under-review-variants/seller-product-under-review-variants.component';
+import { ProductReviewStatusComponent } from './admin-panel/product-review-status/product-review-status/product-review-status.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -52,6 +53,7 @@ const routes: Routes = [
                   { path: 'product-UnderReview', component: SellerProductUnderReviewComponent , pathMatch:'full' },
                   { path: 'UnderReview-variants', component: SellerProductUnderReviewVariantsComponent , pathMatch:'full' },
                   { path: 'product-checking/:productId', component: ProductCheckingComponent , pathMatch:'full' },
+                  { path: 'product-reviews-status', component: ProductReviewStatusComponent , pathMatch:'full' },
 
       ],
 }
