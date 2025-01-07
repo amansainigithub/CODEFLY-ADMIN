@@ -87,4 +87,22 @@ export class AppComponent {
     this.router.navigate(["/admin/dashboard/child-category"])
   }
 
+
+  isCategoriesOpen = false;
+  isUsersOpen = false;
+  isCatalogMeta = false;
+  isProductInvestigation = false;
+  toggleSubmenu(menu:any) {
+    if (menu === 'categories') {
+      this.isCategoriesOpen = !this.isCategoriesOpen;
+    } else if (menu === 'users') {
+      this.isUsersOpen = !this.isUsersOpen;
+    }else if (menu === 'catalogMeta') {
+      this.isCatalogMeta = !this.isCatalogMeta;
+    }else if (menu === 'productInvestigation') {
+      this.isProductInvestigation = !this.isProductInvestigation;
+    }
+  }
+
+  
 }

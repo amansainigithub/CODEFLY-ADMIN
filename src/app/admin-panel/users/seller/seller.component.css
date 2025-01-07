@@ -48,7 +48,7 @@ th{
 td{
     font-size: 13px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #e5ffd6;
+  
 }
 
   /* Container for horizontal scrolling */
@@ -57,4 +57,7 @@ td{
     overflow-x: auto; /* Enable horizontal scrolling */
 }
 
-
+.spanDesign{
+    background-color: #eaf2f8;
+    border-radius: 3px;
+}

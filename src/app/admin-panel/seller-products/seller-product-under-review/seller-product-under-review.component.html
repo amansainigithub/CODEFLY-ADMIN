@@ -28,6 +28,7 @@
                     <th>Creation Date/Time</th>
                     <th>products</th>
                     <th>Status</th>
+                    <th>Approval</th>
                    
               </tr>
             </thead>
@@ -75,6 +76,12 @@
                         </span>
                       </span>
                     </td>
+
+                    <td>
+                      <button mat-stroked-button color="primary"  (click)="proceedBoxOpen(data.id)" >
+                        Verify Product
+                      </button>
+                    </td>
                 
               </tr>
             </tbody>
@@ -87,3 +94,31 @@
           showFirstLastButtons>
       </mat-paginator>
 </div>
+
+
+
+
+ <!-- Proceed Box-->
+ <div  #proccedBox class="modal fade" id="proceedBox" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 330px;height: 90px;">
+    <div class="modal-content">
+
+      <div class="modal-body fs12 text-center">
+
+          <i class=" fs22  bi bi-send-check-fill" style="color: #000080;"></i>
+
+        <p>
+          Are, you sure you want to Edit Variant : {{productId}} ?
+        </p>
+
+        <div class="d-flex justify-content-center gap-3" >
+          <button type="button" mat-raised-button data-bs-dismiss="modal">Close</button>
+          <button type="button" mat-raised-button color="primary" (click)="variantEditModeProceed()" data-bs-dismiss="modal">Procced</button>
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Proceed Box-->

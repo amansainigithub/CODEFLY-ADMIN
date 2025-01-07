@@ -51,7 +51,7 @@ const routes: Routes = [
                   { path: 'netQuantity', component: ProductNetQuantityComponent , pathMatch:'full' },
                   { path: 'product-UnderReview', component: SellerProductUnderReviewComponent , pathMatch:'full' },
                   { path: 'UnderReview-variants', component: SellerProductUnderReviewVariantsComponent , pathMatch:'full' },
-                  { path: 'product-checking/:variantId', component: ProductCheckingComponent , pathMatch:'full' },
+                  { path: 'product-checking/:productId', component: ProductCheckingComponent , pathMatch:'full' },
 
       ],
 }

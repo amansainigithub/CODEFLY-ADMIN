@@ -18,19 +18,24 @@ export class ProductVerifierServiceService {
     return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerProductVerifyList/'+"username"+"?page="+request.page +"&size="+request.size);
   }
 
-  getUnderReviewProductList(request:any) {
-    return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerProductUnderReviewList/'+"username"+"?page="+request.page +"&size="+request.size);
-  }
-
   
   formBuilderFlying(bornCategoryId:any) {
     return this.http.get(API_AUTHORIZA_URL + `adminSellerProductVerifyController/formBuilderFlyingByAdmin/${bornCategoryId}`);
   }
 
 
-  getProductVariantByVariantId(variantId:any) {
-    return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerProductByIdAdmin/'+variantId);
+  getProductVariantByVariantId(productId:any) {
+    return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerProductByIdAdmin/'+productId);
   }
 
+
+  getUnderReviewProductList(request:any) {
+    return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerProductUnderReviewList/'+"username"+"?page="+request.page +"&size="+request.size);
+  }
+
+  
+  getUnderReviewNoVariantProductList(request:any) {
+    return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerProductUnderReviewNoVariantList/'+"username"+"?page="+request.page +"&size="+request.size);
+  }
 
 }

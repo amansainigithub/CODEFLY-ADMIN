@@ -48,13 +48,22 @@
             </span>
           </td>
 
+          
           <td>
-            <button mat-raised-button color="primary" data-bs-toggle="collapse"
+            <button  mat-raised-button (click)="variantProceedBoxOpen(parent.id)"
+                        style="background-color: #f6dc1f;">
+                        Verify Parent
+             </button>
+             <br>
+            <button class="mt-1" mat-raised-button color="primary" data-bs-toggle="collapse"
               [attr.data-bs-target]="'#collapse-' + parent.id" aria-expanded="true"
               [attr.aria-controls]="'collapse-' + parent.id">
-              Variant
+              Variants
               <i class="bi bi-caret-down"></i>
             </button>
+            
+            
+
           </td>
         </tr>
 
@@ -108,7 +117,7 @@
                     <td>
                       <button mat-raised-button (click)="variantProceedBoxOpen(variant.id)"
                         style="background-color: #f6dc1f;">
-                        Edit Variant
+                        Verify
                       </button>
 
                       <span *ngIf="variant.productStatus === 'COMPLETE'" class="text-success fs24 d-flex ">
@@ -154,7 +163,7 @@
           <i class=" fs22  bi bi-send-check-fill" style="color: #000080;"></i>
 
         <p>
-          Are, you sure you want to Edit Variant : {{cVariantId}} ?
+          Are, you sure you want to Edit Variant : {{productId}} ?
         </p>
 
         <div class="d-flex justify-content-center gap-3" >

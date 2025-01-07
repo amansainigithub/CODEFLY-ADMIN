@@ -7,7 +7,7 @@
 
 
           <div  class="table-container">
-            <table class=" table table-sm table-hover ">
+            <table class=" table table-sm table-hover table-bordered">
               <thead>
   
                 <tr>
@@ -29,14 +29,21 @@
                       <td>{{ data.mobile}}</td>
 
                       <td>
-                        <span class="badge bg-primary"> {{ data.projectRole}}</span>
+                        <div class="p-1 "> 
+                          {{ data.projectRole}}
+                        </div>
                       </td>
 
                       <td>
-                        <span class="badge bg-primary">  {{ data.creationDate}}</span>
+                        <span  class="p-1 spanDesign"> 
+                           {{ data.creationDate}}
+                        </span>
                       </td>
+                      
                       <td>
-                        <span class="badge bg-primary">  {{ data.lastModifiedDate}}</span>
+                        <span class="p-1 spanDesign">  
+                          {{ data.lastModifiedDate}}
+                        </span>
                      </td>
 
                     </tr>

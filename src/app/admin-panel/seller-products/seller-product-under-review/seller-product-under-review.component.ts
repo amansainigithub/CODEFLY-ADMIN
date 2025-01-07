@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TokenStorageService } from '../../../_services/token-storage.service';
 import { NgToastService } from 'ng-angular-popup';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { ProductVerifierServiceService } from '../../../_services/product-service/productVerifierService/product-verifier-service.service';
 import { PageEvent } from '@angular/material/paginator';
+// Import Bootstrap's Modal class
+declare var bootstrap: any;
+
 
 @Component({
   selector: 'app-seller-product-under-review',
@@ -13,6 +16,7 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrl: './seller-product-under-review.component.css'
 })
 export class SellerProductUnderReviewComponent {
+  @ViewChild('proccedBox') proceedBox!: ElementRef;
 
         constructor(private tokenStorage: TokenStorageService, 
                     private toast:NgToastService ,
@@ -39,7 +43,7 @@ export class SellerProductUnderReviewComponent {
       { 
           //Show Loading
           this.spinner.show();
-          this.productVerifierService.getUnderReviewProductList(request).subscribe({
+          this.productVerifierService.getUnderReviewNoVariantProductList(request).subscribe({
           next:(res:any)=> {
           console.log(res);
 
@@ -65,16 +69,43 @@ export class SellerProductUnderReviewComponent {
       }
 
 
-      //Search Starting
-      onSearch() {
-      const searchQuery = this.searchText.trim().toLowerCase();
-      if (searchQuery) {
-      this.filteredItems = this.pendingDataCaptured.filter(item => 
-      String(item.productCode).toLowerCase().includes(searchQuery)
-      );
-      } else {
-      this.filteredItems = this.pendingDataCaptured;
+      // Logic to open the modal
+      productId:any
+      proceedBoxOpen(productId:any): void {
+        this.productId = productId;
+
+        const modal = new bootstrap .Modal(this.proceedBox.nativeElement);
+        modal.show(); // Open the modal
       }
+
+
+      variantEditModeProceed(){
+        if( this.productId !== null ||  this.productId !== ""){
+          this.router.navigate(['admin/dashboard/product-checking', this.productId]); 
+        }else{
+          alert("please Enter a Valid Varinat ID :: " +  this.productId);
+        }
       }
-      //Search Ending
+
+
+
+
+
+
+
+
+
+
+        //Search Starting
+        onSearch() {
+          const searchQuery = this.searchText.trim().toLowerCase();
+          if (searchQuery) {
+          this.filteredItems = this.pendingDataCaptured.filter(item => 
+          String(item.productCode).toLowerCase().includes(searchQuery)
+          );
+          } else {
+          this.filteredItems = this.pendingDataCaptured;
+          }
+          }
+          //Search Ending
 }

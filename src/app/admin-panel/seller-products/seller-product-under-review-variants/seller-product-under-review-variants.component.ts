@@ -68,23 +68,21 @@ export class SellerProductUnderReviewVariantsComponent {
 
 
 // Logic to open the modal
-cVariantId:any
-variantProceedBoxOpen(variantId:any): void {
-  this.cVariantId = variantId;
+productId:any
+variantProceedBoxOpen(productId:any): void {
+  this.productId = productId;
 
   const modal = new bootstrap .Modal(this.proceedBox.nativeElement);
   modal.show(); // Open the modal
 }
 
 variantEditModeProceed(){
-  if( this.cVariantId !== null ||  this.cVariantId !== ""){
-    this.router.navigate(['admin/dashboard/product-checking', this.cVariantId]); 
+  if( this.productId !== null ||  this.productId !== ""){
+    this.router.navigate(['admin/dashboard/product-checking', this.productId]); 
   }else{
-    alert("please Enter a Valid Varinat ID :: " +  this.cVariantId);
+    alert("please Enter a Valid Varinat ID :: " +  this.productId);
   }
 }
-
-
 
 //Search Starting
 onSearch() {
@@ -98,8 +96,5 @@ onSearch() {
   }
   }
   //Search Ending
-
-
-//Search Ending
 
 }

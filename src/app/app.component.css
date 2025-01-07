@@ -132,3 +132,35 @@ ul li a {
   color: #4361ee;
   font-family: serif;
 }
+
+.gradient-background {
+  background: linear-gradient(
+    to bottom right,
+    #f9f7f7,
+    #f3d9fa,
+    #d9e8fc,
+    #d1f2eb,
+    #fde8d7
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transition: background 3s ease; /* Smooth transition for gradient changes */
+}
+
+
+
+
+/* =======Arrow Smoothly================= */
+.nav-link-headings .ms-auto {
+  transition: transform 0.3s ease;
+}
+
+.nav-link-headings .bi-chevron-right {
+  transform: rotate(0deg);
+}
+
+.nav-link-headings .bi-chevron-down {
+  transform: rotate(360deg);
+}

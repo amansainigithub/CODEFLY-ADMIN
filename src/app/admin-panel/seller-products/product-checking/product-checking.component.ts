@@ -28,7 +28,7 @@ export class ProductCheckingComponent {
   productSizeError = false; // Product Size (Main)
   files: FileUpload[] = [];
 
-  variantId: any;
+  productId: any;
   dataCaptured:any;
 
   bornCategoryId:any;
@@ -104,8 +104,8 @@ export class ProductCheckingComponent {
           this.dynamicallykeysAndValidationBuilder(formBuilderJson.productOtherDetails);
 
           //Calling The Data 
-          this.variantId = this.route.snapshot.paramMap.get('variantId');
-          this.getSellerProductByIdAdmin(this.variantId);
+          this.productId = this.route.snapshot.paramMap.get('productId');
+          this.getSellerProductByIdAdmin(this.productId);
           console.log("==============FORM BUILDER STARTING====================");
 
         });
@@ -480,9 +480,9 @@ export class ProductCheckingComponent {
     //     }
 
 
-    async getSellerProductByIdAdmin(variantId:any){
+    async getSellerProductByIdAdmin(productId:any){
           
-          this.productVerifierService.getProductVariantByVariantId(variantId).subscribe(
+          this.productVerifierService.getProductVariantByVariantId(productId).subscribe(
             (res: any) => {
               try {
                 this.dataCaptured = res.data;

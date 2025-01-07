@@ -63,17 +63,20 @@
     <ul class="nav flex-column">
 
       <li class="nav-item mt-5 text-center mb-3">
-        <a class="nav-link-headings" href="" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
+        <a class="nav-link-headings gradient-background" href="" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
           <i class="bi bi-house-door"></i>
           Home
         </a>
       </li>
 
       <li class="nav-item ">
-        <a class="nav-link-headings" href="" data-bs-toggle="collapse" data-bs-target="#submenu4" aria-expanded="false">
+        <a class="nav-link-headings" (click)="toggleSubmenu('categories')"  href="" data-bs-toggle="collapse" data-bs-target="#submenu4" aria-expanded="false">
           <i class="bi bi-calendar4 mr-2"></i>
           Categories
-          <i class="bi bi-chevron-down ms-auto floatRit"></i>
+          <i 
+            [class.bi-chevron-right]="!isCategoriesOpen" 
+            [class.bi-chevron-down]="isCategoriesOpen" 
+            class="ms-auto floatRit"></i>
         </a>
 
         <ul class="collapse submenu4" id="submenu4">
@@ -120,17 +123,22 @@
 
       <li class="nav-item">
 
-        <a class="nav-link-headings " href="#" data-bs-toggle="collapse" data-bs-target="#submenu2"
+        <a class="nav-link-headings" (click)="toggleSubmenu('users')"  href="#" data-bs-toggle="collapse" data-bs-target="#submenu2"
           aria-expanded="false">
           <i class="bi bi-people"></i> Users
-          <i class="bi bi-chevron-right ms-auto floatRit"></i>
+          <i 
+            [class.bi-chevron-right]="!isUsersOpen" 
+            [class.bi-chevron-down]="isUsersOpen" 
+            class="ms-auto floatRit"></i>
         </a>
+
         <ul class="collapse submenu" id="submenu2">
           <li class="  unOrderList">
             <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/customer-node"
               style="font-size: 14px;">
               <i class="bi bi-person-fill-check"></i>
               Customer
+              
             </a>
           </li>
 
@@ -155,11 +163,14 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link-headings " href="#" data-bs-toggle="collapse" data-bs-target="#submenu3"
+        <a class="nav-link-headings" (click)="toggleSubmenu('catalogMeta')" href="#" data-bs-toggle="collapse" data-bs-target="#submenu3"
           aria-expanded="false">
           <i class="bi bi-cloud-haze2-fill"></i>
           Catalog Meta
-          <i class="bi bi-chevron-right  ms-auto floatRit"></i>
+          <i 
+            [class.bi-chevron-right]="!isCatalogMeta" 
+            [class.bi-chevron-down]="isCatalogMeta" 
+            class="ms-auto floatRit"></i>
         </a>
         <ul class="collapse submenu3" id="submenu3">
           <li class="unOrderList">
@@ -221,12 +232,17 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link-headings " href="#" data-bs-toggle="collapse" data-bs-target="#productInvestigation"
+
+        <a class="nav-link-headings"  (click)="toggleSubmenu('productInvestigation')"  href="#" data-bs-toggle="collapse" data-bs-target="#productInvestigation"
           aria-expanded="false">
           <i class="bi bi-bag-check-fill"></i>
           Product Investigation
-          <i class="bi bi-chevron-right ms-auto floatRit"></i>
+          <i 
+            [class.bi-chevron-right]="!isProductInvestigation" 
+            [class.bi-chevron-down]="isProductInvestigation" 
+            class="ms-auto floatRit"></i>
         </a>
+
         <ul class="collapse productInvestigation" id="productInvestigation">
           <li class="unOrderList">
             <a routerLink="/admin/dashboard/product-UnderReview" routerLinkActive="active" class="nav-link fs13"
@@ -255,26 +271,27 @@
 
   </div>
 
-  <!-- CONTENT -->
-  <div *ngIf="isLoggedIn" class="content mydiv" [ngClass]="{'content-expanded': !isSidebarVisible}">
+      <!-- CONTENT -->
+      <div *ngIf="isLoggedIn" class="content mydiv" [ngClass]="{'content-expanded': !isSidebarVisible}">
 
-    <div style="width: 100%;">
-      <router-outlet>
+        <div style="width: 100%;">
+          <router-outlet>
 
-        <button mat-stroked-button type="button" (click)="toggleSidebar()">
-          <i class="bi bi-list"></i>
-        </button>
+            <button mat-stroked-button type="button" (click)="toggleSidebar()">
+              <i class="bi bi-list"></i>
+            </button>
 
-        <span class="clock mx-2">
-          {{ currentTime }}
-        </span>
+            <span class="clock mx-2">
+              {{ currentTime }}
+            </span>
 
-        <!-- DYNAMIC ROOT CONTENT -->
-      </router-outlet>
+            <!-- DYNAMIC ROOT CONTENT -->
+          </router-outlet>
 
-    </div>
+        </div>
+      </div>
+      <!-- CONTENT -->
+
   </div>
-  <!-- CONTENT -->
-</div>
 
 <!-- SIDEBAR ENDING -->

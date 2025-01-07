@@ -7,7 +7,7 @@
 
 
           <div  class="table-container">
-            <table class=" table table-sm table-hover ">
+            <table class=" table table-sm table-hover table-bordered">
               <thead>
   
                 <tr>
@@ -33,72 +33,75 @@
                   <tr scope="row" *ngFor="let data of customerList">
                       <td>{{ data.id }}</td>
                       <td>{{ data.username }}</td>
-                      <td>{{ data.email }}</td>
+                      <td class="text-nowrap" >{{ data.email }}</td>
                       <td>{{ data.mobile}}</td>
                       <td>{{ data.customerEmail}}</td>
 
 
                       <td *ngIf="data.customerMobileVerify === 'Y' " >
-                        <span class="badge bg-success">Y</span>
-                      </td>
-                      <td *ngIf="data.customerMobileVerify === 'N' || data.customerMobileVerify === '' || data.customerMobileVerify === null " >
-                        <span class="badge bg-danger">N</span>
+                        <span class="badge bg-success">
+                          Y
+                        </span>
                       </td>
 
+                      <td *ngIf="data.customerMobileVerify === 'N' || data.customerMobileVerify === '' || data.customerMobileVerify === null " >
+                        <span class="badge bg-danger">
+                          N
+                        </span>
+                      </td>
 
                       <td *ngIf="data.customerEmailVerify === 'Y' " >
                         <span class="badge bg-success">Y</span>
                       </td>
+
                       <td *ngIf="data.customerEmailVerify === 'N' || data.customerEmailVerify === '' 
                           || data.customerEmailVerify === null " >
                         <span class="badge bg-danger">N</span>
                       </td>
 
-
                       <td>{{ data.custUsername }}</td>
+
                       <td>{{ data.customerMobileOtp}}</td>
 
-
                       <td>
-                        <span class="badge bg-primary"> {{ data.projectRole}}</span>
+                        <span class="spanDesign px-2 text-nowrap p-1">
+                           {{ data.projectRole}}
+                          </span>
                       </td>
-
-
 
                       <td *ngIf="data.customerRegisterComplete === 'Y' " >
                         <span class="badge bg-success">Y</span>
                       </td>
+
                       <td *ngIf="data.customerRegisterComplete === 'N' || data.customerRegisterComplete === '' 
                           || data.customerRegisterComplete === null " >
                         <span class="badge bg-danger">N</span>
                       </td>
 
-
-
                       <td *ngIf="data.customerForgotPasswordOtp === 'Y' " >
                         <span class="badge bg-success">Y</span>
                       </td>
+
                       <td *ngIf="data.customerForgotPasswordOtp === 'N' || data.customerForgotPasswordOtp === '' 
                           || data.customerForgotPasswordOtp === null " >
                         <span class="badge bg-danger">N</span>
                       </td>
-                      
-
 
                       <td *ngIf="data.isCustomerForgotPassword === 'Y' " >
                         <span class="badge bg-success">Y</span>
                       </td>
+
                       <td *ngIf="data.isCustomerForgotPassword === 'N' || data.isCustomerForgotPassword === '' 
                           || data.isCustomerForgotPassword === null " >
                         <span class="badge bg-danger">N</span>
                       </td>
 
+                      <td>
+                        <span class="spanDesign px-2 text-nowrap p-1">  {{ data.creationDate}}</span>
+                      </td>
 
                       <td>
-                        <span class="badge bg-primary">  {{ data.creationDate}}</span>
-                      </td>
-                      <td>
-                        <span class="badge bg-primary">  {{ data.lastModifiedDate}}</span>
+                        <span class="spanDesign px-2 text-nowrap p-1">  {{ data.lastModifiedDate}}</span>
                      </td>
 
                     </tr>
