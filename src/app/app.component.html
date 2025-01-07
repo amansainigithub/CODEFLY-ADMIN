@@ -1,72 +1,54 @@
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" 
-  size = "small" 
-  color = "#fff" 
-  type = "ball-clip-rotate" 
-  [fullScreen] = "true">
-  <p style="color: white" > 
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+  <p style="color: white">
     Loading... </p>
 </ngx-spinner>
-<ng-toast /> 
+<ng-toast />
 
 
 
-<div id="app" class="navbar-light bg-light"  >
+<div id="app" class="navbar-light">
 
-  <div *ngIf="!isLoggedIn">
-      <mat-toolbar>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-          <mat-icon>menu</mat-icon>
+  <div class="container-fluid p-0">
+
+    <div *ngIf="isLoggedIn">
+      <mat-toolbar class="navbar">
+
+        <div class="baseColor">
+          <i class="bi bi-gear-wide-connected"></i>
+          <span>AdminPanel</span>
+        </div>
+
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+          <mat-icon matBadge="15">notifications</mat-icon>
         </button>
-        
-        <a mat-raised-button color="primary" href="/" routerLink="/">
-          <i class="bi bi-box-arrow-in-right"></i>
-          Login
-        </a>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+          <mat-icon matBadge="2">mail</mat-icon>
+        </button>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+          <mat-icon matBadge="">shopping_cart</mat-icon>
+        </button>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>logout</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="p-2">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+
       </mat-toolbar>
- </div> 
-
-
-  <!--Login Navbar starting -->
-
-  <div class="container-fluid p-0"  >
-
-      <div *ngIf="isLoggedIn" >
-          <mat-toolbar class="navbar" >
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-              <mat-icon>local_mall</mat-icon>
-            </button>
-            <span>AdminShop</span>
-            <span class="example-spacer"></span>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-              <mat-icon matBadge="15" >notifications</mat-icon>
-            </button>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-              <mat-icon matBadge="2" >mail</mat-icon>
-            </button>
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-              <mat-icon matBadge="" >shopping_cart</mat-icon>
-            </button>
-
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-              <mat-icon>logout</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" class="p-2">
-              <button mat-menu-item (click)="logout()">
-                <mat-icon>logout</mat-icon>
-                <span>Logout</span>
-              </button>
-            </mat-menu>
-            
-          </mat-toolbar>
-      </div>
+    </div>
   </div>
   <!-- Not Login Navbar Ending -->
 
   <!-- User Not Login -->
-  <div  *ngIf="!isLoggedIn" > 
+  <div *ngIf="!isLoggedIn">
     <router-outlet></router-outlet>
   </div>
-  
+
 </div>
 
 
@@ -74,37 +56,38 @@
 
 <!-- SIDEBAR STARTING-->
 <div *ngIf="isLoggedIn">
-       <div class="sidebar scrollable-content" [ngClass]="{'sidebar-extend-min': !isSidebarVisible}">
-      <!-- <a href="" class="item">Home</a>
+  <div class="sidebar scrollable-content" [ngClass]="{'sidebar-extend-min': !isSidebarVisible}">
+    <!-- <a href="" class="item">Home</a>
       <a href="" class="item">Product</a> -->
-    
-      <ul class="nav flex-column">
-      
-      <li class="nav-item mt-5">
-          <a class="nav-link hv1"  href="" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
-              <i class="bi bi-house-door"></i> Home
-          </a>
+
+    <ul class="nav flex-column">
+
+      <li class="nav-item mt-5 text-center mb-3">
+        <a class="nav-link-headings" href="" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
+          <i class="bi bi-house-door"></i>
+          Home
+        </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link hv1" href="" data-bs-toggle="collapse" data-bs-target="#submenu4" aria-expanded="false">
+      <li class="nav-item ">
+        <a class="nav-link-headings" href="" data-bs-toggle="collapse" data-bs-target="#submenu4" aria-expanded="false">
           <i class="bi bi-calendar4 mr-2"></i>
           Categories
-          <i class="bi bi-chevron-right ms-auto floatRit"></i>
+          <i class="bi bi-chevron-down ms-auto floatRit"></i>
         </a>
 
         <ul class="collapse submenu4" id="submenu4">
-          <li class="submenu-item hv1 unOrderList">
+          <li class="unOrderList">
             <a class="nav-link fs13" routerLinkActive="active" href="" routerLink="/admin/dashboard/parent-category">
               <i class="bi bi-window-sidebar"></i>
               Parent Category
             </a>
           </li>
         </ul>
-      
+
 
         <ul class="collapse submenu4" id="submenu4">
-          <li class="submenu-item hv1 unOrderList">
+          <li class=" unOrderList">
             <a class="nav-link fs13" routerLinkActive="active" href="/admin/dashboard/child-category"
               routerLink="/admin/dashboard/child-category">
               <i class="bi bi-bookmarks-fill"></i>
@@ -112,134 +95,140 @@
             </a>
           </li>
         </ul>
-      
+
         <ul class="collapse submenu4" id="submenu4">
-          <li class="submenu-item hv1 unOrderList">
-            <a type="button"  routerLinkActive="active" class="nav-link fs13" href="/admin/dashboard/baby-category"
+          <li class=" unOrderList">
+            <a class="nav-link fs13" routerLinkActive="active" href="/admin/dashboard/baby-category"
               routerLink="/admin/dashboard/baby-category">
               <i class="bi bi-bookmarks-fill"></i>
               Baby Category
             </a>
           </li>
         </ul>
-      
+
         <ul class="collapse submenu4" id="submenu4">
-          <li class="submenu-item hv1 unOrderList">
-            <a type="button"  routerLinkActive="active" class="nav-link fs13" href="/admin/dashboard/born-category"
+          <li class=" unOrderList">
+            <a class="nav-link fs13" routerLinkActive="active" href="/admin/dashboard/born-category"
               routerLink="/admin/dashboard/born-category">
               <i class="bi bi-bookmarks-fill"></i>
               Born Category
             </a>
           </li>
         </ul>
-      
+
       </li>
 
-    <li class="nav-item">
+      <li class="nav-item">
 
-        <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu2" aria-expanded="false">
+        <a class="nav-link-headings " href="#" data-bs-toggle="collapse" data-bs-target="#submenu2"
+          aria-expanded="false">
           <i class="bi bi-people"></i> Users
-          <i class="bi bi-chevron-right ms-auto floatRit" ></i>
+          <i class="bi bi-chevron-right ms-auto floatRit"></i>
         </a>
-        <ul class="collapse submenu" id="submenu2" >
-            <li class="submenu-item hv1 unOrderList">
-              <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/customer-node" style="font-size: 14px;">
-                <i class="bi bi-person-fill-check"></i>
-                Customer
-              </a>
-            </li>
+        <ul class="collapse submenu" id="submenu2">
+          <li class="  unOrderList">
+            <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/customer-node"
+              style="font-size: 14px;">
+              <i class="bi bi-person-fill-check"></i>
+              Customer
+            </a>
+          </li>
 
-            <li class="submenu-item hv1 unOrderList">
-              <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/seller-node" style="font-size: 14px;">
-                <i class="bi bi-person-fill-check"></i>
-                Seller
-              </a>
-            </li>
+          <li class="  unOrderList">
+            <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/seller-node"
+              style="font-size: 14px;">
+              <i class="bi bi-person-fill-check"></i>
+              Seller
+            </a>
+          </li>
 
-            <li class="submenu-item hv1 unOrderList">
-              <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/admin-node" style="font-size: 14px;">
-                <i class="bi bi-person-fill-check"></i>
-                Admin
-              </a>
-            </li>
+          <li class=" unOrderList">
+            <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/admin-node"
+              style="font-size: 14px;">
+              <i class="bi bi-person-fill-check"></i>
+              Admin
+            </a>
+          </li>
 
-            
+
         </ul>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#submenu3" aria-expanded="false">
-        <i class="bi bi-cloud-haze2-fill"></i>
-        Catalog Meta
-        <i class="bi bi-chevron-right  ms-auto floatRit"></i>
-      </a>
-      <ul class="collapse submenu3" id="submenu3">
-        <li class="submenu-item unOrderList">
-          <a routerLink="/admin/dashboard/hsnCodes" routerLinkActive="active" class="nav-link fs13"
-            href="/admin/dashboard/hsnCodes">
-            <i class="bi bi-tags-fill"></i>
-            HSN Code
-          </a>
-        </li>
-    
-        <li class="submenu-item unOrderList">
-          <a routerLink="/admin/dashboard/brand" routerLinkActive="active" class="nav-link fs13"
-            href="/admin/dashboard/brand">
-            <i class="bi bi-tags-fill"></i>
-            Brand
-          </a>
-        </li>
-    
-        <li class="submenu-item unOrderList">
-          <a routerLink="/admin/dashboard/material" routerLinkActive="active" class="nav-link fs13"
-            href="/admin/dashboard/material">
-            <i class="bi bi-tags-fill"></i>
-            Material
-          </a>
-        </li>
-    
-        <li class="submenu-item unOrderList">
-          <a routerLink="/admin/dashboard/type" routerLinkActive="active" class="nav-link fs13"
-            href="/admin/dashboard/type">
-            <i class="bi bi-tags-fill"></i>
-            Type
-          </a>
-        </li>
-    
-        <li class="submenu-item unOrderList">
-          <a routerLink="/admin/dashboard/size" routerLinkActive="active" class="nav-link fs13"
-            href="/admin/dashboard/size">
-            <i class="bi bi-tags-fill"></i>
-            Size
-          </a>
-        </li>
-    
-        <li class="submenu-item unOrderList">
-          <a routerLink="/admin/dashboard/netQuantity" routerLinkActive="active" class="nav-link fs13"
-            href="/admin/dashboard/netQuantity">
-            <i class="bi bi-tags-fill"></i>
-            NetQuantity
-          </a>
-        </li>
-    
-    
-        <li class="submenu-item unOrderList">
-          <a class="nav-link" href="#">
-            <i class="bi bi-percent"></i>
-            Tax
-          </a>
-        </li>
-      </ul>
-    </li>
+      </li>
 
       <li class="nav-item">
-        <a class="nav-link hv1" href="#" data-bs-toggle="collapse" data-bs-target="#productInvestigation" aria-expanded="false">
+        <a class="nav-link-headings " href="#" data-bs-toggle="collapse" data-bs-target="#submenu3"
+          aria-expanded="false">
+          <i class="bi bi-cloud-haze2-fill"></i>
+          Catalog Meta
+          <i class="bi bi-chevron-right  ms-auto floatRit"></i>
+        </a>
+        <ul class="collapse submenu3" id="submenu3">
+          <li class="unOrderList">
+            <a routerLink="/admin/dashboard/hsnCodes" routerLinkActive="active" class="nav-link fs13"
+              href="/admin/dashboard/hsnCodes">
+              <i class="bi bi-tags-fill"></i>
+              HSN Code
+            </a>
+          </li>
+
+          <li class="unOrderList">
+            <a routerLink="/admin/dashboard/brand" routerLinkActive="active" class="nav-link fs13"
+              href="/admin/dashboard/brand">
+              <i class="bi bi-tags-fill"></i>
+              Brand
+            </a>
+          </li>
+
+          <li class="unOrderList">
+            <a routerLink="/admin/dashboard/material" routerLinkActive="active" class="nav-link fs13"
+              href="/admin/dashboard/material">
+              <i class="bi bi-tags-fill"></i>
+              Material
+            </a>
+          </li>
+
+          <li class="unOrderList">
+            <a routerLink="/admin/dashboard/type" routerLinkActive="active" class="nav-link fs13"
+              href="/admin/dashboard/type">
+              <i class="bi bi-tags-fill"></i>
+              Type
+            </a>
+          </li>
+
+          <li class=" unOrderList">
+            <a routerLink="/admin/dashboard/size" routerLinkActive="active" class="nav-link fs13"
+              href="/admin/dashboard/size">
+              <i class="bi bi-tags-fill"></i>
+              Size
+            </a>
+          </li>
+
+          <li class="unOrderList">
+            <a routerLink="/admin/dashboard/netQuantity" routerLinkActive="active" class="nav-link fs13"
+              href="/admin/dashboard/netQuantity">
+              <i class="bi bi-tags-fill"></i>
+              NetQuantity
+            </a>
+          </li>
+
+
+          <li class="unOrderList">
+            <a class="nav-link" href="#">
+              <i class="bi bi-percent"></i>
+              Tax
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link-headings " href="#" data-bs-toggle="collapse" data-bs-target="#productInvestigation"
+          aria-expanded="false">
           <i class="bi bi-bag-check-fill"></i>
-            Product Investigation
+          Product Investigation
           <i class="bi bi-chevron-right ms-auto floatRit"></i>
         </a>
         <ul class="collapse productInvestigation" id="productInvestigation">
-          <li class="submenu-item unOrderList">
+          <li class="unOrderList">
             <a routerLink="/admin/dashboard/product-UnderReview" routerLinkActive="active" class="nav-link fs13"
               href="/admin/dashboard/product-UnderReview">
               <i class="bi bi-bag-check-fill"></i>
@@ -249,7 +238,7 @@
         </ul>
 
         <ul class="collapse productInvestigation" id="productInvestigation">
-          <li class="submenu-item unOrderList">
+          <li class="unOrderList">
             <a routerLink="/admin/dashboard/UnderReview-variants" routerLinkActive="active" class="nav-link fs13"
               href="/admin/dashboard/UnderReview-variants">
               <i class="bi bi-bag-check-fill"></i>
@@ -260,36 +249,32 @@
 
       </li>
 
-    <div class="divider">
+      <div class="divider">
+      </div>
+    </ul>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div *ngIf="isLoggedIn" class="content mydiv" [ngClass]="{'content-expanded': !isSidebarVisible}">
+
+    <div style="width: 100%;">
+      <router-outlet>
+
+        <button mat-stroked-button type="button" (click)="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+
+        <span class="clock mx-2">
+          {{ currentTime }}
+        </span>
+
+        <!-- DYNAMIC ROOT CONTENT -->
+      </router-outlet>
+
     </div>
-</ul>
-    
-</div>
-
-<!-- CONTENT -->
-<div *ngIf="isLoggedIn" class="content mydiv" [ngClass]="{'content-expanded': !isSidebarVisible}">
-            
-            <div style="width: 100%;">
-              <router-outlet>
-             
-                <button mat-stroked-button   type="button" (click)="toggleSidebar()">
-                  <i class="bi bi-list"></i>
-                </button>
-
-                <span class="clock mx-2">
-                  {{ currentTime }}
-                </span>
-                
-              <!-- DYNAMIC ROOT CONTENT -->
-            </router-outlet>
-              
-            </div>
-</div>
-<!-- CONTENT -->
+  </div>
+  <!-- CONTENT -->
 </div>
 
 <!-- SIDEBAR ENDING -->
-
-
-
-

@@ -46,15 +46,12 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe(
       data => {
-        console.log("LOGIN:: "  + data)
         this.passkey = true;
-
         this.spinner.hide();
       },
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
-
         this.spinner.hide();
       }
     );
