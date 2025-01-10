@@ -8,15 +8,13 @@ import { ProductVerifierServiceService } from '../../../_services/product-servic
 import { PageEvent } from '@angular/material/paginator';
 // Import Bootstrap's Modal class
 declare var bootstrap: any;
-
-
 @Component({
-  selector: 'app-seller-product-under-review',
-  templateUrl: './seller-product-under-review.component.html',
-  styleUrl: './seller-product-under-review.component.css'
+  selector: 'app-product-approved',
+  templateUrl: './product-approved.component.html',
+  styleUrl: './product-approved.component.css'
 })
-export class SellerProductUnderReviewComponent {
-  @ViewChild('proccedBox') proceedBox!: ElementRef;
+export class ProductApprovedComponent {
+@ViewChild('proccedBox') proceedBox!: ElementRef;
 
         constructor(private tokenStorage: TokenStorageService, 
                     private toast:NgToastService ,
@@ -30,7 +28,7 @@ export class SellerProductUnderReviewComponent {
           
       ngOnInit(): void 
       {
-        this.getproductsUnderReview({ page: "0", size: "10" }) ;
+        this.getProductApprovedList({ page: "0", size: "10" }) ;
       }
 
       pendingDataCaptured:any[]=[];
@@ -39,14 +37,14 @@ export class SellerProductUnderReviewComponent {
       //SearchList
       searchText: string = '';
 
-      getproductsUnderReview(request:any)
+      getProductApprovedList(request:any)
       { 
           //Show Loading
           this.spinner.show();
-          this.productVerifierService.getUnderReviewNoVariantProductList(request).subscribe({
+          this.productVerifierService.productApprovedList(request).subscribe({
           next:(res:any)=> {
-          console.log(res);
-
+            console.log(res);
+            
           this.pendingDataCaptured = res.data['content'];
           this.filteredItems  = this.pendingDataCaptured;
           this.totalElements = res.data['totalElements'];
@@ -55,7 +53,7 @@ export class SellerProductUnderReviewComponent {
           error:(err:any)=>  {
           console.log(err)
           this.spinner.hide();
-          this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+          this.toast.error({detail:"Error Something went Wrong", position:"bottomRight",duration:3000});
           }
           })
       }
@@ -65,7 +63,7 @@ export class SellerProductUnderReviewComponent {
       const request:any = {};
       request['page'] = event.pageIndex.toString();
       request['size'] = event.pageSize.toString();
-      this.getproductsUnderReview(request);
+      this.getProductApprovedList(request);
       }
 
 

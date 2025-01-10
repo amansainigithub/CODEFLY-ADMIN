@@ -192,6 +192,73 @@
                       </div>
                     </div>
 
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="fs12">Mail Subject</label>
+                          <input 
+                          [(ngModel)]="form.mailSubject"
+                          type="text" 
+                          class="form-control form-control-sm" 
+                          name="mailSubject" 
+                          required #mailSubject="ngModel"
+                          [class.dirty]="mailSubject.dirty" 
+                          [class.touched]="mailSubject.touched"
+                          [ngClass]="{ 'is-invalid': mailSubject.errors && (mailSubject.touched || mailSubject.dirty ) }" />
+                  
+                          <div 
+                              *ngIf="mailSubject.errors && (mailSubject.touched || mailSubject.dirty )" 
+                              class="invalid-feedback">
+      
+                            <div 
+                              *ngIf="mailSubject.errors['required'] ">
+                               mail Subject is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+  
+  
+  
+                    <div class="form-group">
+                      <label class="fs12">Mail Body</label>
+                      <textarea style="height: 100px"
+                      type="text" 
+                      [(ngModel)]="form.mailBody"
+                      class="form-control form-control-sm" 
+                      name="mailBody" 
+                      required #mailBody="ngModel"
+                      minlength="4" 
+                      maxlength="10" 
+                      [class.dirty]="mailBody.dirty" 
+                      [class.touched]="mailBody.touched"
+                      [ngClass]="{ 'is-invalid': mailBody.errors && (mailBody.touched || mailBody.dirty ) }" >
+                     </textarea>
+              
+                      <div 
+                      *ngIf="mailBody.errors && (mailBody.touched || mailBody.dirty )" 
+                      class="invalid-feedback">
+  
+                        <div 
+                        *ngIf="mailBody.errors['required'] ">
+                        mailBody is required
+                        </div>
+  
+                        <div 
+                        *ngIf="mailBody.errors['minlength']">
+                          mailBody must be at least 4 characters
+                        </div>
+  
+                        <div 
+                        *ngIf="mailBody.errors['maxlength']">
+                          mailBody must be at most 10 characters
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="d-grid gap-2 col-12 mx-auto mt-4">
                         <button mat-raised-button color="primary" [disabled]="f.invalid">save PRODUCT REVIEW</button>
                       </div>
@@ -217,7 +284,7 @@
                 novalidate>
 
                   <div class="form-group">
-                    <label class="fs12">productStatus</label>
+                    <label class="fs12">product Status</label>
                     <input 
                     [(ngModel)]="updateform.productStatus"
                     type="text" 
@@ -258,7 +325,7 @@
                   <div class="row">
                     <div class="col">
                       <div class="form-group">
-                        <label class="fs12">default Name</label>
+                        <label class="fs12">Product Value</label>
                         <input 
                         [(ngModel)]="updateform.productStatusValue"
                         type="text" 
@@ -317,6 +384,74 @@
                       <div 
                       *ngIf="description.errors['maxlength']">
                         description must be at most 10 characters
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label class="fs12">Mail Subject</label>
+                        <input 
+                        [(ngModel)]="updateform.mailSubject"
+                        type="text" 
+                        class="form-control form-control-sm" 
+                        name="mailSubject" 
+                        required #mailSubject="ngModel"
+                        [class.dirty]="mailSubject.dirty" 
+                        [class.touched]="mailSubject.touched"
+                        [ngClass]="{ 'is-invalid': mailSubject.errors && (mailSubject.touched || mailSubject.dirty ) }" />
+                
+                        <div 
+                            *ngIf="mailSubject.errors && (mailSubject.touched || mailSubject.dirty )" 
+                            class="invalid-feedback">
+    
+                          <div 
+                            *ngIf="mailSubject.errors['required'] ">
+                             mail Subject is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="form-group">
+                    <label class="fs12">Mail Body</label>
+                    <textarea style="height: 100px"
+                    type="text" 
+                    [(ngModel)]="updateform.mailBody"
+                    class="form-control form-control-sm" 
+                    name="mailBody" 
+                    [(ngModel)]="form.mailBody" 
+                    required #mailBody="ngModel"
+                    minlength="4" 
+                    maxlength="10" 
+                    [class.dirty]="mailBody.dirty" 
+                    [class.touched]="mailBody.touched"
+                    [ngClass]="{ 'is-invalid': mailBody.errors && (mailBody.touched || mailBody.dirty ) }" >
+                   </textarea>
+            
+                    <div 
+                    *ngIf="mailBody.errors && (mailBody.touched || mailBody.dirty )" 
+                    class="invalid-feedback">
+
+                      <div 
+                      *ngIf="mailBody.errors['required'] ">
+                      mailBody is required
+                      </div>
+
+                      <div 
+                      *ngIf="mailBody.errors['minlength']">
+                        mailBody must be at least 4 characters
+                      </div>
+
+                      <div 
+                      *ngIf="mailBody.errors['maxlength']">
+                        mailBody must be at most 10 characters
                       </div>
                     </div>
                   </div>

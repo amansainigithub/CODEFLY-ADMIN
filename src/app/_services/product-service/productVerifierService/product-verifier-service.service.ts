@@ -38,4 +38,11 @@ export class ProductVerifierServiceService {
     return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerProductUnderReviewNoVariantList/'+"username"+"?page="+request.page +"&size="+request.size);
   }
 
+  productApprovedList(request:any) {
+    return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerProductApprovedList/'+"username"+"?page="+request.page +"&size="+request.size);
+  }
+
+  productVariantApprovedList(request:any) {
+    return this.http.get(API_AUTHORIZA_URL + 'adminSellerProductVerifyController/getSellerVariantProductApprovedList/'+"username"+"?page="+request.page +"&size="+request.size);
+  }
 }

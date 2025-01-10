@@ -40,5 +40,7 @@ export class ProductReviewStatusService {
     updateMaterial(data:any): Observable<any> {
         return this.http.post(API_AUTHORIZA_URL + "adminProductReviewStatusController/" + 'updateProductReviewStatus',data, httpOptions);
     }
+
+    
      
 }
