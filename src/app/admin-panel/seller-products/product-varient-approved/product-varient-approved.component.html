@@ -31,8 +31,9 @@
                    
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let data of filteredItems; let i = index">
+
+            <tbody *ngIf="variantApproved[0] !== null">
+              <tr  *ngFor="let data of filteredItems; let i = index">
                 <td>{{ data.id }}</td>
 
                     <td *ngIf="data.fileUrl !== null ">
@@ -62,7 +63,7 @@
                             </span>
                         </span>
                     </td>
-                    <td>{{ data.howManyVariants + 1 }}</td>
+                    <td>{{ data.howManyVariants}}</td>
 
                     <td>
                       <span class="productStatusApproved px-2">
@@ -75,9 +76,13 @@
                         </span>
                       </span>
                     </td>
-                
               </tr>
             </tbody>
+            <ng-template #noData>
+              <tr>
+                <td colspan="3">No data available</td>
+              </tr>
+            </ng-template>
           </table>
           <mat-paginator 
           [pageSizeOptions]="[10, 50, 100, 200]" 

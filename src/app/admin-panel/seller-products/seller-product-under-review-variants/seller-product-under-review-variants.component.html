@@ -43,19 +43,28 @@
           <td>{{ parent.productColor }}</td>
 
           <td>
-            <span class="fs11 productStatusComplete">
+            <span *ngIf="parent.productStatus === 'PV_UNDER_REVIEW' " class="fs11 pur" >
               {{ parent.productStatus }}
             </span>
+
+            <span *ngIf="parent.productStatus === 'PV_APPROVED' " class="fs11 pva" >
+              {{ parent.productStatus }}
+            </span>
+
           </td>
 
           
           <td>
-            <button  mat-raised-button (click)="variantProceedBoxOpen(parent.id)"
-                        style="background-color: #f6dc1f;">
-                        Verify Parent
-             </button>
+            <button class="btnUnderReviewColor" *ngIf="parent.productStatus === 'PV_UNDER_REVIEW'"  mat-raised-button (click)="variantProceedBoxOpen(parent.id)">
+              Verify Parent
+            </button>
+
+             <div *ngIf="parent.productStatus === 'PV_APPROVED'" class="px-2 pva" >
+              Approved
+            </div>
+
              <br>
-            <button class="mt-1" mat-raised-button color="primary" data-bs-toggle="collapse"
+            <button mat-raised-button color="primary" data-bs-toggle="collapse"
               [attr.data-bs-target]="'#collapse-' + parent.id" aria-expanded="true"
               [attr.aria-controls]="'collapse-' + parent.id">
               Variants
@@ -87,8 +96,8 @@
                 <tbody>
                   <tr *ngFor="let variant of parent.sellerProductVariantPayloads" class="fs12"
                       [ngClass]="{
-                        'complete-status': variant.productStatus === 'COMPLETE',
-                        'incomplete-status': variant.productStatus !== 'COMPLETE'
+                        'pvUnderReview': variant.productStatus === 'PV_UNDER_REVIEW',
+                        'approved': variant.productStatus === 'PV_APPROVED'
                       }"
                       >
                     <td>{{ variant.id }}</td>
@@ -109,21 +118,27 @@
                     <td>{{ variant.productColor }}</td>
 
                     <td>
-                      <span class="fs11 productStatusInComplete">
+                      <span *ngIf="variant.productStatus === 'PV_UNDER_REVIEW'" class="fs11 pur">
+                        {{ variant.productStatus }}
+                      </span>
+
+                      <span *ngIf="variant.productStatus === 'PV_APPROVED'" class="fs11 pva">
                         {{ variant.productStatus }}
                       </span>
                     </td>
 
                     <td>
-                      <button mat-raised-button (click)="variantProceedBoxOpen(variant.id)"
-                        style="background-color: #f6dc1f;">
+                      <button  class="btnUnderReviewColor" *ngIf="variant.productStatus === 'PV_UNDER_REVIEW'" mat-raised-button (click)="variantProceedBoxOpen(variant.id)" >
                         Verify
                       </button>
+                       
+                      <div *ngIf="variant.productStatus === 'PV_APPROVED'" class="px-2 pva" >
+                        Approved
+                      </div>
 
                       <span *ngIf="variant.productStatus === 'COMPLETE'" class="text-success fs24 d-flex ">
                         <i class="bi bi-check-all"></i>
                       </span>
-
                     </td>
 
                   </tr>

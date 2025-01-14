@@ -18,22 +18,29 @@
 }
 
 
-.complete-status{
-  background-color: #e6ffc0;
-}
-
-.incomplete-status{
+.pvUnderReview{
   background-color: #fcf8a9;;
 }
 
-.productStatusComplete{
-  background-color: #a2e142;
-  border-radius: 2px;
+
+.approved{
+  background-color: lightgreen;
+}
+
+.pur{
+  background-color: yellow;
+  color: black;
+  border-radius: 5px;
   padding: 4px;
 }
 
-.productStatusInComplete{
-  background-color: #f6dc1f;
-  border-radius: 2px;
+.pva{
+  background-color: lightgreen;
+  color: black;
+  border-radius: 5px;
   padding: 4px;
+}
+
+.btnUnderReviewColor{
+  background-color: #e8ec05;
 }

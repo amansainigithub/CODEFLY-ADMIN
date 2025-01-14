@@ -32,7 +32,7 @@ export class ProductVarientApprovedComponent {
         this.getProductVariantApprovedList({ page: "0", size: "10" }) ;
       }
 
-      pendingDataCaptured:any[]=[];
+      variantApproved:any[]=[];
       filteredItems:any;
       totalElements:any;
       //SearchList
@@ -44,10 +44,13 @@ export class ProductVarientApprovedComponent {
           this.spinner.show();
           this.productVerifierService.productVariantApprovedList(request).subscribe({
           next:(res:any)=> {
+
+            console.log("==================================LLLL");
             console.log(res);
             
-          this.pendingDataCaptured = res.data['content'];
-          this.filteredItems  = this.pendingDataCaptured;
+            
+          this.variantApproved = res.data['content'];
+          this.filteredItems  = this.variantApproved;
           this.totalElements = res.data['totalElements'];
           this.spinner.hide();
           },
@@ -91,11 +94,11 @@ export class ProductVarientApprovedComponent {
         onSearch() {
           const searchQuery = this.searchText.trim().toLowerCase();
           if (searchQuery) {
-          this.filteredItems = this.pendingDataCaptured.filter(item => 
+          this.filteredItems = this.variantApproved.filter(item => 
           String(item.productCode).toLowerCase().includes(searchQuery)
           );
           } else {
-          this.filteredItems = this.pendingDataCaptured;
+          this.filteredItems = this.variantApproved;
           }
           }
           //Search Ending
