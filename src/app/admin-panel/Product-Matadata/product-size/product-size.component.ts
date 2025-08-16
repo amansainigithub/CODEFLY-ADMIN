@@ -49,10 +49,8 @@ export class ProductSizeComponent {
    }
    
    constructor(
-              private router:Router, 
               private sizeService:SizeService,
               private toast:NgToastService ,
-              private bucket:BucketService,
               private spinner: NgxSpinnerService)
             {}
  

@@ -79,46 +79,41 @@
             class="ms-auto floatRit"></i>
         </a>
 
+         <ul class="collapse submenu4" id="submenu4">
+          <li class="unOrderList">
+            <a class="nav-link fs13" routerLinkActive="active" href="" routerLink="/admin/dashboard/root-category">
+              <i class="bi bi-window-sidebar"></i>
+              Root Category
+            </a>
+          </li>
+        </ul>
+
         <ul class="collapse submenu4" id="submenu4">
           <li class="unOrderList">
-            <a class="nav-link fs13" routerLinkActive="active" href="" routerLink="/admin/dashboard/parent-category">
+            <a class="nav-link fs13" routerLinkActive="active" href="" routerLink="/admin/dashboard/sub-category">
               <i class="bi bi-window-sidebar"></i>
-              Parent Category
-            </a>
-          </li>
-        </ul>
-
-
-        <ul class="collapse submenu4" id="submenu4">
-          <li class=" unOrderList">
-            <a class="nav-link fs13" routerLinkActive="active" href="/admin/dashboard/child-category"
-              routerLink="/admin/dashboard/child-category">
-              <i class="bi bi-bookmarks-fill"></i>
-              Child Category
+              Sub Category
             </a>
           </li>
         </ul>
 
         <ul class="collapse submenu4" id="submenu4">
-          <li class=" unOrderList">
-            <a class="nav-link fs13" routerLinkActive="active" href="/admin/dashboard/baby-category"
-              routerLink="/admin/dashboard/baby-category">
-              <i class="bi bi-bookmarks-fill"></i>
-              Baby Category
+          <li class="unOrderList">
+            <a class="nav-link fs13" routerLinkActive="active" href="" routerLink="/admin/dashboard/type-category">
+              <i class="bi bi-window-sidebar"></i>
+              Type Category
             </a>
           </li>
         </ul>
 
         <ul class="collapse submenu4" id="submenu4">
-          <li class=" unOrderList">
-            <a class="nav-link fs13" routerLinkActive="active" href="/admin/dashboard/born-category"
-              routerLink="/admin/dashboard/born-category">
-              <i class="bi bi-bookmarks-fill"></i>
-              Born Category
+          <li class="unOrderList">
+            <a class="nav-link fs13" routerLinkActive="active" href="" routerLink="/admin/dashboard/variant-category">
+              <i class="bi bi-window-sidebar"></i>
+              Variant Category
             </a>
           </li>
         </ul>
-
       </li>
 
       <li class="nav-item">
@@ -218,92 +213,6 @@
               href="/admin/dashboard/netQuantity">
               <i class="bi bi-tags-fill"></i>
               NetQuantity
-            </a>
-          </li>
-
-
-          <li class="unOrderList">
-            <a class="nav-link" href="#">
-              <i class="bi bi-percent"></i>
-              Tax
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item">
-
-        <a class="nav-link-headings"  (click)="toggleSubmenu('productInvestigation')"  href="#" data-bs-toggle="collapse" data-bs-target="#productInvestigation"
-          aria-expanded="false">
-          <i class="bi bi-bag-check-fill"></i>
-          Product Investigation
-          <i 
-            [class.bi-chevron-right]="!isProductInvestigation" 
-            [class.bi-chevron-down]="isProductInvestigation" 
-            class="ms-auto floatRit"></i>
-        </a>
-
-        <ul class="collapse productInvestigation" id="productInvestigation">
-          <li class="unOrderList">
-            <a routerLink="/admin/dashboard/UnderReview-variants" routerLinkActive="active" class="nav-link fs13"
-              href="/admin/dashboard/UnderReview-variants">
-              <i class="bi bi-bag-check-fill"></i>
-              UnderReview Variants
-            </a>
-          </li>
-        </ul>
-
-        <ul class="collapse productInvestigation" id="productInvestigation">
-          <li class="unOrderList">
-            <a routerLink="/admin/dashboard/product-UnderReview" routerLinkActive="active" class="nav-link fs13"
-              href="/admin/dashboard/product-UnderReview">
-              <i class="bi bi-bag-check-fill"></i>
-              product UnderReview
-            </a>
-          </li>
-        </ul>
-
-        <ul class="collapse productInvestigation" id="productInvestigation">
-          <li class="unOrderList">
-            <a routerLink="/admin/dashboard/product-approved" routerLinkActive="active" class="nav-link fs13"
-              href="/admin/dashboard/product-approved">
-              <i class="bi bi-bag-check-fill"></i>
-              Product Approved
-            </a>
-          </li>
-        </ul>
-
-        <ul class="collapse productInvestigation" id="productInvestigation">
-          <li class="unOrderList">
-            <a routerLink="/admin/dashboard/product-varinat-approved" routerLinkActive="active" class="nav-link fs13"
-              href="/admin/dashboard/product-varinat-approved">
-              <i class="bi bi-bag-check-fill"></i>
-              Product Variant Appr
-            </a>
-          </li>
-        </ul>
-
-        
-      </li>
-
-      <li class="nav-item">
-
-        <a class="nav-link-headings"  (click)="toggleSubmenu('productReviews')"  href="#" data-bs-toggle="collapse" data-bs-target="#productReviewStatus"
-          aria-expanded="false">
-          <i class="bi bi-bag-check-fill"></i>
-          Product Reviews Status
-          <i 
-            [class.bi-chevron-right]="!isProductReviews" 
-            [class.bi-chevron-down]="isProductReviews" 
-            class="ms-auto floatRit"></i>
-        </a>
-
-        <ul class="collapse productReviewStatus" id="productReviewStatus">
-          <li class="unOrderList">
-            <a routerLink="/admin/dashboard/product-reviews-status" routerLinkActive="active" class="nav-link fs13"
-              href="/admin/dashboard/product-reviews-status">
-              <i class="bi bi-bag-check-fill"></i>
-              product ReviewStatus 
             </a>
           </li>
         </ul>

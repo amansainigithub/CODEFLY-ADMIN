@@ -49,10 +49,8 @@ export class ProductMaterialComponent {
    }
    
    constructor(
-              private router:Router, 
               private materialService:MaterialService,
               private toast:NgToastService ,
-              private bucket:BucketService,
               private spinner: NgxSpinnerService)
             {}
  

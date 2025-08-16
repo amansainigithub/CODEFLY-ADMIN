@@ -49,10 +49,8 @@ export class ProductNetQuantityComponent {
    }
    
    constructor(
-              private router:Router, 
               private netQuantityService:NetQuantityService,
               private toast:NgToastService ,
-              private bucket:BucketService,
               private spinner: NgxSpinnerService)
             {}
  

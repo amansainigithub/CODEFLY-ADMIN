@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ParentCategoryService } from '../../../_services/categories/parentCategory/parent-category.service';
 import { BucketService } from '../../../_services/bucket/bucket.service';
 import Swal from 'sweetalert2';
 import { HsnService } from '../../../_services/HsnService/hsn.service';
@@ -51,11 +50,8 @@ export class HsnCodesComponent {
    }
    
    constructor(
-              private router:Router, 
-              private parentCategoryService:ParentCategoryService ,
               private hsnService:HsnService,
               private toast:NgToastService ,
-              private bucket:BucketService,
               private spinner: NgxSpinnerService)
             {}
  

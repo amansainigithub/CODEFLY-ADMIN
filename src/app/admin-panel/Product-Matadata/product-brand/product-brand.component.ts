@@ -49,10 +49,8 @@ export class ProductBrandComponent {
    }
    
    constructor(
-              private router:Router, 
               private brandService:BrandService,
               private toast:NgToastService ,
-              private bucket:BucketService,
               private spinner: NgxSpinnerService)
             {}
  
