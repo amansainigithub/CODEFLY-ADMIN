@@ -29,7 +29,6 @@ import { CustomerComponent } from './admin-panel/users/customer/customer.compone
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AdminComponent } from './admin-panel/users/admin/admin.component';
 import { SellerComponent } from './admin-panel/users/seller/seller.component';
-import { HsnCodesComponent } from './admin-panel/tax/hsn-codes/hsn-codes.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core'; // For Native Date Adapter
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,6 +47,7 @@ import { TypeCategoryComponent } from './admin-panel/categories/type-category/ty
 import { UpdateTypeFileComponent } from './admin-panel/categories/type-category/update-type-file/update-type-file.component';
 import { VariantCategoryComponent } from './admin-panel/categories/variant-category/variant-category.component';
 import { UpdateVariantFileComponent } from './admin-panel/categories/variant-category/update-variant-file/update-variant-file.component';
+import { HsnCodesComponent } from './admin-panel/hsn-codes/hsn-codes.component';
 
 @NgModule({
   declarations: [

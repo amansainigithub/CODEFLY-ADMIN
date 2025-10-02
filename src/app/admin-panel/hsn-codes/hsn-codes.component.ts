@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { BucketService } from '../../../_services/bucket/bucket.service';
+import { BucketService } from '../../_services/bucket/bucket.service';
 import Swal from 'sweetalert2';
-import { HsnService } from '../../../_services/HsnService/hsn.service';
+import { HsnService } from '../../_services/HsnService/hsn.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
