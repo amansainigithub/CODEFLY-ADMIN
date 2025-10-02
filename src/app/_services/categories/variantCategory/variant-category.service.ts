@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class VariantCategoryService {
 
-  constructor(private http: HttpClient , private toast:NgToastService) { }
+  constructor(private http: HttpClient) { }
   
   
     getVariantCategoryListService(): Observable<any> {

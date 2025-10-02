@@ -16,6 +16,7 @@ import { RootCategoryComponent } from './admin-panel/categories/root-category/ro
 import { SubCategoryComponent } from './admin-panel/categories/sub-category/sub-category.component';
 import { TypeCategoryComponent } from './admin-panel/categories/type-category/type-category.component';
 import { VariantCategoryComponent } from './admin-panel/categories/variant-category/variant-category.component';
+import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-configuration/charge-configuration.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -44,6 +45,9 @@ const routes: Routes = [
                   { path: 'sub-category', component: SubCategoryComponent , pathMatch:'full' },
                   { path: 'type-category', component: TypeCategoryComponent , pathMatch:'full' },
                   { path: 'variant-category', component: VariantCategoryComponent , pathMatch:'full' },
+
+                  //Charge Config
+                  { path: 'charge-config', component: ChargeConfigurationComponent , pathMatch:'full' },
 
       ],
 }

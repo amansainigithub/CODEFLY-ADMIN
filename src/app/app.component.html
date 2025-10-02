@@ -57,13 +57,12 @@
 <!-- SIDEBAR STARTING-->
 <div *ngIf="isLoggedIn">
   <div class="sidebar scrollable-content" [ngClass]="{'sidebar-extend-min': !isSidebarVisible}">
-    <!-- <a href="" class="item">Home</a>
-      <a href="" class="item">Product</a> -->
 
     <ul class="nav flex-column">
 
       <li class="nav-item mt-5 text-center mb-3">
-        <a class="nav-link-headings gradient-background" href="" data-bs-toggle="collapse" data-bs-target="#submenu1" aria-expanded="false">
+        <a class="nav-link-headings gradient-background text-white" href="" data-bs-toggle="collapse" data-bs-target="#submenu1"
+           aria-expanded="false">
           <i class="bi bi-house-door"></i>
           Home
         </a>
@@ -213,6 +212,29 @@
               href="/admin/dashboard/netQuantity">
               <i class="bi bi-tags-fill"></i>
               NetQuantity
+            </a>
+          </li>
+        </ul>
+      </li>
+
+
+      <li class="nav-item">
+
+        <a class="nav-link-headings" (click)="toggleSubmenu('chargeConfig')"  href="#" data-bs-toggle="collapse" 
+           data-bs-target="#changeConfigMenu" aria-expanded="false">
+          <i class="bi bi-people"></i> Charge Config
+          <i 
+            [class.bi-chevron-right]="!isChargeConfig" 
+            [class.bi-chevron-down]="isChargeConfig" 
+            class="ms-auto floatRit"></i>
+        </a>
+
+        <ul class="collapse submenu" id="changeConfigMenu">
+          <li class="  unOrderList">
+            <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/charge-config"
+              style="font-size: 14px;">
+              <i class="bi bi-person-fill-check"></i>
+              Charge Config
             </a>
           </li>
         </ul>

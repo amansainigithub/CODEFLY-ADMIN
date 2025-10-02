@@ -48,6 +48,7 @@ import { UpdateTypeFileComponent } from './admin-panel/categories/type-category/
 import { VariantCategoryComponent } from './admin-panel/categories/variant-category/variant-category.component';
 import { UpdateVariantFileComponent } from './admin-panel/categories/variant-category/update-variant-file/update-variant-file.component';
 import { HsnCodesComponent } from './admin-panel/hsn-codes/hsn-codes.component';
+import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-configuration/charge-configuration.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { HsnCodesComponent } from './admin-panel/hsn-codes/hsn-codes.component';
     UpdateTypeFileComponent,
     VariantCategoryComponent,
     UpdateVariantFileComponent,
+    ChargeConfigurationComponent,
   ],
   imports: [
     BrowserModule,

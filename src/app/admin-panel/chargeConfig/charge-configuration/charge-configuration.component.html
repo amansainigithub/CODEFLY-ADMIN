@@ -1,0 +1,402 @@
+<div class="mt-4">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- COL-MD-5 STARTING -->
+            <div class="col-md-5">
+
+              <!-- SAVE CHARGE ENDING -->
+              <div *ngIf="!viceVersaForm">
+                  <div class="alert">
+                      <i class="bi bi-lightning-charge baseColor"></i>
+                      <p>Charge Config</p>
+                  </div>
+                                  <!-- SAVE CATEGORY START-->
+                  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"  novalidate>
+
+
+                      <!-- Variant Category start-->
+                        <div>
+                          <label class="fs12">Variant Category</label>
+                          <select  
+                            [(ngModel)]="form.variantId"
+                            name="childCategoryId" 
+                            class="form-select form-select-sm"
+                            aria-label="Default select example"
+                            required #variantId="ngModel"
+                            [class.dirty]="variantId.dirty" 
+                            [class.touched]="variantId.touched"
+                            [ngClass]="{ 'is-invalid': variantId.errors && (variantId.touched || variantId.dirty ) }"
+                          >
+                            <option  value="null" disabled selected>select</option>
+                              <option *ngFor="let variantData of variantList" [value]="variantData.id">
+                                {{ variantData.categoryName}}
+                              </option>
+                          </select>   
+                          
+                          <div *ngIf="variantId.errors && (variantId.touched || variantId.dirty )" class="invalid-feedback fs11">
+                              <div  *ngIf="variantId.errors['required'] ">
+                              Variant is required
+                              </div>
+                          </div>
+                        </div>
+                        <!-- Variant Category end-->
+
+
+
+                        <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                  <label class="fs12">TCS Charges</label>
+                                  <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="tcsCharge" 
+                                  [(ngModel)]="form.tcsCharge" 
+                                  required #tcsCharge="ngModel"
+                                  [class.dirty]="tcsCharge.dirty"  
+                                  [class.touched]="tcsCharge.touched"
+                                  [ngClass]="{ 'is-invalid': tcsCharge.errors && (tcsCharge.touched || tcsCharge.dirty ) }" /> 
+                          
+                                  <div *ngIf="tcsCharge.errors && (tcsCharge.touched || tcsCharge.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="tcsCharge.errors['required'] ">
+                                      TCS Charge is required
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="fs12">TDS Charges</label>
+                                    <input 
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="tdsCharge" 
+                                    [(ngModel)]="form.tdsCharge" 
+                                    required #tdsCharge="ngModel"
+                                    [class.dirty]="tdsCharge.dirty" 
+                                    [class.touched]="tdsCharge.touched"
+                                    [ngClass]="{ 'is-invalid': tdsCharge.errors && (tdsCharge.touched || tdsCharge.dirty ) }" />
+                            
+                                    <div *ngIf="tdsCharge.errors && (tdsCharge.touched || tdsCharge.dirty )"class="invalid-feedback fs11">
+                                      <div *ngIf="tdsCharge.errors['required'] ">
+                                        TDS Charge is required
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                  <label class="fs12">Shipping Charges</label>
+                                  <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="shippingCharge" 
+                                  [(ngModel)]="form.shippingCharge" 
+                                  required #shippingCharge="ngModel"
+                                  [class.dirty]="shippingCharge.dirty"  
+                                  [class.touched]="shippingCharge.touched"
+                                  [ngClass]="{ 'is-invalid': shippingCharge.errors && (shippingCharge.touched || shippingCharge.dirty ) }" /> 
+                          
+                                  <div *ngIf="shippingCharge.errors && (shippingCharge.touched || shippingCharge.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="shippingCharge.errors['required'] ">
+                                      Shipping Charge is required
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="fs12">Shipping Charges Fee</label>
+                                    <input 
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="shippingChargeFee" 
+                                    [(ngModel)]="form.shippingChargeFee" 
+                                    required #shippingChargeFee="ngModel"
+                                    [class.dirty]="shippingChargeFee.dirty" 
+                                    [class.touched]="shippingChargeFee.touched"
+                                    [ngClass]="{ 'is-invalid': shippingChargeFee.errors && (shippingChargeFee.touched || shippingChargeFee.dirty ) }" />
+                            
+                                    <div *ngIf="shippingChargeFee.errors && (shippingChargeFee.touched || shippingChargeFee.dirty )"class="invalid-feedback fs11">
+                                      <div *ngIf="shippingChargeFee.errors['required'] ">
+                                        Shipping Charge Fee is required
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+
+
+                        <div class="form-group">
+                              <label class="fs12">Description</label>
+                              <textarea style="height: 100px"
+                              type="text" 
+                              class="form-control form-control-sm" 
+                              name="description" 
+                              [(ngModel)]="form.description" 
+                              #description="ngModel"
+                              >
+                            </textarea>
+                          </div>
+              
+                    <div class="d-grid gap-2 col-12 mx-auto mt-4">
+                        <button mat-raised-button color="primary" [disabled]="f.invalid">Save Charge</button>
+                        <div *ngIf="progressBarShow">
+                          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                        </div>
+                      </div>
+
+                  </form>
+              </div>
+                 <!-- SAVE CHARGE ENDING -->
+
+
+
+                 <!-- UPDATE CATEGORY STARTING -->
+                 <div *ngIf="viceVersaForm">
+                    <div class="alert">
+                        <i class="bi bi-lightning-charge baseColor"></i>
+                        <p>Charge Config Modified</p>
+                    </div>
+                                  <!-- SAVE CATEGORY START-->
+                  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && updateChargeConfig()"  novalidate>
+
+
+                      <!-- Variant Category start-->
+                        <div>
+                          <label class="fs12">Variant Category</label>
+                          <select  
+                            [(ngModel)]="updateform.variantId"
+                            name="childCategoryId" 
+                            class="form-select form-select-sm"
+                            aria-label="Default select example"
+                            required #variantId="ngModel"
+                            [class.dirty]="variantId.dirty" 
+                            [class.touched]="variantId.touched"
+                            [ngClass]="{ 'is-invalid': variantId.errors && (variantId.touched || variantId.dirty ) }"
+                          >
+                            <option  value="null" disabled selected>select</option>
+                              <option *ngFor="let variantData of variantList" [value]="variantData.id">
+                                {{ variantData.categoryName}}
+                              </option>
+                          </select>   
+                          
+                          <div *ngIf="variantId.errors && (variantId.touched || variantId.dirty )" class="invalid-feedback fs11">
+                              <div  *ngIf="variantId.errors['required'] ">
+                              Variant is required
+                              </div>
+                          </div>
+                        </div>
+                        <!-- Variant Category end-->
+
+
+
+                        <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                  <label class="fs12">TCS Charges</label>
+                                  <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="tcsCharge" 
+                                  [(ngModel)]="updateform.tcsCharge" 
+                                  required #tcsCharge="ngModel"
+                                  [class.dirty]="tcsCharge.dirty"  
+                                  [class.touched]="tcsCharge.touched"
+                                  [ngClass]="{ 'is-invalid': tcsCharge.errors && (tcsCharge.touched || tcsCharge.dirty ) }" /> 
+                          
+                                  <div *ngIf="tcsCharge.errors && (tcsCharge.touched || tcsCharge.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="tcsCharge.errors['required'] ">
+                                      TCS Charge is required
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="fs12">TDS Charges</label>
+                                    <input 
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="tdsCharge" 
+                                    [(ngModel)]="updateform.tdsCharge" 
+                                    required #tdsCharge="ngModel"
+                                    [class.dirty]="tdsCharge.dirty" 
+                                    [class.touched]="tdsCharge.touched"
+                                    [ngClass]="{ 'is-invalid': tdsCharge.errors && (tdsCharge.touched || tdsCharge.dirty ) }" />
+                            
+                                    <div *ngIf="tdsCharge.errors && (tdsCharge.touched || tdsCharge.dirty )"class="invalid-feedback fs11">
+                                      <div *ngIf="tdsCharge.errors['required'] ">
+                                        TDS Charge is required
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                  <label class="fs12">Shipping Charges</label>
+                                  <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="shippingCharge" 
+                                  [(ngModel)]="updateform.shippingCharge" 
+                                  required #shippingCharge="ngModel"
+                                  [class.dirty]="shippingCharge.dirty"  
+                                  [class.touched]="shippingCharge.touched"
+                                  [ngClass]="{ 'is-invalid': shippingCharge.errors && (shippingCharge.touched || shippingCharge.dirty ) }" /> 
+                          
+                                  <div *ngIf="shippingCharge.errors && (shippingCharge.touched || shippingCharge.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="shippingCharge.errors['required'] ">
+                                      Shipping Charge is required
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="fs12">Shipping Charges Fee</label>
+                                    <input 
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="shippingChargeFee" 
+                                    [(ngModel)]="updateform.shippingChargeFee" 
+                                    required #shippingChargeFee="ngModel"
+                                    [class.dirty]="shippingChargeFee.dirty" 
+                                    [class.touched]="shippingChargeFee.touched"
+                                    [ngClass]="{ 'is-invalid': shippingChargeFee.errors && (shippingChargeFee.touched || shippingChargeFee.dirty ) }" />
+                            
+                                    <div *ngIf="shippingChargeFee.errors && (shippingChargeFee.touched || shippingChargeFee.dirty )"class="invalid-feedback fs11">
+                                      <div *ngIf="shippingChargeFee.errors['required'] ">
+                                        Shipping Charge Fee is required
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+
+
+                        <div class="form-group">
+                              <label class="fs12">Description</label>
+                              <textarea style="height: 100px"
+                              type="text" 
+                              class="form-control form-control-sm" 
+                              name="description" 
+                              [(ngModel)]="updateform.description" 
+                              #description="ngModel"
+                              >
+                            </textarea>
+                          </div>
+
+                    <div class="form-group">
+                      <label class="fs12 mt-3">Charge Status</label>
+                        <div>
+                          <mat-slide-toggle name="isActive"  [(ngModel)]="updateform.active">
+                          </mat-slide-toggle>
+                        </div>
+                     </div>
+              
+                    <div class="d-grid gap-2 col-12 mx-auto mt-4">
+                        <button mat-raised-button color="primary" [disabled]="f.invalid">Save Charge</button>
+                        <div *ngIf="progressBarShow">
+                          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                        </div>
+                      </div>
+
+                  </form>
+                </div>
+                <!-- UPDATE CATEGORY ENDING -->
+            </div>
+            <!-- COL-MD5 ENDING -->
+
+
+
+
+
+            <!-- COL-MD-6 STARTING -->
+            <div class="col-md-7">
+
+              <div class="alert">
+                <i class="bi bi-lightning-charge baseColor"></i>
+                <p>Charge Config</p>
+              </div>
+
+
+              <table class="table table-sm table-bordered fs11 table-hover" >
+              <thead>
+                <tr class="text-center">
+
+                  <th scope="col">S.N</th>
+                  <th scope="col">VariantId</th>
+                  <th scope="col">Variant Name</th>
+                  <th scope="col">TCS Charge</th>
+                  <th scope="col">TDS Charge</th>
+                  <th scope="col">Shipping Charge</th>
+                  <th scope="col">Shipping Charge Fee</th>
+                  <th scope="col">Active</th>
+                  <th scope="col">Update</th>
+                  <th scope="col">Remove</th>
+
+                </tr>
+              </thead>
+              <tbody >
+                <tr *ngFor="let data of chargeConfigList , let i = index" class="text-center" >
+                  <th scope="row">{{ i + 1 }}</th>
+                  <th>{{data.variantId}}</th>
+                  
+                  <td>{{data.variantName}}</td>
+
+                   <td>{{data.tcsCharge}}</td>
+                   <td>{{data.tdsCharge}}</td>
+                   <td>{{data.shippingCharge}}</td>
+                   <td>{{data.shippingChargeFee}}</td>
+
+                  <td *ngIf="data.active" >
+                    <div class="dotGreen">
+                      <i class="bi bi-dot"></i>
+                    </div>  
+                  </td>
+                  <td *ngIf="!data.active" >
+                    <div class="dotRed">
+                      <i class="bi bi-dot"></i>
+                    </div>  
+                  </td>
+
+                  <td>
+                    <button   (click)="getChargeConfigById(data.id)"  type="button" class="btn btn-primary btn-sm">
+                      <i class="bi bi-pencil-square bg-primary"></i>
+                    </button>
+                  </td>
+
+                  <td>
+                    <button (click)="deleteCharge(data.id)" type="button" class="btn btn-sm" style="color: #d30909;">
+                      <i class="bi bi-file-earmark-x-fill"></i>
+                    </button>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+
+            </div>
+            <!-- COL-MD-6 ENDING -->
+
+
+
+        </div>
+    </div>
+</div>
