@@ -15,10 +15,9 @@ export class ChargeConfigService {
   constructor(private http: HttpClient) { }
 
 
-   saveChargeConfig(data:any): Observable<any> {
-        return this.http.post(API_AUTHORIZA_URL + "chargeConfigController/" + 'createChargeConfig',data, httpOptions);
+  saveChargeConfig(data:any): Observable<any> {
+      return this.http.post(API_AUTHORIZA_URL + "chargeConfigController/" + 'createChargeConfig',data, httpOptions);
       }
-
 
   getChargeConfigListService(): Observable<any> {
       return this.http.get(API_AUTHORIZA_URL + "chargeConfigController/" + 'getChargeConfigList', httpOptions);

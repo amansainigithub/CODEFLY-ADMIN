@@ -49,6 +49,8 @@ import { VariantCategoryComponent } from './admin-panel/categories/variant-categ
 import { UpdateVariantFileComponent } from './admin-panel/categories/variant-category/update-variant-file/update-variant-file.component';
 import { HsnCodesComponent } from './admin-panel/hsn-codes/hsn-codes.component';
 import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-configuration/charge-configuration.component';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -100,6 +102,9 @@ import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-
     MatNativeDateModule,
     MatFormFieldModule,
     MatTooltipModule,
+    MatTableModule,
+    MatInputModule
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync(), DatePipe],
