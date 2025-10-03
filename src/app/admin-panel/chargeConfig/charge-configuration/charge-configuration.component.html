@@ -13,6 +13,7 @@
                       <i class="bi bi-lightning-charge baseColor"></i>
                       <p>Charge Config</p>
                   </div>
+
                                   <!-- SAVE CATEGORY START-->
                   <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"  novalidate>
 
@@ -166,6 +167,7 @@
                     <div class="alert">
                         <i class="bi bi-lightning-charge baseColor"></i>
                         <p>Charge Config Modified</p>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="addNew()" >Add New</button>
                     </div>
                                   <!-- SAVE CATEGORY START-->
                   <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && updateChargeConfig()"  novalidate>
@@ -446,74 +448,9 @@
               </div>
                 <!-- ANGULAR TABLE ENDING -->
 
-
-
-
-                <!-- BOOTSTRAP TABLE STARTING -->
-                <!--  <table class="table table-sm table-bordered fs11 table-hover">
-                <thead>
-                  <tr class="text-center">
-              
-                    <th scope="col">S.N</th>
-                    <th scope="col">VariantId</th>
-                    <th scope="col">Variant Name</th>
-                    <th scope="col">TCS Charge</th>
-                    <th scope="col">TDS Charge</th>
-                    <th scope="col">Shipping Charge</th>
-                    <th scope="col">Shipping Charge Fee</th>
-                    <th scope="col">Active</th>
-                    <th scope="col">Update</th>
-                    <th scope="col">Remove</th>
-              
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let data of chargeConfigList , let i = index" class="text-center">
-                    <th scope="row">{{ i + 1 }}</th>
-                    <th>{{data.variantId}}</th>
-              
-                    <td>{{data.variantName}}</td>
-              
-                    <td>{{data.tcsCharge}}</td>
-                    <td>{{data.tdsCharge}}</td>
-                    <td>{{data.shippingCharge}}</td>
-                    <td>{{data.shippingChargeFee}}</td>
-              
-                    <td *ngIf="data.active">
-                      <div class="dotGreen">
-                        <i class="bi bi-dot"></i>
-                      </div>
-                    </td>
-                    <td *ngIf="!data.active">
-                      <div class="dotRed">
-                        <i class="bi bi-dot"></i>
-                      </div>
-                    </td>
-              
-                    <td>
-                      <button (click)="getChargeConfigById(data.id)" type="button" class="btn btn-primary btn-sm">
-                        <i class="bi bi-pencil-square bg-primary"></i>
-                      </button>
-                    </td>
-              
-                    <td>
-                      <button (click)="deleteCharge(data.id)" type="button" class="btn btn-sm" style="color: #d30909;">
-                        <i class="bi bi-file-earmark-x-fill"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table> --->
-              <!-- BOOTSTRAP TABLE ENDING -->  
-
-
-
             </div>
 
             <!-- COL-MD-7 ENDING -->
-
-
-
         </div>
     </div>
 </div>

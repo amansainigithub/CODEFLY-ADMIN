@@ -217,4 +217,8 @@ updateNetQuantity()
     }
   //Search Ending
  
+
+addNew(){
+    this.viceVersaForm = false;
+}
 }

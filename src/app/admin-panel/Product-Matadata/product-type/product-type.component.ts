@@ -218,4 +218,8 @@ updateType()
   //Search Ending
  
 
+addNew(){
+    this.viceVersaForm = false;
+}
+
 }

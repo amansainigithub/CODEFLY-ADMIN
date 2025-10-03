@@ -281,4 +281,9 @@ export class RootCategoryComponent {
       });
     }
 
+
+ addNew(){
+    this.viceVersaForm = false;
+  }
+
 }

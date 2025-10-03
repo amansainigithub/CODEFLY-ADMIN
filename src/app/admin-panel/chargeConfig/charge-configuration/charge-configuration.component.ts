@@ -226,4 +226,9 @@ updateChargeConfig()
     }
   }
 
+
+  addNew(){
+    this.viceVersaForm = false;
+  }
+
 }

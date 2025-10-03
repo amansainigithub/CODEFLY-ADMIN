@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { BrandService } from '../../../_services/catalogMetaDataServices/brandService/brand.service';
 import { NgToastService } from 'ng-angular-popup';
-import { BucketService } from '../../../_services/bucket/bucket.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PageEvent } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
@@ -216,5 +214,10 @@ export class ProductBrandComponent {
       }
     }
   //Search Ending
+
+
+  addNew(){
+    this.viceVersaForm = false;
+}
  
 }

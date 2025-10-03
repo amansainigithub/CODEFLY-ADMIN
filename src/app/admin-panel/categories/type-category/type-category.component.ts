@@ -307,4 +307,8 @@ applyFilter(event: Event) {
       
     }
 
+ addNew(){
+    this.viceVersaForm = false;
+}
+
 }

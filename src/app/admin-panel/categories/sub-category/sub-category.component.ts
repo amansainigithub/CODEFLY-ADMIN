@@ -305,4 +305,9 @@ displayedColumns: string[] = [
       });
       
     }
+
+
+  addNew(){
+    this.viceVersaForm = false;
+  }
 }

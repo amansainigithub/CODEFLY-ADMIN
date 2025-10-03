@@ -314,7 +314,9 @@ export class VariantCategoryComponent {
        
      }
 
-
+addNew(){
+    this.viceVersaForm = false;
+}
 
 
 }
