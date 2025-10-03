@@ -47,7 +47,7 @@ import { TypeCategoryComponent } from './admin-panel/categories/type-category/ty
 import { UpdateTypeFileComponent } from './admin-panel/categories/type-category/update-type-file/update-type-file.component';
 import { VariantCategoryComponent } from './admin-panel/categories/variant-category/variant-category.component';
 import { UpdateVariantFileComponent } from './admin-panel/categories/variant-category/update-variant-file/update-variant-file.component';
-import { HsnCodesComponent } from './admin-panel/hsn-codes/hsn-codes.component';
+import { HsnCodesComponent } from './admin-panel/Product-Matadata/hsn-codes/hsn-codes.component';
 import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-configuration/charge-configuration.component';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';

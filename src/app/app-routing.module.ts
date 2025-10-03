@@ -6,7 +6,7 @@ import { AdminGuardService } from './authGuards/adminGuards/admin-guard.service'
 import { CustomerComponent } from './admin-panel/users/customer/customer.component';
 import { AdminComponent } from './admin-panel/users/admin/admin.component';
 import { SellerComponent } from './admin-panel/users/seller/seller.component';
-import { HsnCodesComponent } from './admin-panel/hsn-codes/hsn-codes.component';
+import { HsnCodesComponent } from './admin-panel/Product-Matadata/hsn-codes/hsn-codes.component';
 import { ProductBrandComponent } from './admin-panel/Product-Matadata/product-brand/product-brand.component';
 import { ProductMaterialComponent } from './admin-panel/Product-Matadata/product-material/product-material.component';
 import { ProductTypeComponent } from './admin-panel/Product-Matadata/product-type/product-type.component';
