@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BucketService } from '../../../_services/bucket/bucket.service';
@@ -6,6 +6,9 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { RootCategoryService } from '../../../_services/categories/rootCategory/root-category.service';
 import { UpdateRootFileComponent } from './update-root-file/update-root-file.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -52,13 +55,28 @@ export class RootCategoryComponent {
   }
   
 
-  
+    displayedColumns: string[] = [
+      'id',
+      'categoryName',
+      'categoryFile',
+      'active',
+      'update',
+      'remove',
+    ];
+    dataSource = new MatTableDataSource<any>([]);
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
   getRootCategoryData()
   {
     this.spinner.show();
     this.rootCategoryService.getRootListService().subscribe({
       next:(res:any)=> {
         this.parentList = res.data;
+
+        this.dataSource = new MatTableDataSource(res.data);
+        this.dataSource.paginator = this.paginator;  // ✅ client-side pagination
+        this.dataSource.sort = this.sort;            // ✅ sorting
+
         this.spinner.hide();
       },
       error:(err:any)=>  {
@@ -69,6 +87,15 @@ export class RootCategoryComponent {
       }
     }
   );
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage(); // filter ke baad page reset
+    }
   }
 
 

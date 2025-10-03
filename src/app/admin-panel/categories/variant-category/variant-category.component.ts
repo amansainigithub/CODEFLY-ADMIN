@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { BucketService } from '../../../_services/bucket/bucket.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateVariantFileComponent } from './update-variant-file/update-variant-file.component';
 import { TypeCategoryService } from '../../../_services/categories/typeCategory/type-category.service';
 import { VariantCategoryService } from '../../../_services/categories/variantCategory/variant-category.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -76,13 +79,28 @@ export class VariantCategoryComponent {
   );
   }
 
- getVariantCategoryList()
-      {
+  displayedColumns: string[] = [
+      'id',
+      'categoryName',
+      'categoryFile',
+      'active',
+      'update',
+      'remove',
+    ];
+  dataSource = new MatTableDataSource<any>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;    
+ getVariantCategoryList(){
               this.spinner.show();
               this.variantCategoryService.getVariantCategoryListService().subscribe({
                 next:(res:any)=> {
-                  this.variantList = res.data;
-                  this.spinner.hide();
+                this.variantList = res.data;
+
+                this.dataSource = new MatTableDataSource(res.data);
+                this.dataSource.paginator = this.paginator;  // ✅ client-side pagination
+                this.dataSource.sort = this.sort;      
+
+                this.spinner.hide();
                 },
                 error:(err:any)=>  {
                   console.log(err);
@@ -92,6 +110,15 @@ export class VariantCategoryComponent {
               }
             );
       }
+
+ applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage(); // filter ke baad page reset
+    }
+  }     
 
 
   deleteVariantCategoryByid(bornCategoryId:any){

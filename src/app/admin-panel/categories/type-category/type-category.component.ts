@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { BucketService } from '../../../_services/bucket/bucket.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateTypeFileComponent } from './update-type-file/update-type-file.component';
 import { SubCategoryService } from '../../../_services/categories/subCategory/sub-category.service';
 import { TypeCategoryService } from '../../../_services/categories/typeCategory/type-category.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -82,13 +85,28 @@ export class TypeCategoryComponent {
  
 
 
-
+displayedColumns: string[] = [
+      'id',
+      'categoryName',
+      'categoryFile',
+      'active',
+      'update',
+      'remove',
+    ];
+  dataSource = new MatTableDataSource<any>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   getTypeCategoryList()
   {
     this.spinner.show();
     this.typeCategoryService.getTypeCategoryDataService().subscribe({
       next:(res:any)=> {
         this.typeList = res.data;
+
+        this.dataSource = new MatTableDataSource(res.data);
+        this.dataSource.paginator = this.paginator;  // ✅ client-side pagination
+        this.dataSource.sort = this.sort;      
+
         this.spinner.hide();
       },
       error:(err:any)=>  {
@@ -99,6 +117,15 @@ export class TypeCategoryComponent {
       }
     }
   );
+  }
+
+applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage(); // filter ke baad page reset
+    }
   }
 
   deleteTypeCategoryByid(babyCategoryId:any)
