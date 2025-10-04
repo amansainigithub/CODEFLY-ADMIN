@@ -94,6 +94,7 @@ export class AppComponent {
   isProductInvestigation = false;
   isProductReviews = false;
   isChargeConfig=false;
+  productStages=false;
   toggleSubmenu(menu:any) {
     if (menu === 'categories') {
       this.isCategoriesOpen = !this.isCategoriesOpen;
@@ -107,6 +108,8 @@ export class AppComponent {
       this.isProductReviews = !this.isProductReviews;
     }else if (menu === 'chargeConfig') {
       this.isChargeConfig = !this.isChargeConfig;
+    }else if (menu === 'productStages') {
+      this.productStages = !this.productStages;
     }
   }
 

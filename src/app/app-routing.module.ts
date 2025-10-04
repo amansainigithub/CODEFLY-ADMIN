@@ -17,6 +17,8 @@ import { SubCategoryComponent } from './admin-panel/categories/sub-category/sub-
 import { TypeCategoryComponent } from './admin-panel/categories/type-category/type-category.component';
 import { VariantCategoryComponent } from './admin-panel/categories/variant-category/variant-category.component';
 import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-configuration/charge-configuration.component';
+import { ProductApprovedComponent } from './admin-panel/product-stages/product-approved/product-approved.component';
+import { ProductUnderReviewComponent } from './admin-panel/product-stages/product-under-review/product-under-review.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -46,8 +48,12 @@ const routes: Routes = [
                   { path: 'type-category', component: TypeCategoryComponent , pathMatch:'full' },
                   { path: 'variant-category', component: VariantCategoryComponent , pathMatch:'full' },
 
-                  //Charge Config
+                  //CHARGE-CONFIG
                   { path: 'charge-config', component: ChargeConfigurationComponent , pathMatch:'full' },
+
+                  //PRODUCT STAGES
+                  { path: 'product-approved', component: ProductApprovedComponent , pathMatch:'full' },
+                  { path: 'product-under-review', component: ProductUnderReviewComponent , pathMatch:'full' },
 
       ],
 }

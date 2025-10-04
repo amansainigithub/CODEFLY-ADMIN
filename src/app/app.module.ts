@@ -51,6 +51,8 @@ import { HsnCodesComponent } from './admin-panel/Product-Matadata/hsn-codes/hsn-
 import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-configuration/charge-configuration.component';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
+import { ProductApprovedComponent } from './admin-panel/product-stages/product-approved/product-approved.component';
+import { ProductUnderReviewComponent } from './admin-panel/product-stages/product-under-review/product-under-review.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import {MatInputModule} from '@angular/material/input';
     VariantCategoryComponent,
     UpdateVariantFileComponent,
     ChargeConfigurationComponent,
+    ProductApprovedComponent,
+    ProductUnderReviewComponent,
   ],
   imports: [
     BrowserModule,
