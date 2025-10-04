@@ -19,6 +19,7 @@ import { VariantCategoryComponent } from './admin-panel/categories/variant-categ
 import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-configuration/charge-configuration.component';
 import { ProductApprovedComponent } from './admin-panel/product-stages/product-approved/product-approved.component';
 import { ProductUnderReviewComponent } from './admin-panel/product-stages/product-under-review/product-under-review.component';
+import { ProductReviewComponent } from './admin-panel/productManager/product-review/product-review.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -54,6 +55,9 @@ const routes: Routes = [
                   //PRODUCT STAGES
                   { path: 'product-approved', component: ProductApprovedComponent , pathMatch:'full' },
                   { path: 'product-under-review', component: ProductUnderReviewComponent , pathMatch:'full' },
+
+                  //REVIEW PRODUCT
+                  { path: 'product-review', component: ProductReviewComponent , pathMatch:'full' },
 
       ],
 }

@@ -104,7 +104,7 @@
                     <ng-container matColumnDef="review">
                       <th class="fs10" mat-header-cell *matHeaderCellDef> Review </th>
                       <td class="fs10" mat-cell *matCellDef="let element"> 
-                        <button mat-raised-button color="primary" style="height: 28px;">Review</button>
+                        <button (click)="productReview(element.id , element.variantId)" mat-raised-button color="primary" style="height: 28px;">Review</button>
                       </td>
                     </ng-container>
             

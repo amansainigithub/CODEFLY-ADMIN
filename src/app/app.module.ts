@@ -53,6 +53,9 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import { ProductApprovedComponent } from './admin-panel/product-stages/product-approved/product-approved.component';
 import { ProductUnderReviewComponent } from './admin-panel/product-stages/product-under-review/product-under-review.component';
+import { ProductReviewComponent } from './admin-panel/productManager/product-review/product-review.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -82,6 +85,7 @@ import { ProductUnderReviewComponent } from './admin-panel/product-stages/produc
     ChargeConfigurationComponent,
     ProductApprovedComponent,
     ProductUnderReviewComponent,
+    ProductReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,7 +111,9 @@ import { ProductUnderReviewComponent } from './admin-panel/product-stages/produc
     MatFormFieldModule,
     MatTooltipModule,
     MatTableModule,
-    MatInputModule
+    MatInputModule,
+    MatAutocompleteModule,
+    MatSelectModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

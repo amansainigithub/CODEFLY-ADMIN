@@ -5,6 +5,7 @@ import { UnderReviewStageService } from '../../../_services/productStages/underR
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-under-review',
@@ -17,7 +18,8 @@ export class ProductUnderReviewComponent {
   constructor(
     private toast: NgToastService,
     private spinner: NgxSpinnerService,
-    private underReviewService:UnderReviewStageService
+    private underReviewService:UnderReviewStageService,
+    private router: Router
     
   ) {}
 
@@ -63,6 +65,15 @@ export class ProductUnderReviewComponent {
       this.dataSource.paginator.firstPage(); // filter ke baad page reset
     }
   }
+  
 
+ productReview(productId:any , variantId:any)
+  {
+    const productData = {
+      productId: productId,
+      variantId: variantId
+    };
+     this.router.navigateByUrl('/admin/dashboard/product-review', {state: productData});
+  }
 
 }
