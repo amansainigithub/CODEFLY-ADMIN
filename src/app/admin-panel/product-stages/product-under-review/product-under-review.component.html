@@ -129,3 +129,38 @@
                 <!-- ANGULAR TABLE ENDING -->
 
 </div>
+
+
+
+
+    <!-- =====================MODEL OPEN========================= -->
+    <!-- Modal Open-->
+    <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true" #proceedModel>
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center ">
+                    <div>
+                        <i class="bi bi-rocket-takeoff fs20" style="color: #45e832;"></i>
+                    </div>
+                    <span class="fs11">
+                        <p style="line-height: 1.1;">
+                            Are you sure you want to Edit this Product ?
+                        </p>
+                    </span>
+
+                </div>
+                <div class="mb-3 text-center">
+                    <button mat-raised-button class="me-2" data-bs-dismiss="modal">Close</button>
+                    <button mat-raised-button color="primary" (click)="startProductEditMode()" >Continue</button>
+                </div>
+<!-- 
+                <div *ngIf="progressBar">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal Close-->
+    <!-- =====================MODEL CLOSING======================== -->

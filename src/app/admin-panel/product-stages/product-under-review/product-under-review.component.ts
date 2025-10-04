@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UnderReviewStageService } from '../../../_services/productStages/underReviewStageService/under-review-stage.service';
@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
+declare var bootstrap: any; // Declare bootstrap for accessing modal methods
 
 @Component({
   selector: 'app-product-under-review',
@@ -67,13 +68,37 @@ export class ProductUnderReviewComponent {
   }
   
 
+  productId:any;
+  variantId:any;
  productReview(productId:any , variantId:any)
   {
-    const productData = {
-      productId: productId,
-      variantId: variantId
-    };
-     this.router.navigateByUrl('/admin/dashboard/product-review', {state: productData});
+    this.productId = productId;
+    this.variantId = variantId;
+    this.modelOpen();
   }
+startProductEditMode()
+{
+    this.modelClose();
+    const productData = { productId: this.productId , variantId: this.variantId };
+    this.router.navigateByUrl('/admin/dashboard/product-review', {state: productData});
+}
+
+  
+    // ============================================================================================
+    // MODEL PROPERTIES STARTING
+    @ViewChild('proceedModel') proceedModel!: ElementRef;
+    modelOpen() {
+      const modal = new bootstrap.Modal(this.proceedModel.nativeElement);
+      modal.show();
+    }
+    modelClose() {
+      const modal = bootstrap.Modal.getInstance(this.proceedModel.nativeElement);
+      modal?.hide();
+    }
+    // MODEL PROPERTIES ENDING
+    // ============================================================================================
+  
+  
+  
 
 }

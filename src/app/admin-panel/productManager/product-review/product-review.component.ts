@@ -421,15 +421,12 @@ export class ProductReviewComponent {
       });
       return;
     } else {
-      this.productProceedModelShow();
+      this.modelOpen();
     }
   }
 
   // PLRODUCT PROCCEED
   proceedWithProduct() {
-    console.log("---------------------------------------")
-    console.log(this.loadData.id);
-    console.log(this.productForm.value);
     this.spinner.show();
       if (this.productForm.value && Object.keys(this.productForm.value).length > 0) {
 
@@ -438,51 +435,40 @@ export class ProductReviewComponent {
         this.productDataService.updateProductDetails(this.productForm.value, this.loadData.id).subscribe({
             next:(res: any) => {
                 try {
-                  alert('Product Update Success => PRODUCT ID ' + res.data.id);
+                  this.toast.success({detail: 'Product Saved Success !',summary: 'Success',position: 'topRight',duration: 2000,});
+
                   //SPINNER CLOSE
                   this.spinner.hide();
+
+                  // Router to under-review
+                   this.router.navigateByUrl('/admin/dashboard/product-under-review');
                 } catch (err) {
-                  this.toast.error({detail: 'Failed to save Product Details',summary: 'Error',position: 'bottomRight',duration: 2000,});
+                  this.toast.error({detail: 'Failed to save Product Details',summary: 'Error',position: 'topRight',duration: 2000,});
                   //SPINNER CLOSE
                   this.spinner.hide();
+
+                  //Model Close
+                  this.modelClose();
                 }
             },
             error: (err: any) => {
               alert(err);
               this.spinner.hide();
+
+              //Model Close
+              this.modelClose();
             },
           });
 
         //Spinner Close
         this.spinner.hide();
+
+        //Model Close
+        this.modelClose();
       } else {
         this.toast.error({ detail: 'Something went Wrong Please try again after some time!', summary: 'Error',position: 'bottomRight',duration: 2000,});
       }
   }
-
-
-
-
-
-
-
-  // ============================================================================================
-  // MODEL PROPERTIES STARTING
-  @ViewChild('proceedModel') proceedModel!: ElementRef;
-  productProceedModelShow() {
-    const modal = new bootstrap.Modal(this.proceedModel.nativeElement);
-    modal.show();
-  }
-  proceedModelClose() {
-    const modal = bootstrap.Modal.getInstance(this.proceedModel.nativeElement);
-    modal?.hide();
-  }
-  // MODEL PROPERTIES ENDING
-  // ============================================================================================
-
-
-
-
 
 
 
@@ -558,6 +544,27 @@ export class ProductReviewComponent {
       });
   }
   // PRODUCT DETAILS LOAD DATA ENDING.....
+
+
+
+
+
+  
+
+  // ============================================================================================
+  // MODEL PROPERTIES STARTING
+  @ViewChild('proceedModel') proceedModel!: ElementRef;
+  modelOpen() {
+    const modal = new bootstrap.Modal(this.proceedModel.nativeElement);
+    modal.show();
+  }
+  modelClose() {
+    const modal = bootstrap.Modal.getInstance(this.proceedModel.nativeElement);
+    modal?.hide();
+  }
+  // MODEL PROPERTIES ENDING
+  // ============================================================================================
+
 
 
 
