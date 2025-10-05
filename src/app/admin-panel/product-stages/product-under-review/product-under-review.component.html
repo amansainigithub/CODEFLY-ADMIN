@@ -2,11 +2,28 @@
 
 <div class="container">
 
-
-            <div class="heading">
+            <!-- <div class="heading">
                 <i class="bi bi-lightning-charge baseColor"></i>
-                <p>Charge Config</p>
-            </div>
+                <p>Under Review</p>
+
+                  <i class="bi bi-gear-wide-connected" style="cursor: pointer;"></i>
+                <p>Refresh</p>
+            </div> -->
+
+            <div class="heading d-flex align-items-center justify-content-between">
+                <!-- Left side -->
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-lightning-charge baseColor"></i>
+                  <p class="mb-0">Under Review</p>
+                </div> |
+
+                <!-- Right side -->
+                <span (click)="refreshUnderReview()" class="d-flex align-items-center gap-1" style="cursor: pointer;">
+                  <i class="bi bi-gear-wide-connected"></i>
+                  <p class="mb-0">Refresh</p>
+                </span>
+              </div>
+
                     
               <!-- ANGULAR TABLE STARTING -->
               <div>

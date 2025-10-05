@@ -1,0 +1,218 @@
+<div class="container" style="margin-top: 150px;">
+
+    <div class="text-center fs14 mb-3">
+        Product Manager 
+        <span class="text-primary" >[ PRODUCT-ID : {{productId}} ]</span>
+    </div>
+
+    <div class="text-center">
+        <button class="approve-product" role="button" (click)="approvedModelOpen()" >
+            <span class="text" >APPROVED</span>
+        </button>
+    </div>
+
+    <div class="text-center mt-3">
+        <button class="dis-approve-product" role="button" (click)="disApprovedModelOpen()">
+            <span class="text">DIS APPROVED</span>
+        </button>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+    <!-- =====================PRODUCT APPROVED MODEL OPEN========================= -->
+    <!-- Modal Open-->
+    <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true" #APPROVED>
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center ">
+
+                    <div *ngIf="!approvedModel">
+                        <div>
+                            <i class="bi bi-rocket-takeoff fs20" style="color: #45e832;"></i>
+                        </div>
+                        <span class="fs11">
+                            <p style="line-height: 1.1;">
+                                Are you sure you want to Approved this Product ?
+                            </p>
+                        </span>
+
+                        <div class="mb-3 text-center">
+                            <button mat-raised-button class="me-2" data-bs-dismiss="modal">Close</button>
+                            <button mat-raised-button color="primary" (click)="productApproved()">Approved</button>
+                        </div>
+                    </div>
+
+                     <!-- ✅ Progress Bar -->
+                    <div *ngIf="approvedModel">
+                        
+                        <div>
+                            <i class="bi bi-rocket-takeoff fs20" style="color: #45e832;"></i>
+                            <span class="fs11 text-center">
+                                Loading...
+                            </span>
+                        </div>
+
+                        <div *ngIf="isLoading" class="mt-3">
+                            <div class="progress" style="height: 6px;">
+                            <div
+                                class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                role="progressbar"
+                                [style.width.%]="progressValue"
+                                [attr.aria-valuenow]="progressValue"
+                                aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                            </div>
+                            <p class="fs11 mt-1 text-muted">{{ progressValue }}% Processing...</p>
+                    </div>
+                    </div>
+                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal Close-->
+    <!-- =====================PRODUCT APPROVED MODEL CLOSING======================== -->
+
+
+
+
+<!-- ================================================================================================================================
+================================================================================================================================ -->
+
+
+
+
+   <!-- =====================PRODUCT DIS-APPROVED  MODEL OPEN========================= -->
+    <!-- Modal Open-->
+    <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true" #DISAPPROVED>
+        <div class="modal-dialog modal-dialog-centered modal-sm" style="max-width: 450px;">
+            <div class="modal-content">
+                <div class="modal-body ">
+                   
+                    <div *ngIf="!disApprovedModel">
+
+                        <div class="text-center">
+                            <i class="bi bi-rocket-takeoff fs20" style="color: #45e832;"></i>
+                            <span class="fs11">
+                                <p style="line-height: 1.1;">
+                                    Are you sure you want to DIS-APPROVED this Product ?
+                                </p>
+                            </span>
+                        </div>
+
+                         <!-- FORM STARTING -->
+                        <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && productDisApproved()" novalidate>
+                            <div>
+                                <label class="fs12">DisApproved Reason</label>
+
+                                <select  
+                                    [(ngModel)]="selectDisApproveReason.selectedReason" 
+                                    name="selectedReason"
+                                    class="form-select form-select-sm"
+                                    aria-label="Default select example"
+                                    required #selectedReason="ngModel"
+                                    [class.dirty]="selectedReason.dirty" 
+                                    [class.touched]="selectedReason.touched"
+                                    [ngClass]="{ 'is-invalid': selectedReason.errors && (selectedReason.touched || selectedReason.dirty) }"
+                                    (change)="onDisapproveReasonChange()"
+                                    >
+                                    <option value="null" disabled selected>Select reason</option>
+                                    <option *ngFor="let reason of disApprovReason" [ngValue]="reason">
+                                    {{ reason.code }}
+                                    </option>
+                                </select>
+
+                                <div *ngIf="selectedReason.errors && (selectedReason.touched || selectedReason.dirty)" class="invalid-feedback fs11">
+                                    <div *ngIf="selectedReason.errors['required']">Disapproval reason is required</div>
+                                </div>
+                            </div>
+
+
+
+                            <div>
+                                <div class="form-group">
+                                    <label class="fs12">Reason</label>
+                                    <input 
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="reason" 
+                                    [(ngModel)]="disApprovedForm.reason" 
+                                    required #reason="ngModel"
+                                    [class.dirty]="reason.dirty"
+                                    disabled 
+                                    [class.touched]="reason.touched"
+                                    [ngClass]="{ 'is-invalid': reason.errors && (reason.touched || reason.dirty ) }" />
+                            
+                                    <div *ngIf="reason.errors && (reason.touched || reason.dirty )"class="invalid-feedback fs11">
+                                      <div *ngIf="reason.errors['required'] ">
+                                        Reason is required
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+
+
+                            <div>
+                                <div class="form-group">
+                                    <label class="fs12">Description</label>
+                                    <textarea style="height: 80px"
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="description" 
+                                    [(ngModel)]="disApprovedForm.description" 
+                                    #description="ngModel"
+                                    >
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 mt-3 text-center">
+                                <button mat-raised-button class="me-2" data-bs-dismiss="modal">Close</button>
+                                <button mat-raised-button color="primary" type="submit">DIS APPROVED</button>
+                            </div>
+                      </form>
+                    </div>
+                     <!-- FORM ENDING -->
+
+
+                    <div *ngIf="disApprovedModel" class="text-center">
+
+                        <div>
+                            <i class="bi bi-rocket-takeoff fs20" style="color: #45e832;"></i>
+                            <span class="fs11 text-center">
+                                Loading...
+                            </span>
+                        </div>
+
+                        <!-- ✅ Progress Bar -->
+                        <div *ngIf="isLoading" class="mt-3">
+                            <div class="progress" style="height: 6px;">
+                            <div
+                                class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                role="progressbar"
+                                [style.width.%]="progressValue"
+                                [attr.aria-valuenow]="progressValue"
+                                aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                            </div>
+                            <p class="fs11 mt-1 text-muted">{{ progressValue }}% Processing...</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Close-->
+    <!-- =====================PRODUCT DIS-APPROVED  MODEL CLOSING======================== -->

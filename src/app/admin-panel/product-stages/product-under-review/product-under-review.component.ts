@@ -83,6 +83,12 @@ startProductEditMode()
     this.router.navigateByUrl('/admin/dashboard/product-review', {state: productData});
 }
 
+
+//REFRESH UNDER REVIEW DATA
+refreshUnderReview(){
+  this.productUnderReviewStage();
+}
+
   
     // ============================================================================================
     // MODEL PROPERTIES STARTING

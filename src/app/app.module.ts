@@ -56,6 +56,7 @@ import { ProductUnderReviewComponent } from './admin-panel/product-stages/produc
 import { ProductReviewComponent } from './admin-panel/productManager/product-review/product-review.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
+import { ProductApproverComponent } from './admin-panel/productManager/product-approver/product-approver.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import {MatSelectModule} from '@angular/material/select';
     ProductApprovedComponent,
     ProductUnderReviewComponent,
     ProductReviewComponent,
+    ProductApproverComponent,
   ],
   imports: [
     BrowserModule,

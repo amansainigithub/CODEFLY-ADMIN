@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { map, Observable, startWith } from 'rxjs';
 import { EngineXAdminService } from '../../../_services/productManagerService/engineXService/engine-xadmin.service';
 import { ProductDataService } from '../../../_services/productManagerService/productDataService/product-data.service';
+import { ProductApprovalService } from '../../../_services/productManagerService/productApprovalService/product-approval.service';
 
 declare var bootstrap: any; // Declare bootstrap for accessing modal methods
 
@@ -35,7 +36,7 @@ export class ProductReviewComponent {
       private formBuilder: FormBuilder,
       private spinner: NgxSpinnerService,
       private toast: NgToastService,
-      private router: Router
+      private router: Router,
     ) {
       const navigation = this.router.getCurrentNavigation();
       const state = navigation?.extras.state as { productData: any };
@@ -421,7 +422,7 @@ export class ProductReviewComponent {
       });
       return;
     } else {
-      this.modelOpen();
+      this.productUpdateModelOpen();
     }
   }
 
@@ -448,7 +449,7 @@ export class ProductReviewComponent {
                   this.spinner.hide();
 
                   //Model Close
-                  this.modelClose();
+                  this.productUpdateModelClose();
                 }
             },
             error: (err: any) => {
@@ -456,7 +457,7 @@ export class ProductReviewComponent {
               this.spinner.hide();
 
               //Model Close
-              this.modelClose();
+              this.productUpdateModelClose();
             },
           });
 
@@ -464,7 +465,7 @@ export class ProductReviewComponent {
         this.spinner.hide();
 
         //Model Close
-        this.modelClose();
+        this.productUpdateModelClose();
       } else {
         this.toast.error({ detail: 'Something went Wrong Please try again after some time!', summary: 'Error',position: 'bottomRight',duration: 2000,});
       }
@@ -484,7 +485,7 @@ export class ProductReviewComponent {
       .subscribe({
         next: (res: any) => {
 
-          console.log(res.data);
+          // console.log(res.data);
           
           this.actualPrice = res.data.productPrice;
           this.gstAmount = res.data.productGst;
@@ -547,22 +548,53 @@ export class ProductReviewComponent {
 
 
 
+//MOVE OPEN TO PRODUCT CONFORMATION MODEL 
+productApprover(){
+  this.continueToApproverModelOpen();
+}
+
+//GO TO PRODUCT APPROVER MANAGE
+goToApproverManage(){
+  this.continueToApproverModelClose();
+    this.router.navigateByUrl('/admin/dashboard/product-approver', {state: {productId:this.loadData.id}});
+}
 
 
-  
+
+
+
+
+
 
   // ============================================================================================
-  // MODEL PROPERTIES STARTING
-  @ViewChild('proceedModel') proceedModel!: ElementRef;
-  modelOpen() {
-    const modal = new bootstrap.Modal(this.proceedModel.nativeElement);
+  // MODEL UPDATE MODEL PROPERTIES STARTING
+  @ViewChild('productUpdateModel') productUpdateModel!: ElementRef;
+  productUpdateModelOpen() {
+    const modal = new bootstrap.Modal(this.productUpdateModel.nativeElement);
     modal.show();
   }
-  modelClose() {
-    const modal = bootstrap.Modal.getInstance(this.proceedModel.nativeElement);
+  productUpdateModelClose() {
+    const modal = bootstrap.Modal.getInstance(this.productUpdateModel.nativeElement);
     modal?.hide();
   }
-  // MODEL PROPERTIES ENDING
+  // MODEL UPDATE MODEL PROPERTIES ENDING
+
+
+
+
+    // CONTINUE APPROVER MODEL PROPERTIES STARTING
+  @ViewChild('continueToApprover') continueToApprover!: ElementRef;
+  continueToApproverModelOpen() {
+    const modal = new bootstrap.Modal(this.continueToApprover.nativeElement);
+    modal.show();
+  }
+  continueToApproverModelClose() {
+    const modal = bootstrap.Modal.getInstance(this.continueToApprover.nativeElement);
+    modal?.hide();
+  }
+  // CONTINUE APPROVER MODEL PROPERTIES ENDING
+
+
   // ============================================================================================
 
 

@@ -20,6 +20,7 @@ import { ChargeConfigurationComponent } from './admin-panel/chargeConfig/charge-
 import { ProductApprovedComponent } from './admin-panel/product-stages/product-approved/product-approved.component';
 import { ProductUnderReviewComponent } from './admin-panel/product-stages/product-under-review/product-under-review.component';
 import { ProductReviewComponent } from './admin-panel/productManager/product-review/product-review.component';
+import { ProductApproverComponent } from './admin-panel/productManager/product-approver/product-approver.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -58,6 +59,9 @@ const routes: Routes = [
 
                   //REVIEW PRODUCT
                   { path: 'product-review', component: ProductReviewComponent , pathMatch:'full' },
+
+                  //REVIEW APPROVER
+                  { path: 'product-approver', component: ProductApproverComponent , pathMatch:'full' },
 
       ],
 }

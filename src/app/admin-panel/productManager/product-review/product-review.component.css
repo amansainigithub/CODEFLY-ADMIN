@@ -7,10 +7,6 @@
   font-size: 13px;    /* thoda gap dena hai toh */
 }
 
-
-
-
-
 /* Wrapper */
 .tooltip-wrap-uniq {
   position: relative;
@@ -47,7 +43,6 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease-in-out; /* 👈 Smooth fade */
-  
 }
 
 /* Arrow */
@@ -75,10 +70,7 @@ input.is-invalid {
 }
 
 
-
-
 /* FORM BG */
-
 .formbg {
   padding-left: 25px;   /* left padding */
   padding-right: 25px;  /* right padding */
@@ -86,20 +78,16 @@ input.is-invalid {
   border-radius: 12px;
 }
 
-
-
 .form-control:focus {
   border-color: #4814cc;       /* border ka color change */
   box-shadow: 0 0 2px #321aae; /* shadow halka kar diya */
   outline: none;               /* default outline hata diya */
 }
 
-
 ::placeholder {
   font-size: 12px;   /* 👈 apne hisaab se chhota karo */
   color: #999;       /* optional - halka color */
 }
-
 
 .custom-font-size{
   font-size: 12px;
@@ -114,3 +102,76 @@ input.is-invalid {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: 400;
 }
+
+
+
+
+/* PRODUCT CONTINUE BUTTON CSS */
+.product-continue {
+  appearance: none;
+  background-color: #FFFFFF;
+  border: 1px solid #dcdcdc;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Clarkson, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: 1.5em 2.5em;
+  width: 300px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: geometricprecision;
+  text-transform: uppercase;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  border-radius: 10px; /* iOS-style rounded corners */
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.product-continue:hover {
+  border-color: #a79bff;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(134, 126, 246, 0.4);
+}
+
+/* Background gradient overlay */
+.product-continue:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(135deg, #b7aeff 0%, #867ef6 50%, #6d68f4 100%);
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1),
+              -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1),
+              opacity 0.3s ease;
+}
+
+.product-continue:hover:before {
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+}
+
+.product-continue span {
+  position: relative;
+  z-index: 1;
+}
+/* PRODUCT CONTINUE BUTTON CSS */
+
+
+
+
