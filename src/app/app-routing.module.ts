@@ -22,6 +22,7 @@ import { ProductUnderReviewComponent } from './admin-panel/product-stages/produc
 import { ProductReviewComponent } from './admin-panel/productManager/product-review/product-review.component';
 import { ProductApproverComponent } from './admin-panel/productManager/product-approver/product-approver.component';
 import { ProductRejectionReasonComponent } from './admin-panel/productManager/product-rejection-reason/product-rejection-reason.component';
+import { AdminDashboardComponent } from './admin-panel/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -31,7 +32,7 @@ const routes: Routes = [
   path: 'admin/dashboard',canActivate:[AdminGuardService] ,
       children: [
                   //ADMIN PANEL
-                  // { path: '', component: AdminDashboardComponent},
+                  { path: '', component: AdminDashboardComponent},
                   { path: 'profile', component: ProfileComponent },
                   { path: 'customer-node', component: CustomerComponent , pathMatch:'full' },
                   { path: 'seller-node', component: SellerComponent , pathMatch:'full' },

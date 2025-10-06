@@ -95,6 +95,7 @@ export class AppComponent {
   isProductReviews = false;
   isChargeConfig=false;
   productStages=false;
+  productRejectedReason=false;
   toggleSubmenu(menu:any) {
     if (menu === 'categories') {
       this.isCategoriesOpen = !this.isCategoriesOpen;
@@ -110,7 +111,10 @@ export class AppComponent {
       this.isChargeConfig = !this.isChargeConfig;
     }else if (menu === 'productStages') {
       this.productStages = !this.productStages;
+    }else if (menu === 'productRejectedReason') {
+      this.productRejectedReason = !this.productRejectedReason;
     }
+    
   }
 
   

@@ -178,6 +178,8 @@ updateRejectionReason()
                   next:(res:any)=> {
                     this.toast.success({detail:"Success",summary:"Delete Success", position:"topRight",duration:2000});
                     
+                    this.viceVersaForm = false;
+
                     //get Born Category List
                     this.getRejectedReasons();
                     

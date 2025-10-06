@@ -36,6 +36,10 @@ export class LoginComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
+
+      this.router.navigateByUrl('/admin/dashboard').then(() => {
+        window.location.reload();
+      });
     }
   }
 
@@ -73,8 +77,12 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        //this.reloadPage();
         
+        this.router.navigateByUrl('/admin/dashboard').then(() => {
+          window.location.reload();
+        });
+
         this.spinner.hide();
       },
       err => {

@@ -241,7 +241,6 @@
       </li>
 
       <li class="nav-item">
-
         <a class="nav-link-headings" (click)="toggleSubmenu('productStages')"  href="#" data-bs-toggle="collapse" 
            data-bs-target="#productStageMenu" aria-expanded="false">
           <i class="bi bi-people"></i> Product Statges
@@ -270,17 +269,29 @@
             </a>
           </li>
         </ul>
+      </li>
 
-        <ul class="collapse submenu" id="productStageMenu">
+
+      <li class="nav-item">
+
+        <a class="nav-link-headings" (click)="toggleSubmenu('productRejectedReason')"  href="#" data-bs-toggle="collapse" 
+           data-bs-target="#ProductRejectedReason" aria-expanded="false">
+          <i class="bi bi-people"></i> Rejected Reason
+          <i 
+            [class.bi-chevron-right]="!isChargeConfig" 
+            [class.bi-chevron-down]="isChargeConfig" 
+            class="ms-auto floatRit"></i>
+        </a>
+
+        <ul class="collapse submenu" id="ProductRejectedReason">
           <li class="unOrderList">
             <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-Rejection-reason"
               style="font-size: 14px;">
-              <i class="bi bi-card-checklist"></i>
-               P-Rejection-reason
+              <i class="bi bi-person-fill-check"></i>
+              P-Rejected Reason
             </a>
           </li>
         </ul>
-
       </li>
 
       <div class="divider">
