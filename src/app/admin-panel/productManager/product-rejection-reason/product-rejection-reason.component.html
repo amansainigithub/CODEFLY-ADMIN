@@ -1,0 +1,315 @@
+<div class="mt-4">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- COL-MD-5 STARTING -->
+                         <div class="col-md-5">
+
+              <!-- SAVE REJECTION REASON ENDING -->
+              <div *ngIf="!viceVersaForm">
+                  <div class="alert">
+                      <i class="bi bi-x-square"></i>
+                      <p class="mx-3">Rejection Reason Config</p>
+                  </div>
+
+                  <!-- SAVE CATEGORY START-->
+                  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"  novalidate>
+
+
+                        <div class="row">
+
+                              <div class="form-group">
+                                  <label class="fs12">Code</label>
+                                  <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="code" 
+                                  [(ngModel)]="form.code" 
+                                  required #code="ngModel"
+                                  [class.dirty]="code.dirty"  
+                                  [class.touched]="code.touched"
+                                  [ngClass]="{ 'is-invalid': code.errors && (code.touched || code.dirty ) }" /> 
+                          
+                                  <div *ngIf="code.errors && (code.touched || code.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="code.errors['required'] ">
+                                      CODE is required
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                    <label class="fs12">CATEGORY</label>
+                                    <input 
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="category" 
+                                    [(ngModel)]="form.category" 
+                                    required #category="ngModel"
+                                    [class.dirty]="category.dirty" 
+                                    [class.touched]="category.touched"
+                                    [ngClass]="{ 'is-invalid': category.errors && (category.touched || category.dirty ) }" />
+                            
+                                    <div *ngIf="category.errors && (category.touched || category.dirty )"class="invalid-feedback fs11">
+                                      <div *ngIf="category.errors['required'] ">
+                                        Category is required
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+
+
+                              <div class="form-group">
+                                  <label class="fs12">REASON</label>
+                                  <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="reason" 
+                                  [(ngModel)]="form.reason" 
+                                  required #reason="ngModel"
+                                  [class.dirty]="reason.dirty"  
+                                  [class.touched]="reason.touched"
+                                  [ngClass]="{ 'is-invalid': reason.errors && (reason.touched || reason.dirty ) }" /> 
+                          
+                                  <div *ngIf="reason.errors && (reason.touched || reason.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="reason.errors['required'] ">
+                                      Reason is required
+                                    </div>
+                                  </div>
+                              </div>
+
+
+                                <div class="form-group">
+                                    <label class="fs12">Description</label>
+                                    <textarea style="height: 100px"
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="description" 
+                                    [(ngModel)]="form.description" 
+                                    #description="ngModel"
+                                    >
+                                    </textarea>
+                                </div>
+              
+                                <div class="d-grid gap-2 col-12 mx-auto mt-4">
+                                    <button mat-raised-button color="primary" [disabled]="f.invalid">Save Rejection</button>
+                                    <!-- <div *ngIf="progressBarShow">
+                                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                                    </div> -->
+                                </div>
+
+                  </form>
+              </div>
+                 <!-- SAVE REJECTION REASON ENDING -->
+
+
+
+                 <!-- UPDATE REJECTION REASON STARTING -->
+
+                 <div *ngIf="viceVersaForm">
+                    <div class="alert">
+                       <i class="bi bi-x-square"></i>
+                        <p class="mx-3">Rejection Reason Modified</p>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="addNew()" >Add New</button>
+                    </div>
+                                  <!-- SAVE CATEGORY START-->
+                  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && updateRejectionReason()"  novalidate>
+
+
+                    <div class="form-group">
+                                  <label class="fs12">Code</label>
+                                  <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="code" 
+                                  [(ngModel)]="updateform.code" 
+                                  required #code="ngModel"
+                                  [class.dirty]="code.dirty"  
+                                  [class.touched]="code.touched"
+                                  [ngClass]="{ 'is-invalid': code.errors && (code.touched || code.dirty ) }" /> 
+                          
+                                  <div *ngIf="code.errors && (code.touched || code.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="code.errors['required'] ">
+                                      CODE is required
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                    <label class="fs12">CATEGORY</label>
+                                    <input 
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="category" 
+                                    [(ngModel)]="updateform.category" 
+                                    required #category="ngModel"
+                                    [class.dirty]="category.dirty" 
+                                    [class.touched]="category.touched"
+                                    [ngClass]="{ 'is-invalid': category.errors && (category.touched || category.dirty ) }" />
+                            
+                                    <div *ngIf="category.errors && (category.touched || category.dirty )"class="invalid-feedback fs11">
+                                      <div *ngIf="category.errors['required'] ">
+                                        Category is required
+                                      </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                  <label class="fs12">REASON</label>
+                                  <input 
+                                  type="text" 
+                                  class="form-control form-control-sm" 
+                                  name="reason" 
+                                  [(ngModel)]="updateform.reason" 
+                                  required #reason="ngModel"
+                                  [class.dirty]="reason.dirty"  
+                                  [class.touched]="reason.touched"
+                                  [ngClass]="{ 'is-invalid': reason.errors && (reason.touched || reason.dirty ) }" /> 
+                          
+                                  <div *ngIf="reason.errors && (reason.touched || reason.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="reason.errors['required'] ">
+                                      Reason is required
+                                    </div>
+                                  </div>
+                              </div>
+
+
+                                <div class="form-group">
+                                    <label class="fs12">Description</label>
+                                    <textarea style="height: 100px"
+                                    type="text" 
+                                    class="form-control form-control-sm" 
+                                    name="description" 
+                                    [(ngModel)]="updateform.description" 
+                                    #description="ngModel"
+                                    >
+                                    </textarea>
+                                </div>
+
+                                <div class="form-group">
+                                <label class="fs12 mt-3">Rejection Reason Status</label>
+                                    <div>
+                                    <mat-slide-toggle name="isActive"  [(ngModel)]="updateform.active">
+                                    </mat-slide-toggle>
+                                    </div>
+                                </div>
+              
+                    <div class="d-grid gap-2 col-12 mx-auto mt-4">
+                        <button mat-raised-button color="primary" [disabled]="f.invalid">Save Rejection Reason</button>
+                        <div *ngIf="progressBarShow">
+                          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                        </div>
+                      </div>
+
+                  </form>
+                </div>
+                <!-- UPDATE CATEGORY ENDING -->
+            </div>
+            <!-- COL-MD-5 ENDING -->
+
+
+
+
+
+            <!-- COL-MD-7 STARTING -->
+            <div class="col-md-7">
+            
+              <div class="alert">
+                <i class="bi bi-x-square"></i>
+                <p class="mx-3">Product Rejected Reason</p>
+              </div>
+            
+              <!-- ANGULAR TABLE STARTING -->
+              <div>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Filter</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+                </mat-form-field>
+            
+                <div class="table-responsive">
+                  <table mat-table [dataSource]="dataSource" matSort   class="mat-elevation-z8 w-100 table-bordered" style="border-color: #ece4e4;">
+            
+                    <!-- ID -->
+                    <ng-container matColumnDef="id" >
+                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > ID </th>
+                      <td class="fs10"  mat-cell *matCellDef="let element"> 
+                        {{element.id}} 
+                      </td>
+                    </ng-container>
+            
+                    <!--CODE -->
+                    <ng-container matColumnDef="code">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> CODE </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.code}} </td>
+                    </ng-container>
+            
+                    <!-- CATEGORY -->
+                    <ng-container matColumnDef="category">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> CATEGORY   </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.category}} </td>
+                    </ng-container>
+            
+                    <!-- DESCRIPTION -->
+                    <ng-container matColumnDef="description">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPTION </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>\
+            
+                    <!-- Active -->
+                    <ng-container matColumnDef="active">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef> Active </th>
+                      <td class="fs10" mat-cell *matCellDef="let element">
+                          <div *ngIf="element.active" class="dotGreen">
+                            <i class="bi bi-dot"></i>
+                          </div>
+                          <div *ngIf="!element.active" class="dotRed">
+                            <i class="bi bi-dot"></i>
+                          </div>
+                      </td>
+                    </ng-container>
+
+                    <!-- Update -->
+                    <ng-container matColumnDef="update">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef> Update </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> 
+                        <button (click)="getRejectionReasonById(element.id)" type="button" class="btn btn-sm">
+                          <i class="bi bi-pencil-square"></i>
+                        </button>
+                       </td>
+                    </ng-container>
+
+                     <!-- Remove -->
+                    <ng-container matColumnDef="remove">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef> Remove </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> 
+                        <button (click)="deleteRejectionReason(element.id)" type="button" class="btn btn-sm" style="color: #d30909;">
+                          <i class="bi bi-file-earmark-x-fill"></i>
+                        </button>
+                       </td>
+                    </ng-container>
+
+                    <!-- Header & Rows -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                        [ngClass]="{'active-row': row.active, 'inactive-row': !row.active}">
+                    </tr>
+
+                    <!-- No Data -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="11">No data matching the filter</td>
+                    </tr>
+                  </table>
+                </div>
+            
+                <!-- Paginator -->
+                <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+              </div>
+                <!-- ANGULAR TABLE ENDING -->
+
+            </div>
+
+            <!-- COL-MD-7 ENDING -->
+        </div>
+    </div>
+</div>

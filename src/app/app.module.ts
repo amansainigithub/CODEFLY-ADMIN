@@ -57,6 +57,7 @@ import { ProductReviewComponent } from './admin-panel/productManager/product-rev
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
 import { ProductApproverComponent } from './admin-panel/productManager/product-approver/product-approver.component';
+import { ProductRejectionReasonComponent } from './admin-panel/productManager/product-rejection-reason/product-rejection-reason.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { ProductApproverComponent } from './admin-panel/productManager/product-a
     ProductUnderReviewComponent,
     ProductReviewComponent,
     ProductApproverComponent,
+    ProductRejectionReasonComponent,
   ],
   imports: [
     BrowserModule,
