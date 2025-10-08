@@ -23,6 +23,10 @@ export class ProductApproverComponent {
   progressValue: number = 0;
   progressInterval: any;
 
+  
+  //PRODUCT DIS APPROVED REASON
+disApprovReason:any;
+
   constructor(
     private spinner: NgxSpinnerService,
     private toast: NgToastService,
@@ -46,6 +50,31 @@ export class ProductApproverComponent {
       //this.router.navigateByUrl('/admin/dashboard');
     }
   }
+
+  ngOnInit(){
+    this.getRejectionReasonList();
+  }
+
+  //GET REJECTION REASON LIST
+  getRejectionReasonList() {
+     this.productApprovalService.getRejectionReasonList().subscribe({
+       next:(res:any)=> {
+        console.log(res);
+        
+         this.disApprovReason = res.data;
+         this.toast.success({detail:"Success",summary:"Data retrieved successfully", position:"bottomRight",duration:3000});
+         
+       },
+       error:(err:any)=>  {
+         this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+         this.spinner.hide();
+         console.log(err);
+           }
+         }
+       );
+     }
+     //GET REJECTION REASON LIST
+
 
   //PRODUCT APPROVED
   productApproved() {
@@ -88,25 +117,6 @@ export class ProductApproverComponent {
 
 
 
-
-
-
-
-//PRODUCT DIS APPROVED REASON
-disApprovReason:any = [
-  { id: 1, code: 'IMG_QUALITY_LOW', reason: 'Product images are of low quality or blurry.', category: 'Image Issue' },
-  { id: 2, code: 'IMG_POLICY_VIOLATION', reason: 'Images violate listing policy (contains watermark, logo, or text).', category: 'Image Issue' },
-  { id: 3, code: 'DESC_MISMATCH', reason: 'Product description does not match the actual product.', category: 'Content Issue' },
-  { id: 4, code: 'CATEGORY_INCORRECT', reason: 'Product is listed under the wrong category.', category: 'Listing Issue' },
-  { id: 5, code: 'PRICE_ERROR', reason: 'Incorrect or unrealistic pricing information.', category: 'Pricing Issue' },
-  { id: 6, code: 'POLICY_VIOLATION', reason: 'Product violates platform listing or legal policies.', category: 'Policy Issue' },
-  { id: 7, code: 'BRAND_UNAUTHORIZED', reason: 'Unauthorized usage of brand name or logo.', category: 'Brand Issue' },
-  { id: 8, code: 'DUPLICATE_LISTING', reason: 'Duplicate listing of the same product found.', category: 'Listing Issue' },
-  { id: 9, code: 'INCOMPLETE_DETAILS', reason: 'Important product details (size, color, material) are missing.', category: 'Information Issue' },
-  { id: 10, code: 'FAKE_PRODUCT', reason: 'Product appears to be counterfeit or fake.', category: 'Compliance Issue' }
-];
-
-
   //DIS-APPROVED FORM
   selectDisApproveReason: any = {
     selectedReason: null,
@@ -140,7 +150,7 @@ productDisApproved() {
     }
   }, 300);
 
-  this.productApprovalService.productDisApproved(this.productId).subscribe({
+  this.productApprovalService.productDisApproved(this.productId , this.disApprovedForm.id , this.disApprovedForm.description).subscribe({
     next: (res: any) => {
       clearInterval(this.progressInterval);
       this.progressValue = 100; // complete

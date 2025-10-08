@@ -19,7 +19,12 @@ export class ProductApprovalService {
         return this.http.post(API_AUTHORIZA_URL + "productApprovalController/" + 'productApproved/' + productId , "", httpOptions);
     }
 
-    productDisApproved(productId:any): Observable<any> {
-        return this.http.post(API_AUTHORIZA_URL + "productApprovalController/" + 'productDisApproved/' + productId , "", httpOptions);
+    productDisApproved(productId:any , disApprovedReasonId:any ,description:any): Observable<any> {
+        return this.http.post(API_AUTHORIZA_URL + "productApprovalController/" + 'productDisApproved/' + productId +
+                             "/" + disApprovedReasonId + "/" + description , "", httpOptions);
     }
+
+    getRejectionReasonList(): Observable <any> {
+    return this.http.get( API_AUTHORIZA_URL + 'productApprovalController/getRejectionReasonsList' );
+  }
 }
