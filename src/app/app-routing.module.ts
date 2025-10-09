@@ -23,6 +23,7 @@ import { ProductReviewComponent } from './admin-panel/productManager/product-rev
 import { ProductApproverComponent } from './admin-panel/productManager/product-approver/product-approver.component';
 import { ProductRejectionReasonComponent } from './admin-panel/productManager/product-rejection-reason/product-rejection-reason.component';
 import { AdminDashboardComponent } from './admin-panel/admin-dashboard/admin-dashboard.component';
+import { ProductDisApprovedComponent } from './admin-panel/product-stages/product-dis-approved/product-dis-approved.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -58,6 +59,7 @@ const routes: Routes = [
                   //PRODUCT STAGES
                   { path: 'product-approved', component: ProductApprovedComponent , pathMatch:'full' },
                   { path: 'product-under-review', component: ProductUnderReviewComponent , pathMatch:'full' },
+                  { path: 'product-dis-approved', component: ProductDisApprovedComponent , pathMatch:'full' },
 
                   //REVIEW PRODUCT
                   { path: 'product-review', component: ProductReviewComponent , pathMatch:'full' },
