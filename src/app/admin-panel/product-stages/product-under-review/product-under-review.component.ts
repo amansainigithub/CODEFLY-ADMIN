@@ -11,17 +11,14 @@ declare var bootstrap: any; // Declare bootstrap for accessing modal methods
 @Component({
   selector: 'app-product-under-review',
   templateUrl: './product-under-review.component.html',
-  styleUrl: './product-under-review.component.css'
+  styleUrl: './product-under-review.component.css',
 })
 export class ProductUnderReviewComponent {
-
-
   constructor(
     private toast: NgToastService,
     private spinner: NgxSpinnerService,
-    private underReviewService:UnderReviewStageService,
+    private underReviewService: UnderReviewStageService,
     private router: Router
-    
   ) {}
 
   ngOnInit() {
@@ -39,7 +36,7 @@ export class ProductUnderReviewComponent {
     'productTime',
     'variantId',
     'productSeries',
-    'review'
+    'review',
   ];
 
   dataSource = new MatTableDataSource<any>([]);
@@ -66,45 +63,41 @@ export class ProductUnderReviewComponent {
       this.dataSource.paginator.firstPage(); // filter ke baad page reset
     }
   }
-  
 
-  productId:any;
-  variantId:any;
- productReview(productId:any , variantId:any)
-  {
+  productId: any;
+  variantId: any;
+  productReview(productId: any, variantId: any) {
     this.productId = productId;
     this.variantId = variantId;
     this.modelOpen();
   }
-startProductEditMode()
-{
+  startProductEditMode() {
     this.modelClose();
-    const productData = { productId: this.productId , variantId: this.variantId };
-    this.router.navigateByUrl('/admin/dashboard/product-review', {state: productData});
-}
+    const productData = {
+      productId: this.productId,
+      variantId: this.variantId,
+    };
+    this.router.navigateByUrl('/admin/dashboard/product-review', {
+      state: productData,
+    });
+  }
 
+  //REFRESH UNDER REVIEW DATA
+  refreshUnderReview() {
+    this.productUnderReviewStage();
+  }
 
-//REFRESH UNDER REVIEW DATA
-refreshUnderReview(){
-  this.productUnderReviewStage();
-}
-
-  
-    // ============================================================================================
-    // MODEL PROPERTIES STARTING
-    @ViewChild('proceedModel') proceedModel!: ElementRef;
-    modelOpen() {
-      const modal = new bootstrap.Modal(this.proceedModel.nativeElement);
-      modal.show();
-    }
-    modelClose() {
-      const modal = bootstrap.Modal.getInstance(this.proceedModel.nativeElement);
-      modal?.hide();
-    }
-    // MODEL PROPERTIES ENDING
-    // ============================================================================================
-  
-  
-  
-
+  // ============================================================================================
+  // MODEL PROPERTIES STARTING
+  @ViewChild('proceedModel') proceedModel!: ElementRef;
+  modelOpen() {
+    const modal = new bootstrap.Modal(this.proceedModel.nativeElement);
+    modal.show();
+  }
+  modelClose() {
+    const modal = bootstrap.Modal.getInstance(this.proceedModel.nativeElement);
+    modal?.hide();
+  }
+  // MODEL PROPERTIES ENDING
+  // ============================================================================================
 }

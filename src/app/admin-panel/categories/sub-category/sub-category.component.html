@@ -10,9 +10,19 @@
 
           <div class="col-md-6">
 
-            <div class="alert">
-              <i class="bi bi-window-sidebar px-1 baseColor"></i>
-              <p>Sub Category Data</p>
+
+            <div class="heading d-flex align-items-center justify-content-between">
+              <!-- Left side -->
+              <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                <i class="bi bi-lightning-charge lightning-icon"></i>
+                 <p>Sub Category Data</p>
+              </div>
+            
+              <!-- Right side -->
+              <span class="d-flex align-items-center gap-1 refresh-btn" style="cursor: pointer;">
+                <i class="bi bi-gear-wide-connected refresh-icon"></i>
+                <p class="mb-0">Refresh</p>
+              </span>
             </div>
 
 
@@ -107,10 +117,14 @@
 
             <div class="col-md-6">
               <div *ngIf="!viceVersaForm">
-                <div class="alert">
-                  <i class="bi bi-window-sidebar px-1 baseColor"></i>
-                  <p>Create Sub Category</p>  
-                </div>
+
+                  <div class="heading d-flex align-items-center justify-content-between">
+                    <!-- Left side -->
+                    <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                      <i class="bi bi-lightning-charge lightning-icon"></i>
+                       <p>Create Sub Category</p>  
+                    </div>
+                  </div>
               
                   <!-- SAVE CATEGORY STARTING -->
                   <form 
@@ -353,10 +367,13 @@
                     
               <div *ngIf="viceVersaForm">
 
-                <div class="alert">
-                  <i class="bi bi-window-sidebar px-1 baseColor"></i>
-                  <p>Update Sub Category</p>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="addNew()" >Add New</button>
+                <div class="heading d-flex align-items-center justify-content-between">
+                  <!-- Left side -->
+                  <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                    <i class="bi bi-lightning-charge lightning-icon"></i>
+                    <p>Update Sub Category</p>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addNew()">Add New</button>
+                  </div>
                 </div>
             
                 <!-- SAVE CATEGORY START-->

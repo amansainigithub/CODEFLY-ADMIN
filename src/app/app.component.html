@@ -240,6 +240,31 @@
         </ul>
       </li>
 
+
+
+      <li class="nav-item">
+
+        <a class="nav-link-headings" (click)="toggleSubmenu('productRejectedReason')"  href="#" data-bs-toggle="collapse" 
+           data-bs-target="#ProductRejectedReason" aria-expanded="false">
+          <i class="bi bi-people"></i> Rejected Reason
+          <i 
+            [class.bi-chevron-right]="!isChargeConfig" 
+            [class.bi-chevron-down]="isChargeConfig" 
+            class="ms-auto floatRit"></i>
+        </a>
+
+        <ul class="collapse submenu" id="ProductRejectedReason">
+          <li class="unOrderList">
+            <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-Rejection-reason"
+              style="font-size: 14px;">
+              <i class="bi bi-person-fill-check"></i>
+              P-Rejected Reason
+            </a>
+          </li>
+        </ul>
+      </li>
+
+
       <li class="nav-item">
         <a class="nav-link-headings" (click)="toggleSubmenu('productStages')"  href="#" data-bs-toggle="collapse" 
            data-bs-target="#productStageMenu" aria-expanded="false">
@@ -280,31 +305,17 @@
           </li>
         </ul>
 
-
-      </li>
-
-
-      <li class="nav-item">
-
-        <a class="nav-link-headings" (click)="toggleSubmenu('productRejectedReason')"  href="#" data-bs-toggle="collapse" 
-           data-bs-target="#ProductRejectedReason" aria-expanded="false">
-          <i class="bi bi-people"></i> Rejected Reason
-          <i 
-            [class.bi-chevron-right]="!isChargeConfig" 
-            [class.bi-chevron-down]="isChargeConfig" 
-            class="ms-auto floatRit"></i>
-        </a>
-
-        <ul class="collapse submenu" id="ProductRejectedReason">
+         <ul class="collapse submenu" id="productStageMenu">
           <li class="unOrderList">
-            <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-Rejection-reason"
+            <a class="nav-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-draft"
               style="font-size: 14px;">
               <i class="bi bi-person-fill-check"></i>
-              P-Rejected Reason
+               Product Draft
             </a>
           </li>
         </ul>
       </li>
+
 
       <div class="divider">
       </div>

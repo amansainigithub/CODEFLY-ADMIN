@@ -25,7 +25,6 @@ export class ChargeConfigurationComponent {
   //form Hide and show for update and save user
   viceVersaForm: boolean = false;
 
-
   form: any = {
     variantId: null,
     tcsCharge: null,
@@ -36,8 +35,8 @@ export class ChargeConfigurationComponent {
     isActive: false,
   };
 
-   updateform: any = {
-    id:0,
+  updateform: any = {
+    id: 0,
     variantId: null,
     tcsCharge: null,
     tdsCharge: null,
@@ -47,14 +46,30 @@ export class ChargeConfigurationComponent {
     isActive: false,
   };
 
+  displayedColumns: string[] = [
+    'id',
+    'variantId',
+    'variantName',
+    'tcsCharge',
+    'tdsCharge',
+    'shippingCharge',
+    'shippingChargeFee',
+    'description',
+    'active',
+    'update',
+    'remove',
+  ];
+  dataSource = new MatTableDataSource<any>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(
     private toast: NgToastService,
     private spinner: NgxSpinnerService,
     private variantCategoryService: VariantCategoryService,
-    private chargeConfigService:ChargeConfigService
+    private chargeConfigService: ChargeConfigService
   ) {}
   ngOnInit(): void {
-
     //Variant List Data
     this.getVariantCategoryList();
 
@@ -82,142 +97,148 @@ export class ChargeConfigurationComponent {
     });
   }
 
-
-    //CHARGE BY ID
-    getChargeConfigById(chargeConfigId: any) {
+  //CHARGE BY ID
+  getChargeConfigById(chargeConfigId: any) {
     this.viceVersaForm = true;
     this.chargeConfigService.getChargeByIdService(chargeConfigId).subscribe({
-      next:(res:any)=> {
+      next: (res: any) => {
         this.updateform = res.data;
         console.log(res);
-        console.log("UPDATE FORM");
+        console.log('UPDATE FORM');
         console.log(this.updateform);
-        
-        this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"topRight",duration:2000});
-        
+
+        this.toast.success({
+          detail: 'Success',
+          summary: 'Data Fetch Success',
+          position: 'topRight',
+          duration: 2000,
+        });
       },
-      error:(err:any)=>  {
-        this.toast.error({detail:"Error",summary:err.error.data.message, position:"topRight",duration:2000});
+      error: (err: any) => {
+        this.toast.error({
+          detail: 'Error',
+          summary: err.error.data.message,
+          position: 'topRight',
+          duration: 2000,
+        });
         this.spinner.hide();
         console.log(err);
-          }
-        }
-      );
-    }
-
-
-    
-deleteCharge(chargeId:any){
-              Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't to delete this",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-              }).then((result) => {
-                if (result.isConfirmed) {
-
-
-              //save File
-            this.chargeConfigService.deleteChargeService(chargeId).subscribe({
-              next:(res:any)=> {
-                this.toast.success({detail:"Success",summary:"Delete Success", position:"topRight",duration:2000});
-                
-                //get Born Category List
-                this.getChargeConfigList();
-                
-                this.spinner.hide();
-              },
-              error:(err:any)=>  {
-                this.toast.error({detail:"Error",summary:err.error.data.message, position:"topRight",duration:2000});
-                this.spinner.hide();
-                console.log(err);
-                  }
-                }
-              );
-              
-            }
-          })
+      },
+    });
   }
 
+  deleteCharge(chargeId: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't to delete this",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //save File
+        this.chargeConfigService.deleteChargeService(chargeId).subscribe({
+          next: (res: any) => {
+            this.toast.success({
+              detail: 'Success',
+              summary: 'Delete Success',
+              position: 'topRight',
+              duration: 2000,
+            });
 
-//SAVE CHARGE CONFIG
-  onSubmit() {
-       this.chargeConfigService.saveChargeConfig(this.form).subscribe({
-        next:(res:any)=> {
-          this.toast.success({detail:"Success",summary:"Charge Config Saved Success", position:"topRight",duration:2000});
-          this.spinner.hide();
+            //get Born Category List
+            this.getChargeConfigList();
 
-          //Charge List
-          this.getChargeConfigList();
-        },
-        error:(err:any)=>  {
-          this.toast.error({detail:"Error",summary:err.error.data.message, position:"topRight",duration:2000});
-          this.spinner.hide();
-          console.log(err);
-        }
+            this.spinner.hide();
+          },
+          error: (err: any) => {
+            this.toast.error({
+              detail: 'Error',
+              summary: err.error.data.message,
+              position: 'topRight',
+              duration: 2000,
+            });
+            this.spinner.hide();
+            console.log(err);
+          },
+        });
       }
-    );
-}
+    });
+  }
 
+  //SAVE CHARGE CONFIG
+  onSubmit() {
+    this.chargeConfigService.saveChargeConfig(this.form).subscribe({
+      next: (res: any) => {
+        this.toast.success({
+          detail: 'Success',
+          summary: 'Charge Config Saved Success',
+          position: 'topRight',
+          duration: 2000,
+        });
+        this.spinner.hide();
 
-//UPDATE CHARGE CONFIG
-updateChargeConfig()
-{
-       this.chargeConfigService.updateCharge(this.updateform).subscribe({
-       next:(res:any)=> {
-         this.toast.success({detail:"Success",summary:"Data Update Success", position:"topRight",duration:2000});
-         
-         //get Charge Config List
-         this.getChargeConfigList();
-         
-         this.spinner.hide();
-       },
-       error:(err:any)=>  {
-         this.toast.error({detail:"Error",summary:err, position:"topRight",duration:2000});
-         this.spinner.hide();
-         console.log(err);
-           }
-         }
-       );
-}
+        //Charge List
+        this.getChargeConfigList();
+      },
+      error: (err: any) => {
+        this.toast.error({
+          detail: 'Error',
+          summary: err.error.data.message,
+          position: 'topRight',
+          duration: 2000,
+        });
+        this.spinner.hide();
+        console.log(err);
+      },
+    });
+  }
 
+  //UPDATE CHARGE CONFIG
+  updateChargeConfig() {
+    this.chargeConfigService.updateCharge(this.updateform).subscribe({
+      next: (res: any) => {
+        this.toast.success({
+          detail: 'Success',
+          summary: 'Data Update Success',
+          position: 'topRight',
+          duration: 2000,
+        });
 
+        //get Charge Config List
+        this.getChargeConfigList();
 
-
-  displayedColumns: string[] = [
-    'id',
-    'variantId',
-    'variantName',
-    'tcsCharge',
-    'tdsCharge',
-    'shippingCharge',
-    'shippingChargeFee',
-    'description',
-    'active',
-    'update',
-    'remove',
-  ];
-  dataSource = new MatTableDataSource<any>([]);
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+        this.spinner.hide();
+      },
+      error: (err: any) => {
+        this.toast.error({
+          detail: 'Error',
+          summary: err,
+          position: 'topRight',
+          duration: 2000,
+        });
+        this.spinner.hide();
+        console.log(err);
+      },
+    });
+  }
 
   getChargeConfigList() {
     this.chargeConfigService.getChargeConfigListService().subscribe({
       next: (res: any) => {
         this.dataSource = new MatTableDataSource(res.data);
-        this.dataSource.paginator = this.paginator;  // ✅ client-side pagination
-        this.dataSource.sort = this.sort;            // ✅ sorting
+        this.dataSource.paginator = this.paginator; // ✅ client-side pagination
+        this.dataSource.sort = this.sort; // ✅ sorting
       },
       error: (err: any) => {
         console.log(err);
-      }
+      },
     });
   }
 
-    applyFilter(event: Event) {
+  applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -226,9 +247,7 @@ updateChargeConfig()
     }
   }
 
-
-  addNew(){
+  addNew() {
     this.viceVersaForm = false;
   }
-
 }

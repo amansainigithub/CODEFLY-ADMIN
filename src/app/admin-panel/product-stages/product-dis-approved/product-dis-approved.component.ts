@@ -7,11 +7,10 @@ import { DisApprovedStageService } from '../../../_services/productStages/disApp
 @Component({
   selector: 'app-product-dis-approved',
   templateUrl: './product-dis-approved.component.html',
-  styleUrl: './product-dis-approved.component.css'
+  styleUrl: './product-dis-approved.component.css',
 })
 export class ProductDisApprovedComponent {
-
-productDisApprovedList: any[] = [];
+  productDisApprovedList: any[] = [];
 
   //Filter List For Searching
   filteredItems: any = [];
@@ -35,21 +34,33 @@ productDisApprovedList: any[] = [];
 
   getDisApprovedProduct(request: any) {
     this.spinner.show();
-    this.disApprovedStageService.getDisApprovedProductService(request).subscribe({
-      next: (res: any) => {
-        this.productDisApprovedList = res.data['content'];
-        this.filteredItems = this.productDisApprovedList;
+    this.disApprovedStageService
+      .getDisApprovedProductService(request)
+      .subscribe({
+        next: (res: any) => {
+          this.productDisApprovedList = res.data['content'];
+          this.filteredItems = this.productDisApprovedList;
 
-        this.totalElements = res.data['totalElements'];
-        this.toast.success({detail: 'Success', summary: 'Data retrieved successfully',position: 'topRight',duration: 2000,});
-        this.spinner.hide();
-      },
-      error: (err: any) => {
-        console.log(err);
-        this.spinner.hide();
-        this.toast.error({detail: 'Error',summary: err,position: 'bottomRight', duration: 3000, });
-      },
-    });
+          this.totalElements = res.data['totalElements'];
+          this.toast.success({
+            detail: 'Success',
+            summary: 'Data retrieved successfully',
+            position: 'topRight',
+            duration: 2000,
+          });
+          this.spinner.hide();
+        },
+        error: (err: any) => {
+          console.log(err);
+          this.spinner.hide();
+          this.toast.error({
+            detail: 'Error',
+            summary: err,
+            position: 'bottomRight',
+            duration: 3000,
+          });
+        },
+      });
   }
 
   nextPage(event: PageEvent) {
@@ -64,17 +75,17 @@ productDisApprovedList: any[] = [];
 
   // MULTI SEARCH STARTING
   onSearch() {
-  const searchQuery = this.searchText.trim().toLowerCase();
+    const searchQuery = this.searchText.trim().toLowerCase();
 
-  if (searchQuery) {
-    this.filteredItems = this.productDisApprovedList.filter((item) => {
-      // Convert all values of object into single string
-      const itemData = Object.values(item).join(' ').toLowerCase();
-      return itemData.includes(searchQuery);
-    });
-  } else {
-    this.filteredItems = this.productDisApprovedList;
+    if (searchQuery) {
+      this.filteredItems = this.productDisApprovedList.filter((item) => {
+        // Convert all values of object into single string
+        const itemData = Object.values(item).join(' ').toLowerCase();
+        return itemData.includes(searchQuery);
+      });
+    } else {
+      this.filteredItems = this.productDisApprovedList;
+    }
   }
-}
- // MULTI SEARCH ENDING
+  // MULTI SEARCH ENDING
 }

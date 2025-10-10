@@ -9,10 +9,14 @@
 
               <!-- SAVE REJECTION REASON ENDING -->
               <div *ngIf="!viceVersaForm">
-                  <div class="alert">
-                      <i class="bi bi-x-square"></i>
-                      <p class="mx-3">Rejection Reason Config</p>
-                  </div>
+
+                   <div class="heading d-flex align-items-center justify-content-between">
+                    <!-- Left side -->
+                    <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                      <i class="bi bi-lightning-charge lightning-icon"></i>
+                       <p>Rejection Reason Config</p>
+                    </div>
+                </div>	
 
                   <!-- SAVE CATEGORY START-->
                   <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"  novalidate>
@@ -108,11 +112,16 @@
                  <!-- UPDATE REJECTION REASON STARTING -->
 
                  <div *ngIf="viceVersaForm">
-                    <div class="alert">
-                       <i class="bi bi-x-square"></i>
-                        <p class="mx-3">Rejection Reason Modified</p>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="addNew()" >Add New</button>
+
+                    <div class="heading d-flex align-items-center justify-content-between">
+                      <!-- Left side -->
+                      <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                        <i class="bi bi-lightning-charge lightning-icon"></i>
+                        <p>Rejection Reason Modified</p>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="addNew()">Add New</button>
+                      </div>
                     </div>
+
                                   <!-- SAVE CATEGORY START-->
                   <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && updateRejectionReason()"  novalidate>
 
@@ -214,10 +223,19 @@
 
             <!-- COL-MD-7 STARTING -->
             <div class="col-md-7">
-            
-              <div class="alert">
-                <i class="bi bi-x-square"></i>
-                <p class="mx-3">Product Rejected Reason</p>
+
+              <div class="heading d-flex align-items-center justify-content-between">
+                <!-- Left side -->
+                <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                  <i class="bi bi-lightning-charge lightning-icon"></i>
+                  <p class="mb-0">Product Rejected Reason</p>
+                </div>
+              
+                <!-- Right side -->
+                <span class="d-flex align-items-center gap-1 refresh-btn" style="cursor: pointer;">
+                  <i class="bi bi-gear-wide-connected refresh-icon"></i>
+                  <p class="mb-0">Refresh</p>
+                </span>
               </div>
             
               <!-- ANGULAR TABLE STARTING -->

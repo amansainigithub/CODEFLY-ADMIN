@@ -59,6 +59,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { ProductApproverComponent } from './admin-panel/productManager/product-approver/product-approver.component';
 import { ProductRejectionReasonComponent } from './admin-panel/productManager/product-rejection-reason/product-rejection-reason.component';
 import { ProductDisApprovedComponent } from './admin-panel/product-stages/product-dis-approved/product-dis-approved.component';
+import { ProductDraftComponent } from './admin-panel/product-stages/product-draft/product-draft.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { ProductDisApprovedComponent } from './admin-panel/product-stages/produc
     ProductApproverComponent,
     ProductRejectionReasonComponent,
     ProductDisApprovedComponent,
+    ProductDraftComponent,
   ],
   imports: [
     BrowserModule,

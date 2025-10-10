@@ -10,14 +10,19 @@
 
           <div class="col-md-6">
 
-            <div class="alert">
-              <!-- <span class="icon">&#10003;</span> -->
-              <!-- <strong>Create Parent Category</strong> -->
-              <i class="bi bi-window-sidebar px-1 baseColor"></i>
-              <p>MATERIAL</p>
-              <!-- <span class="close-btn">&times;</span> -->
+            <div class="heading d-flex align-items-center justify-content-between">
+              <!-- Left side -->
+              <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                <i class="bi bi-lightning-charge lightning-icon"></i>
+                <p class="mb-0">MATERIAL</p>
+              </div>
+            
+              <!-- Right side -->
+              <span class="d-flex align-items-center gap-1 refresh-btn" style="cursor: pointer;">
+                <i class="bi bi-gear-wide-connected refresh-icon"></i>
+                <p class="mb-0">Refresh</p>
+              </span>
             </div>
-
            
             <!-- Search Input Starting -->
             <input type="text" placeholder="Search MATERIAL Code" 
@@ -77,8 +82,8 @@
             </table>
 
             <mat-paginator 
-                    [pageSizeOptions]="[2, 4, 5, 8]" 
-                    [pageSize]="2"
+                    [pageSizeOptions]="[10, 20, 30]" 
+                    [pageSize]="10"
                     [length]="totalElements"
                     (page)="nextPage($event)"
                     showFirstLastButtons>
@@ -91,11 +96,14 @@
 
                 <!-- SAVE Material STARTING -->
               <div *ngIf="!viceVersaForm">
-                <div class="alert">
-                  <i class="bi bi-window-sidebar px-1 baseColor"></i>
-                  <p>MATERIAL</p>  
-                </div>
               
+                 <div class="heading d-flex align-items-center justify-content-between">
+                    <!-- Left side -->
+                    <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                      <i class="bi bi-lightning-charge lightning-icon"></i>
+                       <p>MATERIAL</p>
+                    </div>
+                </div>	
                   
                   <form 
                   name="form" 
@@ -219,13 +227,15 @@
               <!-- SAVE Material ENDING -->
                     
               <div *ngIf="viceVersaForm">
-                <!-- UPDATE MATERIAL  START-->
-                <div class="alert">
-                  <i class="bi bi-window-sidebar px-1 baseColor"></i>
-                  <p>Update Material</p>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="addNew()" >Add New</button>
+                
+                <div class="heading d-flex align-items-center justify-content-between">
+                  <!-- Left side -->
+                  <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                    <i class="bi bi-lightning-charge lightning-icon"></i>
+                    <p>Update Material</p>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addNew()">Add New</button>
+                  </div>
                 </div>
-            
                
                 <form 
                 name="form" 

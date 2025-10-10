@@ -1,20 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ApprovedStageService } from '../../../_services/productStages/approvedStageService/approved-stage.service';
+import { ProductDraftService } from '../../../_services/productStages/productDraftService/product-draft.service';
+
 @Component({
-  selector: 'app-product-approved',
-  templateUrl: './product-approved.component.html',
-  styleUrl: './product-approved.component.css',
+  selector: 'app-product-draft',
+  templateUrl: './product-draft.component.html',
+  styleUrl: './product-draft.component.css'
 })
-export class ProductApprovedComponent {
-  
+export class ProductDraftComponent {
+
   //Filter List For Searching
   filteredItems: any = [];
 
   //Product List
-  productApprovedList: any[] = [];
+  productDraftList: any[] = [];
   totalElements: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 10;
@@ -29,15 +30,15 @@ export class ProductApprovedComponent {
   constructor(
     private toast: NgToastService,
     private spinner: NgxSpinnerService,
-    private approvedStageService: ApprovedStageService
+    private productDraftService: ProductDraftService
   ) {}
 
   getApprovedProduct(request: any) {
     this.spinner.show();
-    this.approvedStageService.getApprovedProductService(request).subscribe({
+    this.productDraftService.getProductDraftService(request).subscribe({
       next: (res: any) => {
-        this.productApprovedList = res.data['content'];
-        this.filteredItems = this.productApprovedList;
+        this.productDraftList = res.data['content'];
+        this.filteredItems = this.productDraftList;
 
         this.totalElements = res.data['totalElements'];
         this.toast.success({
@@ -76,13 +77,13 @@ export class ProductApprovedComponent {
     const searchQuery = this.searchText.trim().toLowerCase();
 
     if (searchQuery) {
-      this.filteredItems = this.productApprovedList.filter((item) => {
+      this.filteredItems = this.productDraftList.filter((item) => {
         // Convert all values of object into single string
         const itemData = Object.values(item).join(' ').toLowerCase();
         return itemData.includes(searchQuery);
       });
     } else {
-      this.filteredItems = this.productApprovedList;
+      this.filteredItems = this.productDraftList;
     }
   }
   // MULTI SEARCH ENDING

@@ -9,9 +9,13 @@
 
               <!-- SAVE CHARGE ENDING -->
               <div *ngIf="!viceVersaForm">
-                  <div class="alert">
-                      <i class="bi bi-lightning-charge baseColor"></i>
-                      <p>Charge Config</p>
+
+                  <div class="heading d-flex align-items-center justify-content-between">
+                    <!-- Left side -->
+                    <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                      <i class="bi bi-lightning-charge lightning-icon"></i>
+                        <p>Charge Config</p>
+                    </div>
                   </div>
 
                                   <!-- SAVE CATEGORY START-->
@@ -164,12 +168,17 @@
 
                  <!-- UPDATE CATEGORY STARTING -->
                  <div *ngIf="viceVersaForm">
-                    <div class="alert">
-                        <i class="bi bi-lightning-charge baseColor"></i>
+
+                    <div class="heading d-flex align-items-center justify-content-between">
+                      <!-- Left side -->
+                      <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                        <i class="bi bi-lightning-charge lightning-icon"></i>
                         <p>Charge Config Modified</p>
-                        <button type="button" class="btn btn-primary btn-sm" (click)="addNew()" >Add New</button>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="addNew()">Add New</button>
+                      </div>
                     </div>
-                                  <!-- SAVE CATEGORY START-->
+
+                   <!-- SAVE CATEGORY START-->
                   <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && updateChargeConfig()"  novalidate>
 
 
@@ -332,11 +341,19 @@
             <!-- COL-MD-7 STARTING -->
             <div class="col-md-7">
             
-              <div class="alert">
-                <i class="bi bi-lightning-charge baseColor"></i>
-                <p>Charge Config</p>
+              <div class="heading d-flex align-items-center justify-content-between">
+                <!-- Left side -->
+                <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                  <i class="bi bi-lightning-charge lightning-icon"></i>
+                  <p>Charge Config</p>
+                </div>
+              
+                <!-- Right side -->
+                <span class="d-flex align-items-center gap-1 refresh-btn" style="cursor: pointer;">
+                  <i class="bi bi-gear-wide-connected refresh-icon"></i>
+                  <p class="mb-0">Refresh</p>
+                </span>
               </div>
-            
               <!-- ANGULAR TABLE STARTING -->
               <div>
                 <mat-form-field appearance="outline" class="w-100">

@@ -6,14 +6,19 @@
 
           <div class="col-md-6">
 
-            <div class="alert">
-              <!-- <span class="icon">&#10003;</span> -->
-              <!-- <strong>Create Parent Category</strong> -->
-              <i class="bi bi-window-sidebar px-1 baseColor"></i>
-              <p>HSN Code</p>
-              <!-- <span class="close-btn">&times;</span> -->
+            <div class="heading d-flex align-items-center justify-content-between">
+              <!-- Left side -->
+              <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                <i class="bi bi-lightning-charge lightning-icon"></i>
+                <p>HSN Code</p>
+              </div>
+            
+              <!-- Right side -->
+              <span class="d-flex align-items-center gap-1 refresh-btn" style="cursor: pointer;">
+                <i class="bi bi-gear-wide-connected refresh-icon"></i>
+                <p class="mb-0">Refresh</p>
+              </span>
             </div>
-
            
             <!-- Search Input Starting -->
             <input type="text" placeholder="Search HSN Code" 
@@ -87,10 +92,14 @@
 
                 <!-- SAVE HSN STARTING -->
               <div *ngIf="!viceVersaForm">
-                <div class="alert">
-                  <i class="bi bi-window-sidebar px-1 baseColor"></i>
-                  <p>HSN Codes</p>  
-                </div>
+
+                 <div class="heading d-flex align-items-center justify-content-between">
+                    <!-- Left side -->
+                    <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                      <i class="bi bi-lightning-charge lightning-icon"></i>
+                         <p>HSN Codes</p>  
+                    </div>
+                </div>		
               
                   
                   <form 
@@ -214,11 +223,14 @@
               </div>
                     
               <div *ngIf="viceVersaForm">
-                <!-- UPDATE HSN  START-->
-                <div class="alert">
-                  <i class="bi bi-window-sidebar px-1 baseColor"></i>
-                  <p>Update HSN Code</p>
-                  <button type="button" class="btn btn-primary btn-sm" (click)="addNew()" >Add New</button>
+                
+                <div class="heading d-flex align-items-center justify-content-between">
+                  <!-- Left side -->
+                  <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                    <i class="bi bi-lightning-charge lightning-icon"></i>
+                    <p>Update HSN Code</p>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addNew()">Add New</button>
+                  </div>
                 </div>
             
                
