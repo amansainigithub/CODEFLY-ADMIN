@@ -25,6 +25,7 @@ import { ProductRejectionReasonComponent } from './admin-panel/productManager/pr
 import { AdminDashboardComponent } from './admin-panel/admin-dashboard/admin-dashboard.component';
 import { ProductDisApprovedComponent } from './admin-panel/product-stages/product-dis-approved/product-dis-approved.component';
 import { ProductDraftComponent } from './admin-panel/product-stages/product-draft/product-draft.component';
+import { EmailTemplateComponent } from './admin-panel/emailBucket/email-template/email-template.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -71,6 +72,9 @@ const routes: Routes = [
 
                   //REVIEW APPROVER
                   { path: 'product-Rejection-reason', component: ProductRejectionReasonComponent , pathMatch:'full' },
+
+                  //Email Template
+                  { path: 'email-template', component: EmailTemplateComponent , pathMatch:'full' },
 
       ],
 }

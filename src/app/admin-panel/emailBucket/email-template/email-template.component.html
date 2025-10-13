@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <div class="card shadow-sm border-0 rounded-3">
+    <div class="card-body">
+      <h3 class="text-primary fw-bold mb-4 text-center">
+        ✉️ Email Template Builder
+      </h3>
+
+      <div class="row">
+        <!-- Left Side - Form -->
+        <div class="col-md-6">
+          <div class="p-3 border rounded-3 bg-light">
+            <h5 class="mb-3 text-secondary fw-semibold">Template Details</h5>
+
+            <form #templateForm="ngForm">
+              <!-- Template Name -->
+              <div class="mb-3">
+                <label for="templateName" class="form-label fw-semibold"
+                  >Template Name</label
+                >
+                <input
+                  type="text"
+                  id="templateName"
+                  class="form-control form-control-sm"
+                  placeholder="Enter template name"
+                  name="templateName"
+                  [(ngModel)]="templateName"
+                />
+              </div>
+
+              <!-- HTML Content -->
+              <div class="mb-3">
+                <label for="htmlContent" class="form-label fw-semibold"
+                  >HTML Content</label
+                >
+                <div class="editor-container">
+                  <textarea
+                    id="htmlContent"
+                    class="form-control code-box"
+                    rows="14"
+                    placeholder="Write your HTML email body here..."
+                    name="htmlContent"
+                    [(ngModel)]="htmlContent"
+                  ></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right Side - Live Preview -->
+        <div class="col-md-6">
+          <div class="p-3 border rounded-3 bg-white shadow-sm">
+            <h5 class="mb-3 text-secondary fw-semibold">Live Preview</h5>
+            <div
+              class="border rounded p-3 bg-light preview-box"
+              [innerHTML]="safeHtml"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

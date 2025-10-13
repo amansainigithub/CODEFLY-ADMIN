@@ -38,7 +38,7 @@
   overflow: scroll;
   position: fixed;
   padding-top: 45px;
-  font-size: 14px;
+  font-size: 11px;
 }
 
 .sidebar a {
@@ -50,7 +50,7 @@
 
 .sidebar a:hover {
   background-color: #e2e2e2;
-  border-radius: 12px;
+  border-radius: 11px;
 }
 
 
@@ -140,7 +140,7 @@ ul li a {
 
 /* TIME LIVE START */
 .clock {
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   color: #333;
   background: #f0f0f0;
@@ -149,6 +149,32 @@ ul li a {
   color: #4361ee;
   font-family: serif;
 }
+
+.flash-shine {
+  position: relative;
+  display: inline-block;
+  color: #333;
+  overflow: hidden;
+  background: linear-gradient(90deg, #333 0%, #0078d4 50%, #333 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.flash-shine:hover {
+  animation: shine 1.5s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 
 
 
@@ -166,4 +192,10 @@ ul li a {
 
 .nav-link-headings .bi-chevron-down {
   transform: rotate(360deg);
+}
+
+
+
+.nav-sub-link{
+  font-size: 11px;
 }

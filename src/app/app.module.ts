@@ -60,6 +60,7 @@ import { ProductApproverComponent } from './admin-panel/productManager/product-a
 import { ProductRejectionReasonComponent } from './admin-panel/productManager/product-rejection-reason/product-rejection-reason.component';
 import { ProductDisApprovedComponent } from './admin-panel/product-stages/product-dis-approved/product-dis-approved.component';
 import { ProductDraftComponent } from './admin-panel/product-stages/product-draft/product-draft.component';
+import { EmailTemplateComponent } from './admin-panel/emailBucket/email-template/email-template.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { ProductDraftComponent } from './admin-panel/product-stages/product-draf
     ProductRejectionReasonComponent,
     ProductDisApprovedComponent,
     ProductDraftComponent,
+    EmailTemplateComponent,
   ],
   imports: [
     BrowserModule,

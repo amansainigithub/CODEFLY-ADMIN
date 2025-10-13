@@ -96,6 +96,7 @@ export class AppComponent {
   isChargeConfig=false;
   productStages=false;
   productRejectedReason=false;
+  emailBucket=false;
   toggleSubmenu(menu:any) {
     if (menu === 'categories') {
       this.isCategoriesOpen = !this.isCategoriesOpen;
@@ -113,6 +114,8 @@ export class AppComponent {
       this.productStages = !this.productStages;
     }else if (menu === 'productRejectedReason') {
       this.productRejectedReason = !this.productRejectedReason;
+    }else if (menu === 'emailBucket') {
+      this.emailBucket = !this.emailBucket;
     }
     
   }
