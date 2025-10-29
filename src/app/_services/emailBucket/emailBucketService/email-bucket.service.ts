@@ -14,10 +14,14 @@ export class EmailBucketService {
   constructor(private http: HttpClient) {}
 
   saveEmailTemplate(data: any): Observable<any> {
-    return this.http.post(
-      API_AUTHORIZA_URL + 'emailTemplateController/' + 'createEmailTemplate',
-      data,
-      httpOptions
-    );
+    return this.http.post(API_AUTHORIZA_URL + 'emailTemplateController/' + 'createEmailTemplate', data,httpOptions);
+  }
+
+  getEmailTemplates(request: any): Observable<any> {
+    return this.http.get(API_AUTHORIZA_URL +'emailTemplateController/' +'getEmailTemplateData?page=' + request.page +'&size=' + request.size,httpOptions);
+  }
+
+  updateEmailTemplate(data: any): Observable<any> {
+    return this.http.post(API_AUTHORIZA_URL + 'emailTemplateController/' + 'updateEmailTemplate',data,httpOptions);
   }
 }

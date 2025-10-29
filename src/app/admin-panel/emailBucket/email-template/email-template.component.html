@@ -198,3 +198,50 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+    <!-- Search Input Starting -->
+    <div class="mt-2">
+        <input type="text" placeholder="Search HSN Code" [(ngModel)]="searchText" (input)="onSearch()"
+        class="form-control form-control-sm mb-3" />
+    </div>
+    <!-- Search Input Ending -->
+
+
+    <table class="table table-sm fs11 table-hover table-bordered">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">S.N</th>
+                <th scope="col">Id</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Body Html</th>
+                <th scope="col">Module</th>
+                <th scope="col">Template Key</th>
+                <th scope="col">Modifier</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of filteredItems , let i = index" class="text-center" style="cursor: pointer;">
+                <th scope="row" class="p-3">{{i + 1}}</th>
+                <td class="p-3">{{data.id}}</td>
+                <td class="p-3">{{data.subject}}</td>
+                <td class="p-3">{{data.bodyHtml}}</td>
+                <td class="p-3">{{data.module}}</td>
+                <td class="p-3">{{data.templateKey}}</td>
+                <td class="p-3">
+                  <button mat-raised-button color="primary"
+                    class="d-flex align-items-center gap-1 btn-sm email-template">
+                    Modifier
+                  </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" [length]="totalElements" (page)="nextPage($event)"
+        showFirstLastButtons>
+    </mat-paginator>
