@@ -1,48 +1,185 @@
-<div class="container mt-4">
-  <div class="card shadow-sm border-0 rounded-3">
-    <div class="card-body">
-      <h3 class="text-primary fw-bold mb-4 text-center">
-        ✉️ Email Template Builder
-      </h3>
 
+<div class="container mt-1 px-3">
+
+    <div class="heading d-flex align-items-center justify-content-between">
+        <!-- Left side -->
+        <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+            <i class="bi bi-lightning-charge lightning-icon"></i>
+            <p class="mb-0">Email Template Builder</p>
+        </div>
+
+        <!-- Right side (click)="refreshUnderReview()"-->
+        <span  class="d-flex align-items-center gap-1 refresh-btn"
+            style="cursor: pointer;">
+            <i class="bi bi-gear-wide-connected refresh-icon"></i>
+            <p class="mb-0">Refresh</p>
+        </span>
+
+        <span>|</span>
+        <span>
+          <button (click)="showEmailTemplate()" mat-raised-button color="primary" 
+          class="d-flex align-items-center gap-1 btn-sm email-template" >
+          Email Template
+        </button>
+        </span>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+<div class="container mt-4 mb-5" *ngIf="emailTemplate">
+  <div class="card shadow-lg border-0 rounded-3">
+
+    <div class="px-3">
+        <div class="heading d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+            <i class="bi bi-lightning-charge bi-envelope-check text-primary"></i>
+            <p class="mb-0">Email Template Builder</p>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="card-body" style="border-radius: 12px;">
       <div class="row">
         <!-- Left Side - Form -->
         <div class="col-md-6">
           <div class="p-3 border rounded-3 bg-light">
-            <h5 class="mb-3 text-secondary fw-semibold">Template Details</h5>
+            <p class="mb-3 text-secondary">Template Details</p>
 
-            <form #templateForm="ngForm">
-              <!-- Template Name -->
-              <div class="mb-3">
-                <label for="templateName" class="form-label fw-semibold"
-                  >Template Name</label
-                >
+            <form class="fs11"
+              name="form"
+              #f="ngForm"
+              (ngSubmit)="f.form.valid && saveEmailTemplate()"
+              novalidate
+            >
+              <!-- Template Key -->
+              <div class="form-group mb-3">
+                <label class="fw-semibold">Template Key</label>
                 <input
                   type="text"
-                  id="templateName"
+                  name="templateKey"
                   class="form-control form-control-sm"
+                  [(ngModel)]="template.templateKey"
+                  required
+                  #templateKey="ngModel"
+                  [ngClass]="{
+                    'is-invalid':
+                      templateKey.errors && (templateKey.touched || templateKey.dirty)
+                  }"
                   placeholder="Enter template name"
-                  name="templateName"
-                  [(ngModel)]="templateName"
                 />
+                <div
+                  *ngIf="templateKey.errors && (templateKey.touched || templateKey.dirty)"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="templateKey.errors['required']">
+                    Template Name is required
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Suvject -->
+              <div class="form-group mb-3">
+                <label class="fw-semibold">Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  class="form-control form-control-sm"
+                  [(ngModel)]="template.subject"
+                  required
+                  #subject="ngModel"
+                  [ngClass]="{
+                    'is-invalid':
+                      subject.errors && (subject.touched || subject.dirty)
+                  }"
+                  placeholder="Enter template name"
+                />
+                <div
+                  *ngIf="subject.errors && (subject.touched || subject.dirty)"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="subject.errors['required']">
+                    subject is required
+                  </div>
+                </div>
               </div>
 
               <!-- HTML Content -->
-              <div class="mb-3">
-                <label for="htmlContent" class="form-label fw-semibold"
-                  >HTML Content</label
+              <div class="form-group mb-3">
+                <label class="fw-semibold">HTML Content</label>
+                <textarea
+                  class="form-control code-box"
+                  rows="14"
+                  name="bodyHtml"
+                  [(ngModel)]="template.bodyHtml"
+                  required
+                  #bodyHtml="ngModel"
+                  [ngClass]="{
+                    'is-invalid':
+                      bodyHtml.errors && (bodyHtml.touched || bodyHtml.dirty)
+                  }"
+                  placeholder="Write your HTML email body here..."
+                ></textarea>
+                <div
+                  *ngIf="bodyHtml.errors && (bodyHtml.touched || bodyHtml.dirty)"
+                  class="invalid-feedback"
                 >
-                <div class="editor-container">
-                  <textarea
-                    id="htmlContent"
-                    class="form-control code-box"
-                    rows="14"
-                    placeholder="Write your HTML email body here..."
-                    name="htmlContent"
-                    [(ngModel)]="htmlContent"
-                  ></textarea>
+                  <div *ngIf="bodyHtml.errors['required']">
+                    HTML Content is required
+                  </div>
                 </div>
               </div>
+
+
+              <!-- MODULE FOR -->
+              <div class="form-group mb-3">
+                <label class="fw-semibold">Module</label>
+                <select
+                  name="module"
+                  class="form-select form-select-sm"
+                  [(ngModel)]="template.module"
+                  required
+                  #module="ngModel"
+                  [ngClass]="{
+                    'is-invalid':
+                      module.errors && (module.touched || module.dirty)
+                  }"
+                >
+                  <option value="" disabled selected>Select template type</option>
+                  <option value="ADMIN">ADMIN</option>
+                  <option value="SELLER">SELLER</option>
+                  <option value="CUSTOMER">CUSTOMER</option>
+                  <option value="PUBLIC">PUBLIC</option>
+                </select>
+
+                <div
+                  *ngIf="module.errors && (module.touched || module.dirty)"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="module.errors['required']">
+                    module is required
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="mt-2 w-100"
+                mat-raised-button color="primary"
+                [disabled]="f.invalid"
+              >
+                <i class="bi bi-save"></i> Save Template
+              </button>
             </form>
           </div>
         </div>
@@ -50,7 +187,7 @@
         <!-- Right Side - Live Preview -->
         <div class="col-md-6">
           <div class="p-3 border rounded-3 bg-white shadow-sm">
-            <h5 class="mb-3 text-secondary fw-semibold">Live Preview</h5>
+            <p class="mb-3 text-secondary">Live Preview</p>
             <div
               class="border rounded p-3 bg-light preview-box"
               [innerHTML]="safeHtml"

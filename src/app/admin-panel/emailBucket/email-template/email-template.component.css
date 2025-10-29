@@ -1,3 +1,146 @@
+.heading {
+  background-color: #ffffff;
+  border-left: 5px solid #7e76ff;
+  padding: 8px 22px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  /* vertically center */
+  width: fit-content;
+  /* content ke hisab se width */
+  font-family: 'Arial', sans-serif;
+  gap: 8px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  /* icon aur text ke beech gap */
+}
+
+.heading p {
+  margin: 0;
+  font-size: 12px;
+  color: #333;
+}
+
+
+.refresh-icon {
+  color: #6c757d;
+  /* Normal color (gray-ish) */
+  transition: transform 0.6s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Gradient + rotation only while hovering */
+.refresh-btn:hover .refresh-icon {
+  background: linear-gradient(135deg, #00c6ff, #0072ff, #9c27b0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: rotate(360deg);
+}
+
+
+
+.lightning-icon {
+  color: #fdd835;
+  /* golden yellow */
+  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect → flash like lightning */
+.lightning-box:hover .lightning-icon {
+  animation: flash 0.6s ease-in-out;
+}
+
+/* Lightning animation */
+@keyframes flash {
+  0% {
+    text-shadow: 0 0 0px #fff;
+    color: #fdd835;
+    opacity: 1;
+  }
+
+  10% {
+    text-shadow: 0 0 10px #fff, 0 0 20px #ffea00;
+    opacity: 0.8;
+  }
+
+  20% {
+    text-shadow: 0 0 25px #fff, 0 0 40px #ffea00;
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 0.3;
+  }
+
+  40% {
+    text-shadow: 0 0 15px #fff, 0 0 30px #ffea00;
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 0.5;
+  }
+
+  80% {
+    text-shadow: 0 0 20px #fff, 0 0 35px #ffea00;
+    opacity: 1;
+  }
+
+  100% {
+    text-shadow: none;
+    opacity: 1;
+    color: #fdd835;
+  }
+}
+
+
+/* //DOT CSS */
+.dotGreen {
+  animation: blink 1.5s infinite;
+  font-size: 25px;
+  color: #4caf50;
+}
+
+.dotRed {
+  animation: blink 1.5s infinite;
+  font-size: 25px;
+  color: #e31e1e;
+}
+
+/* Animation for smooth blinking */
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+    /* Slightly lower opacity for a smoother effect */
+  }
+}
+
+
+.product-main-file {
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+
+
+
+.email-template{
+  height: 24px;
+  font-size: 11px;
+}
+
+
+
+
+
+/* HTML BOX CSS STARTING */
 .editor-container {
   position: relative;
 }
@@ -29,6 +172,4 @@
   box-shadow: 0 0 0 0.2rem rgba(0, 120, 212, 0.25);
 }
 
-
-
-
+/* HTML BOX CSS ENDING */
