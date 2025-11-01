@@ -294,7 +294,7 @@
         <ul class="collapse submenu" id="productStageMenu">
           <li class="unOrderList">
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-approved">
-              <i class="bi bi-person-fill-check"></i>
+              <i class="bi bi-envelope-check"></i>
               Product-Approved
             </a>
           </li>
@@ -303,7 +303,7 @@
         <ul class="collapse submenu" id="productStageMenu">
           <li class="unOrderList">
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-dis-approved">
-              <i class="bi bi-person-fill-check"></i>
+             <i class="bi bi-envelope-dash"></i>
                P - DisApproved
             </a>
           </li>
@@ -312,8 +312,27 @@
          <ul class="collapse submenu" id="productStageMenu">
           <li class="unOrderList">
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-draft">
-              <i class="bi bi-person-fill-check"></i>
+              <i class="bi bi-envelope-paper-fill"></i>
                Product Draft
+            </a>
+          </li>
+        </ul>
+
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link-headings" (click)="toggleSubmenu('productSearchManagement')" href="#" data-bs-toggle="collapse"
+          data-bs-target="#productSearchManagement" aria-expanded="false">
+          <i class="bi bi-people"></i> P-Search Management
+          <i [class.bi-chevron-right]="!productSearchManagement" [class.bi-chevron-down]="productSearchManagement" class="ms-auto floatRit"></i>
+        </a>
+
+        <ul class="collapse submenu" id="productSearchManagement">
+          <li class="unOrderList">
+             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-Search-Management">
+              <i class="bi bi-search"></i>
+               Search Management
             </a>
           </li>
         </ul>
@@ -331,6 +350,15 @@
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/email-template">
               <i class="bi bi-person-fill-check"></i>
               Email Template
+            </a>
+          </li>
+        </ul>
+
+        <ul class="collapse submenu" id="emailBucket">
+          <li class="unOrderList">
+            <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/send-email-audit">
+              <i class="bi bi-person-fill-check"></i>
+              send-email-audit
             </a>
           </li>
         </ul>

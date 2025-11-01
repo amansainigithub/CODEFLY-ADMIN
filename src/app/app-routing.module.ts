@@ -26,6 +26,8 @@ import { AdminDashboardComponent } from './admin-panel/admin-dashboard/admin-das
 import { ProductDisApprovedComponent } from './admin-panel/product-stages/product-dis-approved/product-dis-approved.component';
 import { ProductDraftComponent } from './admin-panel/product-stages/product-draft/product-draft.component';
 import { EmailTemplateComponent } from './admin-panel/emailBucket/email-template/email-template.component';
+import { SendEmailAuditComponent } from './admin-panel/emailBucket/send-email-audit/send-email-audit.component';
+import { ProductSearchManagementComponent } from './admin-panel/product-stages/product-search-management/product-search-management.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -75,6 +77,10 @@ const routes: Routes = [
 
                   //Email Template
                   { path: 'email-template', component: EmailTemplateComponent , pathMatch:'full' },
+                  { path: 'send-email-audit', component: SendEmailAuditComponent , pathMatch:'full' },
+
+                   //PRODUCT SEARCH MANAGEMENT
+                  { path: 'product-Search-Management', component: ProductSearchManagementComponent , pathMatch:'full' },
 
       ],
 }

@@ -4,7 +4,7 @@
         <!-- Left side -->
         <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
             <i class="bi bi-lightning-charge lightning-icon"></i>
-            <p class="mb-0">Product Draft</p>
+            <p class="mb-0">Product Draft <span>({{totalElements}})</span></p>
         </div>
 
         <!-- Right side (click)="refreshUnderReview()"-->
@@ -18,7 +18,7 @@
 
     <!-- Search Input Starting -->
     <div class="mt-2">
-        <input type="text" placeholder="Search HSN Code" [(ngModel)]="searchText" (input)="onSearch()"
+        <input type="text" placeholder="Search Keyword" [(ngModel)]="searchText" (input)="onSearch()"
         class="form-control form-control-sm mb-3" />
     </div>
     <!-- Search Input Ending -->
@@ -36,7 +36,7 @@
                 <th scope="col">Date | Time</th>
                 <th scope="col">variantId</th>
                 <th scope="col">Product Series</th>
-                <th scope="col">Action</th>
+                <!-- <th scope="col">Action</th> -->
             </tr>
         </thead>
         <tbody>
@@ -53,7 +53,7 @@
                 <td>{{data.productDate}} | {{data.productTime}}</td>
                 <td>{{data.variantId}}</td>
                 <td>{{data.productSeries}}</td>
-                <td class="text-center">
+                <!-- <td class="text-center">
                     <div class="d-flex flex-column align-items-center gap-2">
                         <div class="d-flex justify-content-center gap-2">
                             <button mat-raised-button color="primary">Basic</button>
@@ -64,7 +64,7 @@
                             <button mat-raised-button color="success">Basic</button>
                         </div>
                     </div>
-                </td>
+                </td> -->
 
     
             </tr>
