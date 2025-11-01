@@ -43,25 +43,7 @@
                                   </div>
                               </div>
 
-                              <div class="form-group">
-                                    <label class="fs12">CATEGORY</label>
-                                    <input 
-                                    type="text" 
-                                    class="form-control form-control-sm" 
-                                    name="category" 
-                                    [(ngModel)]="form.category" 
-                                    required #category="ngModel"
-                                    [class.dirty]="category.dirty" 
-                                    [class.touched]="category.touched"
-                                    [ngClass]="{ 'is-invalid': category.errors && (category.touched || category.dirty ) }" />
-                            
-                                    <div *ngIf="category.errors && (category.touched || category.dirty )"class="invalid-feedback fs11">
-                                      <div *ngIf="category.errors['required'] ">
-                                        Category is required
-                                      </div>
-                                    </div>
-                                </div>
-                              </div>
+                            </div>
 
 
                               <div class="form-group">
@@ -144,27 +126,8 @@
                                     </div>
                                   </div>
                               </div>
-
-                              <div class="form-group">
-                                    <label class="fs12">CATEGORY</label>
-                                    <input 
-                                    type="text" 
-                                    class="form-control form-control-sm" 
-                                    name="category" 
-                                    [(ngModel)]="updateform.category" 
-                                    required #category="ngModel"
-                                    [class.dirty]="category.dirty" 
-                                    [class.touched]="category.touched"
-                                    [ngClass]="{ 'is-invalid': category.errors && (category.touched || category.dirty ) }" />
-                            
-                                    <div *ngIf="category.errors && (category.touched || category.dirty )"class="invalid-feedback fs11">
-                                      <div *ngIf="category.errors['required'] ">
-                                        Category is required
-                                      </div>
-                                    </div>
-                                </div>
                                 
-                                <div class="form-group">
+                              <div class="form-group">
                                   <label class="fs12">REASON</label>
                                   <input 
                                   type="text" 
@@ -260,12 +223,6 @@
                     <ng-container matColumnDef="code">
                       <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> CODE </th>
                       <td class="fs10" mat-cell *matCellDef="let element"> {{element.code}} </td>
-                    </ng-container>
-            
-                    <!-- CATEGORY -->
-                    <ng-container matColumnDef="category">
-                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> CATEGORY   </th>
-                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.category}} </td>
                     </ng-container>
 
                     <!-- CATEGORY -->

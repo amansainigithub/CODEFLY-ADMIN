@@ -97,6 +97,7 @@ export class AppComponent {
   productStages=false;
   productRejectedReason=false;
   emailBucket=false;
+  isDashboard=false;
   toggleSubmenu(menu:any) {
     if (menu === 'categories') {
       this.isCategoriesOpen = !this.isCategoriesOpen;

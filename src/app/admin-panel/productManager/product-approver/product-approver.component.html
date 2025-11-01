@@ -91,7 +91,7 @@
 
 
 
-   <!-- =====================PRODUCT DIS-APPROVED  MODEL OPEN========================= -->
+   <!-- ===================== PRODUCT DIS-APPROVED  MODEL OPEN ========================= -->
     <!-- Modal Open-->
     <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1"
         aria-labelledby="exampleModalLabel" aria-hidden="true" #DISAPPROVED>
@@ -102,7 +102,7 @@
                     <div *ngIf="!disApprovedModel">
 
                         <div class="text-center">
-                            <i class="bi bi-rocket-takeoff fs20" style="color: #45e832;"></i>
+                            <i class="bi bi-x fs20" style="color: #a01e0c;"></i>
                             <span class="fs11">
                                 <p style="line-height: 1.1;">
                                     Are you sure you want to DIS-APPROVED this Product ?
@@ -177,10 +177,15 @@
                             </div>
 
                             <div class="mb-3 mt-3 text-center">
-                                <button mat-raised-button class="me-2" data-bs-dismiss="modal">Close</button>
-                                <button mat-raised-button color="primary" type="submit">DIS APPROVED</button>
+                                <button mat-raised-button type="submit" style="background-color: #E83613;color: whitesmoke;">
+                                    DIS APPROVED
+                                </button>
                             </div>
                       </form>
+                      <div class="mb-3 mt-3 text-end">
+                        <button mat-raised-button class="me-2" data-bs-dismiss="modal">Close</button>
+                      </div>
+
                     </div>
                      <!-- FORM ENDING -->
 
@@ -215,4 +220,4 @@
         </div>
     </div>
     <!-- Modal Close-->
-    <!-- =====================PRODUCT DIS-APPROVED  MODEL CLOSING======================== -->
+    <!-- ===================== PRODUCT DIS-APPROVED  MODEL CLOSING ======================== -->

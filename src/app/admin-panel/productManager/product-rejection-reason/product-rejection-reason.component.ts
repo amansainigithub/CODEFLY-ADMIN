@@ -21,7 +21,6 @@ export class ProductRejectionReasonComponent {
 
     form: any = {
     code: null,
-    category: null,
     reason: null,
     description: null,
     isActive: false,
@@ -31,7 +30,6 @@ export class ProductRejectionReasonComponent {
    updateform: any = {
     id:0,
     code: null,
-    category: null,
     reason: null,
     description: null,
     isActive: false,
@@ -99,7 +97,6 @@ updateRejectionReason()
   displayedColumns: string[] = [
     'id',
     'code',
-    'category',
     'reason',
     'description',
     'active',

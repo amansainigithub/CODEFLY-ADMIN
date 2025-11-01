@@ -106,8 +106,13 @@ disApprovReason:any;
         clearInterval(this.progressInterval);
         this.isLoading = false;
         this.progressValue = 0;
-        this.toast.error({detail: 'Error',summary: 'Something went wrong',position: 'topRight',duration: 2000, });
-        console.log(err);
+
+        if(err.error.data.message === 'First approve the main product, then approve the variant product.'){
+          this.toast.error({detail: 'Error',
+            summary: 'First approve the main product, then approve the variant product.',position: 'topRight',duration: 4000, });
+        }else{
+          this.toast.error({detail: 'Error',summary: 'Something went wrong',position: 'topRight',duration: 2000, });
+        } 
 
         //Close Model
         this.approvedModelClose();
@@ -143,7 +148,7 @@ productDisApproved() {
   this.isLoading = true;
   this.progressValue = 0;
 
-  // ✅ Start progress bar animation
+  //Start progress bar animation
   this.progressInterval = setInterval(() => {
     if (this.progressValue < 90) {
       this.progressValue += 5; // increase gradually
