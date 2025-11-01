@@ -88,4 +88,8 @@ export class ProductDisApprovedComponent {
     }
   }
   // MULTI SEARCH ENDING
+
+    refeshPage() {
+    this.getDisApprovedProduct({ page: '0', size: '10' });
+  }
 }

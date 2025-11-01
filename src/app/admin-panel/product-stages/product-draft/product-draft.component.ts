@@ -24,7 +24,7 @@ export class ProductDraftComponent {
   searchText: string = '';
 
   ngOnInit(): void {
-    this.getApprovedProduct({ page: '0', size: '10' });
+    this.getDraftProduct({ page: '0', size: '10' });
   }
 
   constructor(
@@ -33,7 +33,7 @@ export class ProductDraftComponent {
     private productDraftService: ProductDraftService
   ) {}
 
-  getApprovedProduct(request: any) {
+  getDraftProduct(request: any) {
     this.spinner.show();
     this.productDraftService.getProductDraftService(request).subscribe({
       next: (res: any) => {
@@ -67,7 +67,7 @@ export class ProductDraftComponent {
     const request: any = {};
     request['page'] = event.pageIndex.toString();
     request['size'] = event.pageSize.toString();
-    this.getApprovedProduct(request);
+    this.getDraftProduct(request);
   }
 
   //Search Starting
@@ -87,4 +87,8 @@ export class ProductDraftComponent {
     }
   }
   // MULTI SEARCH ENDING
+
+    refeshPage() {
+    this.getDraftProduct({ page: '0', size: '10' });
+  }
 }

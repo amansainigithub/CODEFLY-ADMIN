@@ -86,4 +86,9 @@ export class ProductApprovedComponent {
     }
   }
   // MULTI SEARCH ENDING
+
+
+  refeshPage() {
+    this.getApprovedProduct({ page: '0', size: '10' });
+  }
 }
