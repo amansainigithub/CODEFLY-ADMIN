@@ -12,7 +12,7 @@
         <span  class="d-flex align-items-center gap-1 refresh-btn"
             style="cursor: pointer;">
             <i class="bi bi-gear-wide-connected refresh-icon"></i>
-            <p class="mb-0">Refresh</p>
+            <p class="mb-0" (click)="refershPage()" >Refresh</p>
         </span>
 
         <span>|</span>
@@ -190,7 +190,7 @@
             <p class="mb-3 text-secondary">Live Preview</p>
             <div
               class="border rounded p-3 bg-light preview-box"
-              [innerHTML]="safeHtml"
+              [innerHTML]="safeHtmlCreate"
             ></div>
           </div>
         </div>
@@ -205,8 +205,8 @@
 
 
     <!-- Search Input Starting -->
-    <div class="mt-2">
-        <input type="text" placeholder="Search HSN Code" [(ngModel)]="searchText" (input)="onSearch()"
+    <div class="mt-5 mb-3">
+        <input type="text" placeholder="Search Template Code" [(ngModel)]="searchText" (input)="onSearch()"
         class="form-control form-control-sm mb-3" />
     </div>
     <!-- Search Input Ending -->
@@ -222,6 +222,7 @@
                 <th scope="col">Module</th>
                 <th scope="col">Template Key</th>
                 <th scope="col">Modifier</th>
+                 <th scope="col">Remove</th>
             </tr>
         </thead>
         <tbody>
@@ -233,9 +234,14 @@
                 <td class="p-3">{{data.module}}</td>
                 <td class="p-3">{{data.templateKey}}</td>
                 <td class="p-3">
-                  <button mat-raised-button color="primary"
+                  <button mat-raised-button color="primary" (click)="modifyEmailTemplate(data)"
                     class="d-flex align-items-center gap-1 btn-sm email-template">
                     Modifier
+                  </button>
+                </td>
+                <td class="p-3">
+                  <button (click)="removeTemplate(data.id)" mat-raised-button class="d-flex align-items-center gap-1 btn-sm email-template">
+                    Remove 
                   </button>
                 </td>
             </tr>
@@ -245,3 +251,189 @@
     <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" [length]="totalElements" (page)="nextPage($event)"
         showFirstLastButtons>
     </mat-paginator>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- =====================MODEL OPEN========================= -->
+    <!-- Modal Open-->
+
+
+
+    <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1" belledby="exampleModalLabel"
+      aria-hidden="true" #proceedModel style="margin-top: 80px;">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content" style="max-height: 85vh; overflow: hidden;">
+
+      <div class="px-3">
+        <div class="heading d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+            <i class="bi bi-lightning-charge bi-envelope-check text-primary"></i>
+            <p class="mb-0">Email Template Builder</p>
+          </div>
+          <span>
+            <button mat-raised-button color="primary"
+              class="d-flex align-items-center gap-1 btn-sm email-template" data-bs-dismiss="modal">
+              close
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <!-- Scrollable Body -->
+      <div class="card-body" style="border-radius: 12px; overflow-y: auto; max-height: 75vh;">
+        <div class="row g-3">
+          <!-- Left Side - Form -->
+          <div class="col-md-6">
+            <div class="p-3 border rounded-3 bg-light">
+              <p class="mb-3 text-secondary">Template Details</p>
+
+              <form class="fs11"
+                name="form"
+                #f="ngForm"
+                (ngSubmit)="f.form.valid && updateEmailTemplate()"
+                novalidate>
+
+                <!-- Template Key -->
+                <div class="form-group mb-3">
+                  <label class="fw-semibold">Template Key</label>
+                  <input
+                    type="text"
+                    name="templateKey"
+                    class="form-control form-control-sm"
+                    [(ngModel)]="updateTemplate.templateKey"
+                    required
+                    #templateKey="ngModel"
+                    [ngClass]="{
+                      'is-invalid':
+                        templateKey.errors && (templateKey.touched || templateKey.dirty)
+                    }"
+                    placeholder="Enter template name"
+                  />
+                  <div
+                    *ngIf="templateKey.errors && (templateKey.touched || templateKey.dirty)"
+                    class="invalid-feedback">
+                    <div *ngIf="templateKey.errors['required']">
+                      Template Name is required
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Subject -->
+                <div class="form-group mb-3">
+                  <label class="fw-semibold">Subject</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    class="form-control form-control-sm"
+                    [(ngModel)]="updateTemplate.subject"
+                    required
+                    #subject="ngModel"
+                    [ngClass]="{
+                      'is-invalid':
+                        subject.errors && (subject.touched || subject.dirty)
+                    }"
+                    placeholder="Enter subject"
+                  />
+                  <div
+                    *ngIf="subject.errors && (subject.touched || subject.dirty)"
+                    class="invalid-feedback">
+                    <div *ngIf="subject.errors['required']">
+                      Subject is required
+                    </div>
+                  </div>
+                </div>
+
+                <!-- HTML Content -->
+                <div class="form-group mb-3">
+                  <label class="fw-semibold">HTML Content</label>
+                  <textarea
+                    class="form-control code-box"
+                    rows="14"
+                    name="bodyHtml"
+                    [(ngModel)]="updateTemplate.bodyHtml"
+                    required
+                    #bodyHtml="ngModel"
+                    [ngClass]="{
+                      'is-invalid':
+                        bodyHtml.errors && (bodyHtml.touched || bodyHtml.dirty)
+                    }"
+                    placeholder="Write your HTML email body here..."></textarea>
+                  <div
+                    *ngIf="bodyHtml.errors && (bodyHtml.touched || bodyHtml.dirty)"
+                    class="invalid-feedback">
+                    <div *ngIf="bodyHtml.errors['required']">
+                      HTML Content is required
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Module -->
+                <div class="form-group mb-3">
+                  <label class="fw-semibold">Module</label>
+                  <select
+                    name="module"
+                    class="form-select form-select-sm"
+                    [(ngModel)]="updateTemplate.module"
+                    required
+                    #module="ngModel"
+                    [ngClass]="{
+                      'is-invalid':
+                        module.errors && (module.touched || module.dirty)
+                    }">
+                    <option value="" disabled selected>Select template type</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="SELLER">SELLER</option>
+                    <option value="CUSTOMER">CUSTOMER</option>
+                    <option value="PUBLIC">PUBLIC</option>
+                  </select>
+
+                  <div
+                    *ngIf="module.errors && (module.touched || module.dirty)"
+                    class="invalid-feedback">
+                    <div *ngIf="module.errors['required']">
+                      Module is required
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                  type="submit"
+                  class="mt-2 w-100"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="f.invalid">
+                  <i class="bi bi-save"></i> Update Template
+                </button>
+
+              </form>
+            </div>
+          </div>
+
+          <!-- Right Side - Live Preview -->
+          <div class="col-md-6">
+            <div class="p-3 border rounded-3 bg-white shadow-sm">
+              <p class="mb-3 text-secondary">Live Preview</p>
+              <div
+                class="border rounded p-3 bg-light preview-box"
+                [innerHTML]="safeHtmlUpdate"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <!-- Modal Close-->
+    <!-- =====================MODEL CLOSING======================== -->

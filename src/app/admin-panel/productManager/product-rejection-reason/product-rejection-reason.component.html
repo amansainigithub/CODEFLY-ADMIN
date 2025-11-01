@@ -267,6 +267,12 @@
                       <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> CATEGORY   </th>
                       <td class="fs10" mat-cell *matCellDef="let element"> {{element.category}} </td>
                     </ng-container>
+
+                    <!-- CATEGORY -->
+                    <ng-container matColumnDef="reason">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> REASON   </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.reason}} </td>
+                    </ng-container>
             
                     <!-- DESCRIPTION -->
                     <ng-container matColumnDef="description">

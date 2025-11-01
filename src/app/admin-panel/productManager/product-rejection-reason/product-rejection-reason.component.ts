@@ -100,6 +100,7 @@ updateRejectionReason()
     'id',
     'code',
     'category',
+    'reason',
     'description',
     'active',
     'update',

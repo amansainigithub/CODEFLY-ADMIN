@@ -24,4 +24,10 @@ export class EmailBucketService {
   updateEmailTemplate(data: any): Observable<any> {
     return this.http.post(API_AUTHORIZA_URL + 'emailTemplateController/' + 'updateEmailTemplate',data,httpOptions);
   }
+
+  removeEmailTemplate(templateId:any): Observable<any> {
+       return this.http.get(API_AUTHORIZA_URL + "emailTemplateController/" + 'deleteEmailTemplate/'+templateId, httpOptions);
+     }
+
+ 
 }

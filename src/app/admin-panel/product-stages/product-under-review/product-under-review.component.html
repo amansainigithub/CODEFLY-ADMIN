@@ -1,153 +1,81 @@
+<div class="container mt-1 px-3">
+
+    <div class="heading d-flex align-items-center justify-content-between">
+        <!-- Left side -->
+        <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+            <i class="bi bi-lightning-charge lightning-icon"></i>
+            <p class="mb-0">Product Approved</p>
+        </div>
+
+        <!-- Right side (click)="refreshUnderReview()"-->
+        <span  class="d-flex align-items-center gap-1 refresh-btn"
+            style="cursor: pointer;">
+            <i class="bi bi-gear-wide-connected refresh-icon"></i>
+            <p class="mb-0">Refresh</p>
+        </span>
+    </div>
 
 
-<div class="container">
-
-            <!-- <div class="heading">
-                <i class="bi bi-lightning-charge baseColor"></i>
-                <p>Under Review</p>
-
-                  <i class="bi bi-gear-wide-connected" style="cursor: pointer;"></i>
-                <p>Refresh</p>
-            </div> -->
-
-            <div class="heading d-flex align-items-center justify-content-between">
-                <!-- Left side -->
-              <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
-                <i class="bi bi-lightning-charge lightning-icon"></i>
-                <p class="mb-0">Under Review</p>
-              </div>
+    <!-- Search Input Starting -->
+    <div class="mt-2">
+        <input type="text" placeholder="Search HSN Code" [(ngModel)]="searchText" (input)="onSearch()"
+        class="form-control form-control-sm mb-3" />
+    </div>
+    <!-- Search Input Ending -->
 
 
-                <!-- Right side -->
-                <span (click)="refreshUnderReview()" class="d-flex align-items-center gap-1 refresh-btn" style="cursor: pointer;">
-                  <i class="bi bi-gear-wide-connected refresh-icon"></i>
-                  <p class="mb-0">Refresh</p>
-                </span>
+    <table class="table table-sm fs11 table-hover table-bordered">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">S.N</th>
+                <th scope="col">Id</th>
+                <th scope="col">File</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Product Key</th>
+                <th scope="col">Date | Time</th>
+                <th scope="col">variantId</th>
+                <th scope="col">Product Series</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of filteredItems , let i = index" class="text-center" style="cursor: pointer;">
+                <th scope="row" class="p-3">{{i + 1}}</th>
+                <td class="p-3">{{data.id}}</td>
+                <td>
+                    <img [src]="data.productMainFile" [alt]="data.productMainFile" height="70" width="70"
+                        class="product-main-file mt-1 mb-1">
+                </td>
+                <td>{{data.productName}}</td>
+                <td>{{data.productStatus}}</td>
+                <td>{{data.productKey}}</td>
+                <td>{{data.productDate}} | {{data.productTime}}</td>
+                <td>{{data.variantId}}</td>
+                <td>{{data.productSeries}}</td>
+                <td class="text-center">
+                    <button (click)="productReview(data.id , data.variantId)" mat-raised-button color="primary"
+                      style="height: 20px;font-size: 11px;">
+                      Review
+                    </button>
+                </td>
 
-              </div>
+    
+            </tr>
+        </tbody>
+    </table>
 
-                    
-              <!-- ANGULAR TABLE STARTING -->
-              <div>
-                <mat-form-field appearance="outline" class="w-100 mt-3">
-                  <mat-label>Search By Any Key</mat-label>
-                  <input matInput (keyup)="applyFilter($event)" placeholder="Search By Any Key...">
-                </mat-form-field>
-            
-                <div class="table-responsive">
-                  <table mat-table [dataSource]="dataSource" matSort   class="mat-elevation-z8 w-100 table-bordered" style="border-color: #ece4e4;">
-            
-
-                    <!-- ID -->
-                    <ng-container matColumnDef="id" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > ID </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.id}} 
-                      </td>
-                    </ng-container>
-
-                     <!-- PRODUCT FILE -->
-                    <ng-container matColumnDef="productMainFile" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > productMainFile </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        <img [src]="element.productMainFile" height="70" width="70" class="product-main-file mt-1 mb-1"  [alt]="element.productMainFile">
-                      </td>
-                    </ng-container>
-
-                    <!-- PRODUCT NAME -->
-                    <ng-container matColumnDef="productName" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > productName </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.productName}} 
-                      </td>
-                    </ng-container>
-
-
-                     <!-- PRODUCT STATUS -->
-                    <ng-container matColumnDef="productStatus" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > productStatus </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.productStatus}} 
-                      </td>
-                    </ng-container>
-
-                     <!-- PRODUCT KEY -->
-                    <ng-container matColumnDef="productKey" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > productKey </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.productKey}} 
-                      </td>
-                    </ng-container>
-
-                    <!-- USERID -->
-                    <ng-container matColumnDef="userId" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > userId </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.userId}} 
-                      </td>
-                    </ng-container>
-
-                     <!-- PRODUCT DATE -->
-                    <ng-container matColumnDef="productDate" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > productDate </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.productDate}} 
-                      </td>
-                    </ng-container>
-
-                     <!-- PRODUCT TIME -->
-                    <ng-container matColumnDef="productTime" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > productTime </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.productTime}} 
-                      </td>
-                    </ng-container>
-
-                     <!-- VARIANT ID -->
-                    <ng-container matColumnDef="variantId" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > variantId </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.variantId}} 
-                      </td>
-                    </ng-container>
-
-                     <!-- PRODUCT SERIES -->
-                    <ng-container matColumnDef="productSeries" >
-                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > productSeries </th>
-                      <td class="fs10"  mat-cell *matCellDef="let element"> 
-                        {{element.productSeries}} 
-                      </td>
-                    </ng-container>
-
-                    <!-- Review -->
-                    <ng-container matColumnDef="review">
-                      <th class="fs10" mat-header-cell *matHeaderCellDef> Review </th>
-                      <td class="fs10" mat-cell *matCellDef="let element"> 
-                        <button (click)="productReview(element.id , element.variantId)" mat-raised-button color="primary" style="height: 28px;">Review</button>
-                      </td>
-                    </ng-container>
-            
-                    
-
-                    <!-- Header & Rows -->
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                        [ngClass]="{'active-row': row.productStatus === 'UNDER_REVIEW'}">
-                    </tr>
-
-                    <!-- No Data -->
-                    <tr class="mat-row" *matNoDataRow>
-                      <td class="mat-cell" colspan="11">No data matching the filter</td>
-                    </tr>
-                  </table>
-                </div>
-            
-                <!-- Paginator -->
-                <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" showFirstLastButtons></mat-paginator>
-              </div>
-                <!-- ANGULAR TABLE ENDING -->
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" [pageSize]="10" [length]="totalElements" (page)="nextPage($event)"
+        showFirstLastButtons>
+    </mat-paginator>
 
 </div>
+
+
+
+
+
+
 
 
 

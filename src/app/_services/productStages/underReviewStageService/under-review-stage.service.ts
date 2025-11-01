@@ -13,7 +13,8 @@ export class UnderReviewStageService {
 
    constructor(private http: HttpClient) { }
 
-    productUnderReviewStage(): Observable<any> {
-        return this.http.get(API_AUTHORIZA_URL + "productUnderReviewStageController/" + 'productUnderReviewStage', httpOptions);
-    }
+     getunderReviewStageData(request: any): Observable<any> {
+        return this.http.get(API_AUTHORIZA_URL + 'productUnderReviewStageController/'
+           + 'productUnderReviewStage?page=' + request.page + '&size=' + request.size , httpOptions);
+      }
 }
