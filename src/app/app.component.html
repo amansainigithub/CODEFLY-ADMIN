@@ -231,7 +231,8 @@
 
         <a class="nav-link-headings" (click)="toggleSubmenu('chargeConfig')"  href="#" data-bs-toggle="collapse" 
            data-bs-target="#changeConfigMenu" aria-expanded="false">
-          <i class="bi bi-people"></i> Charge Config
+           <i class="bi bi-lightning-charge"></i>
+          Charge Config
           <i 
             [class.bi-chevron-right]="!isChargeConfig" 
             [class.bi-chevron-down]="isChargeConfig" 
@@ -241,7 +242,7 @@
         <ul class="collapse submenu" id="changeConfigMenu">
           <li class="  unOrderList">
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/charge-config">
-              <i class="bi bi-person-fill-check"></i>
+              <i class="bi bi-lightning-charge"></i>
               Charge Config
             </a>
           </li>
@@ -254,7 +255,7 @@
 
         <a class="nav-link-headings" (click)="toggleSubmenu('productRejectedReason')"  href="#" data-bs-toggle="collapse" 
            data-bs-target="#ProductRejectedReason" aria-expanded="false">
-          <i class="bi bi-people"></i> Rejected Reason
+          <i class="bi bi-clipboard-x"></i> Rejected Reason
           <i 
             [class.bi-chevron-right]="!isChargeConfig" 
             [class.bi-chevron-down]="isChargeConfig" 
@@ -264,7 +265,7 @@
         <ul class="collapse submenu" id="ProductRejectedReason">
           <li class="unOrderList">
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-Rejection-reason">
-              <i class="bi bi-person-fill-check"></i>
+              <i class="bi bi-file-earmark-excel"></i>
               P-Rejected Reason
             </a>
           </li>
@@ -275,7 +276,7 @@
       <li class="nav-item">
         <a class="nav-link-headings" (click)="toggleSubmenu('productStages')"  href="#" data-bs-toggle="collapse" 
            data-bs-target="#productStageMenu" aria-expanded="false">
-          <i class="bi bi-people"></i> Product Statges
+          <i class="bi bi-border-width"></i> Product Statges
           <i 
             [class.bi-chevron-right]="!productStages" 
             [class.bi-chevron-down]="productStages" 
@@ -304,7 +305,7 @@
           <li class="unOrderList">
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/product-dis-approved">
              <i class="bi bi-envelope-dash"></i>
-               P - DisApproved
+               P-DisApproved
             </a>
           </li>
         </ul>
@@ -324,7 +325,7 @@
       <li class="nav-item">
         <a class="nav-link-headings" (click)="toggleSubmenu('productSearchManagement')" href="#" data-bs-toggle="collapse"
           data-bs-target="#productSearchManagement" aria-expanded="false">
-          <i class="bi bi-people"></i> P-Search Management
+          <i class="bi bi-search"></i> P-Search Management
           <i [class.bi-chevron-right]="!productSearchManagement" [class.bi-chevron-down]="productSearchManagement" class="ms-auto floatRit"></i>
         </a>
 
@@ -341,14 +342,14 @@
       <li class="nav-item">
         <a class="nav-link-headings" (click)="toggleSubmenu('emailBucket')" href="#" data-bs-toggle="collapse"
           data-bs-target="#emailBucket" aria-expanded="false">
-          <i class="bi bi-people"></i> Email Bucket
+          <i class="bi bi-envelope"></i> Email Bucket
           <i [class.bi-chevron-right]="!emailBucket" [class.bi-chevron-down]="emailBucket" class="ms-auto floatRit"></i>
         </a>
 
         <ul class="collapse submenu" id="emailBucket">
           <li class="unOrderList">
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/email-template">
-              <i class="bi bi-person-fill-check"></i>
+              <i class="bi bi-envelope-paper"></i>
               Email Template
             </a>
           </li>
@@ -357,7 +358,7 @@
         <ul class="collapse submenu" id="emailBucket">
           <li class="unOrderList">
             <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/send-email-audit">
-              <i class="bi bi-person-fill-check"></i>
+              <i class="bi bi-envelope-plus-fill"></i>
               send-email-audit
             </a>
           </li>
