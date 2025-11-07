@@ -6,8 +6,7 @@
 
             <!-- COL-MD-5 STARTING -->
             <div class="col-md-5">
-
-              <!-- SAVE REJECTION REASON ENDING -->
+              
               <div *ngIf="!viceVersaForm">
 
                    <div class="heading d-flex align-items-center justify-content-between">
@@ -18,81 +17,32 @@
                     </div>
                 </div>	
 
-                  <!-- SAVE CATEGORY START-->
+                  <!-- SAVE ROOT REJECTION CATEGORY  START-->
                   <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"  novalidate>
-
-
-                    <div class="row">
-                        <div class="form-group mb-2">
-                            <label class="fs12">Root Rejection Category</label>
-
-                            <select 
-                              class="form-select form-select-sm"
-                              name="rootRejectionCategory"
-                              [(ngModel)]="form.rootRejectionCategory"
-                              required
-                              #rootRejectionCategory="ngModel"
-                              [ngClass]="{ 'is-invalid': rootRejectionCategory.errors && (rootRejectionCategory.touched || rootRejectionCategory.dirty)}"
-                            >
-                              <option value="" disabled selected>Select Category</option>
-                              <option *ngFor="let item of rootRejectionCategories" [value]="item.rootRejectionCategory">
-                                {{ item.rootRejectionCategory }}
-                              </option>
-                            </select>
-
-                            <div *ngIf="rootRejectionCategory.errors && (rootRejectionCategory.touched || rootRejectionCategory.dirty)" class="invalid-feedback fs11">
-                              <div *ngIf="rootRejectionCategory.errors['required']">
-                                Root Rejection Category is required
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
 
 
                         <div class="row">
 
                               <div class="form-group">
-                                  <label class="fs12">Code</label>
+                                  <label class="fs12">Root Rejection Category</label>
                                   <input 
                                   type="text" 
                                   class="form-control form-control-sm" 
-                                  name="code" 
-                                  [(ngModel)]="form.code" 
-                                  required #code="ngModel"
-                                  [class.dirty]="code.dirty"  
-                                  [class.touched]="code.touched"
-                                  [ngClass]="{ 'is-invalid': code.errors && (code.touched || code.dirty ) }" /> 
+                                  name="rootRejectionCategory" 
+                                  [(ngModel)]="form.rootRejectionCategory" 
+                                  required #rootRejectionCategory="ngModel"
+                                  [class.dirty]="rootRejectionCategory.dirty"  
+                                  [class.touched]="rootRejectionCategory.touched"
+                                  [ngClass]="{ 'is-invalid': rootRejectionCategory.errors && (rootRejectionCategory.touched || rootRejectionCategory.dirty ) }" /> 
                           
-                                  <div *ngIf="code.errors && (code.touched || code.dirty )"class="invalid-feedback fs11">
-                                    <div *ngIf="code.errors['required'] ">
-                                      CODE is required
+                                  <div *ngIf="rootRejectionCategory.errors && (rootRejectionCategory.touched || rootRejectionCategory.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="rootRejectionCategory.errors['required'] ">
+                                      Root Rejection Category is required
                                     </div>
                                   </div>
                               </div>
 
                             </div>
-
-
-                              <div class="form-group">
-                                  <label class="fs12">REASON</label>
-                                  <input 
-                                  type="text" 
-                                  class="form-control form-control-sm" 
-                                  name="reason" 
-                                  [(ngModel)]="form.reason" 
-                                  required #reason="ngModel"
-                                  [class.dirty]="reason.dirty"  
-                                  [class.touched]="reason.touched"
-                                  [ngClass]="{ 'is-invalid': reason.errors && (reason.touched || reason.dirty ) }" /> 
-                          
-                                  <div *ngIf="reason.errors && (reason.touched || reason.dirty )"class="invalid-feedback fs11">
-                                    <div *ngIf="reason.errors['required'] ">
-                                      Reason is required
-                                    </div>
-                                  </div>
-                              </div>
-
 
                                 <div class="form-group">
                                     <label class="fs12">Description</label>
@@ -115,11 +65,11 @@
 
                   </form>
               </div>
-                 <!-- SAVE REJECTION REASON ENDING -->
+                 <!-- SAVE ROOT REJECTION CATEGORY ENDING -->
 
 
 
-                 <!-- UPDATE REJECTION REASON STARTING -->
+                 <!-- UPDATE ROOT REJECTION CATEGORY STARTING -->
 
                  <div *ngIf="viceVersaForm">
 
@@ -127,74 +77,30 @@
                       <!-- Left side -->
                       <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
                         <i class="bi bi-lightning-charge lightning-icon"></i>
-                        <p>Rejection Reason Modified</p>
+                        <p>Root Rejection Category Modified</p>
                         <button type="button" class="btn btn-primary btn-sm" (click)="addNew()">Add New</button>
                       </div>
                     </div>
 
-                 <!-- UPDATE REJECTION REASON STARTING-->
-                  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && updateRejectionReason()"  novalidate>
+                                  <!-- SAVE CATEGORY START-->
+                  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && updateRootRejectionCategory()"  novalidate>
 
-
-
-                    <div class="form-group mb-2">
-                            <label class="fs12">Root Rejection Category</label>
-
-                            <select 
-                              class="form-select form-select-sm"
-                              name="rootRejectionCategory"
-                              [(ngModel)]="updateform.rootRejectionCategory"
-                              required
-                              #rootRejectionCategory="ngModel"
-                              [ngClass]="{ 'is-invalid': rootRejectionCategory.errors && (rootRejectionCategory.touched || rootRejectionCategory.dirty)}"
-                            >
-                              <option value="" disabled selected>Select Category</option>
-                              <option *ngFor="let item of rootRejectionCategories" [value]="item.rootRejectionCategory">
-                                {{ item.rootRejectionCategory }}
-                              </option>
-                            </select>
-
-                            <div *ngIf="rootRejectionCategory.errors && (rootRejectionCategory.touched || rootRejectionCategory.dirty)" class="invalid-feedback fs11">
-                              <div *ngIf="rootRejectionCategory.errors['required']">
-                                Root Rejection Category is required
-                              </div>
-                            </div>
-                          </div>
 
                     <div class="form-group">
                                   <label class="fs12">Code</label>
                                   <input 
                                   type="text" 
                                   class="form-control form-control-sm" 
-                                  name="code" 
-                                  [(ngModel)]="updateform.code" 
-                                  required #code="ngModel"
-                                  [class.dirty]="code.dirty"  
-                                  [class.touched]="code.touched"
-                                  [ngClass]="{ 'is-invalid': code.errors && (code.touched || code.dirty ) }" /> 
+                                  name="rootRejectionCategory" 
+                                  [(ngModel)]="updateform.rootRejectionCategory" 
+                                  required #rootRejectionCategory="ngModel"
+                                  [class.dirty]="rootRejectionCategory.dirty"  
+                                  [class.touched]="rootRejectionCategory.touched"
+                                  [ngClass]="{ 'is-invalid': rootRejectionCategory.errors && (rootRejectionCategory.touched || rootRejectionCategory.dirty ) }" /> 
                           
-                                  <div *ngIf="code.errors && (code.touched || code.dirty )"class="invalid-feedback fs11">
-                                    <div *ngIf="code.errors['required'] ">
-                                      CODE is required
-                                    </div>
-                                  </div>
-                              </div>
-                                
-                              <div class="form-group">
-                                  <label class="fs12">REASON</label>
-                                  <input 
-                                  type="text" 
-                                  class="form-control form-control-sm" 
-                                  name="reason" 
-                                  [(ngModel)]="updateform.reason" 
-                                  required #reason="ngModel"
-                                  [class.dirty]="reason.dirty"  
-                                  [class.touched]="reason.touched"
-                                  [ngClass]="{ 'is-invalid': reason.errors && (reason.touched || reason.dirty ) }" /> 
-                          
-                                  <div *ngIf="reason.errors && (reason.touched || reason.dirty )"class="invalid-feedback fs11">
-                                    <div *ngIf="reason.errors['required'] ">
-                                      Reason is required
+                                  <div *ngIf="rootRejectionCategory.errors && (rootRejectionCategory.touched || rootRejectionCategory.dirty )"class="invalid-feedback fs11">
+                                    <div *ngIf="rootRejectionCategory.errors['required'] ">
+                                      Root Rejection is Required
                                     </div>
                                   </div>
                               </div>
@@ -229,7 +135,7 @@
 
                   </form>
                 </div>
-                <!-- UPDATE CATEGORY ENDING -->
+                <!-- UPDATE ROOT REJECTION CATEGORY  ENDING -->
             </div>
             <!-- COL-MD-5 ENDING -->
 
@@ -271,23 +177,11 @@
                         {{element.id}} 
                       </td>
                     </ng-container>
-
-                     <!--CODE -->
-                    <ng-container matColumnDef="rootRejectionCategory">
-                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> ROOTREJECTIONCATEGORY </th>
-                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.rootRejectionCategory}} </td>
-                    </ng-container>
             
-                    <!--CODE -->
-                    <ng-container matColumnDef="code">
-                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> CODE </th>
-                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.code}} </td>
-                    </ng-container>
-
-                    <!-- CATEGORY -->
-                    <ng-container matColumnDef="reason">
-                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> REASON   </th>
-                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.reason}} </td>
+                    <!--ROOT REJECTION CATEGORY -->
+                    <ng-container matColumnDef="rootRejectionCategory">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef mat-sort-header> Root Rejection </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> {{element.rootRejectionCategory}} </td>
                     </ng-container>
             
                     <!-- DESCRIPTION -->
@@ -313,7 +207,7 @@
                     <ng-container matColumnDef="update">
                       <th class="fs10" mat-header-cell *matHeaderCellDef> Update </th>
                       <td class="fs10" mat-cell *matCellDef="let element"> 
-                        <button (click)="getRejectionReasonById(element.id)" type="button" class="btn btn-sm">
+                        <button (click)="getRootRejectionCategoryById(element.id)" type="button" class="btn btn-sm">
                           <i class="bi bi-pencil-square"></i>
                         </button>
                        </td>

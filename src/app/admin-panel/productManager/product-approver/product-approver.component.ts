@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductApprovalService } from '../../../_services/productManagerService/productApprovalService/product-approval.service';
+import { RootRejectionCategoryService } from '../../../_services/productManagerService/productRejectReasonService/rootRejectionCategoryService/root-rejection-category.service';
 declare var bootstrap: any; // Declare bootstrap for accessing modal methods
 
 @Component({
@@ -23,15 +24,18 @@ export class ProductApproverComponent {
   progressValue: number = 0;
   progressInterval: any;
 
+  //PRODUCT DIS APPROVED REASON
+  rootRejectionCategoryData:any;
   
   //PRODUCT DIS APPROVED REASON
-disApprovReason:any;
+  disApprovReason:any;
 
   constructor(
     private spinner: NgxSpinnerService,
     private toast: NgToastService,
     private router: Router,
-    private productApprovalService: ProductApprovalService
+    private productApprovalService: ProductApprovalService,
+    private rootRejectionCategoryService: RootRejectionCategoryService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { productId: any };
@@ -45,38 +49,34 @@ disApprovReason:any;
       this.productId = state.productId;
       console.log('Product ID:', this.productId);
     } else {
-      console.warn('⚠️ Product ID not found or invalid!');
+      console.warn('Product ID not found or invalid!');
       this.productId = null;
       //this.router.navigateByUrl('/admin/dashboard');
     }
   }
 
   ngOnInit(){
-    this.getRejectionReasonList();
+    //RootRejectionCategoryService
+    this.getRootRejectionCategoryData();
   }
 
-  //GET REJECTION REASON LIST
-  getRejectionReasonList() {
-     this.productApprovalService.getRejectionReasonList().subscribe({
+//GET ROOT REJECTION REASON CATEOGRY DATA START
+  getRootRejectionCategoryData() {
+     this.rootRejectionCategoryService.getRootRejectionCategory().subscribe({
        next:(res:any)=> {
-        console.log(res);
-        
-         this.disApprovReason = res.data;
-         this.toast.success({detail:"Success",summary:"Data retrieved successfully", position:"bottomRight",duration:3000});
-         
+         this.rootRejectionCategoryData = res.data;
+         this.toast.success({detail:"Success",summary:"Data retrieved successfully", position:"topRight",duration:2000});
        },
        error:(err:any)=>  {
-         this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+         this.toast.error({detail:"Error",summary:err.error.data.message, position:"topRight",duration:2000});
          this.spinner.hide();
-         console.log(err);
            }
          }
        );
      }
-     //GET REJECTION REASON LIST
 
 
-  //PRODUCT APPROVED
+  //PRODUCT APPROVED STARTING
   productApproved() {
 
     this.approvedModel = true;
@@ -119,19 +119,57 @@ disApprovReason:any;
       },
     });
   }
+  //PRODUCT APPROVED ENDING
 
 
 
-  //DIS-APPROVED FORM
-  selectDisApproveReason: any = {
+
+  
+// ===========================================================================================
+// ===========================================================================================
+  //Root Rejection Category
+  rootRejectionCategoryObj: any = {
+    rejectionRootCategory: null,
+  };
+
+  //Rejection Reason Category
+   selectDisApproveReason: any = {
     selectedReason: null,
   };
+
+  rootRejectionCategoryChange(data:any){
+    //Find By Root Rejection Category
+    this.findByRootRejectionCategory(data);
+  }
+
+  //GET REJECTION REASON LIST
+  findByRootRejectionCategory(data:any) {
+
+     this.productApprovalService.findByRootRejectionCategory(data.id).subscribe({
+       next:(res:any)=> {
+         this.disApprovReason = res.data;
+         this.toast.success({detail:"Success",summary:"Data retrieved successfully", position:"bottomRight",duration:3000});
+         
+       },
+       error:(err:any)=>  {
+         this.toast.error({detail:"Error",summary:err.error.data.message, position:"bottomRight",duration:3000});
+         this.spinner.hide();
+         console.log(err);
+           }
+         }
+       );
+     }
+//GET REJECTION REASON LIST
+
+
+ 
   disApprovedForm: any = {
     id: '',
     code: '',
     reason: '',
     category: '',
     description: '',
+    rejectionRootCategory:''
   };
 
   onDisapproveReasonChange() {
@@ -139,10 +177,12 @@ disApprovReason:any;
     this.disApprovedForm.code = this.selectDisApproveReason.selectedReason.code;
     this.disApprovedForm.reason =this.selectDisApproveReason.selectedReason.reason;
     this.disApprovedForm.category =this.selectDisApproveReason.selectedReason.category;
+    this.disApprovedForm.rejectionRootCategory =this.rootRejectionCategoryObj.selectedReason.rootRejectionCategory
   }
 
 
 
+//PRODUCT DIS APPROVED STARTING
 productDisApproved() {
   this.disApprovedModel = true;
   this.isLoading = true;
@@ -155,7 +195,7 @@ productDisApproved() {
     }
   }, 300);
 
-  this.productApprovalService.productDisApproved(this.productId , this.disApprovedForm.id , this.disApprovedForm.description).subscribe({
+  this.productApprovalService.productDisApproved(this.productId , this.disApprovedForm.id , this.disApprovedForm.description , this.disApprovedForm.rejectionRootCategory ).subscribe({
     next: (res: any) => {
       clearInterval(this.progressInterval);
       this.progressValue = 100; // complete
@@ -179,10 +219,21 @@ productDisApproved() {
     },
   });
 }
+//PRODUCT DIS APPROVED ENDING...
 
 
 
 
+
+
+
+
+
+
+
+
+// ==========================================================================================
+// ==========================================================================================
 
   // MODEL APPROVED MODEL PROPERTIES STARTING
   @ViewChild('APPROVED') APPROVED!: ElementRef;

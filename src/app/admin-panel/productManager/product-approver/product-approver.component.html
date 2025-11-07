@@ -112,6 +112,37 @@
 
                          <!-- FORM STARTING -->
                         <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && productDisApproved()" novalidate>
+
+
+                            <div>
+                                <label class="fs12">Root Rejection Category</label>
+
+                                <select  
+                                    [(ngModel)]="rootRejectionCategoryObj.selectedReason" 
+                                    name="rejectionRootCategory"
+                                    class="form-select form-select-sm"
+                                    aria-label="Default select example"
+                                    required #rejectionRootCategory="ngModel"
+                                    [class.dirty]="rejectionRootCategory.dirty" 
+                                    [class.touched]="rejectionRootCategory.touched"
+                                    [ngClass]="{ 'is-invalid': rejectionRootCategory.errors && (rejectionRootCategory.touched || rejectionRootCategory.dirty) }"
+                                    (change)="rootRejectionCategoryChange(rootRejectionCategoryObj.selectedReason)"
+                                    >
+                                    <option value="null" disabled selected>Select reason</option>
+                                    <option *ngFor="let rootRejData of rootRejectionCategoryData" [ngValue]="rootRejData">
+                                    {{ rootRejData.rootRejectionCategory }}
+                                    </option>
+                                </select>
+
+                                <div *ngIf="rejectionRootCategory.errors && (rejectionRootCategory.touched || rejectionRootCategory.dirty)" class="invalid-feedback fs11">
+                                    <div *ngIf="rejectionRootCategory.errors['required']">Root Rejection Category</div>
+                                </div>
+                            </div>
+                            
+                            
+
+
+
                             <div>
                                 <label class="fs12">DisApproved Reason</label>
 

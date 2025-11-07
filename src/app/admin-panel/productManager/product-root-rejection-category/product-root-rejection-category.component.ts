@@ -7,25 +7,20 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { RootRejectionCategoryService } from '../../../_services/productManagerService/productRejectReasonService/rootRejectionCategoryService/root-rejection-category.service';
-
 @Component({
-  selector: 'app-product-rejection-reason',
-  templateUrl: './product-rejection-reason.component.html',
-  styleUrl: './product-rejection-reason.component.css'
+  selector: 'app-product-root-rejection-category',
+  templateUrl: './product-root-rejection-category.component.html',
+  styleUrl: './product-root-rejection-category.component.css'
 })
-export class ProductRejectionReasonComponent {
+export class ProductRootRejectionCategoryComponent {
 
   //form Hide and show for update and save user
   viceVersaForm: boolean = false;
   progressBarShow: any = false;
 
-  //Root Rejection Category Data
-  rootRejectionCategories: any[] = [];
 
     form: any = {
-    rootRejectionCategory:null,  
-    code: null,
-    reason: null,
+    rootRejectionCategory: null,
     description: null,
     isActive: false,
   };
@@ -33,8 +28,7 @@ export class ProductRejectionReasonComponent {
 
    updateform: any = {
     id:0,
-    code: null,
-    reason: null,
+    rootRejectionCategory: null,
     description: null,
     isActive: false,
   };
@@ -42,43 +36,27 @@ export class ProductRejectionReasonComponent {
   constructor(
       private toast: NgToastService,
       private spinner: NgxSpinnerService,
-      private rejectionReasonService: ProductRejectReasonService,
       private rootRejectionCategoryService: RootRejectionCategoryService
     ) {}
 
 
     ngOnInit() {
-      this.getRejectedReasons();
-
-      //get Root Rejection Category
       this.getRootRejectionCategory();
     }
 
 
-getRootRejectionCategory() {
-    this.rootRejectionCategoryService.getRootRejectionCategory().subscribe({
-      next: (res: any) => {
-       this.rootRejectionCategories = res.data; 
-       console.log(this.rootRejectionCategories);
-       
-      },
-      error: (err: any) => {
-        console.log(err);
-      }
-    });
-  }
 
 
     
 //Rejection Reason Data
   onSubmit() {
-       this.rejectionReasonService.saveRejectionReason(this.form).subscribe({
+       this.rootRejectionCategoryService.saveRootRejectionCategory(this.form).subscribe({
         next:(res:any)=> {
-          this.toast.success({detail:"Success",summary:"Rejection Reason Saved Success", position:"topRight",duration:2000});
+          this.toast.success({detail:"Success",summary:"Root Rejection Category Saved Success", position:"topRight",duration:2000});
           this.spinner.hide();
 
           //Rejection Reason Data
-          this.getRejectedReasons();
+          this.getRootRejectionCategory();
         },
         error:(err:any)=>  {
           this.toast.error({detail:"Error",summary:err.error.data.message, position:"topRight",duration:2000});
@@ -92,14 +70,14 @@ getRootRejectionCategory() {
 
 
 //UPDATE REJECTION REASON
-updateRejectionReason()
+updateRootRejectionCategory()
 {
-       this.rejectionReasonService.updateRejectionReason(this.updateform).subscribe({
+       this.rootRejectionCategoryService.updateRootRejectionCategory(this.updateform).subscribe({
        next:(res:any)=> {
          this.toast.success({detail:"Success",summary:"Data Update Success", position:"topRight",duration:2000});
          
          //Rejection Reason Data
-         this.getRejectedReasons();
+         this.getRootRejectionCategory();
          
          this.spinner.hide();
        },
@@ -117,8 +95,6 @@ updateRejectionReason()
   displayedColumns: string[] = [
     'id',
     'rootRejectionCategory',
-    'code',
-    'reason',
     'description',
     'active',
     'update',
@@ -128,9 +104,11 @@ updateRejectionReason()
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  getRejectedReasons() {
-    this.rejectionReasonService.getRejectedReasonsService().subscribe({
+  getRootRejectionCategory() {
+    this.rootRejectionCategoryService.getRootRejectionCategory().subscribe({
       next: (res: any) => {
+        console.log(res);
+        
         this.dataSource = new MatTableDataSource(res.data);
         this.dataSource.paginator = this.paginator;  //  client-side pagination
         this.dataSource.sort = this.sort;            //  sorting
@@ -153,13 +131,12 @@ updateRejectionReason()
 
 
     //Rejection Reason BY ID
-    getRejectionReasonById(rejectionId: any) {
+    getRootRejectionCategoryById(rejectionId: any) {
     this.viceVersaForm = true;
-    this.rejectionReasonService.getRejectionReasonByIdSerive(rejectionId).subscribe({
+    this.rootRejectionCategoryService.getRootCategoryRejectionById(rejectionId).subscribe({
       next:(res:any)=> {
         this.updateform = res.data;
         this.toast.success({detail:"Success",summary:"Data Fetch Success", position:"topRight",duration:2000});
-        
       },
       error:(err:any)=>  {
         this.toast.error({detail:"Error",summary:err.error.data.message, position:"topRight",duration:2000});
@@ -187,14 +164,14 @@ updateRejectionReason()
     
     
                   //save File
-                this.rejectionReasonService.deleteRejectedReasonService(rejectionId).subscribe({
+                this.rootRejectionCategoryService.deleteRootRejectionCategory(rejectionId).subscribe({
                   next:(res:any)=> {
                     this.toast.success({detail:"Success",summary:"Delete Success", position:"topRight",duration:2000});
                     
                     this.viceVersaForm = false;
 
-                    //get Born Category List
-                    this.getRejectedReasons();
+                    //get Root Rejection Category
+                    this.getRootRejectionCategory();
                     
                     this.spinner.hide();
                   },

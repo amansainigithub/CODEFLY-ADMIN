@@ -28,6 +28,7 @@ import { ProductDraftComponent } from './admin-panel/product-stages/product-draf
 import { EmailTemplateComponent } from './admin-panel/emailBucket/email-template/email-template.component';
 import { SendEmailAuditComponent } from './admin-panel/emailBucket/send-email-audit/send-email-audit.component';
 import { ProductSearchManagementComponent } from './admin-panel/product-stages/product-search-management/product-search-management.component';
+import { ProductRootRejectionCategoryComponent } from './admin-panel/productManager/product-root-rejection-category/product-root-rejection-category.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -74,6 +75,7 @@ const routes: Routes = [
 
                   //REVIEW APPROVER
                   { path: 'product-Rejection-reason', component: ProductRejectionReasonComponent , pathMatch:'full' },
+                  { path: 'root-rejection-category', component: ProductRootRejectionCategoryComponent , pathMatch:'full' },
 
                   //Email Template
                   { path: 'email-template', component: EmailTemplateComponent , pathMatch:'full' },
