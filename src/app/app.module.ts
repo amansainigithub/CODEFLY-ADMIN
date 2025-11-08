@@ -64,6 +64,7 @@ import { EmailTemplateComponent } from './admin-panel/emailBucket/email-template
 import { SendEmailAuditComponent } from './admin-panel/emailBucket/send-email-audit/send-email-audit.component';
 import { ProductSearchManagementComponent } from './admin-panel/product-stages/product-search-management/product-search-management.component';
 import { ProductRootRejectionCategoryComponent } from './admin-panel/productManager/product-root-rejection-category/product-root-rejection-category.component';
+import { ProductBlockedComponent } from './admin-panel/product-stages/product-blocked/product-blocked.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { ProductRootRejectionCategoryComponent } from './admin-panel/productMana
     SendEmailAuditComponent,
     ProductSearchManagementComponent,
     ProductRootRejectionCategoryComponent,
+    ProductBlockedComponent,
   ],
   imports: [
     BrowserModule,

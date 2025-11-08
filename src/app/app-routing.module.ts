@@ -29,6 +29,7 @@ import { EmailTemplateComponent } from './admin-panel/emailBucket/email-template
 import { SendEmailAuditComponent } from './admin-panel/emailBucket/send-email-audit/send-email-audit.component';
 import { ProductSearchManagementComponent } from './admin-panel/product-stages/product-search-management/product-search-management.component';
 import { ProductRootRejectionCategoryComponent } from './admin-panel/productManager/product-root-rejection-category/product-root-rejection-category.component';
+import { ProductBlockedComponent } from './admin-panel/product-stages/product-blocked/product-blocked.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -66,6 +67,7 @@ const routes: Routes = [
                   { path: 'product-under-review', component: ProductUnderReviewComponent , pathMatch:'full' },
                   { path: 'product-dis-approved', component: ProductDisApprovedComponent , pathMatch:'full' },
                   { path: 'product-draft', component: ProductDraftComponent , pathMatch:'full' },
+                  { path: 'product-blocked', component: ProductBlockedComponent , pathMatch:'full' },
 
                   //REVIEW PRODUCT
                   { path: 'product-review', component: ProductReviewComponent , pathMatch:'full' },
