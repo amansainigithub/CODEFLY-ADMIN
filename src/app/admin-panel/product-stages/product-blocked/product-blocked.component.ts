@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ProductDraftService } from '../../../_services/productStages/productDraftService/product-draft.service';
 import { ProductBlockedService } from '../../../_services/productStages/productBlockedService/product-blocked.service';
 
 @Component({

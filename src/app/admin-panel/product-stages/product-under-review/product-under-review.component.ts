@@ -118,6 +118,17 @@ export class ProductUnderReviewComponent {
 
 
 
+
+    //MODIFIED PRODUCT FILES STARTING
+    modifiedProductFiles(productId: any) {
+      alert('Navigating to Modified Product Files for Product ID: ' + productId);
+      this.router.navigateByUrl('/admin/dashboard/modified-product-files', {
+        state: { productId: productId },  
+      });
+    } 
+    //MODIFIED PRODUCT FILES ENDING
+
+
       // ============================================================================================
   // MODEL PROPERTIES STARTING
   @ViewChild('proceedModel') proceedModel!: ElementRef;

@@ -44,19 +44,23 @@
                 <th scope="row" class="p-3">{{i + 1}}</th>
                 <td class="p-3">{{data.id}}</td>
                 <td>
-                    <img [src]="data.productMainFile" [alt]="data.productMainFile" height="70" width="70"
+                    <img [src]="data.productMainFile" (click)="modifiedProductFiles(data.id)" [alt]="data.productMainFile" height="70" width="70"
                         class="product-main-file mt-1 mb-1">
                 </td>
-                <td>{{data.productName}}</td>
+                <td style="width: 340px;">{{data.productName}}</td>
                 <td>{{data.productStatus}}</td>
                 <td>{{data.productKey}}</td>
                 <td>{{data.productDate}} | {{data.productTime}}</td>
                 <td>{{data.variantId}}</td>
                 <td>{{data.productSeries}}</td>
+                
                 <td class="text-center">
-                    <button (click)="productReview(data.id , data.variantId)" mat-raised-button color="primary"
-                      style="height: 20px;font-size: 11px;">
+                    <button (click)="productReview(data.id , data.variantId)" class="action-button1" mat-raised-button color="primary">
                       Review
+                    </button>
+
+                     <button mat-raised-button class="action-button2 mt-1">
+                      Update Files
                     </button>
                 </td>
 

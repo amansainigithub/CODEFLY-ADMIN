@@ -30,6 +30,7 @@ import { SendEmailAuditComponent } from './admin-panel/emailBucket/send-email-au
 import { ProductSearchManagementComponent } from './admin-panel/product-stages/product-search-management/product-search-management.component';
 import { ProductRootRejectionCategoryComponent } from './admin-panel/productManager/product-root-rejection-category/product-root-rejection-category.component';
 import { ProductBlockedComponent } from './admin-panel/product-stages/product-blocked/product-blocked.component';
+import { ModifiedProductFilesComponent } from './admin-panel/product-files/modified-product-files/modified-product-files.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -86,6 +87,8 @@ const routes: Routes = [
                    //PRODUCT SEARCH MANAGEMENT
                   { path: 'product-Search-Management', component: ProductSearchManagementComponent , pathMatch:'full' },
 
+                  //Modified Product Files
+                  { path: 'modified-product-files', component: ModifiedProductFilesComponent , pathMatch:'full' },
       ],
 }
 
