@@ -232,7 +232,7 @@ modifiedVideoFile(formData:any , productFileId:any)
   this.spinner.show();
     this.productFilesService.fileUploadService(formData, productFileId ,  this.productId).subscribe({
       next: (res: any) => {
-        this.toast.success({detail:"Success",summary:"Video Upload success", position:"bottomRight",duration:3000});
+        this.toast.success({detail:"Success",summary:"Video Upload success", position:"topRight",duration:2000});
         this.spinner.hide();
 
       //get Product Files
