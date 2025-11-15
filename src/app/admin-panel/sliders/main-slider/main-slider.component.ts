@@ -32,7 +32,6 @@ export class MainSliderComponent {
     title: null,
     subTitle: null,
     description: null,
-    fileUrl: null,
     routingLink: null,
     user: null,
   };
@@ -56,7 +55,6 @@ export class MainSliderComponent {
     title: null,
     subTitle: null,
     description: null,
-    fileUrl: null,
     routingLink: null,
     user: null,
     isActive: false,

@@ -4,9 +4,10 @@
 
         <div class="row">
 
+          <!-- ############################################################################################################### -->
+          <!-- ############################################################################################################### -->
+          <!-- ANGULAR TABLE STARTING -->
           <div class="col-md-6">
-
-
             <div class="heading d-flex align-items-center justify-content-between">
               <!-- Left side -->
               <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
@@ -106,12 +107,25 @@
                 <!-- Paginator -->
                 <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
               </div>
-                <!-- ANGULAR TABLE ENDING -->
-
+               
           </div>
+          <!-- ANGULAR TABLE ENDING -->
+          <!-- ############################################################################################################### -->
+          <!-- ############################################################################################################### -->
+
+
+
+
+
           
 
+
+
+           
+
             <div class="col-md-6">
+          <!-- ############################################################################################################### -->
+          <!-- ############################################################################################################### -->
               <div *ngIf="!viceVersaForm">
 
                   <div class="heading d-flex align-items-center justify-content-between">
@@ -122,14 +136,14 @@
                     </div>
                   </div>
               
-                  <!-- SAVE CATEGORY STARTING -->
+                  <!-- SAVE SLIDER STARTING -->
                   <form 
                   name="form" 
                   #f="ngForm" 
                   (ngSubmit)="f.form.valid && onSubmit()" 
                   novalidate>
 
-                  <!-- parent Category list start-->
+
                   <div>
                     <label class="fs12">Slider Category</label>
                     <select  
@@ -159,7 +173,7 @@
                         </div>
                       </div>
                   </div>
-                  <!-- parent Category list end-->
+
 
                     <div class="row">
                       <div class="col">
@@ -256,30 +270,6 @@
                     <div *ngIf="fileRendor" class="mt-3" >
                       <img  [src]="imageSrc" height="50" width="50" alt="">
                     </div>
-
-                    <div class="form-group mt-3">
-                          <label class="fs12">routingLink</label>
-                          <input 
-                          type="text" 
-                          class="form-control form-control-sm" 
-                          name="routingLink" 
-                          [(ngModel)]="form.routingLink" 
-                          required #routingLink="ngModel"
-                          [class.dirty]="routingLink.dirty" 
-                          [class.touched]="routingLink.touched"
-                          [ngClass]="{ 'is-invalid': routingLink.errors && (routingLink.touched || routingLink.dirty ) }" />
-                  
-                          <div 
-                          *ngIf="routingLink.errors && (routingLink.touched || routingLink.dirty )" 
-                          class="invalid-feedback">
-      
-                            <div 
-                            *ngIf="routingLink.errors['required'] ">
-                            routingLink is required
-                            </div>
-                          </div>
-                      </div>
-
                           
               
                     <div class="d-grid gap-2 col-12 mx-auto mt-4">
@@ -292,7 +282,24 @@
                   </form>
 
               </div>
+          <!-- ############################################################################################################### -->
+          <!-- ############################################################################################################### -->
                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- ############################################################################################################### -->
+          <!-- ############################################################################################################### -->
               <div *ngIf="viceVersaForm">
 
                 <div class="heading d-flex align-items-center justify-content-between">
@@ -304,16 +311,13 @@
                   </div>
                 </div>
             
-                <!-- UPDATE CATEGORY START-->
+                <!-- UPDATE SLIDER START-->
                 <form 
                 name="form" 
                 #f="ngForm" 
                 (ngSubmit)="f.form.valid && updateSlider() " 
                 novalidate>
 
-
-
-                 <!-- parent Category list start-->
                  <div>
                   <label class="fs12">Slider Category</label>
                   <select  
@@ -343,7 +347,6 @@
                       </div>
                     </div>
                 </div>
-                <!-- parent Category list end-->
 
 
                   <div class="form-group">
@@ -452,30 +455,6 @@
                     </div>
                   </div>
 
-                  <div class="form-group mt-3">
-                        <label class="fs12">fileUrl</label>
-                        <input 
-                        [(ngModel)]="updateform.fileUrl"
-                        type="text" 
-                        class="form-control form-control-sm" 
-                        name="fileUrl" 
-                        [(ngModel)]="form.fileUrl" 
-                        required #fileUrl="ngModel"
-                        [class.dirty]="fileUrl.dirty" 
-                        [class.touched]="fileUrl.touched"
-                        [ngClass]="{ 'is-invalid': fileUrl.errors && (fileUrl.touched || fileUrl.dirty ) }" />
-                
-                        <div 
-                        *ngIf="fileUrl.errors && (fileUrl.touched || fileUrl.dirty )" 
-                        class="invalid-feedback">
-    
-                          <div 
-                          *ngIf="fileUrl.errors['required'] ">
-                          fileUrl is required
-                          </div>
-                        </div>
-                    </div>
-
                       
 
                  <div class="form-group">
@@ -495,9 +474,11 @@
                      </div>
 
                 </form>
-                 <!-- UPDATE CATEGORY ENDING -->
+                 <!-- UPDATE SLIDER ENDING -->
 
               </div>
+          <!-- ############################################################################################################### -->
+          <!-- ############################################################################################################### -->
                 
             </div>
 
