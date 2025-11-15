@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NgToastService } from 'ng-angular-popup';
 import { UpdateSubFileComponent } from '../../../categories/sub-category/update-sub-file/update-sub-file.component';
 import { MainSliderService } from '../../../../_services/slidersService/mainSliderService/main-slider.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-update-slider-file',
@@ -19,6 +20,7 @@ export class UpdateSliderFileComponent {
     constructor( 
     @Inject(MAT_DIALOG_DATA) public data: any ,
     private toast:NgToastService ,
+    private spinner: NgxSpinnerService,
     private mainSliderService:MainSliderService,
     private dialogRef: MatDialogRef<UpdateSubFileComponent>) { }
   
@@ -45,13 +47,15 @@ export class UpdateSliderFileComponent {
          this.toast.error({detail:"Error",summary:"Error : File is Empty", position:"topRight",duration:2000});
         }
         else{
+          this.spinner.show();
           this.mainSliderService.updateSliderFile(this.file,this.data.subCategoryId).subscribe({
             next:(res:any)=>{
               this.toast.success({detail:"Success",summary:"File Update success", position:"topRight",duration:2000});
               this.dialogRef.close();
-  
+              this.spinner.hide();
             },error:(err:any)=>{
               console.log(err.roor.message);
+              this.spinner.hide();
             }
           })
         }
