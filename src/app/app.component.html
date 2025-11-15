@@ -383,6 +383,24 @@
         </ul>
       </li>
 
+
+      <li class="nav-item">
+        <a class="nav-link-headings" (click)="toggleSubmenu('slider')" href="#" data-bs-toggle="collapse"
+          data-bs-target="#slider" aria-expanded="false">
+          <i class="bi bi-back"></i> Slider
+          <i [class.bi-chevron-right]="!slider" [class.bi-chevron-down]="slider" class="ms-auto floatRit"></i>
+        </a>
+
+        <ul class="collapse submenu" id="slider">
+          <li class="unOrderList">
+            <a class="nav-link nav-sub-link" routerLinkActive="active" href="" routerLink="/admin/dashboard/main-slider">
+              <i class="bi bi-back"></i>
+              Main Slider
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <div class="divider">
       </div>
     </ul>

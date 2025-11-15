@@ -31,6 +31,7 @@ import { ProductSearchManagementComponent } from './admin-panel/product-stages/p
 import { ProductRootRejectionCategoryComponent } from './admin-panel/productManager/product-root-rejection-category/product-root-rejection-category.component';
 import { ProductBlockedComponent } from './admin-panel/product-stages/product-blocked/product-blocked.component';
 import { ModifiedProductFilesComponent } from './admin-panel/product-files/modified-product-files/modified-product-files.component';
+import { MainSliderComponent } from './admin-panel/sliders/main-slider/main-slider.component';
 
 const routes: Routes = [
 // { path: 'register', component: RegisterComponent },
@@ -89,6 +90,9 @@ const routes: Routes = [
 
                   //Modified Product Files
                   { path: 'modified-product-files', component: ModifiedProductFilesComponent , pathMatch:'full' },
+
+                  //Slider --> HomePage Slider
+                  { path: 'main-slider', component: MainSliderComponent , pathMatch:'full' },
       ],
 }
 

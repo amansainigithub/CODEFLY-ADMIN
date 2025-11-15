@@ -66,6 +66,8 @@ import { ProductSearchManagementComponent } from './admin-panel/product-stages/p
 import { ProductRootRejectionCategoryComponent } from './admin-panel/productManager/product-root-rejection-category/product-root-rejection-category.component';
 import { ProductBlockedComponent } from './admin-panel/product-stages/product-blocked/product-blocked.component';
 import { ModifiedProductFilesComponent } from './admin-panel/product-files/modified-product-files/modified-product-files.component';
+import { MainSliderComponent } from './admin-panel/sliders/main-slider/main-slider.component';
+import { UpdateSliderFileComponent } from './admin-panel/sliders/main-slider/update-slider-file/update-slider-file.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +108,8 @@ import { ModifiedProductFilesComponent } from './admin-panel/product-files/modif
     ProductRootRejectionCategoryComponent,
     ProductBlockedComponent,
     ModifiedProductFilesComponent,
+    MainSliderComponent,
+    UpdateSliderFileComponent,
   ],
   imports: [
     BrowserModule,

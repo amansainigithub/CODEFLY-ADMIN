@@ -1,0 +1,508 @@
+<div class="mt-4"> 
+
+    <div class="container">
+
+        <div class="row">
+
+          <div class="col-md-6">
+
+
+            <div class="heading d-flex align-items-center justify-content-between">
+              <!-- Left side -->
+              <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                <i class="bi bi-lightning-charge lightning-icon"></i>
+                 <p>Slider</p>
+              </div>
+            
+              <!-- Right side -->
+              <span class="d-flex align-items-center gap-1 refresh-btn" (click)="refreshData()" style="cursor: pointer;">
+                <i class="bi bi-gear-wide-connected refresh-icon"></i>
+                <p class="mb-0">Refresh</p>
+              </span>
+            </div>
+
+
+             <!-- ANGULAR TABLE STARTING -->
+              <div>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Filter</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+                </mat-form-field>
+            
+                <div class="table-responsive">
+                  <table mat-table [dataSource]="dataSource" matSort   class="mat-elevation-z8 w-100 table-bordered" style="border-color: #ece4e4;">
+            
+                    <!-- ID -->
+                    <ng-container matColumnDef="id" >
+                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > ID </th>
+                      <td class="fs10"  mat-cell *matCellDef="let element"> 
+                        {{element.id}} 
+                      </td>
+                    </ng-container>
+
+                    <!-- ID -->
+                    <ng-container matColumnDef="sliderCategory" >
+                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > Category Name </th>
+                      <td class="fs10"  mat-cell *matCellDef="let element"> 
+                        {{element.sliderCategory}} 
+                      </td>
+                    </ng-container>
+
+                    <!-- ID -->
+                    <ng-container matColumnDef="fileUrl" >
+                      <th class="fs10"  mat-header-cell *matHeaderCellDef mat-sort-header > File </th>
+                      <td class="fs10"  mat-cell *matCellDef="let element"> 
+                        <img [src]="element.fileUrl" height="30"  width="30" alt="" style="cursor:pointer ;border-radius: 45px;"
+                          (click)="openDialog('0ms', '0ms',element.id)" >
+                      </td>
+                    </ng-container>
+            
+                    <!-- Active -->
+                    <ng-container matColumnDef="active">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef> Active </th>
+                      <td class="fs10" mat-cell *matCellDef="let element">
+                          <div *ngIf="element.active" class="dotGreen">
+                            <i class="bi bi-dot"></i>
+                          </div>
+                          <div *ngIf="!element.active" class="dotRed">
+                            <i class="bi bi-dot"></i>
+                          </div>
+                      </td>
+                    </ng-container>
+
+                    <!-- Update -->
+                    <ng-container matColumnDef="update">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef> Update </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> 
+                        <button (click)="getSliderById(element.id)" type="button" class="btn btn-sm">
+                          <i class="bi bi-pencil-square"></i>
+                        </button>
+                       </td>
+                    </ng-container>
+
+                     <!-- Remove -->
+                    <ng-container matColumnDef="remove">
+                      <th class="fs10" mat-header-cell *matHeaderCellDef> Remove </th>
+                      <td class="fs10" mat-cell *matCellDef="let element"> 
+                        <button (click)="deleteSliderById(element.id)" type="button" class="btn btn-sm" style="color: #d30909;">
+                          <i class="bi bi-file-earmark-x-fill"></i>
+                        </button>
+                       </td>
+                    </ng-container>
+
+                    <!-- Header & Rows -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                        [ngClass]="{'active-row': row.active, 'inactive-row': !row.active}">
+                    </tr>
+
+                    <!-- No Data -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="11">No data matching the filter</td>
+                    </tr>
+                  </table>
+                </div>
+            
+                <!-- Paginator -->
+                <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+              </div>
+                <!-- ANGULAR TABLE ENDING -->
+
+          </div>
+          
+
+            <div class="col-md-6">
+              <div *ngIf="!viceVersaForm">
+
+                  <div class="heading d-flex align-items-center justify-content-between">
+                    <!-- Left side -->
+                    <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                      <i class="bi bi-lightning-charge lightning-icon"></i>
+                       <p>Create Slider</p>  
+                    </div>
+                  </div>
+              
+                  <!-- SAVE CATEGORY STARTING -->
+                  <form 
+                  name="form" 
+                  #f="ngForm" 
+                  (ngSubmit)="f.form.valid && onSubmit()" 
+                  novalidate>
+
+                  <!-- parent Category list start-->
+                  <div>
+                    <label class="fs12">Slider Category</label>
+                    <select  
+                    [(ngModel)]="form.sliderCategory" 
+                    name="sliderCategory" 
+                    class="form-select form-select-sm"
+                    aria-label="Default select example"
+                    required #sliderCategory="ngModel"
+                    [class.dirty]="sliderCategory.dirty" 
+                    [class.touched]="sliderCategory.touched"
+                    [ngClass]="{ 'is-invalid': sliderCategory.errors && (sliderCategory.touched || sliderCategory.dirty ) }"
+                    >
+                      <option value="null" disabled selected>select</option>
+                      <option value="HOMEPAGE_SLIDER">HOMEPAGE_SLIDER</option>
+                      <option value="CATEGORY_SLIDER">CATEGORY_SLIDER</option>
+                      <option value="HOTDEALS_SLIDER">HOTDEALS_SLIDER</option>
+                      <option value="ROOT_CATEGORY_SLIDER">ROOT_CATEGORY_SLIDER</option>
+                    </select>   
+                    
+                    <div 
+                      *ngIf="sliderCategory.errors && (sliderCategory.touched || sliderCategory.dirty )" 
+                      class="invalid-feedback">
+
+                        <div 
+                        *ngIf="sliderCategory.errors['required'] ">
+                        category is required
+                        </div>
+                      </div>
+                  </div>
+                  <!-- parent Category list end-->
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="fs12">Title</label>
+                          <input 
+                          type="text" 
+                          class="form-control form-control-sm" 
+                          name="title" 
+                          [(ngModel)]="form.title" 
+                          required #title="ngModel"
+                          [class.dirty]="title.dirty" 
+                          [class.touched]="title.touched"
+                          [ngClass]="{ 'is-invalid': title.errors && (title.touched || title.dirty ) }" />
+                  
+                          <div 
+                          *ngIf="title.errors && (title.touched || title.dirty )" 
+                          class="invalid-feedback">
+      
+                            <div *ngIf="title.errors['required'] ">
+                             title is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="fs12">subTitle</label>
+                          <input 
+                          type="text" 
+                          class="form-control form-control-sm" 
+                          name="subTitle" 
+                          [(ngModel)]="form.subTitle" 
+                          required #subTitle="ngModel"
+                          [class.dirty]="subTitle.dirty" 
+                          [class.touched]="subTitle.touched"
+                          [ngClass]="{ 'is-invalid': subTitle.errors && (subTitle.touched || subTitle.dirty ) }" />
+                  
+                          <div 
+                          *ngIf="subTitle.errors && (subTitle.touched || subTitle.dirty )" 
+                          class="invalid-feedback">
+      
+                            <div *ngIf="subTitle.errors['required'] ">
+                             sub-Title is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="fs12">Description</label>
+                      <textarea style="height: 100px"
+                      type="text" 
+                      class="form-control form-control-sm" 
+                      name="description" 
+                      [(ngModel)]="form.description" 
+                      required #description="ngModel"
+                      minlength="4" 
+                      maxlength="500" 
+                      [class.dirty]="description.dirty" 
+                      [class.touched]="description.touched"
+                      [ngClass]="{ 'is-invalid': description.errors && (description.touched || description.dirty ) }" >
+                    </textarea>
+              
+                      <div 
+                      *ngIf="description.errors && (description.touched || description.dirty )" 
+                      class="invalid-feedback">
+
+                        <div 
+                        *ngIf="description.errors['required'] ">
+                          description is required
+                        </div>
+
+                        <div 
+                        *ngIf="description.errors['minlength']">
+                          description must be at least 4 characters
+                        </div>
+
+                        <div 
+                        *ngIf="description.errors['maxlength']">
+                          description must be at most 500 characters
+                        </div>
+                      </div>
+                    </div>
+                    
+
+                    <div class="mt-3">
+                      <label for="formFileSm" class="form-label fs12">Category File</label>
+                      <input class="form-control form-control-sm" id="formFileSm"  type="file" (change)="onChange($event)">
+                    </div>
+
+                    <div *ngIf="fileRendor" class="mt-3" >
+                      <img  [src]="imageSrc" height="50" width="50" alt="">
+                    </div>
+
+                    <div class="form-group mt-3">
+                          <label class="fs12">routingLink</label>
+                          <input 
+                          type="text" 
+                          class="form-control form-control-sm" 
+                          name="routingLink" 
+                          [(ngModel)]="form.routingLink" 
+                          required #routingLink="ngModel"
+                          [class.dirty]="routingLink.dirty" 
+                          [class.touched]="routingLink.touched"
+                          [ngClass]="{ 'is-invalid': routingLink.errors && (routingLink.touched || routingLink.dirty ) }" />
+                  
+                          <div 
+                          *ngIf="routingLink.errors && (routingLink.touched || routingLink.dirty )" 
+                          class="invalid-feedback">
+      
+                            <div 
+                            *ngIf="routingLink.errors['required'] ">
+                            routingLink is required
+                            </div>
+                          </div>
+                      </div>
+
+                          
+              
+                    <div class="d-grid gap-2 col-12 mx-auto mt-4">
+                        <button mat-raised-button color="primary" [disabled]="f.invalid">Create Slider</button>
+                        <div *ngIf="progressBarShow">
+                          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                        </div>
+                    </div>
+
+                  </form>
+
+              </div>
+                    
+              <div *ngIf="viceVersaForm">
+
+                <div class="heading d-flex align-items-center justify-content-between">
+                  <!-- Left side -->
+                  <div class="d-flex align-items-center gap-2 lightning-box" style="cursor: pointer;">
+                    <i class="bi bi-lightning-charge lightning-icon"></i>
+                    <p>Update Slider</p>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addNew()">Add New Slider</button>
+                  </div>
+                </div>
+            
+                <!-- UPDATE CATEGORY START-->
+                <form 
+                name="form" 
+                #f="ngForm" 
+                (ngSubmit)="f.form.valid && updateSlider() " 
+                novalidate>
+
+
+
+                 <!-- parent Category list start-->
+                 <div>
+                  <label class="fs12">Slider Category</label>
+                  <select  
+                  [(ngModel)]="updateform.sliderCategory" 
+                  name="sliderCategory" 
+                  class="form-select form-select-sm"
+                  aria-label="Default select example"
+                  required #sliderCategory="ngModel"
+                  [class.dirty]="sliderCategory.dirty" 
+                  [class.touched]="sliderCategory.touched"
+                  [ngClass]="{ 'is-invalid': sliderCategory.errors && (sliderCategory.touched || sliderCategory.dirty ) }"
+                  >
+                    <option value="null" disabled selected>select</option>
+                    <option value="HOMEPAGE_SLIDER">HOMEPAGE_SLIDER</option>
+                    <option value="CATEGORY_SLIDER">CATEGORY_SLIDER</option>
+                    <option value="HOTDEALS_SLIDER">HOTDEALS_SLIDER</option>
+                    <option value="ROOT_CATEGORY_SLIDER">ROOT_CATEGORY_SLIDER</option>
+                  </select>   
+                  
+                  <div 
+                    *ngIf="sliderCategory.errors && (sliderCategory.touched || sliderCategory.dirty )" 
+                    class="invalid-feedback">
+
+                      <div 
+                      *ngIf="sliderCategory.errors['required'] ">
+                      slider Category is required
+                      </div>
+                    </div>
+                </div>
+                <!-- parent Category list end-->
+
+
+                  <div class="form-group">
+                    <label class="fs12">title</label>
+                    <input 
+                    [(ngModel)]="updateform.title"
+                    type="text" 
+                    class="form-control form-control-sm" 
+                    name="title" 
+                    [(ngModel)]="form.title" 
+                    required #title="ngModel"
+                    minlength="4" 
+                    maxlength="200" 
+                    [class.dirty]="title.dirty" 
+                    [class.touched]="title.touched"
+                    [ngClass]="{ 'is-invalid': title.errors && (title.touched || title.dirty ) }" />
+            
+                    <div 
+                    *ngIf="title.errors && (title.touched || title.dirty )" 
+                    class="invalid-feedback">
+
+                      <div 
+                      *ngIf="title.errors['required'] ">
+                      title is required
+                      </div>
+
+                      <div 
+                      *ngIf="title.errors['minlength']">
+                      title must be at least 5 characters
+                      </div>
+
+                      <div 
+                      *ngIf="title.errors['maxlength']">
+                      title must be at most 200 characters
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label class="fs12">subTitle</label>
+                        <input 
+                        [(ngModel)]="updateform.subTitle"
+                        type="text" 
+                        class="form-control form-control-sm" 
+                        name="subTitle" 
+                        [(ngModel)]="form.subTitle" 
+                        required #subTitle="ngModel"
+                        [class.dirty]="subTitle.dirty" 
+                        [class.touched]="subTitle.touched"
+                        [ngClass]="{ 'is-invalid': subTitle.errors && (subTitle.touched || subTitle.dirty ) }" />
+                
+                        <div 
+                        *ngIf="subTitle.errors && (subTitle.touched || subTitle.dirty )" 
+                        class="invalid-feedback">
+    
+                          <div 
+                          *ngIf="subTitle.errors['required'] ">
+                          defaultName is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label class="fs12">Description</label>
+                    <textarea style="height: 100px"
+                    type="text" 
+                    [(ngModel)]="updateform.description"
+                    class="form-control form-control-sm" 
+                    name="description" 
+                    [(ngModel)]="form.description" 
+                    required #description="ngModel"
+                    minlength="4" 
+                    maxlength="500" 
+                    [class.dirty]="description.dirty" 
+                    [class.touched]="description.touched"
+                    [ngClass]="{ 'is-invalid': description.errors && (description.touched || description.dirty ) }" >
+                   </textarea>
+            
+                    <div 
+                    *ngIf="description.errors && (description.touched || description.dirty )" 
+                    class="invalid-feedback">
+
+                      <div 
+                      *ngIf="description.errors['required'] ">
+                        description is required
+                      </div>
+
+                      <div 
+                      *ngIf="description.errors['minlength']">
+                        description must be at least 4 characters
+                      </div>
+
+                      <div 
+                      *ngIf="description.errors['maxlength']">
+                        description must be at most 500 characters
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mt-3">
+                        <label class="fs12">fileUrl</label>
+                        <input 
+                        [(ngModel)]="updateform.fileUrl"
+                        type="text" 
+                        class="form-control form-control-sm" 
+                        name="fileUrl" 
+                        [(ngModel)]="form.fileUrl" 
+                        required #fileUrl="ngModel"
+                        [class.dirty]="fileUrl.dirty" 
+                        [class.touched]="fileUrl.touched"
+                        [ngClass]="{ 'is-invalid': fileUrl.errors && (fileUrl.touched || fileUrl.dirty ) }" />
+                
+                        <div 
+                        *ngIf="fileUrl.errors && (fileUrl.touched || fileUrl.dirty )" 
+                        class="invalid-feedback">
+    
+                          <div 
+                          *ngIf="fileUrl.errors['required'] ">
+                          fileUrl is required
+                          </div>
+                        </div>
+                    </div>
+
+                      
+
+                 <div class="form-group">
+                  <label class="fs12 mt-3">Category Status</label>
+                    <div>
+                      <mat-slide-toggle name="isActive"  [(ngModel)]="updateform.active">
+                      </mat-slide-toggle>
+                    </div>
+                 </div>
+                              
+            
+                  <div class="d-grid gap-2 col-12 mx-auto mt-4">
+                      <button mat-raised-button color="primary" [disabled]="f.invalid">Update Slider</button>
+                      <div *ngIf="progressBarShow">
+                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                      </div>
+                     </div>
+
+                </form>
+                 <!-- UPDATE CATEGORY ENDING -->
+
+              </div>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

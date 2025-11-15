@@ -99,6 +99,7 @@ export class AppComponent {
   emailBucket=false;
   isDashboard=false;
   productSearchManagement =false;
+  slider=false;
   toggleSubmenu(menu:any) {
     if (menu === 'categories') {
       this.isCategoriesOpen = !this.isCategoriesOpen;
@@ -120,6 +121,8 @@ export class AppComponent {
       this.emailBucket = !this.emailBucket;
     }else if (menu === 'productSearchManagement') {
       this.productSearchManagement = !this.productSearchManagement;
+    }else if (menu === 'slider') {
+      this.slider = !this.slider;
     }
     
   }
